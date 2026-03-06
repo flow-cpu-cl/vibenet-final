@@ -149,8 +149,8 @@
             transition: transform 0.3s ease;
         }
         .sticker:hover { transform: rotate(0deg) scale(1.05); }
-        .sticker-val { font-size: 20px; line-height: 1; }
-        .sticker-label { font-size: 10px; font-weight: 700; color: #9ca3af; margin-top: 4px; letter-spacing: 0.05em; line-height: 1; }
+        .sticker-val { font-size: 20px; line-height: 1; display: block; }
+        .sticker-label { font-size: 10px; font-weight: 700; color: #9ca3af; margin-top: 4px; letter-spacing: 0.05em; line-height: 1; display: block; }
         @media (min-width: 768px) { .sticker { right: -64px; } }
 
         .hero h1 { font-size: 3.75rem; line-height: 0.95; color: var(--apple-black); }
@@ -216,8 +216,8 @@
         .puck-device:hover .puck-ring { opacity: 1; }
         
         .puck-status { position: absolute; bottom: 48px; width: 100%; text-align: center; }
-        .puck-status span { font-size: 10px; color: #4b5563; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0; transition: opacity 0.5s; }
-        .puck-device:hover .puck-status span { opacity: 1; }
+        .puck-status p { font-size: 10px; color: #4b5563; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0; transition: opacity 0.5s; margin: 0; }
+        .puck-device:hover .puck-status p { opacity: 1; }
         .puck-glare { position: absolute; inset: 0; background: linear-gradient(to top right, rgba(255,255,255,0.05), transparent); pointer-events: none; }
 
         /* Sekce a nadpisy */
@@ -257,13 +257,13 @@
         }
         .glass-panel:hover .bento-card-bg-glow { background: rgba(147, 197, 253, 0.5); }
         
-        .bento-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
+        .bento-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
         .bento-wide h3 { font-size: 2.25rem; color: var(--apple-black); margin-bottom: 8px; }
         .bento-wide p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; max-width: 320px; }
         
         .bento-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
         .badge { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); padding: 8px 16px; border-radius: 99px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-        .badge span:last-child { font-size: 11px; font-weight: 700; color: var(--apple-black); text-transform: uppercase; }
+        .badge strong { font-size: 11px; font-weight: 700; color: var(--apple-black); text-transform: uppercase; }
         
         .bento-price { text-align: right; background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); padding: 8px 16px; border-radius: 16px; font-size: 1.5rem; color: var(--apple-black); }
 
@@ -275,7 +275,7 @@
         }
         .bento-narrow:hover .icon-circle { transform: scale(1.1); }
         .bento-narrow h4 { font-size: 1.25rem; color: var(--apple-black); margin-bottom: 4px; }
-        .bento-narrow p { font-size: 12px; color: var(--apple-gray); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+        .bento-narrow p { font-size: 12px; color: var(--apple-gray); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
 
         /* Speciální úpravy pro Plug Play Post kartu */
         .bento-action-card { flex-direction: column; gap: 40px; }
@@ -284,7 +284,7 @@
         .status-dot-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; justify-content: center; }
         @media (min-width: 768px) { .status-dot-wrap { justify-content: flex-start; } }
         .status-dot { width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; animation: pulse 2s infinite; }
-        .status-text { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); }
+        .status-text { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; }
         
         .anim-box {
             position: relative; width: 160px; height: 160px; background: white; border-radius: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
@@ -308,14 +308,14 @@
         .plan-pro-glow { position: absolute; top: 0; right: 0; width: 256px; height: 256px; background: rgba(59, 130, 246, 0.05); filter: blur(60px); border-radius: 50%; pointer-events: none; }
         
         .plan-header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-        .plan-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 8px; }
+        .plan-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
         .plan-pro .plan-label { color: var(--apple-blue); }
         .plan-badge { background: var(--apple-blue); color: white; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; letter-spacing: 0.05em; }
         
         .plan-card h3 { font-size: 1.875rem; color: var(--apple-black); margin-bottom: 24px; }
         .plan-price-wrap { display: flex; align-items: baseline; gap: 4px; margin-bottom: 32px; }
         .plan-price-wrap .price { font-size: 3rem; color: var(--apple-black); letter-spacing: -0.02em; }
-        .plan-price-wrap .mo { color: var(--apple-gray); font-weight: 500; font-size: 1.125rem; }
+        .plan-price-wrap .mo { color: var(--apple-gray); font-weight: 500; font-size: 1.125rem; margin: 0; }
         
         .plan-features { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
         .plan-features li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--apple-black); font-weight: 500; }
@@ -338,7 +338,7 @@
         .manifesto-card:hover { background: white; }
         .manifesto-card span { font-size: 2.25rem; }
         .manifesto-card h4 { font-size: 1.125rem; color: var(--apple-black); margin-bottom: 4px; }
-        .manifesto-card p { font-size: 14px; color: var(--apple-gray); line-height: 1.6; }
+        .manifesto-card p { font-size: 14px; color: var(--apple-gray); line-height: 1.6; margin: 0; }
 
         /* Specs Section */
         .specs-section {
@@ -360,10 +360,12 @@
         .specs-content h2 { font-size: 2.25rem; color: var(--apple-black); margin-bottom: 8px; }
         .specs-content > p { color: var(--apple-gray); font-weight: 500; margin-bottom: 32px; }
         
-        .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+        /* Semantický seznam pro Specs (dl, dt, dd) */
+        .specs-list { width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; }
+        .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.06); margin: 0; }
         .spec-row:last-child { border-bottom: none; }
-        .spec-label { font-weight: 600; color: var(--apple-black); }
-        .spec-val { color: var(--apple-gray); font-weight: 500; font-size: 14px; }
+        .spec-label { font-weight: 600; color: var(--apple-black); margin: 0; }
+        .spec-val { color: var(--apple-gray); font-weight: 500; font-size: 14px; margin: 0; text-align: right; }
 
         /* Footer */
         .footer { width: 100%; border-top: 1px solid #f3f4f6; background: white; position: relative; z-index: 50; }
@@ -373,8 +375,8 @@
         
         .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; }
         @media (min-width: 768px) { .footer-brand { align-items: flex-start; } }
-        .footer-logo { font-size: 20px; font-weight: 700; color: black; letter-spacing: -0.02em; }
-        .footer-desc { font-size: 14px; color: var(--apple-gray); font-weight: 500; }
+        .footer-logo { font-size: 20px; font-weight: 700; color: black; letter-spacing: -0.02em; margin: 0; }
+        .footer-desc { font-size: 14px; color: var(--apple-gray); font-weight: 500; margin: 0; }
         
         .footer-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: var(--apple-black); flex-wrap: wrap; justify-content: center; }
         .footer-links a:hover { color: var(--apple-blue); }
@@ -386,12 +388,12 @@
 
         .footer-bottom { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-top: 48px; padding-top: 32px; border-top: 1px solid #f3f4f6; }
         @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
-        .footer-copy { font-size: 12px; color: var(--apple-gray); }
+        .footer-copy { font-size: 12px; color: var(--apple-gray); margin: 0; }
         
         .footer-action { display: flex; items-center; gap: 24px; }
         .founder-spot { display: flex; align-items: center; gap: 8px; }
         .spot-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
-        .spot-text { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; }
+        .spot-text { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin: 0; }
         .btn-footer { background: var(--apple-blue); color: white; font-weight: 700; font-size: 12px; padding: 10px 24px; border-radius: 99px; transition: background-color 0.2s; }
         .btn-footer:hover { background: var(--apple-blue-hover); }
 
@@ -409,7 +411,7 @@
     </div>
 
     <nav aria-label="Main navigation" class="nav container">
-        <div class="font-display nav-logo">VIBE_NET</div>
+        <p class="font-display nav-logo">VIBE_NET</p>
         
         <div class="nav-links">
             <a href="#tech">The Tech</a>
@@ -428,8 +430,8 @@
                 
                 <div class="sticker">
                     <div style="display: flex; flex-direction: column; align-items: center; line-height: 1;">
-                        <div class="font-display sticker-val">88 CR</div>
-                        <div class="sticker-label">PER MONTH</div>
+                        <strong class="font-display sticker-val">88 CR</strong>
+                        <small class="sticker-label">PER MONTH</small>
                     </div>
                 </div>
 
@@ -454,7 +456,7 @@
                     <div class="puck-notch"></div>
                     <div class="puck-ring"></div>
                     <div class="puck-status">
-                        <span class="font-display">Connecting...</span>
+                        <p class="font-display">Connecting...</p>
                     </div>
                     <div class="puck-glare" aria-hidden="true"></div>
                 </div>
@@ -474,7 +476,7 @@
                     <div class="bento-card-bg-glow" aria-hidden="true"></div>
                     
                     <div style="position: relative; z-index: 10;">
-                        <span class="bento-label">New Hardware</span>
+                        <p class="bento-label">New Hardware</p>
                         <h3 class="font-display">Nomad Puck 1.0</h3>
                         <p>Your personal Wi-Fi bubble. Designed for movement.</p>
                     </div>
@@ -483,11 +485,11 @@
                         <div class="bento-badges">
                             <div class="badge">
                                 <span aria-hidden="true" style="font-size: 18px;">🚐</span>
-                                <span>Van Life</span>
+                                <strong>Van Life</strong>
                             </div>
                             <div class="badge">
                                 <span aria-hidden="true" style="font-size: 18px;">🎓</span>
-                                <span>Study</span>
+                                <strong>Study</strong>
                             </div>
                         </div>
                         <div class="bento-price font-display">199 CR</div>
@@ -521,7 +523,7 @@
                     <div style="position: relative; z-index: 10; max-width: 384px; text-align: center;">
                         <div class="status-dot-wrap">
                              <div class="status-dot"></div>
-                             <span class="status-text">Fast Setup</span>
+                             <p class="status-text">Fast Setup</p>
                         </div>
                         <h4 class="font-display" style="font-size: 1.875rem; color: var(--apple-black); margin-bottom: 12px;">Plug. Play. Post.</h4>
                         <p style="color: var(--apple-gray); font-weight: 500;">Unbox the puck, scan the QR, and you're live in 30 seconds flat.</p>
@@ -548,11 +550,11 @@
                 <!-- Starter Plan -->
                 <div class="plan-card">
                     <div>
-                        <span class="plan-label">Basic</span>
+                        <p class="plan-label">Basic</p>
                         <h3 class="font-display">Starter</h3>
                         <div class="plan-price-wrap">
-                            <span class="price font-display">48 CR</span>
-                            <span class="mo">/mo</span>
+                            <strong class="price font-display">48 CR</strong>
+                            <p class="mo">/mo</p>
                         </div>
                         <ul class="plan-features">
                             <li>
@@ -578,13 +580,13 @@
                     
                     <div style="position: relative; z-index: 10;">
                         <div class="plan-header-top">
-                            <span class="plan-label" style="margin-bottom: 0;">Power User</span>
-                            <span class="plan-badge">POPULAR</span>
+                            <p class="plan-label" style="margin-bottom: 0;">Power User</p>
+                            <strong class="plan-badge">POPULAR</strong>
                         </div>
                         <h3 class="font-display">Nomad Pro</h3>
                         <div class="plan-price-wrap">
-                            <span class="price font-display">88 CR</span>
-                            <span class="mo">/mo</span>
+                            <strong class="price font-display">88 CR</strong>
+                            <p class="mo">/mo</p>
                         </div>
                         <ul class="plan-features">
                             <li>
@@ -661,7 +663,7 @@
                     <div class="puck-notch" style="top: 40px;"></div>
                     <div class="puck-ring" style="width: 70%; height: 70%;"></div>
                     <div class="puck-status" style="bottom: 56px;">
-                        <span class="font-display" style="font-size: 12px; opacity: 1;">Puck Pro 1.0</span>
+                        <p class="font-display" style="font-size: 12px; opacity: 1;">Puck Pro 1.0</p>
                     </div>
                     <div class="puck-glare" aria-hidden="true"></div>
                     <div class="puck-specs-glow" aria-hidden="true"></div>
@@ -672,16 +674,16 @@
                 <h2 class="font-display">Puck Specs</h2>
                 <p>Technical details for the nerds.</p>
                 
-                <div>
-                    <div class="spec-row"><span class="spec-label">Connectivity</span><span class="spec-val">5G / 4G LTE</span></div>
-                    <div class="spec-row"><span class="spec-label">Battery</span><span class="spec-val">12,000mAh</span></div>
-                    <div class="spec-row"><span class="spec-label">Range</span><span class="spec-val">30m</span></div>
-                    <div class="spec-row"><span class="spec-label">Devices</span><span class="spec-val">Up to 10</span></div>
-                    <div class="spec-row"><span class="spec-label">Weight</span><span class="spec-val">180g</span></div>
-                    <div class="spec-row"><span class="spec-label">Wi-Fi</span><span class="spec-val">Wi-Fi 6</span></div>
-                    <div class="spec-row"><span class="spec-label">Security</span><span class="spec-val">WPA3</span></div>
-                    <div class="spec-row"><span class="spec-label">Setup</span><span class="spec-val">App + QR Code</span></div>
-                </div>
+                <dl class="specs-list">
+                    <div class="spec-row"><dt class="spec-label">Connectivity</dt><dd class="spec-val">5G / 4G LTE</dd></div>
+                    <div class="spec-row"><dt class="spec-label">Battery</dt><dd class="spec-val">12,000mAh</dd></div>
+                    <div class="spec-row"><dt class="spec-label">Range</dt><dd class="spec-val">30m</dd></div>
+                    <div class="spec-row"><dt class="spec-label">Devices</dt><dd class="spec-val">Up to 10</dd></div>
+                    <div class="spec-row"><dt class="spec-label">Weight</dt><dd class="spec-val">180g</dd></div>
+                    <div class="spec-row"><dt class="spec-label">Wi-Fi</dt><dd class="spec-val">Wi-Fi 6</dd></div>
+                    <div class="spec-row"><dt class="spec-label">Security</dt><dd class="spec-val">WPA3</dd></div>
+                    <div class="spec-row"><dt class="spec-label">Setup</dt><dd class="spec-val">App + QR Code</dd></div>
+                </dl>
             </div>
         </section>
 
@@ -692,7 +694,7 @@
             <div class="footer-top">
                 
                 <div class="footer-brand">
-                    <div class="footer-logo">VIBE_NET</div>
+                    <p class="footer-logo">VIBE_NET</p>
                     <p class="footer-desc">Internet without the leash.</p>
                 </div>
 
@@ -720,7 +722,7 @@
                 <div class="footer-action">
                     <div class="founder-spot">
                         <div class="spot-dot"></div>
-                        <span class="spot-text">Limited Founder spots</span>
+                        <strong class="spot-text">Limited Founder spots</strong>
                     </div>
                     <button class="btn-footer">Let's Goooo!</button>
                 </div>
