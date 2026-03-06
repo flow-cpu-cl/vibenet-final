@@ -257,7 +257,7 @@
             opacity: 0.5;
         }
 
-        /* Tech Section */
+        /* Tech Section (Bento Grid) */
         .tech-section {
             display: flex;
             flex-direction: column;
@@ -280,7 +280,12 @@
             width: 100%;
         }
         @media (min-width: 768px) {
-            .tech-grid { grid-template-columns: 2fr 1fr; }
+            .tech-grid { 
+                /* 3 columns create the perfect asymmetrical layout */
+                grid-template-columns: repeat(3, 1fr); 
+            }
+            .tech-card.wide { grid-column: span 2; }
+            .tech-card.narrow { grid-column: span 1; }
         }
         .tech-card {
             border-radius: 36px;
@@ -798,7 +803,8 @@
             nav > div:nth-child(2) { display: none; }
             main { padding: 32px 16px 64px; gap: 64px; }
             .tech-grid { grid-template-columns: 1fr; }
-            .tech-card { grid-column: 1 / -1 !important; grid-row: auto !important; }
+            /* Na mobilu se všechny karty seřadí pod sebe */
+            .tech-card.wide, .tech-card.narrow { grid-column: auto; }
             .specs-section { padding: 32px; gap: 32px; }
         }
     </style>
@@ -856,8 +862,9 @@
                 <h2>Signal. Everywhere.</h2>
             </div>
             <div class="tech-grid">
-                <!-- Bento Card 1: Plná šířka (1 / -1) -->
-                <div class="tech-card" style="grid-column: 1 / -1; margin-bottom: 0;">
+                
+                <!-- Bento Card 1: Vlevo nahoře (Široká) -->
+                <div class="tech-card wide">
                     <div class="tech-card-content">
                         <span class="tech-card-label">New Hardware</span>
                         <h3>Nomad Puck 1.0</h3>
@@ -874,9 +881,9 @@
                     </div>
                 </div>
                 
-                <!-- Bento Card 2: Levý sloupec nahoře -->
-                <div class="tech-card" style="grid-column: 1;">
-                    <div class="tech-card-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <!-- Bento Card 2: Vpravo nahoře (Úzká) -->
+                <div class="tech-card narrow">
+                    <div class="tech-card-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
                         <div class="tech-icon">
                             <svg aria-hidden="true" focusable="false" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 32px; height: 32px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
                         </div>
@@ -885,9 +892,9 @@
                     </div>
                 </div>
                 
-                <!-- Bento Card 3: Levý sloupec dole -->
-                <div class="tech-card" style="grid-column: 1;">
-                    <div class="tech-card-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <!-- Bento Card 3: Vlevo dole (Úzká) -->
+                <div class="tech-card narrow">
+                    <div class="tech-card-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
                         <div class="tech-icon" style="color: #ec4899;">
                             <svg aria-hidden="true" focusable="false" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 32px; height: 32px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
                         </div>
@@ -896,8 +903,8 @@
                     </div>
                 </div>
                 
-                <!-- Bento Card 4: Pravý sloupec (zabere 2 řádky na výšku) -->
-                <div class="tech-card" style="grid-column: 2; grid-row: 2 / 4;">
+                <!-- Bento Card 4: Vpravo dole (Široká) -->
+                <div class="tech-card wide">
                     <div class="tech-card-content" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                         <div style="text-align: center;">
                             <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
@@ -915,6 +922,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </section>
         
