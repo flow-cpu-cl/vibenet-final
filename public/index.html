@@ -281,15 +281,16 @@
         }
         @media (min-width: 768px) {
             .tech-grid { 
-                /* 3 columns create the perfect asymmetrical layout */
                 grid-template-columns: repeat(3, 1fr); 
             }
             .tech-card.wide { grid-column: span 2; }
             .tech-card.narrow { grid-column: span 1; }
         }
+        
         .tech-card {
             border-radius: 36px;
             background: #f5f5f7;
+            padding: 40px; /* Sjednocený prémiový padding */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -299,11 +300,28 @@
             transition: transform 0.3s ease;
         }
         .tech-card:hover { transform: scale(1.01); }
+        
+        /* Utility classes pro přesné zarovnání uvnitř karet */
+        .tech-card.flex-center {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .tech-card.text-center-card {
+            align-items: center;
+            text-align: center;
+        }
+        .tech-card.flex-center p, .tech-card.text-center-card p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .tech-card-content {
             position: relative;
             z-index: 10;
-            padding: 32px;
+            width: 100%;
         }
+        
         .tech-card-label {
             font-size: 11px;
             font-weight: 700;
@@ -324,7 +342,10 @@
             font-size: 1.125rem;
             font-weight: 500;
             max-width: 20rem;
+            margin: 0;
         }
+        
+        /* Odsazení prvků uvnitř karet pro perfektní vizuální rytmus */
         .tech-card-badge {
             display: inline-flex;
             align-items: center;
@@ -342,36 +363,94 @@
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            gap: 32px;
-            margin-top: 48px;
+            gap: 24px;
+            margin-top: auto; /* Automaticky odtlačí patičku dolů */
             position: relative;
             z-index: 10;
         }
         .tech-card-price {
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.6);
             backdrop-filter: blur(12px);
-            padding: 12px 16px;
-            border-radius: 16px;
+            padding: 12px 20px;
+            border-radius: 20px;
             text-align: right;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
         .tech-card-price div {
             font-size: 1.5rem;
             color: #1d1d1f;
             font-weight: 700;
         }
+        
+        /* Ikony uvnitř úzkých karet */
         .tech-icon {
             width: 64px;
             height: 64px;
             border-radius: 50%;
             background: white;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #0071e3;
-            transition: transform 0.3s;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin: 0 auto 24px; /* Odsazení od nadpisu dole */
         }
         .tech-card:hover .tech-icon { transform: scale(1.1); }
+
+        /* Komponenty pro 4. kartu (Plug Play Post) */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .status-indicator .dot {
+            width: 8px;
+            height: 8px;
+            background: #f59e0b;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        .status-indicator span {
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #86868b;
+        }
+        .tech-animation-box {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        .tech-animation-box::before {
+            content: '';
+            position: absolute;
+            inset: 16px;
+            border: 2px dashed #e5e5e5;
+            border-radius: 20px;
+            animation: spin-slow 10s linear infinite;
+        }
+        .tech-animation-box .icon-wrapper {
+            width: 72px;
+            height: 72px;
+            background: #1d1d1f;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
 
         /* Plans Section */
         .plans-section {
@@ -803,6 +882,7 @@
             nav > div:nth-child(2) { display: none; }
             main { padding: 32px 16px 64px; gap: 64px; }
             .tech-grid { grid-template-columns: 1fr; }
+            .tech-card { padding: 32px; }
             /* Na mobilu se všechny karty seřadí pod sebe */
             .tech-card.wide, .tech-card.narrow { grid-column: auto; }
             .specs-section { padding: 32px; gap: 32px; }
@@ -882,43 +962,40 @@
                 </div>
                 
                 <!-- Bento Card 2: Vpravo nahoře (Úzká) -->
-                <div class="tech-card narrow">
-                    <div class="tech-card-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+                <div class="tech-card narrow flex-center">
+                    <div class="tech-card-content">
                         <div class="tech-icon">
                             <svg aria-hidden="true" focusable="false" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 32px; height: 32px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
                         </div>
-                        <h3 style="font-size: 1.25rem; margin: 8px 0;">5G Ultra</h3>
-                        <p style="font-size: 12px; color: #86868b; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">Wideband Ready</p>
+                        <h3>5G Ultra</h3>
+                        <p>Wideband Ready</p>
                     </div>
                 </div>
                 
                 <!-- Bento Card 3: Vlevo dole (Úzká) -->
-                <div class="tech-card narrow">
-                    <div class="tech-card-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+                <div class="tech-card narrow flex-center">
+                    <div class="tech-card-content">
                         <div class="tech-icon" style="color: #ec4899;">
                             <svg aria-hidden="true" focusable="false" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 32px; height: 32px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
                         </div>
-                        <h3 style="font-size: 1.25rem; margin: 8px 0;">Ghost Mode</h3>
-                        <p style="font-size: 12px; color: #86868b; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">Cancel Anytime</p>
+                        <h3>Ghost Mode</h3>
+                        <p>Cancel Anytime</p>
                     </div>
                 </div>
                 
                 <!-- Bento Card 4: Vpravo dole (Široká) -->
-                <div class="tech-card wide">
-                    <div class="tech-card-content" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-                        <div style="text-align: center;">
-                            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
-                                <div style="width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; animation: pulse 2s infinite;"></div>
-                                <span style="font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #86868b;">Fast Setup</span>
-                            </div>
-                            <h3 style="font-size: 1.875rem; color: #1d1d1f; margin: 0 0 12px; font-weight: 700;">Plug. Play. Post.</h3>
-                            <p style="color: #86868b; font-weight: 500;">Unbox the puck, scan the QR, and you're live in 30 seconds flat.</p>
+                <div class="tech-card wide text-center-card">
+                    <div class="tech-card-content">
+                        <div class="status-indicator">
+                            <div class="dot"></div>
+                            <span>Fast Setup</span>
                         </div>
-                        <div style="position: relative; width: 160px; height: 160px; background: white; border-radius: 24px; box-shadow: 0 1px 8px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; margin: 32px auto 0;">
-                            <div style="position: absolute; inset: 12px; border: 2px dashed #e5e5e5; border-radius: 24px; animation: spin-slow 8s linear infinite;"></div>
-                            <div style="width: 64px; height: 64px; background: #1d1d1f; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
-                                <svg aria-hidden="true" focusable="false" style="width: 32px; height: 32px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                            </div>
+                        <h3>Plug. Play. Post.</h3>
+                        <p>Unbox the puck, scan the QR, and you're live in 30 seconds flat.</p>
+                    </div>
+                    <div class="tech-animation-box">
+                        <div class="icon-wrapper">
+                            <svg aria-hidden="true" focusable="false" style="width: 32px; height: 32px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                         </div>
                     </div>
                 </div>
