@@ -114,7 +114,7 @@
             position: relative;
             z-index: 50;
         }
-        .nav-logo { font-size: 20px; color: var(--apple-black); }
+        .nav-logo { font-size: 20px; color: var(--apple-black); margin: 0; }
         .nav-links { display: none; gap: 40px; font-size: 13px; font-weight: 500; color: var(--apple-black); }
         .nav-links a:hover { color: var(--apple-blue); }
         .btn-nav {
@@ -149,12 +149,12 @@
             transition: transform 0.3s ease;
         }
         .sticker:hover { transform: rotate(0deg) scale(1.05); }
-        .sticker-val { font-size: 20px; line-height: 1; display: block; }
-        .sticker-label { font-size: 10px; font-weight: 700; color: #9ca3af; margin-top: 4px; letter-spacing: 0.05em; line-height: 1; display: block; }
+        .sticker-val { font-size: 20px; line-height: 1; display: block; margin: 0; }
+        .sticker-label { font-size: 10px; font-weight: 700; color: #9ca3af; margin-top: 4px; letter-spacing: 0.05em; line-height: 1; display: block; margin-bottom: 0; }
         @media (min-width: 768px) { .sticker { right: -64px; } }
 
-        .hero h1 { font-size: 3.75rem; line-height: 0.95; color: var(--apple-black); }
-        .hero p { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; max-width: 576px; margin-top: 16px; }
+        .hero h1 { font-size: 3.75rem; line-height: 0.95; color: var(--apple-black); margin: 0; }
+        .hero p { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; max-width: 576px; margin: 16px 0 0 0; }
         @media (min-width: 768px) { 
             .hero h1 { font-size: 5.5rem; }
             .hero p { font-size: 1.5rem; }
@@ -222,8 +222,8 @@
 
         /* Sekce a nadpisy */
         .section-block { display: flex; flex-direction: column; gap: 40px; }
-        .section-header h2 { font-size: 2.25rem; color: var(--apple-black); margin-bottom: 16px; }
-        .section-header p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; }
+        .section-header h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 16px 0; }
+        .section-header p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; }
         @media (min-width: 768px) { .section-header h2 { font-size: 3rem; } }
         .text-center { text-align: center; }
 
@@ -234,7 +234,6 @@
         .glass-panel {
             background: var(--apple-light-gray);
             border-radius: 36px;
-            padding: 32px;
             position: relative;
             overflow: hidden;
             transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s;
@@ -242,8 +241,13 @@
             display: flex;
             flex-direction: column;
         }
-        @media (min-width: 768px) { .glass-panel { padding: 40px; } }
         .glass-panel:hover { transform: scale(1.01); }
+
+        /* Specifické paddingy Bento karet podle původního návrhu */
+        .bento-1 { padding: 32px; }
+        @media (min-width: 768px) { .bento-1 { padding: 48px; } }
+        .bento-narrow { padding: 32px; }
+        .bento-4 { padding: 40px; }
 
         .bento-wide { grid-column: span 1; min-height: 400px; justify-content: space-between; }
         @media (min-width: 768px) { .bento-wide { grid-column: span 2; } }
@@ -257,9 +261,9 @@
         }
         .glass-panel:hover .bento-card-bg-glow { background: rgba(147, 197, 253, 0.5); }
         
-        .bento-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
-        .bento-wide h3 { font-size: 2.25rem; color: var(--apple-black); margin-bottom: 8px; }
-        .bento-wide p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; max-width: 320px; }
+        .bento-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 12px 0; }
+        .bento-wide h3 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 8px 0; }
+        .bento-wide p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; max-width: 320px; margin: 0; }
         
         .bento-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
         .badge { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); padding: 8px 16px; border-radius: 99px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
@@ -272,24 +276,32 @@
         .icon-circle {
             width: 64px; height: 64px; border-radius: 50%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             display: flex; align-items: center; justify-content: center; transition: transform 0.3s;
+            margin: 0;
         }
         .bento-narrow:hover .icon-circle { transform: scale(1.1); }
-        .bento-narrow h4 { font-size: 1.25rem; color: var(--apple-black); margin-bottom: 4px; }
+        .bento-narrow h4 { font-size: 1.25rem; color: var(--apple-black); margin: 0 0 4px 0; }
         .bento-narrow p { font-size: 12px; color: var(--apple-gray); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
 
         /* Speciální úpravy pro Plug Play Post kartu */
-        .bento-action-card { flex-direction: column; gap: 40px; }
+        .bento-action-card { flex-direction: column; gap: 40px; justify-content: space-between; align-items: center; }
         @media (min-width: 768px) { .bento-action-card { flex-direction: row; align-items: center; justify-content: space-between; } }
+        
+        .bento-action-content { position: relative; z-index: 10; max-width: 384px; text-align: center; }
+        @media (min-width: 768px) { .bento-action-content { text-align: left; } }
         
         .status-dot-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; justify-content: center; }
         @media (min-width: 768px) { .status-dot-wrap { justify-content: flex-start; } }
         .status-dot { width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; animation: pulse 2s infinite; }
-        .status-text { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; }
+        .status-text { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; line-height: 1; }
+        
+        .bento-action-content h4 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 12px 0; }
+        .bento-action-content p { color: var(--apple-gray); font-weight: 500; font-size: 1rem; margin: 0; max-width: none; }
         
         .anim-box {
             position: relative; width: 160px; height: 160px; background: white; border-radius: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            display: flex; align-items: center; justify-content: center; transition: box-shadow 0.3s; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center; transition: box-shadow 0.3s; flex-shrink: 0; margin: 0 auto;
         }
+        @media (min-width: 768px) { .anim-box { margin: 0; } }
         .glass-panel:hover .anim-box { box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .anim-box-dashed { position: absolute; inset: 0; border: 2px dashed #e5e5e5; border-radius: 24px; margin: 12px; animation: spin-slow 8s linear infinite; will-change: transform; }
         .anim-box-inner { width: 64px; height: 64px; background: var(--apple-black); border-radius: 16px; display: flex; align-items: center; justify-content: center; z-index: 2; }
@@ -308,11 +320,11 @@
         .plan-pro-glow { position: absolute; top: 0; right: 0; width: 256px; height: 256px; background: rgba(59, 130, 246, 0.05); filter: blur(60px); border-radius: 50%; pointer-events: none; }
         
         .plan-header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-        .plan-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+        .plan-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px 0; display: block; }
         .plan-pro .plan-label { color: var(--apple-blue); }
         .plan-badge { background: var(--apple-blue); color: white; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; letter-spacing: 0.05em; }
         
-        .plan-card h3 { font-size: 1.875rem; color: var(--apple-black); margin-bottom: 24px; }
+        .plan-card h3 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 24px 0; }
         .plan-price-wrap { display: flex; align-items: baseline; gap: 4px; margin-bottom: 32px; }
         .plan-price-wrap .price { font-size: 3rem; color: var(--apple-black); letter-spacing: -0.02em; }
         .plan-price-wrap .mo { color: var(--apple-gray); font-weight: 500; font-size: 1.125rem; margin: 0; }
@@ -337,7 +349,7 @@
         .manifesto-card { background: var(--apple-light-gray); border-radius: 30px; padding: 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; transition: background-color 0.2s; }
         .manifesto-card:hover { background: white; }
         .manifesto-card span { font-size: 2.25rem; }
-        .manifesto-card h4 { font-size: 1.125rem; color: var(--apple-black); margin-bottom: 4px; }
+        .manifesto-card h4 { font-size: 1.125rem; color: var(--apple-black); margin: 0 0 4px 0; }
         .manifesto-card p { font-size: 14px; color: var(--apple-gray); line-height: 1.6; margin: 0; }
 
         /* Specs Section */
@@ -357,8 +369,8 @@
         
         .specs-content { width: 100%; position: relative; z-index: 10; }
         @media (min-width: 1024px) { .specs-content { width: 50%; } }
-        .specs-content h2 { font-size: 2.25rem; color: var(--apple-black); margin-bottom: 8px; }
-        .specs-content > p { color: var(--apple-gray); font-weight: 500; margin-bottom: 32px; }
+        .specs-content h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 8px 0; }
+        .specs-content > p { color: var(--apple-gray); font-weight: 500; margin: 0 0 32px 0; }
         
         /* Semantický seznam pro Specs (dl, dt, dd) */
         .specs-list { width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; }
@@ -390,7 +402,7 @@
         @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
         .footer-copy { font-size: 12px; color: var(--apple-gray); margin: 0; }
         
-        .footer-action { display: flex; items-center; gap: 24px; }
+        .footer-action { display: flex; align-items: center; gap: 24px; }
         .founder-spot { display: flex; align-items: center; gap: 8px; }
         .spot-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
         .spot-text { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin: 0; }
@@ -472,7 +484,7 @@
             <div class="bento-grid">
                 
                 <!-- Karta 1 -->
-                <div class="glass-panel bento-wide">
+                <div class="glass-panel bento-wide bento-1">
                     <div class="bento-card-bg-glow" aria-hidden="true"></div>
                     
                     <div style="position: relative; z-index: 10;">
@@ -519,14 +531,14 @@
                 </div>
 
                 <!-- Karta 4 -->
-                <div class="glass-panel bento-wide bento-action-card">
-                    <div style="position: relative; z-index: 10; max-width: 384px; text-align: center;">
+                <div class="glass-panel bento-wide bento-action-card bento-4">
+                    <div class="bento-action-content">
                         <div class="status-dot-wrap">
                              <div class="status-dot"></div>
                              <p class="status-text">Fast Setup</p>
                         </div>
-                        <h4 class="font-display" style="font-size: 1.875rem; color: var(--apple-black); margin-bottom: 12px;">Plug. Play. Post.</h4>
-                        <p style="color: var(--apple-gray); font-weight: 500;">Unbox the puck, scan the QR, and you're live in 30 seconds flat.</p>
+                        <h4 class="font-display">Plug. Play. Post.</h4>
+                        <p>Unbox the puck, scan the QR, and you're live in 30 seconds flat.</p>
                     </div>
                     <div class="anim-box">
                         <div class="anim-box-dashed"></div>
