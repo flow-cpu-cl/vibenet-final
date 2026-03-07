@@ -214,27 +214,49 @@
         .btn-footer:hover { background: var(--apple-blue-hover); }
         .hidden-mobile { display: none; }
         @media (min-width: 48rem) { .hidden-mobile { display: inline; } }
-        /* SHARE THE SIGNAL SECTION */
-        @keyframes pulse-ring {
-            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+
+        /* MOBILE ECOSYSTEM ALTERNATIVE */
+        #ecosystem-desktop { display: block; }
+        #ecosystem-mobile { display: none; }
+        @media (max-width: 47.9rem) {
+            #ecosystem-desktop { display: none !important; }
+            #ecosystem-mobile { display: block !important; }
         }
-        .share-section { min-height: 50rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: visible; position: relative; }
-        .share-container { position: relative; padding: 10rem 1.5rem; width: 100%; display: flex; flex-direction: column; align-items: center; }
-        .signal-transmitter { position: relative; z-index: 10; }
-        .share-title { font-size: clamp(1.875rem, 10vw, 10rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; text-align: center; margin: 0; color: var(--apple-black); white-space: break-spaces; }
-        .wave-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); border: 2px solid var(--apple-blue); border-radius: 50%; pointer-events: none; opacity: 0; z-index: -1; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease; }
-        .wave-ring.active { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
-        .wave-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 1px solid var(--apple-blue); border-radius: 50%; width: 100%; height: 100%; animation: pulse-ring 3s infinite; }
-        .face-avatar { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 20; }
-        .face-avatar.visible { opacity: 1; transform: scale(1); }
-        .face-bubble { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
-        .face-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; text-transform: uppercase; white-space: nowrap; }
-        .share-description { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; text-align: center; margin-top: 3rem; max-width: 28rem; }
-        @media (min-width: 48rem) {
-            .share-title { font-size: clamp(3rem, 10vw, 10rem); }
-            .share-description { font-size: 1.25rem; }
+
+        .ecosystem-mobile {
+            position: relative;
+            width: 100%;
+            background: white;
+            padding: 4rem 1.5rem;
+        }
+
+        .ecosystem-mobile-content {
+            max-width: 75rem;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ecosystem-mobile-text h2 {
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+        }
+
+        .ecosystem-mobile-image {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+        }
+
+        .ecosystem-mobile-image img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
     </style>
 </head>
@@ -320,52 +342,6 @@
             </div>
         </section>
 
-        <section class="share-section" id="share-section">
-            <div class="share-container">
-                <div class="signal-transmitter">
-                    <h2 class="share-title">Share<br>the Signal.</h2>
-
-                    <div class="wave-ring" id="ring-1" style="width: 400px; height: 400px;">
-                        <div class="wave-pulse"></div>
-                        <div class="face-avatar" style="top: -24px; left: 50%; transform: translateX(-50%);">
-                            <div class="face-bubble">😎</div>
-                            <div class="face-label">Tom</div>
-                        </div>
-                    </div>
-
-                    <div class="wave-ring" id="ring-2" style="width: 650px; height: 650px;">
-                        <div class="wave-pulse" style="animation-delay: -1s;"></div>
-                        <div class="face-avatar" style="top: 15%; left: 5%;">
-                            <div class="face-bubble">🤩</div>
-                            <div class="face-label">Sara</div>
-                        </div>
-                        <div class="face-avatar" style="top: 15%; right: 5%;">
-                            <div class="face-bubble">🥳</div>
-                            <div class="face-label">Leo</div>
-                        </div>
-                    </div>
-
-                    <div class="wave-ring" id="ring-3" style="width: 900px; height: 900px;">
-                        <div class="wave-pulse" style="animation-delay: -2s;"></div>
-                        <div class="face-avatar" style="bottom: 10%; left: 20%;">
-                            <div class="face-bubble">🙌</div>
-                            <div class="face-label">Yuki</div>
-                        </div>
-                        <div class="face-avatar" style="bottom: 10%; right: 20%;">
-                            <div class="face-bubble">✨</div>
-                            <div class="face-label">Mia</div>
-                        </div>
-                        <div class="face-avatar" style="top: 50%; right: -24px; transform: translateY(-50%);">
-                            <div class="face-bubble">😁</div>
-                            <div class="face-label">Max</div>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="share-description">Turn your text into a transmitter. Connect your tribe with a single tap.</p>
-            </div>
-        </section>
-
         <section id="coverage" class="section-block">
             <div class="section-header text-center">
                 <h2 class="font-display">Simple Plans.</h2>
@@ -413,8 +389,8 @@
         </section>
     </main>
 
-    <!-- ECOSYSTEM SECTION - FULL WIDTH (OUTSIDE CONTAINER) -->
-    <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
+    <!-- ECOSYSTEM SECTION - FULL WIDTH (DESKTOP) -->
+    <section id="ecosystem-desktop" style="position: relative; width: 100%; min-height: 500vh; background: white;">
         <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
             <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
                 <img id="ecosystem-image" src="sdilej-data.png" alt="Sdílení připojení se přáteli" style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
@@ -423,6 +399,21 @@
                 <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
                 <span style="color: var(--apple-black);">se svými přáteli.</span>
             </h2>
+        </div>
+    </section>
+
+    <!-- ECOSYSTEM SECTION - MOBILE VERSION -->
+    <section id="ecosystem-mobile" class="ecosystem-mobile">
+        <div class="ecosystem-mobile-content">
+            <div class="ecosystem-mobile-text">
+                <h2 class="font-display">
+                    <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
+                    <span style="color: var(--apple-black);">se svými přáteli.</span>
+                </h2>
+            </div>
+            <div class="ecosystem-mobile-image">
+                <img src="sdilej-data.png" alt="Sdílení připojení se přáteli">
+            </div>
         </div>
     </section>
 
@@ -519,70 +510,49 @@
             window.addEventListener('scroll', () => { targetScroll = window.scrollY; }, { passive: true });
             render();
 
-            const ecosystemSection = document.getElementById('ecosystem');
+            // Ecosystem Section Scroll Animation (ONLY ON DESKTOP)
+            const ecosystemSection = document.getElementById('ecosystem-desktop');
             const ecosystemText = document.getElementById('ecosystem-text');
             const ecosystemImage = document.getElementById('ecosystem-image');
             const ecosystemImageContainer = document.getElementById('ecosystem-image-container');
 
-            window.addEventListener('scroll', () => {
-                const sectionTop = ecosystemSection.getBoundingClientRect().top;
-                const sectionHeight = ecosystemSection.offsetHeight;
-                const windowHeight = window.innerHeight;
-                const scrollProgress = (windowHeight - sectionTop) / (sectionHeight + windowHeight);
-                const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
+            // Pouze pokud existuje element (desktop verze)
+            if (ecosystemSection && window.innerWidth >= 768) {
+                window.addEventListener('scroll', () => {
+                    const sectionTop = ecosystemSection.getBoundingClientRect().top;
+                    const sectionHeight = ecosystemSection.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollProgress = (windowHeight - sectionTop) / (sectionHeight + windowHeight);
+                    const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
 
-                if (clampedProgress <= 0.5) {
-                    const phase1Progress = clampedProgress / 0.5;
-                    const textScale = 0.1 + (phase1Progress * 2.2);
-                    ecosystemText.style.transform = `scale(${textScale})`;
-                    ecosystemText.style.opacity = 1;
-                    ecosystemImage.style.opacity = 0;
-                    ecosystemImageContainer.style.transform = `scale(1)`;
-                } else if (clampedProgress <= 0.75) {
-                    const phase2Progress = (clampedProgress - 0.5) / 0.25;
-                    ecosystemText.style.transform = `scale(2.3)`;
-                    ecosystemText.style.opacity = 1;
-                    ecosystemImage.style.opacity = phase2Progress;
-                    ecosystemImageContainer.style.transform = `scale(1)`;
-                } else {
-                    const phase3Progress = (clampedProgress - 0.75) / 0.25;
-                    const containerWidth = 75 * 16;
-                    const minScale = Math.min(1, containerWidth / window.innerWidth);
-                    const scaleDownAmount = 1 - minScale;
-                    const currentScale = Math.max(minScale, 1 - (phase3Progress * scaleDownAmount));
-                    ecosystemText.style.opacity = 1;
-                    ecosystemText.style.transform = `scale(${2.3 * currentScale})`;
-                    ecosystemImage.style.opacity = 1;
-                    const borderRadius = phase3Progress * 35;
-                    ecosystemImageContainer.style.transform = `scale(${currentScale})`;
-                    ecosystemImage.style.borderRadius = `${borderRadius}px`;
-                }
-            }, { passive: true });
-
-            // Share the Signal Animation
-            const shareSection = document.getElementById('share-section');
-            const rings = document.querySelectorAll('.wave-ring');
-
-            window.addEventListener('scroll', () => {
-                if (!shareSection) return;
-                const rect = shareSection.getBoundingClientRect();
-                const viewHeight = window.innerHeight;
-                const start = viewHeight * 0.8;
-                const end = -rect.height * 0.2;
-                let progress = (start - rect.top) / (start - end);
-                progress = Math.max(0, Math.min(1, progress));
-
-                rings.forEach((ring, i) => {
-                    const threshold = (i + 1) / (rings.length + 1);
-                    if (progress > threshold) {
-                        ring.classList.add('active');
-                        ring.querySelectorAll('.face-avatar').forEach(f => f.classList.add('visible'));
+                    if (clampedProgress <= 0.5) {
+                        const phase1Progress = clampedProgress / 0.5;
+                        const textScale = 0.1 + (phase1Progress * 2.2);
+                        ecosystemText.style.transform = `scale(${textScale})`;
+                        ecosystemText.style.opacity = 1;
+                        ecosystemImage.style.opacity = 0;
+                        ecosystemImageContainer.style.transform = `scale(1)`;
+                    } else if (clampedProgress <= 0.75) {
+                        const phase2Progress = (clampedProgress - 0.5) / 0.25;
+                        ecosystemText.style.transform = `scale(2.3)`;
+                        ecosystemText.style.opacity = 1;
+                        ecosystemImage.style.opacity = phase2Progress;
+                        ecosystemImageContainer.style.transform = `scale(1)`;
                     } else {
-                        ring.classList.remove('active');
-                        ring.querySelectorAll('.face-avatar').forEach(f => f.classList.remove('visible'));
+                        const phase3Progress = (clampedProgress - 0.75) / 0.25;
+                        const containerWidth = 75 * 16;
+                        const minScale = Math.min(1, containerWidth / window.innerWidth);
+                        const scaleDownAmount = 1 - minScale;
+                        const currentScale = Math.max(minScale, 1 - (phase3Progress * scaleDownAmount));
+                        ecosystemText.style.opacity = 1;
+                        ecosystemText.style.transform = `scale(${2.3 * currentScale})`;
+                        ecosystemImage.style.opacity = 1;
+                        const borderRadius = phase3Progress * 35;
+                        ecosystemImageContainer.style.transform = `scale(${currentScale})`;
+                        ecosystemImage.style.borderRadius = `${borderRadius}px`;
                     }
-                });
-            }, { passive: true });
+                }, { passive: true });
+            }
         });
     </script>
 </body>
