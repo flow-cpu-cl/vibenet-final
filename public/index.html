@@ -327,7 +327,7 @@
         .btn-plan-pro { background: var(--apple-blue); color: white; border: none; box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.25); position: relative; z-index: 10; }
         .btn-plan-pro:hover { background: var(--apple-blue-hover); }
 
-        /* --- TUNNEL SECTION (REWRITTEN FOR WIDER FANNING EFFECT AS PER RED LINES) --- */
+        /* --- TUNNEL SECTION (NASTAVENÍ 3D TUNELU) --- */
         .tunnel-section {
             position: relative;
             width: 100%;
@@ -337,7 +337,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* DŮLEŽITÉ: Ořezává telefony hranou kontejneru */
+            overflow: hidden; /* Ořezává telefony hranou kontejneru */
             border-radius: 2.5rem;
             margin-bottom: 2.5rem;
         }
@@ -345,7 +345,7 @@
         .tunnel-container {
             position: absolute;
             inset: 0;
-            /* Agresivnější perspektiva pro větší "rozbíhání" hran do stran */
+            /* HLOUBKA SCÉNY: Menší číslo = silnější 3D efekt a zkreslení */
             perspective: 500px; 
             display: flex;
             justify-content: center;
@@ -383,14 +383,13 @@
 
         /* 1. HORNÍ / SPODNÍ STĚNA (Strop a Podlaha) */
         .tunnel-top, .tunnel-bottom {
-            width: 50vw; max-width: 35rem;
+            /* ŠÍŘKA A DÉLKA STĚNY: Upravuj dle potřeby zaplnění prostoru */
+            width: 40vw; max-width: 35rem;
             height: 60vh;
             left: 50%;
         }
 
-        /* Matematika Top: Transform-origin dole (u textu), rotace v X 
-           čímž se horní hrana telefonu "rozbíhá" do horních rohů sekce.
-        */
+        /* STROP: translateY určuje vysunutí/zasunutí, rotateX úhel stěny */
         .tunnel-top { 
             top: 0;
             transform-origin: bottom center;
@@ -398,24 +397,22 @@
         }
         .tunnel-top img { transform: rotate(180deg); } /* Ostrov dolů k textu */
 
-        /* Matematika Bottom: Origin nahoře (u textu) */
+        /* PODLAHA: Kladné rotateX vyklopí hranu k divákovi */
         .tunnel-bottom { 
             top: auto; bottom: 0;
             transform-origin: top center;
             transform: translate(-50%, 10%) rotateX(75deg); 
         }
-        /* Ostrov přirozeně nahoře u textu */
 
         /* 2. LEVÁ / PRAVÁ STĚNA (Boky) */
         .tunnel-left, .tunnel-right {
+            /* ŠÍŘKA BOKŮ: vw jednotky pomáhají s responzivitou */
             width: 40vw;
             height: 60vh;
             top: 50%;
         }
 
-        /* Matematika Left: Origin vpravo (u textu), rotace v Y 
-           čímž se levá hrana telefonu "rozbíhá" do levých rohů sekce.
-        */
+        /* LEVÝ BOK: rotateY určuje natočení "dveří" stěny */
         .tunnel-left { 
             left: 0;
             transform-origin: center right;
@@ -423,7 +420,7 @@
         }
         .tunnel-left img { transform: rotate(90deg); } /* Ostrov vpravo k textu */
 
-        /* Matematika Right: Origin vlevo (u textu) */
+        /* PRAVÝ BOK: Záporné rotateY pro zrcadlový efekt */
         .tunnel-right { 
             left: auto; right: 0;
             transform-origin: center left;
@@ -431,7 +428,7 @@
         }
         .tunnel-right img { transform: rotate(-90deg); } /* Ostrov vlevo k textu */
 
-        /* Responzivní úpravy pro mobilní tunel */
+        /* MOBILNÍ TUNEL: Zde můžeš upravit úhly a perspektivu pro telefony */
         @media (max-width: 48rem) {
             .tunnel-container { perspective: 400px; }
             .tunnel-top, .tunnel-bottom { width: 80vw; }
@@ -536,403 +533,4 @@
         .founder-spot { display: flex; align-items: center; gap: 0.5rem; }
         .spot-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: #15803d; animation: pulse 2s infinite; }
         .spot-text { font-weight: 700; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; }
-        .btn-footer { background: var(--apple-blue); color: white; font-weight: 700; font-size: 0.875rem; padding: 0.625rem 1.5rem; border-radius: 99rem; transition: background-color 0.2s; }
-        .btn-footer:hover { background: var(--apple-blue-hover); }
-
-        .hidden-mobile { display: none; }
-        @media (min-width: 48rem) { .hidden-mobile { display: inline; } }
-    </style>
-</head>
-<body>
-
-    <div class="blobs-wrapper" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-
-    <nav aria-label="Main navigation" class="nav container">
-        <p class="font-display nav-logo">VIBE_NET</p>
-        
-        <div class="nav-links">
-            <a href="#tech">The Tech</a>
-            <a href="#coverage">Coverage</a>
-            <a href="#manifesto">Manifesto</a>
-        </div>
-
-        <button class="btn-nav">Join the Club</button>
-    </nav>
-
-    <main class="container section-gap">
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                
-                <div class="sticker">
-                    <div style="display: flex; flex-direction: column; align-items: center; line-height: 1;">
-                        <strong class="font-display sticker-val">88 CR</strong>
-                        <small class="sticker-label">PER MONTH</small>
-                    </div>
-                </div>
-
-                <h1 class="font-display">
-                    Internet<br class="hidden-mobile" aria-hidden="true">
-                    <span class="gradient-text">Without</span>
-                    The Leash.
-                </h1>
-                
-                <p>Forget cables. Forget landlords.<br>The web flows where you flow.</p>
-
-                <div class="hero-actions">
-                    <button class="btn-primary">Gimme Access</button>
-                    <a href="#tech" class="btn-text">
-                        Learn more <span aria-hidden="true">›</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="phone-wrapper">
-                <div id="hero-phone" class="phone-mockup">
-                    <img 
-                        src="telefon-800.webp" 
-                        srcset="telefon-400.webp 400w, telefon-800.webp 800w"
-                        sizes="(max-width: 768px) 288px, 384px"
-                        width="800"
-                        height="1627"
-                        fetchpriority="high"
-                        alt="VIBE_NET App na telefonu">
-                </div>
-            </div>
-        </section>
-
-        <!-- Tech Section (Bento Grid) -->
-        <section id="tech" class="section-block">
-            <div class="section-header">
-                <h2 class="font-display">Signal. Everywhere.</h2>
-            </div>
-            
-            <div class="bento-grid">
-                
-                <div class="glass-panel bento-wide bento-1">
-                    <div class="bento-card-bg-glow" aria-hidden="true"></div>
-                    
-                    <div style="position: relative; z-index: 10;">
-                        <p class="bento-label">New Hardware</p>
-                        <h3 class="font-display">Nomad Puck 1.0</h3>
-                        <p>Your personal Wi-Fi bubble. Designed for movement.</p>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-top: 3rem; position: relative; z-index: 10;">
-                        <div class="bento-badges">
-                            <div class="badge">
-                                <span aria-hidden="true" style="font-size: 1.125rem;">🚐</span>
-                                <strong>Van Life</strong>
-                            </div>
-                            <div class="badge">
-                                <span aria-hidden="true" style="font-size: 1.125rem;">🎓</span>
-                                <strong>Study</strong>
-                            </div>
-                        </div>
-                        <div class="bento-price font-display">199 CR</div>
-                    </div>
-                </div>
-
-                <div class="glass-panel bento-narrow">
-                    <div class="icon-circle">
-                        <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-display">5G Ultra</h3>
-                        <p>Wideband Ready</p>
-                    </div>
-                </div>
-
-                <div class="glass-panel bento-narrow">
-                    <div class="icon-circle" style="color: #be185d;">
-                        <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-display">Ghost Mode</h3>
-                        <p>Cancel Anytime</p>
-                    </div>
-                </div>
-
-                <div class="glass-panel bento-wide bento-action-card bento-4">
-                    <div class="bento-action-content">
-                        <div class="status-dot-wrap">
-                             <div class="status-dot"></div>
-                             <p class="status-text">Fast Setup</p>
-                        </div>
-                        <h3 class="font-display">Plug. Play. Post.</h3>
-                        <p>Unbox the puck, scan the QR, and you're live in 30 seconds flat.</p>
-                    </div>
-                    <div class="anim-box">
-                        <div class="anim-box-dashed"></div>
-                        <div class="anim-box-inner">
-                            <svg style="width: 2rem; height: 2rem; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Coverage/Plans Section -->
-        <section id="coverage" class="section-block">
-            <div class="section-header text-center">
-                <h2 class="font-display">Simple Plans.</h2>
-                <p>No hidden fees. No contracts. Just vibes.</p>
-            </div>
-
-            <div class="plans-grid">
-                
-                <div class="plan-card">
-                    <div>
-                        <p class="plan-label">Basic</p>
-                        <h3 class="font-display">Starter</h3>
-                        <div class="plan-price-wrap">
-                            <strong class="price font-display">48 CR</strong>
-                            <p class="mo">/mo</p>
-                        </div>
-                        <ul class="plan-features">
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                100GB High-speed data
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                1 Device connection
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Standard Support
-                            </li>
-                        </ul>
-                    </div>
-                    <button class="btn-plan">Get Started</button>
-                </div>
-
-                <div class="plan-card plan-pro">
-                    <div class="plan-pro-glow" aria-hidden="true"></div>
-                    
-                    <div style="position: relative; z-index: 10;">
-                        <div class="plan-header-top">
-                            <p class="plan-label" style="margin-bottom: 0;">Power User</p>
-                            <strong class="plan-badge">POPULAR</strong>
-                        </div>
-                        <h3 class="font-display">Nomad Pro</h3>
-                        <div class="plan-price-wrap">
-                            <strong class="price font-display">88 CR</strong>
-                            <p class="mo">/mo</p>
-                        </div>
-                        <ul class="plan-features">
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                Unlimited 5G Data
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                5 Device connections
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                Priority 24/7 Support
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                Global Roaming included
-                            </li>
-                        </ul>
-                    </div>
-                    <button class="btn-plan btn-plan-pro">Join Pro</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tunnel Section -->
-        <section id="ecosystem" class="tunnel-section">
-            <div class="tunnel-container">
-                
-                <!-- Center Text -->
-                <div class="tunnel-center-text">
-                    <h2 class="font-display">
-                        <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
-                        <span style="color: var(--apple-black);">se svými přáteli.</span>
-                    </h2>
-                </div>
-
-                <!-- 1. Levý mobil -->
-                <div class="tunnel-device tunnel-left">
-                    <img src="telefon-rotation-1.png" alt="Levý telefon">
-                </div>
-
-                <!-- 2. Pravý mobil -->
-                <div class="tunnel-device tunnel-right">
-                    <img src="telefon-rotation-2.png" alt="Pravý telefon">
-                </div>
-
-                <!-- 3. Horní zařízení -->
-                <div class="tunnel-device tunnel-top">
-                    <img src="telefon-rotation-3.png" alt="Horní telefon">
-                </div>
-
-                <!-- 4. Spodní zařízení -->
-                <div class="tunnel-device tunnel-bottom">
-                    <img src="telefon-rotation-4.png" alt="Spodní telefon">
-                </div>
-            </div>
-        </section>
-
-        <!-- Manifesto Section -->
-        <section id="manifesto" class="section-block">
-            <div class="section-header text-center">
-                <h2 class="font-display">Why the Puck Slaps</h2>
-                <p>Engineering for the untethered generation.</p>
-            </div>
-            
-            <div class="manifesto-grid">
-                <div class="manifesto-card">
-                    <span aria-hidden="true">⚡️</span>
-                    <div>
-                        <h3 class="font-display">Zero Setup</h3>
-                        <p>Plug it in and you're good. No technicians, no calls.</p>
-                    </div>
-                </div>
-                
-                <div class="manifesto-card">
-                    <span aria-hidden="true">🚐</span>
-                    <div>
-                        <h3 class="font-display">Go Anywhere</h3>
-                        <p>Built for van-life, cafes, and mountain peaks.</p>
-                    </div>
-                </div>
-                
-                <div class="manifesto-card">
-                    <span aria-hidden="true">🌐</span>
-                    <div>
-                        <h3 class="font-display">Share the Vibe</h3>
-                        <p>Connect up to 10 devices simultaneously.</p>
-                    </div>
-                </div>
-                
-                <div class="manifesto-card">
-                    <span aria-hidden="true">🔋</span>
-                    <div>
-                        <h3 class="font-display">All-Day Battery</h3>
-                        <p>12 hours of uninterrupted life on a single charge.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Specs Section -->
-        <section class="specs-section">
-            <div class="specs-bg-glow" aria-hidden="true"></div>
-
-            <div class="specs-image">
-                <div class="device-specs-wrapper">
-                    <img 
-                        src="modem-476.webp" 
-                        srcset="modem-256.webp 256w, modem-476.webp 476w"
-                        sizes="(max-width: 768px) 224px, 320px"
-                        width="446"
-                        height="642"
-                        loading="lazy"
-                        alt="VIBE_NET Modem" 
-                        class="puck-product-image">
-                    <div class="puck-specs-glow" aria-hidden="true"></div>
-                </div>
-            </div>
-            
-            <div class="specs-content">
-                <h2 class="font-display">Tech Specs</h2>
-                <p>Technical details for the nerds.</p>
-                
-                <dl class="specs-list">
-                    <div class="spec-row"><dt class="spec-label">Connectivity</dt><dd class="spec-val">5G / 4G LTE</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Battery</dt><dd class="spec-val">12,000mAh</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Range</dt><dd class="spec-val">30m</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Devices</dt><dd class="spec-val">Up to 10</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Weight</dt><dd class="spec-val">180g</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Wi-Fi</dt><dd class="spec-val">Wi-Fi 6</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Security</dt><dd class="spec-val">WPA3</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Setup</dt><dd class="spec-val">App + QR Code</dd></div>
-                </dl>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-top">
-                
-                <div class="footer-brand">
-                    <p class="footer-logo">VIBE_NET</p>
-                    <p class="footer-desc">Internet without the leash.</p>
-                </div>
-
-                <div class="footer-links">
-                    <a href="#tech">The Tech</a>
-                    <a href="#coverage">Coverage</a>
-                    <a href="#manifesto">Manifesto</a>
-                    <a href="#">Privacy</a>
-                </div>
-
-                <div class="footer-socials">
-                    <a href="#" aria-label="Follow us on Twitter" class="social-btn">
-                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
-                    </a>
-                    <a href="#" aria-label="Facebook" class="social-btn">
-                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="footer-bottom">
-                <p class="footer-copy">© 2024 VIBE_NET. All rights reserved.</p>
-                
-                <div class="footer-action">
-                    <div class="founder-spot">
-                        <div class="spot-dot"></div>
-                        <strong class="spot-text">Limited Founder spots</strong>
-                    </div>
-                    <button class="btn-footer">Let's Goooo!</button>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- SCROLL ANIMATION SCRIPT -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroPhone = document.getElementById('hero-phone');
-            let targetScroll = window.scrollY;
-            let currentScroll = targetScroll;
-            const ease = 0.08;
-
-            const render = () => {
-                currentScroll += (targetScroll - currentScroll) * ease;
-                const progress = Math.min(Math.max(currentScroll / 600, 0), 1);
-                
-                const y = 150 - (progress * 190);
-                const scale = 0.85 + (progress * 0.15);
-                const rotateX = 30 - (progress * 30);
-                const opacity = 0.2 + (progress * 0.8);
-
-                heroPhone.style.transform = `translateY(${y}px) scale(${scale}) rotateX(${rotateX}deg)`;
-                heroPhone.style.opacity = opacity;
-
-                requestAnimationFrame(render);
-            };
-
-            window.addEventListener('scroll', () => {
-                targetScroll = window.scrollY;
-            }, { passive: true });
-
-            render();
-        });
-    </script>
-</body>
-</html>
+        .btn-footer { background: var(--apple-blue); color: white; font-weight: 700; font-size: 0.875rem; padding: 0.625rem 1.5rem; border-
