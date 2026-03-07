@@ -185,26 +185,23 @@
             display: flex; 
             justify-content: center; 
             margin-top: 3rem; 
-            /* Perspektiva nutná pro 3D naklonění při scrollu */
             perspective: 1200px;
         }
         
         .phone-mockup {
             position: relative;
-            width: 18rem; /* Základní šířka iPhonu na mobilu */
+            width: 18rem; 
             display: flex;
             justify-content: center;
             align-items: center;
             will-change: transform, opacity;
             
-            /* Výchozí stav (před JS injekcí) - skryté a dole s 3D náklonem */
             transform: translateY(150px) scale(0.85) rotateX(30deg);
             opacity: 0;
             
-            /* Jemný prostorový stín pod celým telefonem */
             filter: drop-shadow(0 25px 35px rgba(0,0,0,0.25));
         }
-        @media (min-width: 48rem) { .phone-mockup { width: 24rem; } } /* Větší šířka pro desktop */
+        @media (min-width: 48rem) { .phone-mockup { width: 24rem; } } 
         
         .phone-mockup img {
             width: 100%;
@@ -330,11 +327,11 @@
         .btn-plan-pro { background: var(--apple-blue); color: white; border: none; box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.25); position: relative; z-index: 10; }
         .btn-plan-pro:hover { background: var(--apple-blue-hover); }
 
-        /* --- TUNNEL SECTION (ECOSYSTEM V2) --- */
+        /* --- TUNNEL SECTION (Stabilní základ V5) --- */
         .tunnel-section {
             position: relative;
             width: 100%;
-            height: 80vh; /* Efektivní výška zabírající většinu obrazovky */
+            height: 80vh; 
             min-height: 37.5rem; /* 600px */
             max-height: 56.25rem; /* 900px */
             background: #ffffff;
@@ -349,7 +346,7 @@
         .tunnel-container {
             position: absolute;
             inset: 0;
-            perspective: 1000px; /* Hloubka prostoru, klíčové pro efekt zužování */
+            perspective: 350px; /* Původní skvěle fungující perspektiva */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -375,133 +372,73 @@
         /* Společný styl pro "tělo" zařízení (rámeček) */
         .tunnel-device {
             position: absolute;
-            background: #111; /* Barva rámečku/těla */
-            box-shadow: 0 1.875rem 3.75rem rgba(0,0,0,0.15); /* Prostorový stín */
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
         }
 
-        /* Vnitřní obrazovka s placeholderem */
-        .tunnel-screen {
+        /* Obrázek zařízení nahrazující původní CSS mockup */
+        .tunnel-img {
             width: 100%;
             height: 100%;
-            background: #fff;
-            position: relative;
-            overflow: hidden;
+            object-fit: contain;
+            filter: drop-shadow(0 2rem 4rem rgba(0,0,0,0.25)); /* Prostorový stín kopírující tvar telefonu */
         }
 
-        /* 1. Levý mobil (nyní plně horizontální) */
+        /* 1. LEVÝ MOBIL */
         .tunnel-left {
-            left: -10%; 
-            top: 30%; /* Optimalizováno pro širší formát */
-            bottom: 30%;
-            width: 30%;
-            max-width: 22rem; 
-            border-radius: 2rem;
-            padding: 0.75rem; 
+            left: -2%; 
+            top: 25%; 
+            bottom: 25%;
+            width: 25%; 
+            max-width: 20rem; 
             transform-origin: left center;
-            /* Zrušeno naklánění nahoru (rotateZ), už jen samotný 3D tunel směrem dozadu */
-            transform: rotateY(55deg);
+            transform: scale(1.4) rotateY(68deg);
         }
-        .tunnel-left .tunnel-screen { border-radius: 1.5rem; }
 
-        /* 2. Pravý mobil (nyní plně horizontální) */
+        /* 2. PRAVÝ MOBIL */
         .tunnel-right {
-            right: -10%; 
-            top: 30%;
-            bottom: 30%;
-            width: 30%;
-            max-width: 22rem; 
-            border-radius: 2rem;
-            padding: 0.75rem;
+            right: -2%; 
+            top: 25%;
+            bottom: 25%;
+            width: 25%;
+            max-width: 20rem; 
             transform-origin: right center;
-            transform: rotateY(-55deg);
-        }
-        .tunnel-right .tunnel-screen { border-radius: 1.5rem; }
-
-        /* Kamery telefonů teď umísťujeme na příslušné boky tak, aby mířily rovnou do středu */
-        .tunnel-left .tunnel-screen::after,
-        .tunnel-right .tunnel-screen::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1.25rem;
-            height: 25%; /* Dynamický ostrov v poměru k nové kratší straně */
-            background: #111;
-            border-radius: 1rem;
-            z-index: 5;
+            transform: rotateY(-60deg);
         }
 
-        /* Levý mobil míří kamerou doprava -> přímo na "Sdílej připojení" */
-        .tunnel-left .tunnel-screen::after {
-            right: 0.5rem;
-            left: auto;
-        }
-
-        /* Pravý mobil míří kamerou doleva -> přímo na "Sdílej připojení" */
-        .tunnel-right .tunnel-screen::after {
-            left: 0.5rem;
-            right: auto;
-        }
-
-        /* 3. Horní Tablet */
+        /* 3. HORNÍ ZAŘÍZENÍ */
         .tunnel-top {
-            top: -15%;
+            top: -2%;
             left: 20%;
             right: 20%;
-            height: 35%;
-            max-height: 25rem; /* 400px */
-            border-radius: 1.5rem;
-            padding: 0.75rem;
+            height: 35%; 
+            max-height: 25rem; 
             transform-origin: top center;
-            transform: rotateX(-55deg);
+            transform: rotateX(-60deg);
         }
-        .tunnel-top .tunnel-screen { border-radius: 0.75rem; }
 
-        /* 4. Spodní Notebook */
+        /* 4. SPODNÍ ZAŘÍZENÍ */
         .tunnel-bottom {
-            bottom: -20%;
-            left: 15%;
+            bottom: -2%;
+            left: 15%; 
             right: 15%;
-            height: 40%;
-            max-height: 28rem; /* 450px */
-            border-radius: 1rem;
-            /* Spodní rámeček notebooku je tlustší */
-            padding: 0.5rem 0.5rem 2.5rem 0.5rem; 
+            height: 40%; 
+            max-height: 28rem; 
             transform-origin: bottom center;
-            transform: rotateX(55deg);
-        }
-        .tunnel-bottom .tunnel-screen { border-radius: 0.5rem; }
-
-        /* Šedé čáry představující falešný obsah/aplikace na obrazovkách */
-        .skeleton-ui {
-            width: 100%;
-            height: 100%;
-            background-color: #f9fafb;
-            background-image: 
-                linear-gradient(#f3f4f6 2rem, transparent 0),
-                linear-gradient(#f3f4f6 8rem, transparent 0),
-                linear-gradient(#f3f4f6 8rem, transparent 0);
-            background-size: 100% 3rem, 45% 10rem, 45% 10rem;
-            background-position: 0 0, 5% 4rem, 95% 4rem;
-            background-repeat: no-repeat;
-            opacity: 0.6;
-        }
-        .tunnel-top .skeleton-ui, .tunnel-bottom .skeleton-ui {
-            background-size: 100% 3rem, 30% 10rem, 30% 10rem;
-            background-position: 0 0, 10% 4rem, 45% 4rem;
+            transform: rotateX(60deg);
         }
 
-        /* Úprava rozložení pro mobilní zobrazení, aby se prvky nepřekrývaly špatně */
+        /* Úprava pro mobily */
         @media (max-width: 48rem) {
             .tunnel-section { height: 60vh; min-height: 25rem; }
-            .tunnel-left { left: -25%; top: 35%; bottom: 35%; width: 45%; transform: rotateY(65deg); }
-            .tunnel-right { right: -25%; top: 35%; bottom: 35%; width: 45%; transform: rotateY(-65deg); }
-            .tunnel-top { top: -10%; left: 5%; right: 5%; height: 25%; transform: rotateX(-65deg); }
-            .tunnel-bottom { bottom: -10%; left: 5%; right: 5%; height: 30%; transform: rotateX(65deg); }
+            .tunnel-container { perspective: 300px; } 
+            
+            .tunnel-left { left: -5%; top: 30%; bottom: 30%; width: 40%; transform-origin: left center; transform: scale(1.4) rotateY(72deg); }
+            .tunnel-right { right: -5%; top: 30%; bottom: 30%; width: 40%; transform: rotateY(-65deg); }
+            .tunnel-top { top: -5%; left: 5%; right: 5%; height: 30%; transform: rotateX(-65deg); }
+            .tunnel-bottom { bottom: -5%; left: 5%; right: 5%; height: 35%; transform: rotateX(65deg); }
         }
         /* --- KONEC TUNNEL SEKCE --- */
 
@@ -532,18 +469,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 14rem; /* Zmenšeno z 16rem pro menší vzhled na mobilu */
+            width: 14rem; 
             z-index: 10;
         }
-        @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } } /* Výrazně zmenšeno z 29.75rem pro desktop */
+        @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } } 
         
         .puck-product-image {
             width: 100%;
             height: auto;
             display: block;
             object-fit: contain;
-            filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); /* Stín pro vizuální hloubku */
-            border-radius: 2rem; /* Jemné hrany kolem fotky */
+            filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); 
+            border-radius: 2rem; 
         }
         
         .puck-specs-glow { 
@@ -654,9 +591,7 @@
             </div>
 
             <div class="phone-wrapper">
-                <!-- ID pro přesné zacílení první hlavní animace na hrdinu -->
                 <div id="hero-phone" class="phone-mockup">
-                    <!-- Použití responzivních obrázků (srcset), dimensions a priority načítání -->
                     <img 
                         src="telefon-800.webp" 
                         srcset="telefon-400.webp 400w, telefon-800.webp 800w"
@@ -677,7 +612,6 @@
             
             <div class="bento-grid">
                 
-                <!-- Karta 1 -->
                 <div class="glass-panel bento-wide bento-1">
                     <div class="bento-card-bg-glow" aria-hidden="true"></div>
                     
@@ -702,7 +636,6 @@
                     </div>
                 </div>
 
-                <!-- Karta 2 -->
                 <div class="glass-panel bento-narrow">
                     <div class="icon-circle">
                         <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
@@ -713,7 +646,6 @@
                     </div>
                 </div>
 
-                <!-- Karta 3 -->
                 <div class="glass-panel bento-narrow">
                     <div class="icon-circle" style="color: #be185d;">
                         <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
@@ -724,7 +656,6 @@
                     </div>
                 </div>
 
-                <!-- Karta 4 -->
                 <div class="glass-panel bento-wide bento-action-card bento-4">
                     <div class="bento-action-content">
                         <div class="status-dot-wrap">
@@ -753,7 +684,6 @@
 
             <div class="plans-grid">
                 
-                <!-- Starter Plan -->
                 <div class="plan-card">
                     <div>
                         <p class="plan-label">Basic</p>
@@ -780,7 +710,6 @@
                     <button class="btn-plan">Get Started</button>
                 </div>
 
-                <!-- Pro Plan -->
                 <div class="plan-card plan-pro">
                     <div class="plan-pro-glow" aria-hidden="true"></div>
                     
@@ -818,7 +747,7 @@
             </div>
         </section>
 
-        <!-- Tunnel Section (3D Perspective Inspiration) -->
+        <!-- Tunnel Section -->
         <section id="ecosystem" class="tunnel-section">
             <div class="tunnel-container">
                 
@@ -830,36 +759,24 @@
                     </h2>
                 </div>
 
-                <!-- 1. Left Device (Mobile) -->
+                <!-- 1. Levý mobil -->
                 <div class="tunnel-device tunnel-left">
-                    <div class="tunnel-screen">
-                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
-                        <div class="skeleton-ui"></div>
-                    </div>
+                    <img src="telefon-rotation-1.png" alt="Levý telefon" class="tunnel-img">
                 </div>
 
-                <!-- 2. Right Device (Mobile) -->
+                <!-- 2. Pravý mobil -->
                 <div class="tunnel-device tunnel-right">
-                    <div class="tunnel-screen">
-                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
-                        <div class="skeleton-ui"></div>
-                    </div>
+                    <img src="telefon-rotation-2.png" alt="Pravý telefon" class="tunnel-img">
                 </div>
 
-                <!-- 3. Top Device (Tablet) -->
+                <!-- 3. Horní zařízení -->
                 <div class="tunnel-device tunnel-top">
-                    <div class="tunnel-screen">
-                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
-                        <div class="skeleton-ui"></div>
-                    </div>
+                    <img src="telefon-rotation-3.png" alt="Horní telefon" class="tunnel-img">
                 </div>
 
-                <!-- 4. Bottom Device (Laptop screen) -->
+                <!-- 4. Spodní zařízení -->
                 <div class="tunnel-device tunnel-bottom">
-                    <div class="tunnel-screen">
-                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
-                        <div class="skeleton-ui"></div>
-                    </div>
+                    <img src="telefon-rotation-4.png" alt="Spodní telefon" class="tunnel-img">
                 </div>
             </div>
         </section>
@@ -912,7 +829,6 @@
 
             <div class="specs-image">
                 <div class="device-specs-wrapper">
-                    <!-- Responzivní načítání a lazy loading pro spodní obrázek s explicitními rozměry -->
                     <img 
                         src="modem-476.webp" 
                         srcset="modem-256.webp 256w, modem-476.webp 476w"
@@ -989,50 +905,30 @@
     <!-- SCROLL ANIMATION SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Zacílíme na telefon v hero sekci
             const heroPhone = document.getElementById('hero-phone');
-            
-            // Cílová hodnota scrollu (kam uživatel doscrolloval)
             let targetScroll = window.scrollY;
-            // Aktuální hodnota pro plynulý dojezd (lerp)
             let currentScroll = targetScroll;
-            // Faktor vyhlazení (0.08 = velmi hladký dojezd)
             const ease = 0.08;
 
             const render = () => {
-                // Výpočet "máslového" dojezdu k cílovému scrollu
                 currentScroll += (targetScroll - currentScroll) * ease;
-                
-                // Animace se odehrává v prvních 600px scrollování
                 const progress = Math.min(Math.max(currentScroll / 600, 0), 1);
                 
-                // --- PARAMETRY ANIMACE PRO TELEFON ---
-                // Y-osa: Začíná dole (150px) a stoupá nahoru (-40px)
                 const y = 150 - (progress * 190);
-                
-                // Měřítko (Scale): Z lehce oddáleného na plnou velikost
                 const scale = 0.85 + (progress * 0.15);
-                
-                // 3D rotace (RotateX): Začíná nakloněný vzad (30deg) a srovná se na (0deg)
                 const rotateX = 30 - (progress * 30);
-                
-                // Průhlednost (Opacity): Postupné zviditelnění
                 const opacity = 0.2 + (progress * 0.8);
 
-                // Aplikace stylů
                 heroPhone.style.transform = `translateY(${y}px) scale(${scale}) rotateX(${rotateX}deg)`;
                 heroPhone.style.opacity = opacity;
 
-                // Opakování smyčky
                 requestAnimationFrame(render);
             };
 
-            // Listener pro zachycení pozice
             window.addEventListener('scroll', () => {
                 targetScroll = window.scrollY;
             }, { passive: true });
 
-            // Start animační smyčky
             render();
         });
     </script>
