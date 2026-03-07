@@ -480,11 +480,13 @@
             <div class="phone-wrapper">
                 <!-- ID pro přesné zacílení první hlavní animace na hrdinu -->
                 <div id="hero-phone" class="phone-mockup">
-                    <!-- Použití responzivních obrázků (srcset) a priority načítání -->
+                    <!-- Použití responzivních obrázků (srcset), dimensions a priority načítání -->
                     <img 
                         src="telefon-800.webp" 
                         srcset="telefon-400.webp 400w, telefon-800.webp 800w"
                         sizes="(max-width: 768px) 288px, 384px"
+                        width="800"
+                        height="1627"
                         fetchpriority="high"
                         alt="VIBE_NET App na telefonu">
                 </div>
@@ -688,11 +690,13 @@
 
             <div class="specs-image">
                 <div class="device-specs-wrapper">
-                    <!-- Responzivní načítání a lazy loading pro spodní obrázek -->
+                    <!-- Responzivní načítání a lazy loading pro spodní obrázek s explicitními rozměry -->
                     <img 
                         src="modem-476.webp" 
                         srcset="modem-256.webp 256w, modem-476.webp 476w"
                         sizes="(max-width: 768px) 224px, 320px"
+                        width="446"
+                        height="642"
                         loading="lazy"
                         alt="VIBE_NET Modem" 
                         class="puck-product-image">
