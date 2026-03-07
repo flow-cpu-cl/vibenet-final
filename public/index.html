@@ -632,20 +632,31 @@
         </section>
 
         <!-- Sharing Section - Scroll Animation -->
-        <section id="ecosystem" style="position: relative; width: 100%; min-height: 300vh; background: white;">
+        <section id="ecosystem" style="position: relative; width: 100%; min-height: 400vh; background: white;">
             <div style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                <!-- Obrázek na pozadí -->
+                <!-- Obrázek na pozadí - full viewport -->
                 <img 
                     id="ecosystem-image"
                     src="sdilej-data.png" 
                     alt="Sdílení připojení se přáteli"
-                    style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; z-index: 1;">
+                    style="position: absolute; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
                 
                 <!-- Text -->
-                <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.3); transform-origin: center;">
+                <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); transform-origin: center;">
                     <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
                     <span style="color: var(--apple-black);">se svými přáteli.</span>
                 </h2>
+            </div>
+
+            <!-- Scale down container -->
+            <div id="ecosystem-scale" style="position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; background: white;">
+                <div style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <img 
+                        id="ecosystem-image-scale"
+                        src="sdilej-data.png" 
+                        alt="Sdílení připojení se přáteli"
+                        style="width: 100vw; height: 100vh; object-fit: cover; border-radius: 2.25rem;">
+                </div>
             </div>
         </section>
 
@@ -804,6 +815,8 @@
             const ecosystemSection = document.getElementById('ecosystem');
             const ecosystemText = document.getElementById('ecosystem-text');
             const ecosystemImage = document.getElementById('ecosystem-image');
+            const ecosystemScaleDiv = document.getElementById('ecosystem-scale');
+            const ecosystemImageScale = document.getElementById('ecosystem-image-scale');
 
             window.addEventListener('scroll', () => {
                 const sectionTop = ecosystemSection.getBoundingClientRect().top;
@@ -814,13 +827,23 @@
                 const scrollProgress = (windowHeight - sectionTop) / (sectionHeight + windowHeight);
                 const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
 
-                // Text scale animation (0.3 to 1)
-                const textScale = 0.3 + (clampedProgress * 0.7);
+                // PHASE 1: Text scale animation (0.1 to 1.8) - MORE DRAMATIC
+                const textScale = 0.1 + (Math.min(clampedProgress, 0.6) / 0.6) * 1.7;
                 ecosystemText.style.transform = `scale(${textScale})`;
 
-                // Image opacity animation (0 to 1) - starts appearing when text is near full scale
-                const imageOpacity = Math.max(0, (clampedProgress - 0.6) * 2.5);
+                // PHASE 1: Image opacity animation - starts appearing when text is near full scale
+                const imageOpacity = Math.max(0, (clampedProgress - 0.5) * 2);
                 ecosystemImage.style.opacity = imageOpacity;
+
+                // PHASE 2: Scale down animation on scroll container
+                if (clampedProgress > 0.6) {
+                    const scaleDownProgress = (clampedProgress - 0.6) / 0.4;
+                    const scaleValue = 1 - (scaleDownProgress * 0.85); // Scale from 1 to 0.15
+                    const borderRadius = scaleDownProgress * 30; // Add border radius as it scales
+                    
+                    ecosystemImageScale.style.transform = `scale(${scaleValue})`;
+                    ecosystemImageScale.style.borderRadius = `${borderRadius}px`;
+                }
             }, { passive: true });
         });
     </script>
