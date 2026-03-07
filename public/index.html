@@ -6,15 +6,7 @@
     <meta name="description" content="VIBE NET - Internet Without The Leash. Forget cables. Forget landlords. The web flows where you flow.">
     <meta name="theme-color" content="#ffffff">
     <title>VIBE NET | Internet Without The Leash</title>
-    
     <style>
-        /* * ZERO-DEPENDENCY OPTIMIZED CSS
-         * Všechny barvy, fonty a Tailwind utility zkompilovány do čistého CSS 
-         * pro maximální PageSpeed skóre.
-         * Nyní plně založeno na REM pro dokonalou přístupnost (A11y) a škálování.
-         * BARVY UPRAVENY PRO DOSTATEČNÝ KONTRASTNÍ POMĚR (WCAG AA/AAA).
-         */
-        
         :root {
             --apple-blue: #0056b3; 
             --apple-blue-hover: #004085; 
@@ -22,11 +14,8 @@
             --apple-gray: #4b4b52;
             --apple-light-gray: #f5f5f7;
             --apple-bg: #ffffff;
-            
             --sys-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-
-        /* CSS Reset */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
@@ -38,33 +27,21 @@
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.5;
         }
-        
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--apple-blue);
             outline-offset: 4px;
             border-radius: 4px;
         }
-
         a { text-decoration: none; color: inherit; transition: all 0.2s; }
         ul { list-style: none; }
         button { cursor: pointer; font-family: inherit; border: none; background: transparent; }
-        
-        .font-display {
-            font-weight: 700; 
-            letter-spacing: -0.02em;
-        }
+        .font-display { font-weight: 700; letter-spacing: -0.02em; }
         .gradient-text {
             background: linear-gradient(135deg, #1d4ed8, #be185d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .container {
-            width: 100%;
-            max-width: 75rem;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+        .container { width: 100%; max-width: 75rem; margin: 0 auto; padding: 0 1.5rem; }
         .section-gap {
             display: flex;
             flex-direction: column;
@@ -74,40 +51,14 @@
             position: relative;
             z-index: 10;
         }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-0.625rem); }
-            100% { transform: translateY(0); }
-        }
-        @keyframes spin-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
-        }
-
-        .blobs-wrapper {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(5rem);
-            opacity: 0.4;
-            will-change: transform;
-            transform: translateZ(0);
-        }
+        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-0.625rem); } 100% { transform: translateY(0); } }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .blobs-wrapper { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(5rem); opacity: 0.4; will-change: transform; transform: translateZ(0); }
         .blob-1 { top: -10%; left: 20%; width: 37.5rem; height: 37.5rem; background: radial-gradient(circle, #e0f2fe 0%, transparent 70%); }
         .blob-2 { bottom: 10%; right: -10%; width: 31.25rem; height: 31.25rem; background: radial-gradient(circle, #fce7f3 0%, transparent 70%); }
         .blob-3 { top: 40%; left: -10%; width: 25rem; height: 25rem; background: radial-gradient(circle, #e0f2fe 0%, transparent 70%); }
-
         .nav {
             display: flex;
             justify-content: space-between;
@@ -120,213 +71,97 @@
         .nav-logo { font-size: 1.25rem; color: var(--apple-black); margin: 0; }
         .nav-links { display: none; gap: 2.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--apple-black); }
         .nav-links a:hover { color: var(--apple-blue); }
-        .btn-nav {
-            padding: 0.5rem 1.25rem;
-            background: var(--apple-black);
-            color: white;
-            border-radius: 9999px;
-            font-weight: 500;
-            font-size: 0.8125rem;
-            transition: all 0.2s;
-        }
+        .btn-nav { padding: 0.5rem 1.25rem; background: var(--apple-black); color: white; border-radius: 9999px; font-weight: 500; font-size: 0.8125rem; transition: all 0.2s; }
         .btn-nav:hover { background: #333; }
         .btn-nav:active { transform: scale(0.95); }
         @media (min-width: 48rem) { .nav-links { display: flex; } }
-
         .hero { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2.5rem; position: relative; }
         .hero-content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; position: relative; max-width: 56rem; margin: 0 auto; z-index: 10; }
-        
-        .sticker {
-            position: absolute;
-            top: -2rem;
-            right: -1rem;
-            background: #ffffff;
-            box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.08);
-            transform: rotate(-6deg);
-            padding: 0.75rem 1.25rem;
-            border-radius: 0.75rem;
-            z-index: 20;
-            animation: float 6s ease-in-out infinite;
-            will-change: transform;
-            transition: transform 0.3s ease;
-        }
+        .sticker { position: absolute; top: -2rem; right: -1rem; background: #ffffff; box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.08); transform: rotate(-6deg); padding: 0.75rem 1.25rem; border-radius: 0.75rem; z-index: 20; animation: float 6s ease-in-out infinite; will-change: transform; transition: transform 0.3s ease; }
         .sticker:hover { transform: rotate(0deg) scale(1.05); }
         .sticker-val { font-size: 1.25rem; line-height: 1; display: block; margin: 0; color: var(--apple-black); }
         .sticker-label { font-size: 0.625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; letter-spacing: 0.05em; line-height: 1; display: block; margin-bottom: 0; }
         @media (min-width: 48rem) { .sticker { right: -4rem; } }
-
         .hero h1 { font-size: 3.75rem; line-height: 0.95; color: var(--apple-black); margin: 0; }
         .hero p { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; max-width: 36rem; margin: 1rem 0 0 0; }
-        @media (min-width: 48rem) { 
-            .hero h1 { font-size: 5.5rem; }
-            .hero p { font-size: 1.5rem; }
-        }
-
+        @media (min-width: 48rem) { .hero h1 { font-size: 5.5rem; } .hero p { font-size: 1.5rem; } }
         .hero-actions { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.5rem; }
-        .btn-primary {
-            background: var(--apple-blue);
-            color: white;
-            font-weight: 500;
-            font-size: 1rem;
-            padding: 0.875rem 2rem;
-            border-radius: 9999px;
-            box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.2);
-            transition: all 0.3s;
-            will-change: transform;
-        }
+        .btn-primary { background: var(--apple-blue); color: white; font-weight: 500; font-size: 1rem; padding: 0.875rem 2rem; border-radius: 9999px; box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.2); transition: all 0.3s; will-change: transform; }
         .btn-primary:hover { background: var(--apple-blue-hover); transform: translateY(-0.25rem); }
         .btn-text { color: var(--apple-blue); font-size: 1rem; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
-
-        /* ZAŘÍZENÍ (TELEFON) - HERO ANIMACE */
-        .phone-wrapper { 
-            width: 100%; 
-            display: flex; 
-            justify-content: center; 
-            margin-top: 3rem; 
-            perspective: 1200px;
-        }
-        
-        .phone-mockup {
-            position: relative;
-            width: 18rem; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            will-change: transform, opacity;
-            
-            transform: translateY(150px) scale(0.85) rotateX(30deg);
-            opacity: 0;
-            
-            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.25));
-        }
-        @media (min-width: 48rem) { .phone-mockup { width: 24rem; } } 
-        
-        .phone-mockup img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
-        }
-
+        .phone-wrapper { width: 100%; display: flex; justify-content: center; margin-top: 3rem; perspective: 1200px; }
+        .phone-mockup { position: relative; width: 18rem; display: flex; justify-content: center; align-items: center; will-change: transform, opacity; transform: translateY(150px) scale(0.85) rotateX(30deg); opacity: 0; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.25)); }
+        @media (min-width: 48rem) { .phone-mockup { width: 24rem; } }
+        .phone-mockup img { width: 100%; height: auto; display: block; object-fit: contain; }
         .section-block { display: flex; flex-direction: column; gap: 2.5rem; }
         .section-header h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; }
         .section-header p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; }
         @media (min-width: 48rem) { .section-header h2 { font-size: 3rem; } }
         .text-center { text-align: center; }
-
         .bento-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; width: 100%; }
         @media (min-width: 48rem) { .bento-grid { grid-template-columns: repeat(3, 1fr); } }
-
-        .glass-panel {
-            background: var(--apple-light-gray);
-            border-radius: 2.25rem;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s;
-            will-change: transform;
-            display: flex;
-            flex-direction: column;
-        }
+        .glass-panel { background: var(--apple-light-gray); border-radius: 2.25rem; position: relative; overflow: hidden; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s; will-change: transform; display: flex; flex-direction: column; }
         .glass-panel:hover { transform: scale(1.01); }
-
         .bento-1 { padding: 2rem; }
         @media (min-width: 48rem) { .bento-1 { padding: 3rem; } }
         .bento-narrow { padding: 2rem; }
         .bento-4 { padding: 2.5rem; }
-
         .bento-wide { grid-column: span 1; min-height: 25rem; justify-content: space-between; }
         @media (min-width: 48rem) { .bento-wide { grid-column: span 2; } }
-        
-        .bento-card-bg-glow {
-            position: absolute; top: 0; right: 0; width: 24rem; height: 24rem;
-            background: rgba(191, 219, 254, 0.4);
-            border-radius: 50%; filter: blur(5rem);
-            transform: translate(33%, -50%);
-            transition: background-color 0.5s;
-        }
+        .bento-card-bg-glow { position: absolute; top: 0; right: 0; width: 24rem; height: 24rem; background: rgba(191, 219, 254, 0.4); border-radius: 50%; filter: blur(5rem); transform: translate(33%, -50%); transition: background-color 0.5s; }
         .glass-panel:hover .bento-card-bg-glow { background: rgba(147, 197, 253, 0.5); }
-        
         .bento-label { font-size: 0.6875rem; font-weight: 700; color: var(--apple-gray); text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 0.75rem 0; }
         .bento-wide h3 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 0.5rem 0; }
         .bento-wide p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; max-width: 20rem; margin: 0; }
-        
         .bento-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-end; }
         .badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.9); backdrop-filter: blur(0.25rem); padding: 0.5rem 1rem; border-radius: 99rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .badge strong { font-size: 0.6875rem; font-weight: 700; color: var(--apple-black); text-transform: uppercase; }
-        
         .bento-price { text-align: right; background: rgba(255,255,255,0.9); backdrop-filter: blur(0.75rem); padding: 0.5rem 1rem; border-radius: 1rem; font-size: 1.5rem; color: var(--apple-black); }
-
         .bento-narrow { justify-content: center; align-items: center; text-align: center; gap: 1.5rem; }
         .bento-narrow:hover { background: white; }
-        .icon-circle {
-            width: 4rem; height: 4rem; border-radius: 50%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            display: flex; align-items: center; justify-content: center; transition: transform 0.3s;
-            margin: 0; color: var(--apple-blue);
-        }
+        .icon-circle { width: 4rem; height: 4rem; border-radius: 50%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; margin: 0; color: var(--apple-blue); }
         .bento-narrow:hover .icon-circle { transform: scale(1.1); }
         .bento-narrow h3 { font-size: 1.25rem; color: var(--apple-black); margin: 0 0 0.25rem 0; }
         .bento-narrow p { font-size: 0.75rem; color: var(--apple-gray); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
-
         .bento-action-card { flex-direction: column; gap: 2.5rem; justify-content: space-between; align-items: center; }
         @media (min-width: 48rem) { .bento-action-card { flex-direction: row; align-items: center; justify-content: space-between; } }
-        
         .bento-action-content { position: relative; z-index: 10; max-width: 24rem; text-align: center; }
         @media (min-width: 48rem) { .bento-action-content { text-align: left; } }
-        
         .status-dot-wrap { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; justify-content: center; }
         @media (min-width: 48rem) { .status-dot-wrap { justify-content: flex-start; } }
         .status-dot { width: 0.5rem; height: 0.5rem; background: #c2410c; border-radius: 50%; animation: pulse 2s infinite; }
         .status-text { font-weight: 700; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; line-height: 1; }
-        
         .bento-action-content h3 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 0.75rem 0; }
         .bento-action-content p { color: var(--apple-gray); font-weight: 500; font-size: 1rem; margin: 0; max-width: none; }
-        
-        .anim-box {
-            position: relative; width: 10rem; height: 10rem; background: white; border-radius: 1.5rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            display: flex; align-items: center; justify-content: center; transition: box-shadow 0.3s; flex-shrink: 0; margin: 0 auto;
-        }
+        .anim-box { position: relative; width: 10rem; height: 10rem; background: white; border-radius: 1.5rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; transition: box-shadow 0.3s; flex-shrink: 0; margin: 0 auto; }
         @media (min-width: 48rem) { .anim-box { margin: 0; } }
         .glass-panel:hover .anim-box { box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.1); }
         .anim-box-dashed { position: absolute; inset: 0; border: 2px dashed #d1d5db; border-radius: 1.5rem; margin: 0.75rem; animation: spin-slow 8s linear infinite; will-change: transform; }
         .anim-box-inner { width: 4rem; height: 4rem; background: var(--apple-black); border-radius: 1rem; display: flex; align-items: center; justify-content: center; z-index: 2; }
-
         .plans-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; width: 100%; max-width: 64rem; margin: 0 auto; }
         @media (min-width: 48rem) { .plans-grid { grid-template-columns: 1fr 1fr; } }
-        
-        .plan-card {
-            border-radius: 2.5rem; background: var(--apple-light-gray); padding: 2.5rem;
-            display: flex; flex-direction: column; justify-content: space-between; height: 100%;
-            border: 1px solid transparent; transition: border-color 0.3s; position: relative; overflow: hidden;
-        }
+        .plan-card { border-radius: 2.5rem; background: var(--apple-light-gray); padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 100%; border: 1px solid transparent; transition: border-color 0.3s; position: relative; overflow: hidden; }
         .plan-card:hover { border-color: #d1d5db; }
         .plan-pro { border-color: rgba(0, 86, 179, 0.4); }
         .plan-pro-glow { position: absolute; top: 0; right: 0; width: 16rem; height: 16rem; background: rgba(0, 86, 179, 0.05); filter: blur(3.75rem); border-radius: 50%; pointer-events: none; }
-        
         .plan-header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
         .plan-label { font-size: 0.6875rem; font-weight: 700; color: var(--apple-gray); text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 0.5rem 0; display: block; }
         .plan-pro .plan-label { color: var(--apple-blue); }
         .plan-badge { background: var(--apple-blue); color: white; font-size: 0.625rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 0.375rem; letter-spacing: 0.05em; }
-        
         .plan-card h3 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 1.5rem 0; }
         .plan-price-wrap { display: flex; align-items: baseline; gap: 0.25rem; margin-bottom: 2rem; }
         .plan-price-wrap .price { font-size: 3rem; color: var(--apple-black); letter-spacing: -0.02em; }
         .plan-price-wrap .mo { color: var(--apple-gray); font-weight: 500; font-size: 1.125rem; margin: 0; }
-        
         .plan-features { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
         .plan-features li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9375rem; color: var(--apple-black); font-weight: 500; }
         .plan-features svg { width: 1.25rem; height: 1.25rem; color: var(--apple-gray); }
         .plan-pro .plan-features svg { color: var(--apple-blue); }
-        
-        .btn-plan {
-            width: 100%; padding: 1rem; border-radius: 1rem; background: white; border: 1px solid #d1d5db;
-            font-weight: 700; font-size: 0.875rem; color: var(--apple-black); transition: background-color 0.2s;
-        }
+        .btn-plan { width: 100%; padding: 1rem; border-radius: 1rem; background: white; border: 1px solid #d1d5db; font-weight: 700; font-size: 0.875rem; color: var(--apple-black); transition: background-color 0.2s; }
         .btn-plan:hover { background: #f9fafb; }
         .btn-plan-pro { background: var(--apple-blue); color: white; border: none; box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.25); position: relative; z-index: 10; }
         .btn-plan-pro:hover { background: var(--apple-blue-hover); }
-
         .manifesto-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         @media (min-width: 48rem) { .manifesto-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 64rem) { .manifesto-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -335,98 +170,53 @@
         .manifesto-card span { font-size: 2.25rem; }
         .manifesto-card h3 { font-size: 1.125rem; color: var(--apple-black); margin: 0 0 0.25rem 0; }
         .manifesto-card p { font-size: 0.875rem; color: var(--apple-gray); line-height: 1.6; margin: 0; }
-
-        .specs-section {
-            background: var(--apple-light-gray); border-radius: 2.5rem; padding: 2.5rem; overflow: hidden;
-            display: flex; flex-direction: column; align-items: center; gap: 4rem; position: relative;
-        }
+        .specs-section { background: var(--apple-light-gray); border-radius: 2.5rem; padding: 2.5rem; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 4rem; position: relative; }
         @media (min-width: 48rem) { .specs-section { padding: 5rem; } }
         @media (min-width: 64rem) { .specs-section { flex-direction: row; gap: 6rem; } }
-        
         .specs-bg-glow { position: absolute; top: 50%; left: 25%; width: 31.25rem; height: 31.25rem; background: rgba(219, 234, 254, 0.5); border-radius: 50%; filter: blur(6.25rem); transform: translateY(-50%); pointer-events: none; }
         .specs-image { width: 100%; display: flex; justify-content: center; position: relative; z-index: 10; }
         @media (min-width: 64rem) { .specs-image { width: 50%; } }
-        
-        /* Styly pro samotné zařízení (Puck) ve spodní statické sekci */
-        .device-specs-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 14rem; 
-            z-index: 10;
-        }
-        @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } } 
-        
-        .puck-product-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
-            filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); 
-            border-radius: 2rem; 
-        }
-        
-        .puck-specs-glow { 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            width: 100%; 
-            height: 100%; 
-            transform: translate(-50%, -50%); 
-            background: rgba(0, 86, 179, 0.2); 
-            filter: blur(4rem); 
-            border-radius: 50%; 
-            z-index: -1; 
-            pointer-events: none; 
-        }
-        
+        .device-specs-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 14rem; z-index: 10; }
+        @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } }
+        .puck-product-image { width: 100%; height: auto; display: block; object-fit: contain; filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); border-radius: 2rem; }
+        .puck-specs-glow { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); background: rgba(0, 86, 179, 0.2); filter: blur(4rem); border-radius: 50%; z-index: -1; pointer-events: none; }
         .specs-content { width: 100%; position: relative; z-index: 10; }
         @media (min-width: 64rem) { .specs-content { width: 50%; } }
         .specs-content h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 0.5rem 0; }
         .specs-content > p { color: var(--apple-gray); font-weight: 500; margin: 0 0 2rem 0; }
-        
         .specs-list { width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; }
         .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.1); margin: 0; }
         .spec-row:last-child { border-bottom: none; }
         .spec-label { font-weight: 600; color: var(--apple-black); margin: 0; }
         .spec-val { color: var(--apple-gray); font-weight: 500; font-size: 0.875rem; margin: 0; text-align: right; }
-
         .footer { width: 100%; border-top: 1px solid #e5e7eb; background: white; position: relative; z-index: 50; }
         .footer-inner { max-width: 75rem; margin: 0 auto; padding: 3rem 1.5rem; }
         .footer-top { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
         @media (min-width: 48rem) { .footer-top { flex-direction: row; justify-content: space-between; align-items: center; } }
-        
         .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
         @media (min-width: 48rem) { .footer-brand { align-items: flex-start; } }
         .footer-logo { font-size: 1.25rem; font-weight: 700; color: var(--apple-black); letter-spacing: -0.02em; margin: 0; }
         .footer-desc { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; margin: 0; }
-        
         .footer-links { display: flex; gap: 2rem; font-size: 0.875rem; font-weight: 500; color: var(--apple-black); flex-wrap: wrap; justify-content: center; }
         .footer-links a:hover { color: var(--apple-blue); }
-        
         .footer-socials { display: flex; gap: 1rem; }
         .social-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #f3f4f6; display: flex; align-items: center; justify-content: center; color: var(--apple-black); transition: background-color 0.2s; }
         .social-btn:hover { background: #d1d5db; }
         .social-btn svg { width: 1.25rem; height: 1.25rem; }
-
         .footer-bottom { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; }
         @media (min-width: 48rem) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
         .footer-copy { font-size: 0.75rem; color: var(--apple-gray); margin: 0; }
-        
         .footer-action { display: flex; align-items: center; gap: 1.5rem; }
         .founder-spot { display: flex; align-items: center; gap: 0.5rem; }
         .spot-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: #15803d; animation: pulse 2s infinite; }
         .spot-text { font-weight: 700; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; }
         .btn-footer { background: var(--apple-blue); color: white; font-weight: 700; font-size: 0.875rem; padding: 0.625rem 1.5rem; border-radius: 99rem; transition: background-color 0.2s; }
         .btn-footer:hover { background: var(--apple-blue-hover); }
-
         .hidden-mobile { display: none; }
         @media (min-width: 48rem) { .hidden-mobile { display: inline; } }
     </style>
 </head>
 <body>
-
     <div class="blobs-wrapper" aria-hidden="true">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -435,139 +225,85 @@
 
     <nav aria-label="Main navigation" class="nav container">
         <p class="font-display nav-logo">VIBE_NET</p>
-        
         <div class="nav-links">
             <a href="#tech">The Tech</a>
             <a href="#coverage">Coverage</a>
             <a href="#manifesto">Manifesto</a>
         </div>
-
         <button class="btn-nav">Join the Club</button>
     </nav>
 
     <main class="container section-gap">
-
-        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                
                 <div class="sticker">
                     <div style="display: flex; flex-direction: column; align-items: center; line-height: 1;">
                         <strong class="font-display sticker-val">88 CR</strong>
                         <small class="sticker-label">PER MONTH</small>
                     </div>
                 </div>
-
-                <h1 class="font-display">
-                    Internet<br class="hidden-mobile" aria-hidden="true">
-                    <span class="gradient-text">Without</span>
-                    The Leash.
-                </h1>
-                
+                <h1 class="font-display">Internet<br class="hidden-mobile" aria-hidden="true"><span class="gradient-text">Without</span>The Leash.</h1>
                 <p>Forget cables. Forget landlords.<br>The web flows where you flow.</p>
-
                 <div class="hero-actions">
                     <button class="btn-primary">Gimme Access</button>
-                    <a href="#tech" class="btn-text">
-                        Learn more <span aria-hidden="true">›</span>
-                    </a>
+                    <a href="#tech" class="btn-text">Learn more <span aria-hidden="true">›</span></a>
                 </div>
             </div>
-
             <div class="phone-wrapper">
                 <div id="hero-phone" class="phone-mockup">
-                    <img 
-                        src="telefon-800.webp" 
-                        srcset="telefon-400.webp 400w, telefon-800.webp 800w"
-                        sizes="(max-width: 768px) 288px, 384px"
-                        width="800"
-                        height="1627"
-                        fetchpriority="high"
-                        alt="VIBE_NET App na telefonu">
+                    <img src="telefon-800.webp" srcset="telefon-400.webp 400w, telefon-800.webp 800w" sizes="(max-width: 768px) 288px, 384px" width="800" height="1627" fetchpriority="high" alt="VIBE_NET App na telefonu">
                 </div>
             </div>
         </section>
 
-        <!-- Tech Section (Bento Grid) -->
         <section id="tech" class="section-block">
             <div class="section-header">
                 <h2 class="font-display">Signal. Everywhere.</h2>
             </div>
-            
             <div class="bento-grid">
-                
                 <div class="glass-panel bento-wide bento-1">
                     <div class="bento-card-bg-glow" aria-hidden="true"></div>
-                    
                     <div style="position: relative; z-index: 10;">
                         <p class="bento-label">New Hardware</p>
                         <h3 class="font-display">Nomad Puck 1.0</h3>
                         <p>Your personal Wi-Fi bubble. Designed for movement.</p>
                     </div>
-
                     <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-top: 3rem; position: relative; z-index: 10;">
                         <div class="bento-badges">
-                            <div class="badge">
-                                <span aria-hidden="true" style="font-size: 1.125rem;">🚐</span>
-                                <strong>Van Life</strong>
-                            </div>
-                            <div class="badge">
-                                <span aria-hidden="true" style="font-size: 1.125rem;">🎓</span>
-                                <strong>Study</strong>
-                            </div>
+                            <div class="badge"><span aria-hidden="true" style="font-size: 1.125rem;">🚐</span><strong>Van Life</strong></div>
+                            <div class="badge"><span aria-hidden="true" style="font-size: 1.125rem;">🎓</span><strong>Study</strong></div>
                         </div>
                         <div class="bento-price font-display">199 CR</div>
                     </div>
                 </div>
-
                 <div class="glass-panel bento-narrow">
-                    <div class="icon-circle">
-                        <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-display">5G Ultra</h3>
-                        <p>Wideband Ready</p>
-                    </div>
+                    <div class="icon-circle"><svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg></div>
+                    <div><h3 class="font-display">5G Ultra</h3><p>Wideband Ready</p></div>
                 </div>
-
                 <div class="glass-panel bento-narrow">
-                    <div class="icon-circle" style="color: #be185d;">
-                        <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-display">Ghost Mode</h3>
-                        <p>Cancel Anytime</p>
-                    </div>
+                    <div class="icon-circle" style="color: #be185d;"><svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div>
+                    <div><h3 class="font-display">Ghost Mode</h3><p>Cancel Anytime</p></div>
                 </div>
-
                 <div class="glass-panel bento-wide bento-action-card bento-4">
                     <div class="bento-action-content">
-                        <div class="status-dot-wrap">
-                             <div class="status-dot"></div>
-                             <p class="status-text">Fast Setup</p>
-                        </div>
+                        <div class="status-dot-wrap"><div class="status-dot"></div><p class="status-text">Fast Setup</p></div>
                         <h3 class="font-display">Plug. Play. Post.</h3>
                         <p>Unbox the puck, scan the QR, and you're live in 30 seconds flat.</p>
                     </div>
                     <div class="anim-box">
                         <div class="anim-box-dashed"></div>
-                        <div class="anim-box-inner">
-                            <svg style="width: 2rem; height: 2rem; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        </div>
+                        <div class="anim-box-inner"><svg style="width: 2rem; height: 2rem; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Coverage/Plans Section -->
         <section id="coverage" class="section-block">
             <div class="section-header text-center">
                 <h2 class="font-display">Simple Plans.</h2>
                 <p>No hidden fees. No contracts. Just vibes.</p>
             </div>
-
             <div class="plans-grid">
-                
                 <div class="plan-card">
                     <div>
                         <p class="plan-label">Basic</p>
@@ -577,26 +313,15 @@
                             <p class="mo">/mo</p>
                         </div>
                         <ul class="plan-features">
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                100GB High-speed data
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                1 Device connection
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Standard Support
-                            </li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>100GB High-speed data</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1 Device connection</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Standard Support</li>
                         </ul>
                     </div>
                     <button class="btn-plan">Get Started</button>
                 </div>
-
                 <div class="plan-card plan-pro">
                     <div class="plan-pro-glow" aria-hidden="true"></div>
-                    
                     <div style="position: relative; z-index: 10;">
                         <div class="plan-header-top">
                             <p class="plan-label" style="margin-bottom: 0;">Power User</p>
@@ -608,114 +333,57 @@
                             <p class="mo">/mo</p>
                         </div>
                         <ul class="plan-features">
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                Unlimited 5G Data
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                5 Device connections
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                Priority 24/7 Support
-                            </li>
-                            <li>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                Global Roaming included
-                            </li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>Unlimited 5G Data</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>5 Device connections</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>Priority 24/7 Support</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>Global Roaming included</li>
                         </ul>
                     </div>
                     <button class="btn-plan btn-plan-pro">Join Pro</button>
                 </div>
             </div>
         </section>
+    </main>
 
-        <!-- Sharing Section - Scroll Animation -->
-        <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
-            <!-- Sticky animated container -->
-            <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
-                <!-- Image container - will be scaled down in phase 3 -->
-                <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
-                    <img 
-                        id="ecosystem-image"
-                        src="sdilej-data.png" 
-                        alt="Sdílení připojení se přáteli"
-                        style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
-                </div>
-                
-                <!-- Text -->
-                <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); opacity: 1; transform-origin: center;">
-                    <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
-                    <span style="color: var(--apple-black);">se svými přáteli.</span>
-                </h2>
+    <!-- ECOSYSTEM SECTION - FULL WIDTH (OUTSIDE CONTAINER) -->
+    <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
+        <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
+            <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
+                <img id="ecosystem-image" src="sdilej-data.png" alt="Sdílení připojení se přáteli" style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
             </div>
-        </section>
+            <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); opacity: 1; transform-origin: center;">
+                <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
+                <span style="color: var(--apple-black);">se svými přáteli.</span>
+            </h2>
+        </div>
+    </section>
 
-        <!-- Manifesto Section -->
+    <!-- MANIFESTO & SPECS - BACK IN CONTAINER -->
+    <main class="container section-gap">
         <section id="manifesto" class="section-block">
             <div class="section-header text-center">
                 <h2 class="font-display">Why the Puck Slaps</h2>
                 <p>Engineering for the untethered generation.</p>
             </div>
-            
             <div class="manifesto-grid">
-                    <span aria-hidden="true">⚡️</span>
-                    <div>
-                        <h3 class="font-display">Zero Setup</h3>
-                        <p>Plug it in and you're good. No technicians, no calls.</p>
-                    </div>
-                </div>
-                
-                <div class="manifesto-card">
-                    <span aria-hidden="true">🚐</span>
-                    <div>
-                        <h3 class="font-display">Go Anywhere</h3>
-                        <p>Built for van-life, cafes, and mountain peaks.</p>
-                    </div>
-                </div>
-                
-                <div class="manifesto-card">
-                    <span aria-hidden="true">🌐</span>
-                    <div>
-                        <h3 class="font-display">Share the Vibe</h3>
-                        <p>Connect up to 10 devices simultaneously.</p>
-                    </div>
-                </div>
-                
-                <div class="manifesto-card">
-                    <span aria-hidden="true">🔋</span>
-                    <div>
-                        <h3 class="font-display">All-Day Battery</h3>
-                        <p>12 hours of uninterrupted life on a single charge.</p>
-                    </div>
-                </div>
+                <div class="manifesto-card"><span aria-hidden="true">⚡️</span><div><h3 class="font-display">Zero Setup</h3><p>Plug it in and you're good. No technicians, no calls.</p></div></div>
+                <div class="manifesto-card"><span aria-hidden="true">🚐</span><div><h3 class="font-display">Go Anywhere</h3><p>Built for van-life, cafes, and mountain peaks.</p></div></div>
+                <div class="manifesto-card"><span aria-hidden="true">🌐</span><div><h3 class="font-display">Share the Vibe</h3><p>Connect up to 10 devices simultaneously.</p></div></div>
+                <div class="manifesto-card"><span aria-hidden="true">🔋</span><div><h3 class="font-display">All-Day Battery</h3><p>12 hours of uninterrupted life on a single charge.</p></div></div>
             </div>
         </section>
 
-        <!-- Specs Section -->
         <section class="specs-section">
             <div class="specs-bg-glow" aria-hidden="true"></div>
-
             <div class="specs-image">
                 <div class="device-specs-wrapper">
-                    <img 
-                        src="modem-476.webp" 
-                        srcset="modem-256.webp 256w, modem-476.webp 476w"
-                        sizes="(max-width: 768px) 224px, 320px"
-                        width="446"
-                        height="642"
-                        loading="lazy"
-                        alt="VIBE_NET Modem" 
-                        class="puck-product-image">
+                    <img src="modem-476.webp" srcset="modem-256.webp 256w, modem-476.webp 476w" sizes="(max-width: 768px) 224px, 320px" width="446" height="642" loading="lazy" alt="VIBE_NET Modem" class="puck-product-image">
                     <div class="puck-specs-glow" aria-hidden="true"></div>
                 </div>
             </div>
-            
             <div class="specs-content">
                 <h2 class="font-display">Tech Specs</h2>
                 <p>Technical details for the nerds.</p>
-                
                 <dl class="specs-list">
                     <div class="spec-row"><dt class="spec-label">Connectivity</dt><dd class="spec-val">5G / 4G LTE</dd></div>
                     <div class="spec-row"><dt class="spec-label">Battery</dt><dd class="spec-val">12,000mAh</dd></div>
@@ -728,39 +396,28 @@
                 </dl>
             </div>
         </section>
-
     </main>
 
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-top">
-                
                 <div class="footer-brand">
                     <p class="footer-logo">VIBE_NET</p>
                     <p class="footer-desc">Internet without the leash.</p>
                 </div>
-
                 <div class="footer-links">
                     <a href="#tech">The Tech</a>
                     <a href="#coverage">Coverage</a>
                     <a href="#manifesto">Manifesto</a>
                     <a href="#">Privacy</a>
                 </div>
-
                 <div class="footer-socials">
-                    <a href="#" aria-label="Follow us on Twitter" class="social-btn">
-                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
-                    </a>
-                    <a href="#" aria-label="Facebook" class="social-btn">
-                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
-                    </a>
+                    <a href="#" aria-label="Follow us on Twitter" class="social-btn"><svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a>
+                    <a href="#" aria-label="Facebook" class="social-btn"><svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
                 </div>
-
             </div>
-
             <div class="footer-bottom">
                 <p class="footer-copy">© 2024 VIBE_NET. All rights reserved.</p>
-                
                 <div class="footer-action">
                     <div class="founder-spot">
                         <div class="spot-dot"></div>
@@ -772,10 +429,8 @@
         </div>
     </footer>
 
-    <!-- SCROLL ANIMATION SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Hero Phone Animation
             const heroPhone = document.getElementById('hero-phone');
             let targetScroll = window.scrollY;
             let currentScroll = targetScroll;
@@ -784,25 +439,18 @@
             const render = () => {
                 currentScroll += (targetScroll - currentScroll) * ease;
                 const progress = Math.min(Math.max(currentScroll / 600, 0), 1);
-                
                 const y = 150 - (progress * 190);
                 const scale = 0.85 + (progress * 0.15);
                 const rotateX = 30 - (progress * 30);
                 const opacity = 0.2 + (progress * 0.8);
-
                 heroPhone.style.transform = `translateY(${y}px) scale(${scale}) rotateX(${rotateX}deg)`;
                 heroPhone.style.opacity = opacity;
-
                 requestAnimationFrame(render);
             };
 
-            window.addEventListener('scroll', () => {
-                targetScroll = window.scrollY;
-            }, { passive: true });
-
+            window.addEventListener('scroll', () => { targetScroll = window.scrollY; }, { passive: true });
             render();
 
-            // Ecosystem Section Scroll Animation
             const ecosystemSection = document.getElementById('ecosystem');
             const ecosystemText = document.getElementById('ecosystem-text');
             const ecosystemImage = document.getElementById('ecosystem-image');
@@ -812,48 +460,31 @@
                 const sectionTop = ecosystemSection.getBoundingClientRect().top;
                 const sectionHeight = ecosystemSection.offsetHeight;
                 const windowHeight = window.innerHeight;
-
-                // Calculate overall scroll progress through the ecosystem section
                 const scrollProgress = (windowHeight - sectionTop) / (sectionHeight + windowHeight);
                 const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
 
-                // PHASE 1 (0-0.5): Text scale-up, image opacity stays 0
                 if (clampedProgress <= 0.5) {
                     const phase1Progress = clampedProgress / 0.5;
-                    const textScale = 0.1 + (phase1Progress * 2.2); // 0.1 to 2.3
+                    const textScale = 0.1 + (phase1Progress * 2.2);
                     ecosystemText.style.transform = `scale(${textScale})`;
                     ecosystemText.style.opacity = 1;
                     ecosystemImage.style.opacity = 0;
                     ecosystemImageContainer.style.transform = `scale(1)`;
-                }
-                // PHASE 2 (0.5-0.75): Image fade-in, text stays at max scale
-                else if (clampedProgress <= 0.75) {
+                } else if (clampedProgress <= 0.75) {
                     const phase2Progress = (clampedProgress - 0.5) / 0.25;
                     ecosystemText.style.transform = `scale(2.3)`;
                     ecosystemText.style.opacity = 1;
                     ecosystemImage.style.opacity = phase2Progress;
                     ecosystemImageContainer.style.transform = `scale(1)`;
-                }
-                // PHASE 3 (0.75-1.0): Scale down entire component (image + text) on center
-                else {
+                } else {
                     const phase3Progress = (clampedProgress - 0.75) / 0.25;
-                    
-                    // Calculate minimum scale based on container width (75rem = 1200px)
-                    const containerWidth = 75 * 16; // 75rem in pixels
+                    const containerWidth = 75 * 16;
                     const minScale = Math.min(1, containerWidth / window.innerWidth);
-                    
-                    // Scale down from 1 to minScale
                     const scaleDownAmount = 1 - minScale;
                     const currentScale = Math.max(minScale, 1 - (phase3Progress * scaleDownAmount));
-                    
-                    // Text stays visible and scales with container
                     ecosystemText.style.opacity = 1;
                     ecosystemText.style.transform = `scale(${2.3 * currentScale})`;
-                    
-                    // Image stays at opacity 1 and scales down
                     ecosystemImage.style.opacity = 1;
-                    
-                    // Scale down the entire image container
                     const borderRadius = phase3Progress * 35;
                     ecosystemImageContainer.style.transform = `scale(${currentScale})`;
                     ecosystemImage.style.borderRadius = `${borderRadius}px`;
