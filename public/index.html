@@ -220,6 +220,11 @@
             50% { opacity: 0.5; }
             100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
         }
+        @keyframes avatar-flash {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.15); }
+            100% { opacity: 0.7; transform: scale(1); }
+        }
         .share-section { min-height: 50rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: visible; position: relative; }
         .share-container { position: relative; padding: 10rem 1.5rem; width: 100%; display: flex; flex-direction: column; align-items: center; }
         .signal-transmitter { position: relative; z-index: 10; }
@@ -230,6 +235,7 @@
         .face-avatar { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 20; cursor: pointer; }
         .face-avatar.visible { opacity: 0.7; transform: scale(1); }
         .face-avatar:hover, .face-avatar.active { opacity: 1 !important; }
+        .face-avatar.pulse-hit { animation: avatar-flash 0.6s ease-out; }
         .face-bubble { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
         .face-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; text-transform: uppercase; white-space: nowrap; }
         .share-description { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; text-align: center; margin-top: 3rem; max-width: 28rem; }
@@ -593,6 +599,45 @@
                 });
                 avatar.addEventListener('mouseleave', () => {
                     avatar.classList.remove('active');
+                });
+            });
+
+            // Pulse ring hitting emojis effect
+            rings.forEach((ring, ringIndex) => {
+                const waveAvatars = ring.querySelectorAll('.face-avatar');
+                const ringSize = parseFloat(ring.style.width);
+                const ringRadius = ringSize / 2;
+
+                waveAvatars.forEach(avatar => {
+                    // Calculate distance from center (0,0) to avatar position
+                    const rect = avatar.getBoundingClientRect();
+                    const ringRect = ring.getBoundingClientRect();
+                    const centerX = ringRect.left + ringRect.width / 2;
+                    const centerY = ringRect.top + ringRect.height / 2;
+                    const distX = rect.left + rect.width / 2 - centerX;
+                    const distY = rect.top + rect.height / 2 - centerY;
+                    const distance = Math.sqrt(distX * distX + distY * distY);
+                    const distancePercent = (distance / ringRadius) * 100;
+
+                    // Every 3 seconds, pulse expands from 0.2 to 1.5 scale
+                    // Calculate when pulse reaches this avatar's distance
+                    const pulseStartSize = 0.2;
+                    const pulseEndSize = 1.5;
+                    const pulseDuration = 3000; // 3 seconds
+                    const pulseRange = pulseEndSize - pulseStartSize;
+                    const triggerScale = pulseStartSize + (distancePercent / 100) * pulseRange;
+                    const triggerTime = ((triggerScale - pulseStartSize) / pulseRange) * pulseDuration;
+
+                    // Trigger animation repeatedly
+                    setInterval(() => {
+                        const now = Date.now() % pulseDuration;
+                        if (Math.abs(now - triggerTime) < 150) { // 150ms window for hit detection
+                            avatar.classList.add('pulse-hit');
+                            setTimeout(() => {
+                                avatar.classList.remove('pulse-hit');
+                            }, 600); // duration of flash animation
+                        }
+                    }, 50); // Check every 50ms
                 });
             });
         });
