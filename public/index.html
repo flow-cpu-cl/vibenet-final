@@ -327,17 +327,18 @@
         .btn-plan-pro { background: var(--apple-blue); color: white; border: none; box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.25); position: relative; z-index: 10; }
         .btn-plan-pro:hover { background: var(--apple-blue-hover); }
 
-        /* --- TUNNEL SECTION (PERFECT 3D ACCURACY WITH CONTAINER EDGE CLIPPING) --- */
+        /* --- TUNNEL SECTION (Stabilní základ V5) --- */
         .tunnel-section {
             position: relative;
             width: 100%;
             height: 80vh; 
-            min-height: 40rem; 
+            min-height: 37.5rem; /* 600px */
+            max-height: 56.25rem; /* 900px */
             background: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* DŮLEŽITÉ: Ořezává telefony hranou sekce */
+            overflow: hidden;
             border-radius: 2.5rem;
             margin-bottom: 2.5rem;
         }
@@ -345,7 +346,7 @@
         .tunnel-container {
             position: absolute;
             inset: 0;
-            perspective: 300px; 
+            perspective: 350px; /* Původní skvěle fungující perspektiva */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -368,70 +369,88 @@
             .tunnel-center-text h2 { font-size: 4.5rem; }
         }
 
-        /* Společný základ pro všechna zařízení */
+        /* Společný styl pro "tělo" zařízení (rámeček) */
         .tunnel-device {
             position: absolute;
-            top: 50%; left: 50%;
-            display: flex; justify-content: center; align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 10;
-            transform-origin: center center;
-            will-change: transform;
-        }
-        .tunnel-device img {
-            filter: drop-shadow(0 1.5rem 2rem rgba(0,0,0,0.2));
-            width: 100%; height: 100%; object-fit: contain;
         }
 
-        /* 1. HORNÍ / SPODNÍ ZAŘÍZENÍ */
-        .tunnel-top, .tunnel-bottom {
-            width: 14vw; max-width: 10rem;
-            height: 30vw; max-height: 21.6rem; 
+        /* Obrázek zařízení nahrazující původní CSS mockup */
+        .tunnel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 2rem 4rem rgba(0,0,0,0.25)); /* Prostorový stín kopírující tvar telefonu */
         }
 
-        /* Matematika Top: Posuneme střed telefonu PŘESNĚ na horní hranu (translateY -50%) 
-           a pak ho o kousek vykloníme, aby se odhalila jen horní polovina.
-        */
-        .tunnel-top { 
-            top: 0;
-            transform: translate(-50%, -10%) rotateX(-55deg); 
+        /* 1. LEVÝ MOBIL */
+        .tunnel-left {
+            left: -2%; 
+            top: 25%; 
+            bottom: 25%;
+            width: 25%; 
+            max-width: 20rem; 
+            transform-origin: left center;
+            transform: scale(1.4) rotateY(68deg);
         }
-        .tunnel-top img { transform: rotate(180deg); } /* Ostrov dolů */
-
-        /* Matematika Bottom: Střed na spodní hranu */
-        .tunnel-bottom { 
-            top: auto; bottom: 0;
-            transform: translate(-50%, 10%) rotateX(55deg); 
-        }
-
-        /* 2. LEVÉ / PRAVÉ ZAŘÍZENÍ */
-        .tunnel-left, .tunnel-right {
-            width: 14vw; max-width: 10rem;
-            height: 30vw; max-height: 21.6rem;
+        /* Rotace samotného levého obrázku o 90 doprava */
+        .tunnel-left .tunnel-img {
+            transform: rotate(90deg);
         }
 
-        /* Matematika Left: Střed na levou hranu sekce */
-        .tunnel-left { 
-            left: 0;
-            transform: translate(-30%, -50%) rotateY(55deg); 
+        /* 2. PRAVÝ MOBIL */
+        .tunnel-right {
+            right: -2%; 
+            top: 25%;
+            bottom: 25%;
+            width: 25%;
+            max-width: 20rem; 
+            transform-origin: right center;
+            transform: rotateY(-60deg);
         }
-        .tunnel-left img { transform: rotate(90deg); } /* Ostrov doprava */
-
-        /* Matematika Right: Střed na pravou hranu sekce */
-        .tunnel-right { 
-            left: auto; right: 0;
-            transform: translate(30%, -50%) rotateY(-55deg); 
+        /* Rotace samotného pravého obrázku o 90 doleva */
+        .tunnel-right .tunnel-img {
+            transform: rotate(-90deg);
         }
-        .tunnel-right img { transform: rotate(-90deg); } /* Ostrov doleva */
 
-        /* Responzivní úpravy posunů */
+        /* 3. HORNÍ ZAŘÍZENÍ */
+        .tunnel-top {
+            top: -2%;
+            left: 20%;
+            right: 20%;
+            height: 35%; 
+            max-height: 25rem; 
+            transform-origin: top center;
+            transform: rotateX(-60deg);
+        }
+        /* Rotace samotného horního obrázku o 180 stupňů */
+        .tunnel-top .tunnel-img {
+            transform: rotate(180deg);
+        }
+
+        /* 4. SPODNÍ ZAŘÍZENÍ */
+        .tunnel-bottom {
+            bottom: -2%;
+            left: 15%; 
+            right: 15%;
+            height: 40%; 
+            max-height: 28rem; 
+            transform-origin: bottom center;
+            transform: rotateX(60deg);
+        }
+
+        /* Úprava pro mobily */
         @media (max-width: 48rem) {
-            .tunnel-container { perspective: 800px; }
-            .tunnel-top, .tunnel-bottom, .tunnel-left, .tunnel-right { width: 22vw; height: 47vw; }
+            .tunnel-section { height: 60vh; min-height: 25rem; }
+            .tunnel-container { perspective: 300px; } 
             
-            .tunnel-top { transform: translate(-50%, -5%) rotateX(-50deg); }
-            .tunnel-bottom { transform: translate(-50%, 5%) rotateX(50deg); }
-            .tunnel-left { transform: translate(-15%, -50%) rotateY(50deg); }
-            .tunnel-right { transform: translate(15%, -50%) rotateY(-50deg); }
+            .tunnel-left { left: -5%; top: 30%; bottom: 30%; width: 40%; transform-origin: left center; transform: scale(1.4) rotateY(72deg); }
+            .tunnel-right { right: -5%; top: 30%; bottom: 30%; width: 40%; transform: rotateY(-65deg); }
+            .tunnel-top { top: -5%; left: 5%; right: 5%; height: 30%; transform: rotateX(-65deg); }
+            .tunnel-bottom { bottom: -5%; left: 5%; right: 5%; height: 35%; transform: rotateX(65deg); }
         }
         /* --- KONEC TUNNEL SEKCE --- */
 
@@ -754,22 +773,22 @@
 
                 <!-- 1. Levý mobil -->
                 <div class="tunnel-device tunnel-left">
-                    <img src="telefon-rotation-1.png" alt="Levý telefon">
+                    <img src="telefon-rotation-1.png" alt="Levý telefon" class="tunnel-img">
                 </div>
 
                 <!-- 2. Pravý mobil -->
                 <div class="tunnel-device tunnel-right">
-                    <img src="telefon-rotation-2.png" alt="Pravý telefon">
+                    <img src="telefon-rotation-2.png" alt="Pravý telefon" class="tunnel-img">
                 </div>
 
                 <!-- 3. Horní zařízení -->
                 <div class="tunnel-device tunnel-top">
-                    <img src="telefon-rotation-3.png" alt="Horní telefon">
+                    <img src="telefon-rotation-3.png" alt="Horní telefon" class="tunnel-img">
                 </div>
 
                 <!-- 4. Spodní zařízení -->
                 <div class="tunnel-device tunnel-bottom">
-                    <img src="telefon-rotation-4.png" alt="Spodní telefon">
+                    <img src="telefon-rotation-4.png" alt="Spodní telefon" class="tunnel-img">
                 </div>
             </div>
         </section>
