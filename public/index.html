@@ -393,12 +393,22 @@
             width: 100%; height: 100%; object-fit: contain;
         }
 
-        /* Matematika Top: posunout nahoru, překlopit ostrovem dolů, vyklopit vrchní hranu k divákovi */
-        .tunnel-top { transform: translate(-50%, -50%) translateY(-17vw) rotateX(-55deg); }
+        /* Matematika Top: posunout nahoru, překlopit ostrovem dolů, vyklopit vrchní hranu k divákovi 
+           Zobrazujeme pouze spodní polovinu kontejneru (kde je nyní díky 180° rotaci horní polovina telefonu).
+        */
+        .tunnel-top { 
+            transform: translate(-50%, -50%) translateY(-17vw) rotateX(-55deg); 
+            clip-path: inset(50% 0 0 0);
+        }
         .tunnel-top img { transform: rotate(180deg); } /* Ostrov ukazuje do středu na text */
 
-        /* Matematika Bottom: posunout dolů, nechat tak, vyklopit spodní hranu k divákovi */
-        .tunnel-bottom { transform: translate(-50%, -50%) translateY(17vw) rotateX(55deg); }
+        /* Matematika Bottom: posunout dolů, nechat tak, vyklopit spodní hranu k divákovi 
+           Zobrazujeme horní polovinu kontejneru (kde je horní polovina telefonu).
+        */
+        .tunnel-bottom { 
+            transform: translate(-50%, -50%) translateY(17vw) rotateX(55deg); 
+            clip-path: inset(0 0 50% 0);
+        }
         /* Spodní obrázek přirozeně svírá 0deg (Ostrov míří do středu) */
 
 
@@ -416,12 +426,22 @@
             object-fit: contain;
         }
 
-        /* Matematika Left: posunout doleva, natočit jako dveře (+Y vytahuje hranu) */
-        .tunnel-left { transform: translate(-50%, -50%) translateX(-22vw) rotateY(55deg); }
+        /* Matematika Left: posunout doleva, natočit jako dveře (+Y vytahuje hranu) 
+           Zobrazujeme pravou polovinu kontejneru (kde je díky 90° rotaci horní polovina telefonu).
+        */
+        .tunnel-left { 
+            transform: translate(-50%, -50%) translateX(-22vw) rotateY(55deg); 
+            clip-path: inset(0 0 0 50%);
+        }
         .tunnel-left img { transform: rotate(90deg); } /* Ostrov ukazuje doprava na text */
 
-        /* Matematika Right: posunout doprava, natočit jako dveře (-Y vytahuje hranu) */
-        .tunnel-right { transform: translate(-50%, -50%) translateX(22vw) rotateY(-55deg); }
+        /* Matematika Right: posunout doprava, natočit jako dveře (-Y vytahuje hranu) 
+           Zobrazujeme levou polovinu kontejneru (kde je díky -90° rotaci horní polovina telefonu).
+        */
+        .tunnel-right { 
+            transform: translate(-50%, -50%) translateX(22vw) rotateY(-55deg); 
+            clip-path: inset(0 50% 0 0);
+        }
         .tunnel-right img { transform: rotate(-90deg); } /* Ostrov ukazuje doleva na text */
 
         /* Úprava pro mobily zachovává stejnou matematiku posunů */
