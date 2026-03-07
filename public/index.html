@@ -220,21 +220,16 @@
             50% { opacity: 0.5; }
             100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
         }
-        @keyframes avatar-flash {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.15); }
-            100% { opacity: 0.7; transform: scale(1); }
-        }
         .share-section { min-height: 50rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: visible; position: relative; }
         .share-container { position: relative; padding: 10rem 1.5rem; width: 100%; display: flex; flex-direction: column; align-items: center; }
         .signal-transmitter { position: relative; z-index: 10; }
         .share-title { font-size: clamp(1.875rem, 10vw, 10rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; text-align: center; margin: 0; color: var(--apple-black); white-space: break-spaces; }
-        .wave-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); border: 2px solid var(--apple-blue); border-radius: 50%; pointer-events: none; opacity: 0; z-index: -1; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease; background: radial-gradient(circle, rgba(0, 86, 179, 0.15) 0%, rgba(0, 86, 179, 0.05) 50%, rgba(0, 86, 179, 0) 100%); }
+        .wave-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); border: 2px solid var(--apple-blue); border-radius: 50%; pointer-events: none; opacity: 0; z-index: 5; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease; background: radial-gradient(circle, rgba(0, 86, 179, 0.15) 0%, rgba(0, 86, 179, 0.05) 50%, rgba(0, 86, 179, 0) 100%); }
         .wave-ring.active { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
         .wave-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 1px solid var(--apple-blue); border-radius: 50%; width: 100%; height: 100%; animation: pulse-ring 3s infinite; }
         .face-avatar { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 20; cursor: pointer; }
-        .face-avatar.visible { opacity: 0.7; transform: scale(1); animation: avatar-flash 0.6s ease-out infinite; animation-delay: var(--pulse-delay, 0ms); }
-        .face-avatar:hover, .face-avatar.active { opacity: 1 !important; animation: none; }
+        .face-avatar.visible { opacity: 0.7; transform: scale(1); }
+        .face-avatar:hover, .face-avatar.active { opacity: 1 !important; }
         .face-bubble { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
         .face-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; text-transform: uppercase; white-space: nowrap; }
         .share-description { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; text-align: center; margin-top: 3rem; max-width: 28rem; }
@@ -598,33 +593,6 @@
                 });
                 avatar.addEventListener('mouseleave', () => {
                     avatar.classList.remove('active');
-                });
-            });
-
-            // Pulse ring hitting emojis effect - using CSS animation delays
-            rings.forEach((ring, ringIndex) => {
-                const waveAvatars = ring.querySelectorAll('.face-avatar');
-                const avatarCount = waveAvatars.length;
-
-                waveAvatars.forEach((avatar, avatarIndex) => {
-                    // Get avatar inline style position to calculate relative distance
-                    const topStr = avatar.style.top || avatar.style.bottom;
-                    const leftStr = avatar.style.left || avatar.style.right;
-                    
-                    // Simple distance calculation: combine position strings to create delay
-                    // Earlier avatars (top) hit first, later avatars (bottom) hit later
-                    let delayMultiplier = 0.3; // default
-                    
-                    if (topStr && topStr.includes('-24px')) delayMultiplier = 0.1; // Top center
-                    else if (topStr && topStr.includes('15%')) delayMultiplier = 0.2; // Top sides
-                    else if (topStr && topStr.includes('50%')) delayMultiplier = 0.4; // Middle right
-                    else if (topStr && topStr.includes('10%')) delayMultiplier = 0.6; // Bottom
-
-                    // Apply animation delay
-                    const delayMs = delayMultiplier * 3000; // 3s matches pulse duration
-                    avatar.style.animationDelay = `${delayMs}ms`;
-                    avatar.style.animationIterationCount = 'infinite';
-                    avatar.style.animationDuration = '0.6s';
                 });
             });
         });
