@@ -631,27 +631,6 @@
             </div>
         </section>
 
-        <!-- Sharing Section - Scroll Animation -->
-        <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
-            <!-- Sticky animated container -->
-            <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
-                <!-- Image container - will be scaled down in phase 3 -->
-                <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
-                    <img 
-                        id="ecosystem-image"
-                        src="sdilej-data.png" 
-                        alt="Sdílení připojení se přáteli"
-                        style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
-                </div>
-                
-                <!-- Text -->
-                <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); opacity: 1; transform-origin: center;">
-                    <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
-                    <span style="color: var(--apple-black);">se svými přáteli.</span>
-                </h2>
-            </div>
-        </section>
-
         <!-- Manifesto Section -->
         <section id="manifesto" class="section-block">
             <div class="section-header text-center">
@@ -731,6 +710,27 @@
         </section>
 
     </main>
+
+    <!-- Sharing Section - Scroll Animation (OUTSIDE CONTAINER) -->
+    <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
+        <!-- Sticky animated container -->
+        <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
+            <!-- Image container - will be scaled down in phase 3 -->
+            <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
+                <img 
+                    id="ecosystem-image"
+                    src="sdilej-data.png" 
+                    alt="Sdílení připojení se přáteli"
+                    style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
+            </div>
+            
+            <!-- Text -->
+            <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); opacity: 1; transform-origin: center;">
+                <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
+                <span style="color: var(--apple-black);">se svými přáteli.</span>
+            </h2>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="footer-inner">
