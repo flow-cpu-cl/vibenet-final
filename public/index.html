@@ -330,116 +330,172 @@
         .btn-plan-pro { background: var(--apple-blue); color: white; border: none; box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.25); position: relative; z-index: 10; }
         .btn-plan-pro:hover { background: var(--apple-blue-hover); }
 
-        /* --- NOVÁ SEKCE: ECOSYSTEM (3D ZAŘÍZENÍ) --- */
-        .ecosystem-section {
+        /* --- TUNNEL SECTION (ECOSYSTEM V2) --- */
+        .tunnel-section {
             position: relative;
             width: 100%;
-            min-height: 40rem;
+            height: 80vh; /* Efektivní výška zabírající většinu obrazovky */
+            min-height: 37.5rem; /* 600px */
+            max-height: 56.25rem; /* 900px */
+            background: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
             border-radius: 2.5rem;
-            background: radial-gradient(circle at center, #ffffff 0%, var(--apple-light-gray) 100%);
-            perspective: 1200px; /* Hloubka prostoru pro 3D rotace */
             margin-bottom: 2.5rem;
         }
-        @media (min-width: 48rem) { .ecosystem-section { min-height: 50rem; } }
 
-        .ecosystem-content {
-            position: relative;
-            z-index: 20;
-            text-align: center;
-            max-width: 32rem;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            padding: 2.5rem;
-            border-radius: 2rem;
-            box-shadow: 0 1rem 3rem rgba(0,0,0,0.05);
-            border: 1px solid rgba(255,255,255,0.8);
-        }
-        .ecosystem-content h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; line-height: 1.1; }
-        @media (min-width: 48rem) { .ecosystem-content h2 { font-size: 3rem; } }
-        .ecosystem-content p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; }
-
-        /* Kontejner pro ukotvení zařízení vprostřed */
-        .ecosystem-devices {
+        .tunnel-container {
             position: absolute;
-            top: 50%; left: 50%;
-            width: 0; height: 0;
-            z-index: 10;
-        }
-
-        /* Společný styl pro všechny 3D zástupce zařízení */
-        .device-mock {
-            position: absolute;
-            background: var(--apple-black);
-            border: 0.25rem solid #4b4b52;
-            border-radius: 1.5rem;
+            inset: 0;
+            perspective: 1000px; /* Hloubka prostoru, klíčové pro efekt zužování */
             display: flex;
             justify-content: center;
             align-items: center;
-            color: rgba(255,255,255,0.4);
-            font-weight: 700;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            box-shadow: 0 2rem 4rem rgba(0,0,0,0.3);
-            /* Animace se aplikuje s využitím proměnných pro zachování úhlů natočení */
-            transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz));
         }
-        /* Vnitřní "displej" zařízení */
-        .device-mock::before {
+
+        /* Centrální text */
+        .tunnel-center-text {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            max-width: 80%;
+        }
+        .tunnel-center-text h2 {
+            font-size: 2.5rem;
+            margin: 0;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        @media (min-width: 48rem) {
+            .tunnel-center-text h2 { font-size: 4.5rem; }
+        }
+
+        /* Společný styl pro "tělo" zařízení (rámeček) */
+        .tunnel-device {
+            position: absolute;
+            background: #111; /* Barva rámečku/těla */
+            box-shadow: 0 1.875rem 3.75rem rgba(0,0,0,0.15); /* Prostorový stín */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* Vnitřní obrazovka s placeholderem */
+        .tunnel-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Levý mobil */
+        .tunnel-left {
+            left: -10%; /* Posunuto mírně ven z kontejneru */
+            top: 15%;
+            bottom: 15%;
+            width: 25%;
+            max-width: 18.75rem; /* 300px */
+            border-radius: 2.5rem;
+            padding: 0.75rem; /* Tloušťka rámečku */
+            /* ZDE JE KOUZLO: Osa rotace je na levé (vnější) hraně */
+            transform-origin: left center;
+            /* Pravá (vnitřní) hrana se natočí od nás dozadu do prostoru, takže se opticky zmenší */
+            transform: rotateY(55deg);
+        }
+        .tunnel-left .tunnel-screen { border-radius: 1.75rem; }
+
+        /* 2. Pravý mobil */
+        .tunnel-right {
+            right: -10%; /* Posunuto mírně ven z kontejneru */
+            top: 15%;
+            bottom: 15%;
+            width: 25%;
+            max-width: 18.75rem; /* 300px */
+            border-radius: 2.5rem;
+            padding: 0.75rem;
+            /* Osa rotace na pravé (vnější) hraně */
+            transform-origin: right center;
+            /* Levá (vnitřní) hrana se natočí od nás dozadu do prostoru */
+            transform: rotateY(-55deg);
+        }
+        .tunnel-right .tunnel-screen { border-radius: 1.75rem; }
+
+        /* Fake "Dynamic Island" (průstřel foťáku) pro mobily, aby víc připomínaly telefon */
+        .tunnel-left .tunnel-screen::after,
+        .tunnel-right .tunnel-screen::after {
             content: '';
             position: absolute;
-            inset: 0.375rem;
+            top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30%;
+            height: 1.25rem;
             background: #111;
             border-radius: 1rem;
-            z-index: -1;
+            z-index: 5;
         }
 
-        /* Specifické rozměry, pozice a rotace (jako na inspiraci) */
-        .top-device {
-            --rx: 45deg; --ry: 0deg; --rz: 0deg;
-            width: 22rem; height: 14rem;
-            margin-left: -11rem; margin-top: -24rem; /* Umístění nahoru od středu */
-            animation: float-3d 8s ease-in-out infinite;
+        /* 3. Horní Tablet */
+        .tunnel-top {
+            top: -15%;
+            left: 20%;
+            right: 20%;
+            height: 35%;
+            max-height: 25rem; /* 400px */
+            border-radius: 1.5rem;
+            padding: 0.75rem;
+            transform-origin: top center;
+            transform: rotateX(-55deg);
         }
-        .bottom-device {
-            --rx: -45deg; --ry: 0deg; --rz: 0deg;
-            width: 18rem; height: 12rem;
-            margin-left: -9rem; margin-top: 10rem; /* Umístění dolů od středu */
-            animation: float-3d 7s ease-in-out infinite 1s;
-        }
-        .left-device {
-            --rx: 0deg; --ry: 45deg; --rz: 15deg;
-            width: 12rem; height: 16rem;
-            margin-left: -28rem; margin-top: -8rem; /* Umístění vlevo */
-            animation: float-3d 9s ease-in-out infinite 2s;
-        }
-        .right-device {
-            --rx: 0deg; --ry: -45deg; --rz: -15deg;
-            width: 8rem; height: 16rem; /* Telefon má užší poměr stran */
-            border-radius: 2rem;
-            margin-left: 18rem; margin-top: -6rem; /* Umístění vpravo */
-            animation: float-3d 8s ease-in-out infinite 3s;
-        }
-        .right-device::before { border-radius: 1.5rem; }
+        .tunnel-top .tunnel-screen { border-radius: 0.75rem; }
 
-        /* Zmenšení zařízení pro mobilní zařízení, aby to neuteklo z obrazovky */
-        @media (max-width: 47.9375rem) {
-            .top-device { width: 14rem; height: 10rem; margin-left: -7rem; margin-top: -16rem; }
-            .bottom-device { width: 12rem; height: 8rem; margin-left: -6rem; margin-top: 10rem; }
-            .left-device { width: 8rem; height: 12rem; margin-left: -11rem; margin-top: -6rem; }
-            .right-device { width: 5rem; height: 10rem; margin-left: 7rem; margin-top: -5rem; }
-            .device-mock { font-size: 0.75rem; border-width: 0.15rem; }
+        /* 4. Spodní Notebook */
+        .tunnel-bottom {
+            bottom: -20%;
+            left: 15%;
+            right: 15%;
+            height: 40%;
+            max-height: 28rem; /* 450px */
+            border-radius: 1rem;
+            /* Spodní rámeček notebooku je tlustší */
+            padding: 0.5rem 0.5rem 2.5rem 0.5rem; 
+            transform-origin: bottom center;
+            transform: rotateX(55deg);
+        }
+        .tunnel-bottom .tunnel-screen { border-radius: 0.5rem; }
+
+        /* Šedé čáry představující falešný obsah/aplikace na obrazovkách */
+        .skeleton-ui {
+            width: 100%;
+            height: 100%;
+            background-color: #f9fafb;
+            background-image: 
+                linear-gradient(#f3f4f6 2rem, transparent 0),
+                linear-gradient(#f3f4f6 8rem, transparent 0),
+                linear-gradient(#f3f4f6 8rem, transparent 0);
+            background-size: 100% 3rem, 45% 10rem, 45% 10rem;
+            background-position: 0 0, 5% 4rem, 95% 4rem;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+        }
+        .tunnel-top .skeleton-ui, .tunnel-bottom .skeleton-ui {
+            background-size: 100% 3rem, 30% 10rem, 30% 10rem;
+            background-position: 0 0, 10% 4rem, 45% 4rem;
         }
 
-        @keyframes float-3d {
-            0%, 100% { transform: translateY(0) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz)); }
-            50% { transform: translateY(-1.5rem) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz)); }
+        /* Úprava rozložení pro mobilní zobrazení, aby se prvky nepřekrývaly špatně */
+        @media (max-width: 48rem) {
+            .tunnel-section { height: 60vh; min-height: 25rem; }
+            .tunnel-left { left: -25%; top: 20%; bottom: 20%; width: 40%; transform: rotateY(65deg); }
+            .tunnel-right { right: -25%; top: 20%; bottom: 20%; width: 40%; transform: rotateY(-65deg); }
+            .tunnel-top { top: -10%; left: 5%; right: 5%; height: 25%; transform: rotateX(-65deg); }
+            .tunnel-bottom { bottom: -10%; left: 5%; right: 5%; height: 30%; transform: rotateX(65deg); }
         }
-        /* --- KONEC SEKCE ECOSYSTEM --- */
+        /* --- KONEC TUNNEL SEKCE --- */
 
 
         .manifesto-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
@@ -754,18 +810,49 @@
             </div>
         </section>
 
-        <!-- Ecosystem Section (3D Inspiration) -->
-        <section id="ecosystem" class="ecosystem-section">
-            <div class="ecosystem-content">
-                <h2 class="font-display">Jeden tarif.<br>Všechny tvoje obrazovky.</h2>
-                <p>Připoj k VIBE_NET svůj telefon, tablet, notebook i televizi. Prostě všechny tvoje hračky.</p>
-            </div>
+        <!-- Tunnel Section (3D Perspective Inspiration) -->
+        <section id="ecosystem" class="tunnel-section">
+            <div class="tunnel-container">
+                
+                <!-- Center Text -->
+                <div class="tunnel-center-text">
+                    <h2 class="font-display">
+                        <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
+                        <span style="color: var(--apple-black);">se svými přáteli.</span>
+                    </h2>
+                </div>
 
-            <div class="ecosystem-devices" aria-hidden="true">
-                <div class="device-mock top-device">Monitor</div>
-                <div class="device-mock bottom-device">Notebook</div>
-                <div class="device-mock left-device">Tablet</div>
-                <div class="device-mock right-device">Telefon</div>
+                <!-- 1. Left Device (Mobile) -->
+                <div class="tunnel-device tunnel-left">
+                    <div class="tunnel-screen">
+                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
+                        <div class="skeleton-ui"></div>
+                    </div>
+                </div>
+
+                <!-- 2. Right Device (Mobile) -->
+                <div class="tunnel-device tunnel-right">
+                    <div class="tunnel-screen">
+                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
+                        <div class="skeleton-ui"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Top Device (Tablet) -->
+                <div class="tunnel-device tunnel-top">
+                    <div class="tunnel-screen">
+                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
+                        <div class="skeleton-ui"></div>
+                    </div>
+                </div>
+
+                <!-- 4. Bottom Device (Laptop screen) -->
+                <div class="tunnel-device tunnel-bottom">
+                    <div class="tunnel-screen">
+                        <!-- Místo tohoto DIVu pak přijde obrázek (img) -->
+                        <div class="skeleton-ui"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
