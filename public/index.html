@@ -179,7 +179,7 @@
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
 
-        /* ZAŘÍZENÍ (TELEFON) - UPRAVENO PRO ANIMACI A MOCKUP */
+        /* ZAŘÍZENÍ (TELEFON) - HERO ANIMACE */
         .phone-wrapper { 
             width: 100%; 
             display: flex; 
@@ -350,15 +350,39 @@
         .specs-image { width: 100%; display: flex; justify-content: center; position: relative; z-index: 10; }
         @media (min-width: 64rem) { .specs-image { width: 50%; } }
         
-        /* Úprava chování telefonu pro spodní statickou sekci */
-        .phone-specs {
-            transform: none; /* Zrušíme transformaci z hero sekce pro statické zobrazení */
-            opacity: 1;
-            width: 14rem;
+        /* Styly pro samotné zařízení (Puck) ve spodní statické sekci */
+        .device-specs-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 16rem;
+            z-index: 10;
         }
-        @media (min-width: 48rem) { .phone-specs { width: 20rem; } }
+        @media (min-width: 48rem) { .device-specs-wrapper { width: 22rem; } }
         
-        .phone-specs-glow { position: absolute; top: 50%; left: 50%; width: 80%; height: 80%; transform: translate(-50%, -50%); background: rgba(0, 86, 179, 0.15); filter: blur(3rem); border-radius: 50%; z-index: -1; pointer-events: none; }
+        .puck-product-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); /* Stín pro vizuální hloubku */
+            border-radius: 2rem; /* Jemné hrany kolem fotky */
+        }
+        
+        .puck-specs-glow { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            width: 100%; 
+            height: 100%; 
+            transform: translate(-50%, -50%); 
+            background: rgba(0, 86, 179, 0.2); 
+            filter: blur(4rem); 
+            border-radius: 50%; 
+            z-index: -1; 
+            pointer-events: none; 
+        }
         
         .specs-content { width: 100%; position: relative; z-index: 10; }
         @media (min-width: 64rem) { .specs-content { width: 50%; } }
@@ -456,6 +480,7 @@
             <div class="phone-wrapper">
                 <!-- ID pro přesné zacílení první hlavní animace na hrdinu -->
                 <div id="hero-phone" class="phone-mockup">
+                    <!-- Použit tvůj původní mockup pro horní sekci -->
                     <img src="658d7b23ebf04cbc8cfabef4_iPhone 14 Pro – Space Black-3.webp" alt="VIBE_NET App on iPhone">
                 </div>
             </div>
@@ -657,9 +682,10 @@
             <div class="specs-bg-glow" aria-hidden="true"></div>
 
             <div class="specs-image">
-                <div class="phone-mockup phone-specs">
-                    <img src="658d7b23ebf04cbc8cfabef4_iPhone 14 Pro – Space Black-3.webp" alt="VIBE_NET App on iPhone">
-                    <div class="phone-specs-glow" aria-hidden="true"></div>
+                <div class="device-specs-wrapper">
+                    <!-- Nyní se zde načte fotka skutečného TP-Link modemu -->
+                    <img src="M7000_EU_1.0_01_large_1572599997220b-Photoroom.jpg" alt="VIBE_NET Puck Device" class="puck-product-image">
+                    <div class="puck-specs-glow" aria-hidden="true"></div>
                 </div>
             </div>
             
