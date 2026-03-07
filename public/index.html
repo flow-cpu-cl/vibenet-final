@@ -631,6 +631,27 @@
             </div>
         </section>
 
+        <!-- Sharing Section - Scroll Animation -->
+        <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
+            <!-- Sticky animated container -->
+            <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
+                <!-- Image container - will be scaled down in phase 3 -->
+                <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
+                    <img 
+                        id="ecosystem-image"
+                        src="sdilej-data.png" 
+                        alt="Sdílení připojení se přáteli"
+                        style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
+                </div>
+                
+                <!-- Text -->
+                <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); opacity: 1; transform-origin: center;">
+                    <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
+                    <span style="color: var(--apple-black);">se svými přáteli.</span>
+                </h2>
+            </div>
+        </section>
+
         <!-- Manifesto Section -->
         <section id="manifesto" class="section-block">
             <div class="section-header text-center">
@@ -639,7 +660,6 @@
             </div>
             
             <div class="manifesto-grid">
-                <div class="manifesto-card">
                     <span aria-hidden="true">⚡️</span>
                     <div>
                         <h3 class="font-display">Zero Setup</h3>
@@ -710,27 +730,6 @@
         </section>
 
     </main>
-
-    <!-- Sharing Section - Scroll Animation (OUTSIDE CONTAINER) -->
-    <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
-        <!-- Sticky animated container -->
-        <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
-            <!-- Image container - will be scaled down in phase 3 -->
-            <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
-                <img 
-                    id="ecosystem-image"
-                    src="sdilej-data.png" 
-                    alt="Sdílení připojení se přáteli"
-                    style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
-            </div>
-            
-            <!-- Text -->
-            <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); opacity: 1; transform-origin: center;">
-                <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
-                <span style="color: var(--apple-black);">se svými přáteli.</span>
-            </h2>
-        </div>
-    </section>
 
     <footer class="footer">
         <div class="footer-inner">
@@ -839,18 +838,24 @@
                 else {
                     const phase3Progress = (clampedProgress - 0.75) / 0.25;
                     
-                    // Text stays visible but scales down
+                    // Calculate minimum scale based on container width (75rem = 1200px)
+                    const containerWidth = 75 * 16; // 75rem in pixels
+                    const minScale = Math.min(1, containerWidth / window.innerWidth);
+                    
+                    // Scale down from 1 to minScale
+                    const scaleDownAmount = 1 - minScale;
+                    const currentScale = Math.max(minScale, 1 - (phase3Progress * scaleDownAmount));
+                    
+                    // Text stays visible and scales with container
                     ecosystemText.style.opacity = 1;
-                    ecosystemText.style.transform = `scale(${2.3 * (1 - phase3Progress * 0.85)})`;
+                    ecosystemText.style.transform = `scale(${2.3 * currentScale})`;
                     
                     // Image stays at opacity 1 and scales down
                     ecosystemImage.style.opacity = 1;
                     
                     // Scale down the entire image container
-                    const containerScale = 1 - (phase3Progress * 0.85); // 1 to 0.15
                     const borderRadius = phase3Progress * 35;
-                    
-                    ecosystemImageContainer.style.transform = `scale(${containerScale})`;
+                    ecosystemImageContainer.style.transform = `scale(${currentScale})`;
                     ecosystemImage.style.borderRadius = `${borderRadius}px`;
                 }
             }, { passive: true });
