@@ -179,62 +179,39 @@
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
 
-        /* ZAŘÍZENÍ (PUCK) - UPRAVENO PRO ANIMACI */
-        .puck-wrapper { 
+        /* ZAŘÍZENÍ (TELEFON) - UPRAVENO PRO ANIMACI A MOCKUP */
+        .phone-wrapper { 
             width: 100%; 
             display: flex; 
             justify-content: center; 
-            margin-top: 2rem; 
+            margin-top: 3rem; 
             /* Perspektiva nutná pro 3D naklonění při scrollu */
-            perspective: 1000px;
+            perspective: 1200px;
         }
-        .puck-device {
-            background: #1d1d1f;
-            box-shadow: 0 1.25rem 2.5rem -0.625rem rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1);
-            border-radius: 3rem;
+        
+        .phone-mockup {
             position: relative;
-            overflow: hidden;
+            width: 18rem; /* Základní šířka iPhonu na mobilu */
             display: flex;
-            align-items: center;
             justify-content: center;
-            width: 16rem;
-            height: 16rem;
+            align-items: center;
+            will-change: transform, opacity;
             
-            /* DŮLEŽITÉ: Odebráno transition na transform/opacity, necháváme jen na hover glow,
-               aby JS animace (requestAnimationFrame) nebyla zpomalována CSS přechody. */
-            transition: box-shadow 0.5s;
-            will-change: transform, opacity, box-shadow;
-            cursor: pointer;
-            
-            /* Výchozí stav (před JS injekcí) - skryté a dole */
-            transform: translateY(120px) scale(0.85) rotateX(25deg);
+            /* Výchozí stav (před JS injekcí) - skryté a dole s 3D náklonem */
+            transform: translateY(150px) scale(0.85) rotateX(30deg);
             opacity: 0;
+            
+            /* Jemný prostorový stín pod celým telefonem */
+            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.25));
         }
-        @media (min-width: 48rem) { .puck-device { width: 20rem; height: 20rem; } }
-        .puck-device:hover { box-shadow: 0 1.5625rem 3.125rem -0.75rem rgba(0,0,0,0.5); }
+        @media (min-width: 48rem) { .phone-mockup { width: 24rem; } } /* Větší šířka pro desktop */
         
-        .puck-notch { position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); width: 3rem; height: 0.375rem; background: #000; border-radius: 99rem; opacity: 0.8; }
-        .puck-ring {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 60%; height: 60%;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%);
-            opacity: 0.6;
-            transition: opacity 0.5s;
+        .phone-mockup img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
         }
-        .puck-ring::after {
-            content: ''; position: absolute; inset: -1px; border-radius: 50%;
-            border: 2px solid transparent; border-top-color: rgba(255,255,255,0.4);
-            animation: spin-slow 3s linear infinite;
-            will-change: transform;
-        }
-        .puck-device:hover .puck-ring { opacity: 1; }
-        
-        .puck-status { position: absolute; bottom: 3rem; width: 100%; text-align: center; }
-        .puck-status p { font-size: 0.625rem; color: #d1d5db; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0; transition: opacity 0.5s; margin: 0; font-weight: 700; }
-        .puck-device:hover .puck-status p { opacity: 1; }
-        .puck-glare { position: absolute; inset: 0; background: linear-gradient(to top right, rgba(255,255,255,0.05), transparent); pointer-events: none; }
 
         .section-block { display: flex; flex-direction: column; gap: 2.5rem; }
         .section-header h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; }
@@ -373,10 +350,15 @@
         .specs-image { width: 100%; display: flex; justify-content: center; position: relative; z-index: 10; }
         @media (min-width: 64rem) { .specs-image { width: 50%; } }
         
-        /* Zde pro specs puck necháme původní transition aby se mu animace chovala standardně */
-        .puck-specs { width: 16rem; height: 16rem; border-radius: 3.125rem; box-shadow: 0 1.5625rem 3.125rem -0.75rem rgba(0,0,0,0.25); transition: all 0.5s; transform: translateY(0) scale(1) rotateX(0); opacity: 1; }
-        @media (min-width: 48rem) { .puck-specs { width: 24rem; height: 24rem; } }
-        .puck-specs-glow { position: absolute; inset: 0; background: rgba(0, 86, 179, 0.2); filter: blur(2.5rem); border-radius: 3.125rem; z-index: -1; pointer-events: none; }
+        /* Úprava chování telefonu pro spodní statickou sekci */
+        .phone-specs {
+            transform: none; /* Zrušíme transformaci z hero sekce pro statické zobrazení */
+            opacity: 1;
+            width: 14rem;
+        }
+        @media (min-width: 48rem) { .phone-specs { width: 20rem; } }
+        
+        .phone-specs-glow { position: absolute; top: 50%; left: 50%; width: 80%; height: 80%; transform: translate(-50%, -50%); background: rgba(0, 86, 179, 0.15); filter: blur(3rem); border-radius: 50%; z-index: -1; pointer-events: none; }
         
         .specs-content { width: 100%; position: relative; z-index: 10; }
         @media (min-width: 64rem) { .specs-content { width: 50%; } }
@@ -471,15 +453,10 @@
                 </div>
             </div>
 
-            <div class="puck-wrapper">
+            <div class="phone-wrapper">
                 <!-- ID pro přesné zacílení první hlavní animace na hrdinu -->
-                <div id="hero-puck" class="puck-device">
-                    <div class="puck-notch"></div>
-                    <div class="puck-ring"></div>
-                    <div class="puck-status">
-                        <p class="font-display">Connecting...</p>
-                    </div>
-                    <div class="puck-glare" aria-hidden="true"></div>
+                <div id="hero-phone" class="phone-mockup">
+                    <img src="658d7b23ebf04cbc8cfabef4_iPhone 14 Pro – Space Black-3.webp" alt="VIBE_NET App on iPhone">
                 </div>
             </div>
         </section>
@@ -680,19 +657,14 @@
             <div class="specs-bg-glow" aria-hidden="true"></div>
 
             <div class="specs-image">
-                <div class="puck-device puck-specs">
-                    <div class="puck-notch" style="top: 2.5rem;"></div>
-                    <div class="puck-ring" style="width: 70%; height: 70%;"></div>
-                    <div class="puck-status" style="bottom: 3.5rem;">
-                        <p class="font-display" style="font-size: 0.75rem; opacity: 1;">Puck Pro 1.0</p>
-                    </div>
-                    <div class="puck-glare" aria-hidden="true"></div>
-                    <div class="puck-specs-glow" aria-hidden="true"></div>
+                <div class="phone-mockup phone-specs">
+                    <img src="658d7b23ebf04cbc8cfabef4_iPhone 14 Pro – Space Black-3.webp" alt="VIBE_NET App on iPhone">
+                    <div class="phone-specs-glow" aria-hidden="true"></div>
                 </div>
             </div>
             
             <div class="specs-content">
-                <h2 class="font-display">Puck Specs</h2>
+                <h2 class="font-display">Tech Specs</h2>
                 <p>Technical details for the nerds.</p>
                 
                 <dl class="specs-list">
@@ -754,45 +726,45 @@
     <!-- SCROLL ANIMATION SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Zacílíme pouze na první Puck v hero sekci (nepokazí to animaci dole ve Specs)
-            const heroPuck = document.getElementById('hero-puck');
+            // Zacílíme na telefon v hero sekci
+            const heroPhone = document.getElementById('hero-phone');
             
             // Cílová hodnota scrollu (kam uživatel doscrolloval)
             let targetScroll = window.scrollY;
             // Aktuální hodnota pro plynulý dojezd (lerp)
             let currentScroll = targetScroll;
-            // Faktor vyhlazení (0.08 = velmi hladký, Webflow-style dojezd)
+            // Faktor vyhlazení (0.08 = velmi hladký dojezd)
             const ease = 0.08;
 
             const render = () => {
                 // Výpočet "máslového" dojezdu k cílovému scrollu
                 currentScroll += (targetScroll - currentScroll) * ease;
                 
-                // Definujeme, na jaké vzdálenosti se má animace plně dokončit (např. po prvních 500px)
-                const progress = Math.min(Math.max(currentScroll / 500, 0), 1);
+                // Animace se odehrává v prvních 600px scrollování
+                const progress = Math.min(Math.max(currentScroll / 600, 0), 1);
                 
-                // --- PARAMETRY ANIMACE ---
-                // Y-osa: Začíná na 120px (posunuto dole) a jak scrollujeme, posouvá se nahoru do -60px (paralaxa)
-                const y = 120 - (progress * 180);
+                // --- PARAMETRY ANIMACE PRO TELEFON ---
+                // Y-osa: Začíná dole (150px) a stoupá nahoru (-40px)
+                const y = 150 - (progress * 190);
                 
-                // Měřítko (Scale): Začíná na 0.85 a při scrollu se zvětší na 1.05
-                const scale = 0.85 + (progress * 0.2);
+                // Měřítko (Scale): Z lehce oddáleného na plnou velikost
+                const scale = 0.85 + (progress * 0.15);
                 
-                // 3D rotace (RotateX): Začíná lehce nakloněno vzad (25deg) a srovná se na (0deg)
-                const rotateX = 25 - (progress * 25);
+                // 3D rotace (RotateX): Začíná nakloněný vzad (30deg) a srovná se na (0deg)
+                const rotateX = 30 - (progress * 30);
                 
-                // Průhlednost (Opacity): Začíná na 0.3 a postupně se vyjasní do 1
-                const opacity = 0.3 + (progress * 0.7);
+                // Průhlednost (Opacity): Postupné zviditelnění
+                const opacity = 0.2 + (progress * 0.8);
 
-                // Aplikace stylů na náš element
-                heroPuck.style.transform = `translateY(${y}px) scale(${scale}) rotateX(${rotateX}deg)`;
-                heroPuck.style.opacity = opacity;
+                // Aplikace stylů
+                heroPhone.style.transform = `translateY(${y}px) scale(${scale}) rotateX(${rotateX}deg)`;
+                heroPhone.style.opacity = opacity;
 
-                // Spustíme nekonečnou smyčku v rámci vykreslování prohlížeče
+                // Opakování smyčky
                 requestAnimationFrame(render);
             };
 
-            // Pasivní event listener pro maximalizaci výkonu
+            // Listener pro zachycení pozice
             window.addEventListener('scroll', () => {
                 targetScroll = window.scrollY;
             }, { passive: true });
