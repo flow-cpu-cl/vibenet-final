@@ -635,29 +635,20 @@
         <section id="ecosystem" style="position: relative; width: 100%; min-height: 500vh; background: white;">
             <!-- Sticky animated container -->
             <div id="ecosystem-sticky" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 20;">
-                <!-- Obrázek - full viewport -->
-                <img 
-                    id="ecosystem-image"
-                    src="sdilej-data.png" 
-                    alt="Sdílení připojení se přáteli"
-                    style="position: absolute; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; z-index: 1;">
+                <!-- Image container - will be scaled down in phase 3 -->
+                <div id="ecosystem-image-container" style="position: absolute; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
+                    <img 
+                        id="ecosystem-image"
+                        src="sdilej-data.png" 
+                        alt="Sdílení připojení se přáteli"
+                        style="width: 100%; height: 100%; object-fit: cover; opacity: 0; z-index: 1;">
+                </div>
                 
                 <!-- Text -->
                 <h2 id="ecosystem-text" class="font-display" style="position: relative; text-align: center; z-index: 10; transform: scale(0.1); opacity: 1; transform-origin: center;">
                     <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
                     <span style="color: var(--apple-black);">se svými přáteli.</span>
                 </h2>
-            </div>
-
-            <!-- Scale down section -->
-            <div style="position: relative; width: 100%; height: 200vh; display: flex; align-items: center; justify-content: center; background: white;">
-                <div id="ecosystem-scale-container" style="position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center;">
-                    <img 
-                        id="ecosystem-image-final"
-                        src="sdilej-data.png" 
-                        alt="Sdílení připojení se přáteli"
-                        style="width: 100vw; height: 100vh; object-fit: cover;">
-                </div>
             </div>
         </section>
 
@@ -814,11 +805,9 @@
 
             // Ecosystem Section Scroll Animation
             const ecosystemSection = document.getElementById('ecosystem');
-            const ecosystemSticky = document.getElementById('ecosystem-sticky');
             const ecosystemText = document.getElementById('ecosystem-text');
             const ecosystemImage = document.getElementById('ecosystem-image');
-            const ecosystemScaleContainer = document.getElementById('ecosystem-scale-container');
-            const ecosystemImageFinal = document.getElementById('ecosystem-image-final');
+            const ecosystemImageContainer = document.getElementById('ecosystem-image-container');
 
             window.addEventListener('scroll', () => {
                 const sectionTop = ecosystemSection.getBoundingClientRect().top;
@@ -836,6 +825,7 @@
                     ecosystemText.style.transform = `scale(${textScale})`;
                     ecosystemText.style.opacity = 1;
                     ecosystemImage.style.opacity = 0;
+                    ecosystemImageContainer.style.transform = `scale(1)`;
                 }
                 // PHASE 2 (0.5-0.75): Image fade-in, text stays at max scale
                 else if (clampedProgress <= 0.75) {
@@ -843,22 +833,25 @@
                     ecosystemText.style.transform = `scale(2.3)`;
                     ecosystemText.style.opacity = 1;
                     ecosystemImage.style.opacity = phase2Progress;
+                    ecosystemImageContainer.style.transform = `scale(1)`;
                 }
-                // PHASE 3 (0.75-1.0): Scale down entire component, text fade-out
+                // PHASE 3 (0.75-1.0): Scale down entire component (image + text) on center
                 else {
                     const phase3Progress = (clampedProgress - 0.75) / 0.25;
                     
-                    // Text fade-out
-                    ecosystemText.style.opacity = 1 - phase3Progress;
-                    ecosystemText.style.transform = `scale(2.3)`;
+                    // Text stays visible but scales down
+                    ecosystemText.style.opacity = 1;
+                    ecosystemText.style.transform = `scale(${2.3 * (1 - phase3Progress * 0.85)})`;
+                    
+                    // Image stays at opacity 1 and scales down
                     ecosystemImage.style.opacity = 1;
                     
-                    // Scale down the container from full viewport to component size
+                    // Scale down the entire image container
                     const containerScale = 1 - (phase3Progress * 0.85); // 1 to 0.15
-                    const borderRadius = phase3Progress * 35; // Add rounded corners
+                    const borderRadius = phase3Progress * 35;
                     
-                    ecosystemScaleContainer.style.transform = `scale(${containerScale})`;
-                    ecosystemImageFinal.style.borderRadius = `${borderRadius}px`;
+                    ecosystemImageContainer.style.transform = `scale(${containerScale})`;
+                    ecosystemImage.style.borderRadius = `${borderRadius}px`;
                 }
             }, { passive: true });
         });
