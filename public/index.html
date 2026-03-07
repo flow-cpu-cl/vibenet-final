@@ -356,10 +356,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 16rem;
+            width: 14rem; /* Zmenšeno z 16rem pro menší vzhled na mobilu */
             z-index: 10;
         }
-        @media (min-width: 48rem) { .device-specs-wrapper { width: 29.75rem; } }
+        @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } } /* Výrazně zmenšeno z 29.75rem pro desktop */
         
         .puck-product-image {
             width: 100%;
@@ -692,7 +692,7 @@
                     <img 
                         src="modem-476.webp" 
                         srcset="modem-256.webp 256w, modem-476.webp 476w"
-                        sizes="(max-width: 768px) 256px, 476px"
+                        sizes="(max-width: 768px) 224px, 320px"
                         loading="lazy"
                         alt="VIBE_NET Modem" 
                         class="puck-product-image">
