@@ -396,6 +396,10 @@
             transform-origin: left center;
             transform: scale(1.4) rotateY(68deg);
         }
+        /* Rotace samotného levého obrázku o 90 doprava */
+        .tunnel-left .tunnel-img {
+            transform: rotate(90deg);
+        }
 
         /* 2. PRAVÝ MOBIL */
         .tunnel-right {
@@ -407,6 +411,10 @@
             transform-origin: right center;
             transform: rotateY(-60deg);
         }
+        /* Rotace samotného pravého obrázku o 90 doleva */
+        .tunnel-right .tunnel-img {
+            transform: rotate(-90deg);
+        }
 
         /* 3. HORNÍ ZAŘÍZENÍ */
         .tunnel-top {
@@ -417,6 +425,10 @@
             max-height: 25rem; 
             transform-origin: top center;
             transform: rotateX(-60deg);
+        }
+        /* Rotace samotného horního obrázku o 180 stupňů */
+        .tunnel-top .tunnel-img {
+            transform: rotate(180deg);
         }
 
         /* 4. SPODNÍ ZAŘÍZENÍ */
