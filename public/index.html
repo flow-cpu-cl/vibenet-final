@@ -330,6 +330,118 @@
         .btn-plan-pro { background: var(--apple-blue); color: white; border: none; box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 86, 179, 0.25); position: relative; z-index: 10; }
         .btn-plan-pro:hover { background: var(--apple-blue-hover); }
 
+        /* --- NOVÁ SEKCE: ECOSYSTEM (3D ZAŘÍZENÍ) --- */
+        .ecosystem-section {
+            position: relative;
+            width: 100%;
+            min-height: 40rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 2.5rem;
+            background: radial-gradient(circle at center, #ffffff 0%, var(--apple-light-gray) 100%);
+            perspective: 1200px; /* Hloubka prostoru pro 3D rotace */
+            margin-bottom: 2.5rem;
+        }
+        @media (min-width: 48rem) { .ecosystem-section { min-height: 50rem; } }
+
+        .ecosystem-content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            max-width: 32rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+        .ecosystem-content h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; line-height: 1.1; }
+        @media (min-width: 48rem) { .ecosystem-content h2 { font-size: 3rem; } }
+        .ecosystem-content p { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; }
+
+        /* Kontejner pro ukotvení zařízení vprostřed */
+        .ecosystem-devices {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            z-index: 10;
+        }
+
+        /* Společný styl pro všechny 3D zástupce zařízení */
+        .device-mock {
+            position: absolute;
+            background: var(--apple-black);
+            border: 0.25rem solid #4b4b52;
+            border-radius: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255,255,255,0.4);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: 0 2rem 4rem rgba(0,0,0,0.3);
+            /* Animace se aplikuje s využitím proměnných pro zachování úhlů natočení */
+            transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz));
+        }
+        /* Vnitřní "displej" zařízení */
+        .device-mock::before {
+            content: '';
+            position: absolute;
+            inset: 0.375rem;
+            background: #111;
+            border-radius: 1rem;
+            z-index: -1;
+        }
+
+        /* Specifické rozměry, pozice a rotace (jako na inspiraci) */
+        .top-device {
+            --rx: 45deg; --ry: 0deg; --rz: 0deg;
+            width: 22rem; height: 14rem;
+            margin-left: -11rem; margin-top: -24rem; /* Umístění nahoru od středu */
+            animation: float-3d 8s ease-in-out infinite;
+        }
+        .bottom-device {
+            --rx: -45deg; --ry: 0deg; --rz: 0deg;
+            width: 18rem; height: 12rem;
+            margin-left: -9rem; margin-top: 10rem; /* Umístění dolů od středu */
+            animation: float-3d 7s ease-in-out infinite 1s;
+        }
+        .left-device {
+            --rx: 0deg; --ry: 45deg; --rz: 15deg;
+            width: 12rem; height: 16rem;
+            margin-left: -28rem; margin-top: -8rem; /* Umístění vlevo */
+            animation: float-3d 9s ease-in-out infinite 2s;
+        }
+        .right-device {
+            --rx: 0deg; --ry: -45deg; --rz: -15deg;
+            width: 8rem; height: 16rem; /* Telefon má užší poměr stran */
+            border-radius: 2rem;
+            margin-left: 18rem; margin-top: -6rem; /* Umístění vpravo */
+            animation: float-3d 8s ease-in-out infinite 3s;
+        }
+        .right-device::before { border-radius: 1.5rem; }
+
+        /* Zmenšení zařízení pro mobilní zařízení, aby to neuteklo z obrazovky */
+        @media (max-width: 47.9375rem) {
+            .top-device { width: 14rem; height: 10rem; margin-left: -7rem; margin-top: -16rem; }
+            .bottom-device { width: 12rem; height: 8rem; margin-left: -6rem; margin-top: 10rem; }
+            .left-device { width: 8rem; height: 12rem; margin-left: -11rem; margin-top: -6rem; }
+            .right-device { width: 5rem; height: 10rem; margin-left: 7rem; margin-top: -5rem; }
+            .device-mock { font-size: 0.75rem; border-width: 0.15rem; }
+        }
+
+        @keyframes float-3d {
+            0%, 100% { transform: translateY(0) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz)); }
+            50% { transform: translateY(-1.5rem) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz)); }
+        }
+        /* --- KONEC SEKCE ECOSYSTEM --- */
+
+
         .manifesto-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         @media (min-width: 48rem) { .manifesto-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 64rem) { .manifesto-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -639,6 +751,21 @@
                     </div>
                     <button class="btn-plan btn-plan-pro">Join Pro</button>
                 </div>
+            </div>
+        </section>
+
+        <!-- Ecosystem Section (3D Inspiration) -->
+        <section id="ecosystem" class="ecosystem-section">
+            <div class="ecosystem-content">
+                <h2 class="font-display">Jeden tarif.<br>Všechny tvoje obrazovky.</h2>
+                <p>Připoj k VIBE_NET svůj telefon, tablet, notebook i televizi. Prostě všechny tvoje hračky.</p>
+            </div>
+
+            <div class="ecosystem-devices" aria-hidden="true">
+                <div class="device-mock top-device">Monitor</div>
+                <div class="device-mock bottom-device">Notebook</div>
+                <div class="device-mock left-device">Tablet</div>
+                <div class="device-mock right-device">Telefon</div>
             </div>
         </section>
 
