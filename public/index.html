@@ -359,7 +359,7 @@
             width: 16rem;
             z-index: 10;
         }
-        @media (min-width: 48rem) { .device-specs-wrapper { width: 22rem; } }
+        @media (min-width: 48rem) { .device-specs-wrapper { width: 29.75rem; } }
         
         .puck-product-image {
             width: 100%;
@@ -480,8 +480,13 @@
             <div class="phone-wrapper">
                 <!-- ID pro přesné zacílení první hlavní animace na hrdinu -->
                 <div id="hero-phone" class="phone-mockup">
-                    <!-- Použit tvůj původní mockup pro horní sekci -->
-                    <img src="658d7b23ebf04cbc8cfabef4_iPhone 14 Pro – Space Black-3.webp" alt="VIBE_NET App on iPhone">
+                    <!-- Použití responzivních obrázků (srcset) a priority načítání -->
+                    <img 
+                        src="telefon-800.webp" 
+                        srcset="telefon-400.webp 400w, telefon-800.webp 800w"
+                        sizes="(max-width: 768px) 288px, 384px"
+                        fetchpriority="high"
+                        alt="VIBE_NET App na telefonu">
                 </div>
             </div>
         </section>
@@ -683,8 +688,14 @@
 
             <div class="specs-image">
                 <div class="device-specs-wrapper">
-                    <!-- Nyní se zde načte fotka skutečného TP-Link modemu -->
-                    <img src="M7000_EU_1.0_01_large_1572599997220b-Photoroom.png" alt="VIBE_NET Puck Device" class="puck-product-image">
+                    <!-- Responzivní načítání a lazy loading pro spodní obrázek -->
+                    <img 
+                        src="modem-476.webp" 
+                        srcset="modem-256.webp 256w, modem-476.webp 476w"
+                        sizes="(max-width: 768px) 256px, 476px"
+                        loading="lazy"
+                        alt="VIBE_NET Modem" 
+                        class="puck-product-image">
                     <div class="puck-specs-glow" aria-hidden="true"></div>
                 </div>
             </div>
