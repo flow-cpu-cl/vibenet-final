@@ -18,546 +18,96 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body {
-            background-color: var(--apple-bg);
-            color: var(--apple-black);
-            font-family: var(--sys-font);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            line-height: 1.5;
-        }
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--apple-blue);
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-        a { text-decoration: none; color: inherit; transition: all 0.2s; }
-        ul { list-style: none; }
-        button { cursor: pointer; font-family: inherit; border: none; background: transparent; }
-        
+        body { background-color: var(--apple-bg); color: var(--apple-black); font-family: var(--sys-font); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         .font-display { font-weight: 700; letter-spacing: -0.02em; }
-        .gradient-text {
-            background: linear-gradient(135deg, #1d4ed8, #be185d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
         .container { width: 100%; max-width: 75rem; margin: 0 auto; padding: 0 1.5rem; }
-        .section-gap {
-            display: flex;
-            flex-direction: column;
-            gap: 8rem;
-            padding-top: 2.5rem;
-            padding-bottom: 8rem;
-            position: relative;
-            z-index: 10;
-        }
 
-        /* --- ANIMATIONS --- */
-        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-1.25rem); } 100% { transform: translateY(0); } }
-        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } 50% { opacity: 0.3; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
-
-        /* --- BACKGROUND BLOBS --- */
-        .blobs-wrapper { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-        .blob { position: absolute; border-radius: 50%; filter: blur(5rem); opacity: 0.4; will-change: transform; transform: translateZ(0); }
-        .blob-1 { top: -10%; left: 20%; width: 37.5rem; height: 37.5rem; background: radial-gradient(circle, #e0f2fe 0%, transparent 70%); }
-        .blob-2 { bottom: 10%; right: -10%; width: 31.25rem; height: 31.25rem; background: radial-gradient(circle, #fce7f3 0%, transparent 70%); }
-        .blob-3 { top: 40%; left: -10%; width: 25rem; height: 25rem; background: radial-gradient(circle, #e0f2fe 0%, transparent 70%); }
-
-        /* --- NAVIGATION --- */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            position: relative;
-            z-index: 50;
-        }
-        .nav-logo { font-size: 1.25rem; color: var(--apple-black); margin: 0; }
-        .nav-links { display: none; gap: 2.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--apple-black); }
-        .nav-links a:hover { color: var(--apple-blue); }
-        .btn-nav { padding: 0.625rem 1.5rem; background: var(--apple-black); color: white; border-radius: 9999px; font-weight: 500; font-size: 0.8125rem; transition: all 0.2s; }
-        .btn-nav:hover { background: #333; }
-        .btn-nav:active { transform: scale(0.95); }
-        @media (min-width: 48rem) { .nav-links { display: flex; } }
-
-        /* --- NEW HERO SECTION --- */
-        .hero-new {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4rem;
-            min-height: 80vh;
-            padding-top: 4rem;
-        }
-        @media (min-width: 64rem) {
-            .hero-new { flex-direction: row; align-items: center; justify-content: space-between; text-align: left; }
-        }
-        .hero-text { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; position: relative; z-index: 20; }
-        .hero-badge {
-            background: #eff6ff; color: var(--apple-blue); padding: 0.375rem 1rem; border-radius: 9999px;
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block;
-        }
-        .hero-text h1 { font-size: 3.75rem; line-height: 0.9; color: var(--apple-black); margin: 0; }
-        .hero-text p.subtitle { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; max-width: 32rem; margin: 0; }
-        @media (min-width: 64rem) { .hero-text h1 { font-size: 6.5rem; } .hero-text p.subtitle { font-size: 1.5rem; } }
-        
-        .hero-actions { display: flex; align-items: center; gap: 1.5rem; margin-top: 1rem; }
-        .btn-primary { background: var(--apple-blue); color: white; font-weight: 600; font-size: 1.125rem; padding: 1rem 2.5rem; border-radius: 9999px; box-shadow: 0 10px 20px rgba(0, 86, 179, 0.2); transition: all 0.3s; }
-        .btn-primary:hover { background: var(--apple-blue-hover); transform: translateY(-0.25rem); }
-        .btn-text { color: var(--apple-blue); font-size: 1.125rem; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
-        .btn-text span { transition: transform 0.2s; }
-        .btn-text:hover span { transform: translateX(0.25rem); }
-
-        .hero-sticker-wrap { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; }
-        .sticker { background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transform: rotate(-6deg); padding: 0.5rem 1rem; border-radius: 0.5rem; z-index: 20; text-align: center; }
-        .sticker-val { font-size: 1.125rem; line-height: 1; display: block; color: var(--apple-black); }
-        .sticker-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; letter-spacing: 0.1em; display: block; }
-        .hero-sticker-wrap p { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; max-width: 12rem; margin: 0; }
-
-        .hero-visual { flex: 1; position: relative; width: 100%; min-height: 400px; display: flex; justify-content: center; align-items: center; }
-        @media (min-width: 64rem) { .hero-visual { min-height: 600px; } }
-        .hero-pulse-ring { position: absolute; top: 50%; left: 50%; border: 1px solid var(--apple-blue); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
-        .ring-1 { width: 400px; height: 400px; animation: pulse-ring 4s infinite; }
-        .ring-2 { width: 600px; height: 600px; animation: pulse-ring 4s infinite 1.3s; }
-        .ring-3 { width: 800px; height: 800px; animation: pulse-ring 4s infinite 2.6s; }
-        
-        .puck-device { width: 18rem; height: 18rem; background: #1d1d1f; border-radius: 3.75rem; box-shadow: 0 40px 80px -15px rgba(0,0,0,0.4); position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: float 6s ease-in-out infinite; }
-        @media (min-width: 64rem) { .puck-device { width: 28rem; height: 28rem; } }
-        .puck-notch { position: absolute; top: 2.5rem; width: 4rem; height: 0.375rem; background: #333; border-radius: 9999px; opacity: 0.4; }
-        .puck-spinner-wrap { width: 70%; height: 70%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; position: relative; }
-        .puck-spinner { position: absolute; inset: 0; border-radius: 50%; border-top: 2px solid rgba(59, 130, 246, 0.6); animation: spin-slow 12s linear infinite; }
-        .puck-inner-glow { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent); }
-        .puck-label { position: absolute; bottom: 4rem; font-family: var(--sys-font); font-weight: 700; font-size: 0.75rem; color: #6b7280; letter-spacing: 0.4em; text-transform: uppercase; }
-
-        /* --- 4 USPs GRID --- */
-        .usp-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 4rem; }
-        @media (min-width: 40rem) { .usp-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 64rem) { .usp-grid { grid-template-columns: repeat(4, 1fr); } }
-        .glass-panel { background: var(--apple-light-gray); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease; border-radius: 2.25rem; }
-        .glass-panel:hover { transform: scale(1.02); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1); }
-        .usp-card { padding: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
-        .usp-icon { font-size: 2.25rem; line-height: 1; display: block; }
-        .usp-card h3 { font-size: 1.25rem; color: var(--apple-black); margin: 0; }
-        .usp-card p { color: var(--apple-gray); font-size: 0.9375rem; font-weight: 500; margin: 0; line-height: 1.6; }
-
-        /* --- NEW PRICING SECTION --- */
-        .pricing-new { margin-top: 4rem; }
-        .pricing-new-inner { background: var(--apple-light-gray); border-radius: 3.125rem; padding: 3rem 2rem; display: flex; flex-direction: column; gap: 4rem; align-items: center; }
-        @media (min-width: 64rem) { .pricing-new-inner { flex-direction: row; padding: 6rem; gap: 4rem; } }
-        .pricing-text-area { flex: 1; width: 100%; }
-        .pricing-text-area h2 { font-size: 3rem; line-height: 1; color: var(--apple-black); margin: 0 0 2rem 0; }
-        @media (min-width: 64rem) { .pricing-text-area h2 { font-size: 4.5rem; } }
-        .pricing-features { display: flex; flex-direction: column; gap: 1.5rem; }
-        .pricing-features li { display: flex; align-items: center; gap: 1rem; font-size: 1.25rem; font-weight: 500; color: var(--apple-black); }
-        .pricing-features svg { width: 1.5rem; height: 1.5rem; color: var(--apple-blue); flex-shrink: 0; }
-        
-        .pricing-card-area { flex: 1; width: 100%; }
-        .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; overflow: hidden; width: 100%; max-width: 32rem; margin: 0 auto; }
-        .pricing-card-new::after { content: ''; position: absolute; top: 0; right: 0; width: 8rem; height: 8rem; background: #eff6ff; border-bottom-left-radius: 6rem; z-index: 0; pointer-events: none; }
-        .pricing-card-new > * { position: relative; z-index: 10; }
-        .pricing-card-new h3 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 3rem 0; }
-        .pricing-price-wrap { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 2rem; }
-        .pricing-price-wrap .price { font-size: 6rem; line-height: 1; color: var(--apple-black); }
-        .pricing-price-wrap .mo { color: var(--apple-gray); font-weight: 500; font-size: 1.875rem; margin: 0; }
-        .btn-pricing-new { width: 100%; padding: 1.25rem; border-radius: 1rem; background: var(--apple-blue); color: white; font-weight: 700; font-size: 1.25rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 86, 179, 0.2); transition: transform 0.2s; }
-        .btn-pricing-new:hover { transform: scale(1.02); background: var(--apple-blue-hover); }
-        .pricing-note { text-align: center; margin-top: 1.5rem; color: var(--apple-gray); font-weight: 500; font-size: 1rem; margin-bottom: 0; }
-
-        /* --- CAROUSEL (SIGNAL. EVERYWHERE) --- */
-        .carousel-section { width: 100%; padding-top: 6rem; padding-bottom: 6rem; overflow: hidden; background: rgba(255,255,255,0.3); }
-        .carousel-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
-        .carousel-header h2 { font-size: 3rem; color: var(--apple-black); margin: 0; line-height: 1; }
-        .carousel-header p { color: var(--apple-gray); font-size: 1.25rem; font-weight: 500; margin: 1rem 0 0 0; }
-        .carousel-arrows { display: none; gap: 0.75rem; }
-        @media (min-width: 48rem) { .carousel-arrows { display: flex; } }
-        .arrow-btn { width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: center; color: #9ca3af; transition: background-color 0.2s; font-size: 1.25rem; }
-        .arrow-btn:hover { background: #f9fafb; color: var(--apple-black); }
-
-        .filmstrip-container {
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 2.5rem max(1.5rem, calc((100vw - 75rem) / 2)) 5rem;
-            gap: 2rem; scrollbar-width: none; -ms-overflow-style: none;
-        }
+        /* CAROUSEL */
+        .carousel-section { width: 100%; padding-top: 6rem; padding-bottom: 6rem; overflow: hidden; }
+        .carousel-header { display: flex; justify-content: space-between; margin-bottom: 2rem; }
+        .carousel-header h2 { font-size: 3rem; color: var(--apple-black); margin: 0; }
+        .filmstrip-container { display: flex; overflow-x: auto; padding: 2.5rem 1.5rem 5rem; gap: 2rem; scrollbar-width: none; }
         .filmstrip-container::-webkit-scrollbar { display: none; }
-        .filmstrip-card { flex: 0 0 85vw; max-width: 31.25rem; height: 37.5rem; scroll-snap-align: center; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 3rem; position: relative; overflow: hidden; }
+        .filmstrip-card { flex: 0 0 85vw; max-width: 31.25rem; height: 37.5rem; padding: 3rem; border-radius: 3rem; background: var(--apple-light-gray); display: flex; flex-direction: column; justify-content: space-between; }
         @media (min-width: 48rem) { .filmstrip-card { flex: 0 0 40vw; } }
         
-        .fs-tag { font-size: 0.6875rem; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
-        .fs-title { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; line-height: 1.1; }
-        .fs-desc { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; line-height: 1.6; }
+        .fs-title { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; }
+        .fs-desc { color: var(--apple-gray); font-size: 1.125rem; margin: 0; }
 
-        /* Card 1 Specifics */
-        .fs-c1-visual { display: flex; justify-content: center; padding: 2rem 0; }
-        .fs-c1-puck { width: 10rem; height: 10rem; background: var(--apple-black); border-radius: 2.25rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); }
-        .fs-c1-puck-inner { width: 60%; height: 60%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); opacity: 0.4; }
-        .fs-c1-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
-        .fs-c1-badges { display: flex; gap: 0.5rem; }
-        .fs-c1-badge { background: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--apple-black); }
+        /* LANDSCAPE CARD */
+        .fs-landscape {
+            flex: 0 0 90vw !important;
+            max-width: 100% !important;
+            aspect-ratio: 16 / 9 !important;
+            padding: 0 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
         
-        /* Card 2 Specifics */
-        .fs-c2 { background: white; }
-        .fs-icon-box { width: 4rem; height: 4rem; border-radius: 1rem; background: #eff6ff; color: var(--apple-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
-        .fs-c2-bottom { margin-top: auto; padding-top: 2.5rem; border-top: 1px solid #f3f4f6; }
-        .fs-progress-wrap { display: flex; align-items: center; gap: 1rem; }
-        .fs-progress-bar { flex-grow: 1; height: 0.375rem; background: #f3f4f6; border-radius: 9999px; overflow: hidden; }
-        .fs-progress-fill { height: 100%; width: 95%; background: var(--apple-blue); }
-        .fs-progress-text { font-size: 0.6875rem; font-weight: 700; color: var(--apple-blue); letter-spacing: 0.05em; }
-
-        /* Card 3 Specifics */
-        .fs-c3 { background: var(--apple-black); }
-        .fs-c3 .fs-title { color: white; }
-        .fs-c3-icon-box { background: rgba(255,255,255,0.1); color: #ec4899; }
-        .btn-ghost { width: 100%; padding: 1rem; border-radius: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
-        .btn-ghost:hover { background: rgba(255,255,255,0.1); }
-
-        /* Card 4 Specifics */
-        .fs-c4 { background: var(--apple-light-gray); }
-        .fs-spec-list { display: flex; flex-direction: column; flex-grow: 1; overflow-y: auto; margin-top: 1rem; }
-        .fs-spec-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
-        .fs-spec-row:last-child { border-bottom: none; }
-        .fs-spec-label { font-weight: 600; color: var(--apple-black); }
-        .fs-spec-val { color: var(--apple-gray); font-size: 0.875rem; font-weight: 500; }
-
-        /* Card 5 Specifics */
-        .fs-c5 { background: var(--apple-light-gray); }
-        .fs-c5::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom right, rgba(0, 86, 179, 0.1), transparent); pointer-events: none; }
-        .fs-c5-avatars { height: 8rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        .fs-avatar { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
-        .fs-avatar-more { background: #eff6ff; color: var(--apple-blue); font-weight: 700; font-size: 0.625rem; }
-
-        /* Card 6 (Wide) Specifics */
-        .fs-c6 { background: white; padding: 0; display: flex; flex-direction: column; max-width: 50rem; }
-        @media (min-width: 48rem) { .fs-c6 { flex: 0 0 70vw; max-width: 60rem; flex-direction: row; } }
-        .fs-c6-content { padding: 3rem; flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 10; }
-        .fs-c6-image { flex: 1.2; position: relative; min-height: 15rem; }
-        .fs-c6-image img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-        @media (min-width: 48rem) { .fs-c6-image { min-height: auto; } }
-
-        /* --- SPECS SECTION (ORIGINAL) --- */
-        .specs-section { background: var(--apple-light-gray); border-radius: 2.5rem; padding: 2.5rem; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 4rem; position: relative; }
-        @media (min-width: 48rem) { .specs-section { padding: 5rem; } }
-        @media (min-width: 64rem) { .specs-section { flex-direction: row; gap: 6rem; } }
-        .specs-bg-glow { position: absolute; top: 50%; left: 25%; width: 31.25rem; height: 31.25rem; background: rgba(219, 234, 254, 0.5); border-radius: 50%; filter: blur(6.25rem); transform: translateY(-50%); pointer-events: none; }
-        .specs-image { width: 100%; display: flex; justify-content: center; position: relative; z-index: 10; }
-        @media (min-width: 64rem) { .specs-image { width: 50%; } }
-        .device-specs-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 14rem; z-index: 10; }
-        @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } }
-        .puck-product-image { width: 100%; height: auto; display: block; object-fit: contain; filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); border-radius: 2rem; }
-        .puck-specs-glow { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); background: rgba(0, 86, 179, 0.2); filter: blur(4rem); border-radius: 50%; z-index: -1; pointer-events: none; }
-        .specs-content { width: 100%; position: relative; z-index: 10; }
-        @media (min-width: 64rem) { .specs-content { width: 50%; } }
-        .specs-content h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 0.5rem 0; }
-        .specs-content > p { color: var(--apple-gray); font-weight: 500; margin: 0 0 2rem 0; }
-        .specs-list { width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; }
-        .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.1); margin: 0; }
-        .spec-row:last-child { border-bottom: none; }
-        .spec-label { font-weight: 600; color: var(--apple-black); margin: 0; }
-        .spec-val { color: var(--apple-gray); font-weight: 500; font-size: 0.875rem; margin: 0; text-align: right; }
-
-        /* --- FOOTER --- */
-        .footer { width: 100%; border-top: 1px solid #e5e7eb; background: white; position: relative; z-index: 50; }
-        .footer-inner { max-width: 75rem; margin: 0 auto; padding: 4rem 1.5rem; display: flex; flex-direction: column; gap: 2rem; }
-        @media (min-width: 48rem) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; } }
-        .footer-brand { text-align: center; }
-        @media (min-width: 48rem) { .footer-brand { text-align: left; } }
-        .footer-logo { font-size: 1.25rem; font-weight: 700; color: var(--apple-black); letter-spacing: -0.02em; margin: 0 0 0.5rem 0; }
-        .footer-desc { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; margin: 0; }
-        .footer-links { display: flex; gap: 2.5rem; font-size: 0.875rem; font-weight: 600; color: var(--apple-black); flex-wrap: wrap; justify-content: center; }
-        .footer-links a:hover { color: var(--apple-blue); }
-        .footer-status { display: flex; items-center; gap: 0.5rem; justify-content: center; }
-        .status-dot-green { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; margin-top: 0.35rem; }
-        .status-text { font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; margin: 0; }
+        @media (max-width: 768px) {
+            .fs-landscape { aspect-ratio: auto !important; min-height: 400px; }
+        }
+        
+        .fs-landscape::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        .fs-landscape-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .fs-landscape-content .fs-title {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        
+        .fs-landscape-content .fs-title span:first-child {
+            color: var(--apple-blue);
+            display: block;
+        }
+        
+        .fs-landscape-content .fs-title span:last-child {
+            color: var(--apple-black);
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <div class="blobs-wrapper" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-
-    <!-- NAVIGATION -->
-    <nav aria-label="Main navigation" class="nav container">
-        <p class="font-display nav-logo">VIBE_NET</p>
-        <div class="nav-links">
-            <a href="#tech">The Tech</a>
-            <a href="#coverage">Coverage</a>
-            <a href="#manifesto">Manifesto</a>
-        </div>
-        <button class="btn-nav">Join the Club</button>
-    </nav>
-
-    <!-- NEW HERO -->
-    <main class="container">
-        <section class="hero-new">
-            <div class="hero-text">
-                <div class="hero-badge">Now available in 40+ countries</div>
-                <h1 class="font-display">Internet<br><span class="gradient-text">Without</span><br>The Leash.</h1>
-                <p class="subtitle">Forget cables. Forget landlords. The web flows where you flow.</p>
-                <div class="hero-actions">
-                    <button class="btn-primary">Gimme Access</button>
-                    <a href="#tech" class="btn-text">Learn more <span aria-hidden="true">›</span></a>
-                </div>
-                <div class="hero-sticker-wrap">
-                    <div class="sticker">
-                        <strong class="font-display sticker-val">88 CR</strong>
-                        <small class="sticker-label">PER MONTH</small>
-                    </div>
-                    <p>No contract. No limits. Just pure speed.</p>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="hero-pulse-ring ring-1"></div>
-                <div class="hero-pulse-ring ring-2"></div>
-                <div class="hero-pulse-ring ring-3"></div>
-                
-                <div class="puck-device">
-                    <div class="puck-notch"></div>
-                    <div class="puck-spinner-wrap">
-                        <div class="puck-spinner"></div>
-                        <div class="puck-inner-glow"></div>
-                    </div>
-                    <span class="puck-label">Active Signal</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4 USPs -->
-        <section class="usp-grid">
-            <div class="glass-panel usp-card">
-                <span class="usp-icon">⚡️</span>
-                <h3 class="font-display">Zero Setup</h3>
-                <p>Plug it in and you're good. No technicians, no calls, no wait times.</p>
-            </div>
-            <div class="glass-panel usp-card">
-                <span class="usp-icon">🚐</span>
-                <h3 class="font-display">Go Anywhere</h3>
-                <p>Built for van-life, remote cabins, and the middle of nowhere.</p>
-            </div>
-            <div class="glass-panel usp-card">
-                <span class="usp-icon">🌐</span>
-                <h3 class="font-display">Share the Vibe</h3>
-                <p>Connect up to 10 devices simultaneously with low-latency signal.</p>
-            </div>
-            <div class="glass-panel usp-card">
-                <span class="usp-icon">🔋</span>
-                <h3 class="font-display">12h Battery</h3>
-                <p>An all-day battery that charges via USB-C in under 45 minutes.</p>
-            </div>
-        </section>
-
-        <!-- PRICING NEW -->
-        <section class="pricing-new">
-            <div class="pricing-new-inner glass-panel">
-                <div class="pricing-text-area">
-                    <h2 class="font-display">One plan.<br>Infinite freedom.</h2>
-                    <ul class="pricing-features">
-                        <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Unlimited 5G Data</li>
-                        <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Global Roaming Included</li>
-                        <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Priority Support 24/7</li>
-                    </ul>
-                </div>
-                <div class="pricing-card-area">
-                    <div class="pricing-card-new">
-                        <h3 class="font-display">Nomad Pro</h3>
-                        <div class="pricing-price-wrap">
-                            <span class="price font-display">88</span>
-                            <span class="mo">CR/mo</span>
-                        </div>
-                        <button class="btn-pricing-new">Get Started</button>
-                        <p class="pricing-note">No hidden fees. Cancel anytime.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- CAROUSEL -->
     <section class="carousel-section">
         <div class="container carousel-header">
-            <div>
-                <h2 class="font-display">Signal. Everywhere.</h2>
-                <p>Swipe to explore the future of connectivity.</p>
-            </div>
-            <div class="carousel-arrows">
-                <button class="arrow-btn" aria-label="Previous">←</button>
-                <button class="arrow-btn" aria-label="Next">→</button>
-            </div>
+            <h2 class="font-display">Signal. Everywhere.</h2>
         </div>
         
         <div class="filmstrip-container">
-            <!-- Card 1 -->
-            <div class="filmstrip-card glass-panel">
-                <div class="relative z-10">
-                    <span class="fs-tag">Core Experience</span>
-                    <h3 class="font-display fs-title">Nomad Puck 1.0</h3>
-                    <p class="fs-desc">Your personal Wi-Fi bubble. Designed for movement and aesthetic bliss.</p>
-                </div>
-                <div class="fs-c1-visual">
-                     <div class="fs-c1-puck">
-                        <div class="fs-c1-puck-inner"></div>
-                     </div>
-                </div>
-                <div class="fs-c1-bottom">
-                    <div class="fs-c1-badges">
-                        <span class="fs-c1-badge">Van Life</span>
-                        <span class="fs-c1-badge">Remote</span>
-                    </div>
-                    <div class="font-display fs-title" style="margin: 0;">199 CR</div>
-                </div>
-            </div>
+            <div class="filmstrip-card"><h3 class="font-display fs-title">Nomad Puck 1.0</h3><p class="fs-desc">Your personal Wi-Fi bubble.</p></div>
+            <div class="filmstrip-card"><h3 class="font-display fs-title">5G Ultra</h3><p class="fs-desc">Experience speeds that make fiber look like dial-up.</p></div>
+            <div class="filmstrip-card"><h3 class="font-display fs-title">Ghost Mode</h3><p class="fs-desc">No tracking. No contracts.</p></div>
+            <div class="filmstrip-card"><h3 class="font-display fs-title">Tech Specs</h3><p class="fs-desc">Precision engineering.</p></div>
+            <div class="filmstrip-card"><h3 class="font-display fs-title">Share Signal</h3><p class="fs-desc">One Puck. Up to 10 friends.</p></div>
 
-            <!-- Card 2 -->
-            <div class="filmstrip-card glass-panel fs-c2">
-                <div class="relative z-10">
-                    <div class="fs-icon-box">
-                        <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
-                    </div>
-                    <h3 class="font-display fs-title">5G Ultra Wideband</h3>
-                    <p class="fs-desc">Experience speeds that make fiber optic look like dial-up. Zero lag, 100% vibe.</p>
-                </div>
-                <div class="fs-c2-bottom">
-                    <div class="fs-progress-wrap">
-                        <div class="fs-progress-bar"><div class="fs-progress-fill"></div></div>
-                        <span class="fs-progress-text">95% UPTIME</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="filmstrip-card glass-panel fs-c3">
-                <div class="relative z-10">
-                    <div class="fs-icon-box fs-c3-icon-box">
-                        <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
-                    </div>
-                    <h3 class="font-display fs-title">Ghost Mode</h3>
-                    <p class="fs-desc">No tracking. No contracts. No nonsense. You disappear when you want to.</p>
-                </div>
-                <div class="mt-auto">
-                    <button class="btn-ghost">Go Invisible</button>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="filmstrip-card glass-panel fs-c4">
-                <div class="relative z-10">
-                    <h3 class="font-display fs-title" style="margin-bottom: 0.5rem;">Technical Specs</h3>
-                    <p class="fs-desc" style="font-size: 1rem;">Precision engineering inside.</p>
-                </div>
-                <div class="fs-spec-list">
-                    <div class="fs-spec-row"><span class="fs-spec-label">Connectivity</span><span class="fs-spec-val">5G / 4G LTE</span></div>
-                    <div class="fs-spec-row"><span class="fs-spec-label">Battery Life</span><span class="fs-spec-val">12 Hours</span></div>
-                    <div class="fs-spec-row"><span class="fs-spec-label">Weight</span><span class="fs-spec-val">180g</span></div>
-                    <div class="fs-spec-row"><span class="fs-spec-label">Max Devices</span><span class="fs-spec-val">10 Devices</span></div>
-                    <div class="fs-spec-row"><span class="fs-spec-label">Security</span><span class="fs-spec-val">WPA3 Encr.</span></div>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="filmstrip-card glass-panel fs-c5">
-                <div class="relative z-10">
-                    <span class="fs-tag">Social Protocol</span>
-                    <h3 class="font-display fs-title">Share the Signal</h3>
-                    <p class="fs-desc">One Puck. Up to 10 friends. Your own personal local network, anywhere on Earth.</p>
-                </div>
-                <div class="fs-c5-avatars">
-                    <div class="fs-avatar">😎</div>
-                    <div class="fs-avatar">🤩</div>
-                    <div class="fs-avatar">🥳</div>
-                    <div class="fs-avatar fs-avatar-more">+7</div>
-                </div>
-            </div>
-
-            <!-- Card 6 (WIDE) - Zahrnující design z původního Ecosystem -->
-            <div class="filmstrip-card glass-panel fs-c6">
-                <div class="fs-c6-content">
-                    <h3 class="font-display fs-title" style="margin-bottom: 1.5rem;">
-                        <span style="color: var(--apple-blue);">Sdílej připojení</span><br>
-                        <span style="color: var(--apple-black);">se svými přáteli.</span>
+            <!-- LANDSCAPE CARD - Sdílej připojení -->
+            <div class="filmstrip-card fs-landscape" style="background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="fs-landscape-content">
+                    <h3 class="font-display fs-title">
+                        <span>Sdílej připojení</span>
+                        <span>se svými přáteli.</span>
                     </h3>
-                    <p class="fs-desc">
-                        Vytvořte si vlastní lokální síť. Jeden puk, až 10 přátel. Připojení nebylo nikdy tak společenské.
-                    </p>
-                </div>
-                <div class="fs-c6-image">
-                    <img src="sdilej-data.png" alt="Sdílení připojení se přáteli">
                 </div>
             </div>
             
-            <div style="flex: 0 0 2rem;"></div> <!-- Spacer -->
+            <div style="flex: 0 0 2rem;"></div>
         </div>
     </section>
-
-    <!-- SPECS SECTION (ORIGINAL) -->
-    <main class="container section-gap" style="margin-top: 4rem;">
-        <section class="specs-section">
-            <div class="specs-bg-glow" aria-hidden="true"></div>
-            <div class="specs-image">
-                <div class="device-specs-wrapper">
-                    <img src="modem-476.webp" srcset="modem-256.webp 256w, modem-476.webp 476w" sizes="(max-width: 768px) 224px, 320px" width="446" height="642" loading="lazy" alt="VIBE_NET Modem" class="puck-product-image">
-                    <div class="puck-specs-glow" aria-hidden="true"></div>
-                </div>
-            </div>
-            <div class="specs-content">
-                <h2 class="font-display">Tech Specs</h2>
-                <p>Technical details for the nerds.</p>
-                <dl class="specs-list">
-                    <div class="spec-row"><dt class="spec-label">Connectivity</dt><dd class="spec-val">5G / 4G LTE</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Battery</dt><dd class="spec-val">12,000mAh</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Range</dt><dd class="spec-val">30m</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Devices</dt><dd class="spec-val">Up to 10</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Weight</dt><dd class="spec-val">180g</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Wi-Fi</dt><dd class="spec-val">Wi-Fi 6</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Security</dt><dd class="spec-val">WPA3</dd></div>
-                    <div class="spec-row"><dt class="spec-label">Setup</dt><dd class="spec-val">App + QR Code</dd></div>
-                </dl>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <p class="footer-logo">VIBE_NET</p>
-                <p class="footer-desc">© 2024 VIBE_NET. Built for the nomads.</p>
-            </div>
-            <div class="footer-links">
-                <a href="#tech">Technology</a>
-                <a href="#coverage">Coverage</a>
-                <a href="#">Privacy</a>
-            </div>
-            <div class="footer-status">
-                <div class="status-dot-green"></div>
-                <strong class="status-text">System Online</strong>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Carousel arrow scroll support
-            const scrollContainer = document.querySelector('.filmstrip-container');
-            const scrollCards = document.querySelectorAll('.filmstrip-card');
-            const btnPrev = document.querySelector('.arrow-btn[aria-label="Previous"]');
-            const btnNext = document.querySelector('.arrow-btn[aria-label="Next"]');
-
-            if(scrollContainer && btnPrev && btnNext && scrollCards.length > 0) {
-                const scrollAmount = scrollCards[0].offsetWidth + 32; // width + gap
-                btnNext.addEventListener('click', () => {
-                    scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                });
-                btnPrev.addEventListener('click', () => {
-                    scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                });
-            }
-        });
-    </script>
 </body>
 </html>
