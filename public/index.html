@@ -164,20 +164,28 @@
         .btn-pricing-new:hover { transform: scale(1.02); background: var(--apple-blue-hover); }
         .pricing-note { text-align: center; margin-top: 1.5rem; color: var(--apple-gray); font-weight: 500; font-size: 1rem; margin-bottom: 0; }
 
-        /* --- SHARE THE SIGNAL SECTION --- */
+        /* --- SHARE THE SIGNAL COMPONENT --- */
         .share-section {
             position: relative;
-            min-height: 800px;
+            min-height: 600px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: visible;
+            /* Tímto se zajistí, že vlny nepřetečou mimo vizuální hranici komponenty */
+            overflow: hidden; 
             margin-top: 4rem;
+            /* Design jako u ostatních komponent */
+            background: var(--apple-light-gray);
+            border-radius: 3.125rem;
+            padding: 4rem 1.5rem;
+            width: 100%;
+        }
+        @media (min-width: 64rem) {
+            .share-section { min-height: 800px; padding: 6rem; }
         }
         .share-inner {
             position: relative;
-            padding: 10rem 0;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -185,7 +193,7 @@
         }
         .signal-transmitter { position: relative; z-index: 10; width: 100%; }
         .share-title {
-            font-size: clamp(4rem, 12vw, 10rem);
+            font-size: clamp(3rem, 10vw, 8rem);
             line-height: 1;
             color: var(--apple-black);
             letter-spacing: -0.02em;
@@ -244,6 +252,7 @@
             font-size: 1.25rem; color: var(--apple-gray);
             font-weight: 500; text-align: center;
             margin-top: 5rem; max-width: 24rem;
+            position: relative; z-index: 10;
         }
 
         /* --- CAROUSEL (SIGNAL. EVERYWHERE) --- */
@@ -551,7 +560,7 @@
             </div>
         </section>
 
-        <!-- SHARE THE SIGNAL -->
+        <!-- SHARE THE SIGNAL COMPONENT -->
         <section class="share-section" id="share-section">
             <div class="share-inner">
                 <div class="signal-transmitter">
