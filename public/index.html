@@ -129,8 +129,6 @@
         .sticker { background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transform: rotate(-6deg); padding: 0.5rem 1rem; border-radius: 0.5rem; z-index: 20; text-align: center; }
         .sticker-val { font-size: 1.125rem; line-height: 1; display: block; color: var(--apple-black); }
         .sticker-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; letter-spacing: 0.1em; display: block; }
-        .hero-sticker-wrap p { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; max-width: 12rem; margin: 0; }
-
         .hero-visual { flex: 1; position: relative; width: 100%; min-height: 300px; display: flex; justify-content: center; align-items: center; }
         @media (min-width: 64rem) { .hero-visual { min-height: 600px; } }
         .hero-pulse-ring { position: absolute; top: 50%; left: 50%; border: 1px solid var(--apple-blue); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
@@ -294,29 +292,40 @@
             height: 100vh;
             border-radius: 0;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 2rem;
+            justify-items: center;
+            align-content: center;
+            padding: 2rem 1.5rem;
             overflow: hidden;
             will-change: width, height, border-radius; 
+        }
+        @media (min-width: 48rem) {
+            .ds-inner-card {
+                padding: 4rem 1.5rem;
+                gap: 3rem;
+            }
         }
 
         .ds-header {
             text-align: center;
-            margin-bottom: 1rem; /* Zmenšeno pro mobil */
             position: relative;
             z-index: 20;
             padding: 0 1.5rem;
+            width: 100%;
+            max-width: 50rem;
         }
 
-        .ds-header h2 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 0.5rem 0; }
-        @media (min-width: 48rem) { .ds-header h2 { font-size: 4.5rem; line-height: 1; margin: 0 0 1rem 0; } }
+        .ds-header h2 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem 0; }
+        @media (min-width: 48rem) { .ds-header h2 { font-size: 3rem; line-height: 1.1; margin: 0 0 1.5rem 0; } }
+        @media (min-width: 64rem) { .ds-header h2 { font-size: 4rem; line-height: 1; } }
         
         .ds-header p {
-            font-size: 1rem; color: #a1a1aa; max-width: 40rem; margin: 0 auto; font-weight: 500;
+            font-size: 0.9rem; color: #a1a1aa; max-width: 50rem; margin: 0; font-weight: 500;
         }
-        @media (min-width: 48rem) { .ds-header p { font-size: 1.25rem; } }
+        @media (min-width: 48rem) { .ds-header p { font-size: 1rem; } }
+        @media (min-width: 64rem) { .ds-header p { font-size: 1.125rem; } }
 
         .ds-reveal-el {
             opacity: 0;
@@ -327,15 +336,17 @@
         .ds-3d-wrapper {
             position: relative;
             width: 100%;
-            height: 300px; /* Extrémně snížena výška pro mobil, aby obal telefonu nebyl tak velký */
+            max-width: 100%;
+            height: auto;
+            min-height: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: scale(0.35); /* Zhruba 3x menší než desktop verze (scale: 1) */
+            transform: scale(0.55);
         }
-        @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.5); height: 400px; } }
-        @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.75); height: 550px; } }
-        @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(1); height: 700px; } }
+        @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.65); min-height: 350px; } }
+        @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.85); min-height: 450px; } }
+        @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(1); min-height: 600px; } }
         
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .c-ring-1 { width: 500px; height: 500px; border: 1px solid rgba(168, 85, 247, 0.3); }
