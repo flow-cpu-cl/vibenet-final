@@ -23,6 +23,7 @@
             color: var(--apple-black);
             font-family: var(--sys-font);
             overflow-x: hidden;
+            width: 100%; /* Prevence horizontálního scrollu */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.5;
@@ -130,14 +131,19 @@
         .sticker-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; letter-spacing: 0.1em; display: block; }
         .hero-sticker-wrap p { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; max-width: 12rem; margin: 0; }
 
-        .hero-visual { flex: 1; position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center; align-items: center; }
+        .hero-visual { flex: 1; position: relative; width: 100%; min-height: 300px; display: flex; justify-content: center; align-items: center; }
         @media (min-width: 64rem) { .hero-visual { min-height: 600px; } }
         .hero-pulse-ring { position: absolute; top: 50%; left: 50%; border: 1px solid var(--apple-blue); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
         
-        /* Adjusted rings for responsiveness */
-        .ring-1 { width: 250px; height: 250px; animation: pulse-ring 4s infinite; }
-        .ring-2 { width: 400px; height: 400px; animation: pulse-ring 4s infinite 1.3s; }
-        .ring-3 { width: 550px; height: 550px; animation: pulse-ring 4s infinite 2.6s; }
+        /* Ještě menší kruhy pro mobily, aby nedělaly přetékání mimo osu X */
+        .ring-1 { width: 200px; height: 200px; animation: pulse-ring 4s infinite; }
+        .ring-2 { width: 280px; height: 280px; animation: pulse-ring 4s infinite 1.3s; }
+        .ring-3 { width: 360px; height: 360px; animation: pulse-ring 4s infinite 2.6s; }
+        @media (min-width: 48rem) {
+            .ring-1 { width: 300px; height: 300px; }
+            .ring-2 { width: 450px; height: 450px; }
+            .ring-3 { width: 600px; height: 600px; }
+        }
         @media (min-width: 64rem) {
             .ring-1 { width: 400px; height: 400px; }
             .ring-2 { width: 600px; height: 600px; }
@@ -203,7 +209,7 @@
 
         .filmstrip-container {
             display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 2.5rem max(1.5rem, calc((100vw - 75rem) / 2)) 5rem;
+            padding: 2.5rem max(1.5rem, calc((100% - 75rem) / 2)) 5rem;
             gap: 2rem; scrollbar-width: none; -ms-overflow-style: none;
         }
         .filmstrip-container::-webkit-scrollbar { display: none; }
@@ -266,6 +272,7 @@
             position: relative;
             height: 250vh; 
             z-index: 20;
+            width: 100%;
         }
         
         .ds-sticky-container {
@@ -283,7 +290,7 @@
         .ds-inner-card {
             background-color: #000;
             color: #fff;
-            width: 100vw;
+            width: 100%; /* Nahrazeno 100vw za 100% z důvodu přetékání do stran */
             height: 100vh;
             border-radius: 0;
             position: relative;
@@ -320,13 +327,14 @@
         .ds-3d-wrapper {
             position: relative;
             width: 100%;
-            height: 400px; /* Výrazně snížena výška pro mobil */
+            height: 300px; /* Extrémně snížena výška pro mobil, aby obal telefonu nebyl tak velký */
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: scale(0.55); /* Výrazně zmenšeno pro mobil */
+            transform: scale(0.35); /* Zhruba 3x menší než desktop verze (scale: 1) */
         }
-        @media (min-width: 40rem) { .ds-3d-wrapper { transform: scale(0.75); height: 550px; } }
+        @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.5); height: 400px; } }
+        @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.75); height: 550px; } }
         @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(1); height: 700px; } }
         
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
@@ -1021,7 +1029,9 @@
                 // Ease-in-out křivka pro zmenšení
                 const easeInOut = shrinkProgress < 0.5 ? 2 * shrinkProgress * shrinkProgress : 1 - Math.pow(-2 * shrinkProgress + 2, 2) / 2;
 
-                const currentVW = window.innerWidth;
+                // Oprava horizontalního scrollu: Použití document.documentElement.clientWidth
+                // To zajistí, že se do výpočtu šířky nezahrne tloušťka svislého scrollbaru.
+                const currentVW = document.documentElement.clientWidth;
                 const containerWidth = Math.min(currentVW, 1200); // 1200px (75rem) je maximální šířka kontejnerů na webu
                 
                 // Cílová šířka respektuje klasické odsazení (padding) .container (3rem z obou stran celkově)
@@ -1029,7 +1039,8 @@
                 const widthDiff = currentVW - targetMaxWidth;
 
                 // Nastavení in-line CSS dynamicky podle scrollu
-                phoneInnerCard.style.width = `calc(100vw - ${easeInOut * widthDiff}px)`;
+                // Nahrazeno 100vw za 100% z důvodu prevence přetékání na mobilech a windows
+                phoneInnerCard.style.width = `calc(100% - ${easeInOut * widthDiff}px)`;
                 phoneInnerCard.style.height = `calc(100vh - ${easeInOut * 80}px)`; // Zmenšení výšky o 80px
                 phoneInnerCard.style.borderRadius = `${easeInOut * 40}px`; // Zaoblení rohů až do 40px
             }
