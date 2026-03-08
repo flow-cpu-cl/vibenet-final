@@ -175,9 +175,13 @@
             /* Tímto se zajistí, že vlny nepřetečou mimo vizuální hranici komponenty */
             overflow: hidden; 
             margin-top: 4rem;
-            /* Design jako u ostatních komponent */
-            background: var(--apple-light-gray);
+            
+            /* Změněno na bílé pozadí s velmi jemným ohraničením/stínem pro vymezení ořezu vln */
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.02);
             border-radius: 3.125rem;
+            
             padding: 4rem 1.5rem;
             width: 100%;
         }
@@ -355,15 +359,15 @@
             
             display: grid;
             grid-template-rows: auto 1fr;
-            padding-top: 4rem;
+            padding-top: 2.5rem; /* Upraveno pro méně prázdného místa nahoře a lepší fit telefonu */
             
             overflow: hidden;
             will-change: width, height, border-radius; 
         }
-        @media (min-width: 48rem) { .ds-inner-card { padding-top: 6rem; } }
-        @media (min-width: 64rem) { .ds-inner-card { padding-top: 8rem; } }
+        @media (min-width: 48rem) { .ds-inner-card { padding-top: 3.5rem; } }
+        @media (min-width: 64rem) { .ds-inner-card { padding-top: 4rem; } } /* Zmenšeno z 8rem na 4rem */
 
-        .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0; }
+        .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0 0 1.5rem 0; } /* Přidán spodní margin pro odstup od telefonu */
         .ds-header h2 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 0.5rem 0; }
         @media (min-width: 48rem) { .ds-header h2 { font-size: 4.5rem; line-height: 1; margin: 0 0 1rem 0; } }
         .ds-header p { font-size: 1rem; color: #a1a1aa; max-width: 40rem; margin: 0 auto; font-weight: 500; }
@@ -371,14 +375,17 @@
 
         .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
 
-        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; padding-bottom: 2rem; }
+        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; padding-bottom: 0; } /* Odstraněn spodní padding, který ořezával telefon */
 
         .ds-3d-wrapper {
             position: relative; width: 340px; height: 680px; transform: scale(0.45); 
+            transform-origin: center center;
         }
         @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.55); } }
-        @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.75); } }
-        @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(1); } }
+        @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.65); } }
+        @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.75); } } /* Zmenšeno měřítko z 1, aby se telefon na běžných displejích celý vešel */
+        @media (min-width: 64rem) and (min-height: 900px) { .ds-3d-wrapper { transform: scale(0.85); } } /* Pokud je displej hodně vysoký, zvětšíme ho */
+        @media (min-width: 64rem) and (min-height: 1080px) { .ds-3d-wrapper { transform: scale(1); } }
         
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .c-ring-1 { width: 500px; height: 500px; border: 1px solid rgba(168, 85, 247, 0.3); }
