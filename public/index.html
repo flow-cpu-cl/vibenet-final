@@ -17,17 +17,19 @@
             --sys-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* Vráceno do původního čistého stavu */
         html { scroll-behavior: smooth; }
         body {
             background-color: var(--apple-bg);
             color: var(--apple-black);
             font-family: var(--sys-font);
             overflow-x: hidden;
-            width: 100%; /* Prevence horizontálního scrollu */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.5;
         }
+        
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--apple-blue);
             outline-offset: 4px;
@@ -87,7 +89,7 @@
         .btn-nav:active { transform: scale(0.95); }
         @media (min-width: 48rem) { .nav-links { display: flex; } }
 
-        /* --- NEW HERO SECTION --- */
+        /* --- NEW HERO SECTION (REVERTED) --- */
         .hero-new {
             display: flex;
             flex-direction: column;
@@ -133,9 +135,9 @@
 
         .hero-visual { flex: 1; position: relative; width: 100%; min-height: 300px; display: flex; justify-content: center; align-items: center; }
         @media (min-width: 64rem) { .hero-visual { min-height: 600px; } }
+        
         .hero-pulse-ring { position: absolute; top: 50%; left: 50%; border: 1px solid var(--apple-blue); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
         
-        /* Ještě menší kruhy pro mobily, aby nedělaly přetékání mimo osu X */
         .ring-1 { width: 200px; height: 200px; animation: pulse-ring 4s infinite; }
         .ring-2 { width: 280px; height: 280px; animation: pulse-ring 4s infinite 1.3s; }
         .ring-3 { width: 360px; height: 360px; animation: pulse-ring 4s infinite 2.6s; }
