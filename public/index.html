@@ -18,7 +18,6 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* Vráceno do původního čistého stavu */
         html { scroll-behavior: smooth; }
         body {
             background-color: var(--apple-bg);
@@ -60,7 +59,7 @@
         /* --- ANIMATIONS --- */
         @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-1.25rem); } 100% { transform: translateY(0); } }
         @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } 50% { opacity: 0.3; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
+        @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
@@ -89,33 +88,32 @@
         .btn-nav:active { transform: scale(0.95); }
         @media (min-width: 48rem) { .nav-links { display: flex; } }
 
-        /* --- NEW HERO SECTION --- */
+        /* --- SIMPLIFIED HERO SECTION --- */
         .hero-new {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 2rem;
             min-height: auto;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
             text-align: center;
         }
         @media (min-width: 64rem) {
-            .hero-new { flex-direction: row; align-items: center; justify-content: space-between; text-align: left; min-height: 80vh; gap: 4rem; padding-top: 4rem; padding-bottom: 0; }
+            .hero-new { min-height: 65vh; padding-top: 6rem; padding-bottom: 6rem; }
         }
-        .hero-text { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; position: relative; z-index: 20; }
-        @media (min-width: 64rem) { .hero-text { align-items: flex-start; } }
+        .hero-text { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; position: relative; z-index: 20; max-width: 48rem; }
         
         .hero-badge {
             background: #eff6ff; color: var(--apple-blue); padding: 0.375rem 1rem; border-radius: 9999px;
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block;
         }
-        .hero-text h1 { font-size: clamp(2.5rem, 10vw, 3.75rem); line-height: 1; color: var(--apple-black); margin: 0; }
+        .hero-text h1 { font-size: clamp(3rem, 10vw, 6.5rem); line-height: 0.95; color: var(--apple-black); margin: 0; }
         .hero-text p.subtitle { font-size: 1.125rem; color: var(--apple-gray); font-weight: 500; max-width: 32rem; margin: 0; }
-        @media (min-width: 64rem) { .hero-text h1 { font-size: 6.5rem; line-height: 0.9; } .hero-text p.subtitle { font-size: 1.5rem; } }
+        @media (min-width: 64rem) { .hero-text p.subtitle { font-size: 1.5rem; } }
         
         .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-        @media (min-width: 64rem) { .hero-actions { justify-content: flex-start; } }
         
         .btn-primary { background: var(--apple-blue); color: white; font-weight: 600; font-size: 1rem; padding: 0.875rem 2rem; border-radius: 9999px; box-shadow: 0 10px 20px rgba(0, 86, 179, 0.2); transition: all 0.3s; }
         .btn-primary:hover { background: var(--apple-blue-hover); transform: translateY(-0.25rem); }
@@ -125,47 +123,12 @@
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
 
-        .hero-sticker-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
-        @media (min-width: 64rem) { .hero-sticker-wrap { justify-content: flex-start; } }
+        .hero-sticker-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; position: relative; }
         
         .sticker { background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transform: rotate(-6deg); padding: 0.5rem 1rem; border-radius: 0.5rem; z-index: 20; text-align: center; }
         .sticker-val { font-size: 1.125rem; line-height: 1; display: block; color: var(--apple-black); }
         .sticker-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; letter-spacing: 0.1em; display: block; }
-        .hero-sticker-wrap p { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; max-width: 12rem; margin: 0; }
-
-        .hero-visual { flex: 1; position: relative; width: 100%; min-height: 300px; display: flex; justify-content: center; align-items: center; }
-        @media (min-width: 64rem) { .hero-visual { min-height: 600px; } }
-        
-        .hero-pulse-ring { position: absolute; top: 50%; left: 50%; border: 1px solid var(--apple-blue); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
-        
-        /* FIX: Dynamické zmenšování (vw) zajišťuje kulatý tvar a zároveň brání přetékání na mobilech */
-        .ring-1 { width: min(50vw, 200px); height: min(50vw, 200px); animation: pulse-ring 4s infinite; }
-        .ring-2 { width: min(70vw, 280px); height: min(70vw, 280px); animation: pulse-ring 4s infinite 1.3s; }
-        .ring-3 { width: min(90vw, 360px); height: min(90vw, 360px); animation: pulse-ring 4s infinite 2.6s; }
-        
-        @media (min-width: 48rem) {
-            .ring-1 { width: 300px; height: 300px; }
-            .ring-2 { width: 450px; height: 450px; }
-            .ring-3 { width: 600px; height: 600px; }
-        }
-        @media (min-width: 64rem) {
-            .ring-1 { width: 400px; height: 400px; }
-            .ring-2 { width: 600px; height: 600px; }
-            .ring-3 { width: 800px; height: 800px; }
-        }
-        
-        .puck-device { width: 14rem; height: 14rem; background: #1d1d1f; border-radius: 2.5rem; box-shadow: 0 30px 60px -15px rgba(0,0,0,0.4); position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: float 6s ease-in-out infinite; }
-        @media (min-width: 48rem) { .puck-device { width: 18rem; height: 18rem; border-radius: 3.75rem; box-shadow: 0 40px 80px -15px rgba(0,0,0,0.4); } }
-        @media (min-width: 64rem) { .puck-device { width: 28rem; height: 28rem; } }
-        
-        .puck-notch { position: absolute; top: 1.5rem; width: 3rem; height: 0.25rem; background: #333; border-radius: 9999px; opacity: 0.4; }
-        @media (min-width: 48rem) { .puck-notch { top: 2.5rem; width: 4rem; height: 0.375rem; } }
-        
-        .puck-spinner-wrap { width: 70%; height: 70%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; position: relative; }
-        .puck-spinner { position: absolute; inset: 0; border-radius: 50%; border-top: 2px solid rgba(59, 130, 246, 0.6); animation: spin-slow 12s linear infinite; }
-        .puck-inner-glow { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent); }
-        .puck-label { position: absolute; bottom: 2rem; font-family: var(--sys-font); font-weight: 700; font-size: 0.625rem; color: #6b7280; letter-spacing: 0.2em; text-transform: uppercase; }
-        @media (min-width: 48rem) { .puck-label { bottom: 4rem; font-size: 0.75rem; letter-spacing: 0.4em; } }
+        .hero-sticker-wrap p { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; max-width: 12rem; margin: 0; text-align: left; }
 
         /* --- 4 USPs GRID --- */
         .usp-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 4rem; }
@@ -182,7 +145,7 @@
         .pricing-new { margin-top: 4rem; }
         .pricing-new-inner { background: var(--apple-light-gray); border-radius: 3.125rem; padding: 3rem 2rem; display: flex; flex-direction: column; gap: 4rem; align-items: center; }
         @media (min-width: 64rem) { .pricing-new-inner { flex-direction: row; padding: 6rem; gap: 4rem; } }
-        .pricing-text-area { flex: 1; width: 100%; }
+        .pricing-text-area { flex: 1; width: 100%; text-align: left; }
         .pricing-text-area h2 { font-size: 3rem; line-height: 1; color: var(--apple-black); margin: 0 0 2rem 0; }
         @media (min-width: 64rem) { .pricing-text-area h2 { font-size: 4.5rem; } }
         .pricing-features { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -190,7 +153,7 @@
         .pricing-features svg { width: 1.5rem; height: 1.5rem; color: var(--apple-blue); flex-shrink: 0; }
         
         .pricing-card-area { flex: 1; width: 100%; }
-        .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; overflow: hidden; width: 100%; max-width: 32rem; margin: 0 auto; }
+        .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; overflow: hidden; width: 100%; max-width: 32rem; margin: 0 auto; text-align: left;}
         .pricing-card-new::after { content: ''; position: absolute; top: 0; right: 0; width: 8rem; height: 8rem; background: #eff6ff; border-bottom-left-radius: 6rem; z-index: 0; pointer-events: none; }
         .pricing-card-new > * { position: relative; z-index: 10; }
         .pricing-card-new h3 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 3rem 0; }
@@ -200,6 +163,88 @@
         .btn-pricing-new { width: 100%; padding: 1.25rem; border-radius: 1rem; background: var(--apple-blue); color: white; font-weight: 700; font-size: 1.25rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 86, 179, 0.2); transition: transform 0.2s; }
         .btn-pricing-new:hover { transform: scale(1.02); background: var(--apple-blue-hover); }
         .pricing-note { text-align: center; margin-top: 1.5rem; color: var(--apple-gray); font-weight: 500; font-size: 1rem; margin-bottom: 0; }
+
+        /* --- SHARE THE SIGNAL SECTION --- */
+        .share-section {
+            position: relative;
+            min-height: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            margin-top: 4rem;
+        }
+        .share-inner {
+            position: relative;
+            padding: 10rem 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .signal-transmitter { position: relative; z-index: 10; width: 100%; }
+        .share-title {
+            font-size: clamp(4rem, 12vw, 10rem);
+            line-height: 1;
+            color: var(--apple-black);
+            letter-spacing: -0.02em;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin: 0;
+        }
+        .wave-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            border: 2px solid var(--apple-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            z-index: -1;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+        }
+        .wave-ring.active {
+            opacity: 0.2;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .wave-pulse {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid var(--apple-blue);
+            border-radius: 50%;
+            width: 100%; height: 100%;
+            animation: pulse-ring 3s infinite;
+        }
+        
+        .face-pos { position: absolute; z-index: 20; }
+        .face-avatar {
+            display: flex; flex-direction: column; align-items: center;
+            opacity: 0; transform: scale(0);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .face-avatar.visible {
+            opacity: 1; transform: scale(1);
+        }
+        .face-bubble {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+        }
+        .face-label {
+            font-size: 9px; font-weight: 700; color: var(--apple-gray);
+            margin-top: 4px; text-transform: uppercase;
+        }
+        .share-subtitle {
+            font-size: 1.25rem; color: var(--apple-gray);
+            font-weight: 500; text-align: center;
+            margin-top: 5rem; max-width: 24rem;
+        }
 
         /* --- CAROUSEL (SIGNAL. EVERYWHERE) --- */
         .carousel-section { width: 100%; padding-top: 6rem; padding-bottom: 6rem; overflow: hidden; background: rgba(255,255,255,0.3); }
@@ -260,7 +305,7 @@
         .fs-c5 { background: var(--apple-light-gray); }
         .fs-c5::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom right, rgba(0, 86, 179, 0.1), transparent); pointer-events: none; }
         .fs-c5-avatars { height: 8rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        .fs-avatar { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+        .fs-avatar-static { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
         .fs-avatar-more { background: #eff6ff; color: var(--apple-blue); font-weight: 700; font-size: 0.625rem; }
 
         /* Card 6 (Wide) Specifics */
@@ -299,7 +344,6 @@
             border-radius: 0;
             position: relative;
             
-            /* CSS GRID FIX - Tímto se telefon a text už nikdy nepřekryjí */
             display: grid;
             grid-template-rows: auto 1fr;
             padding-top: 4rem;
@@ -310,45 +354,18 @@
         @media (min-width: 48rem) { .ds-inner-card { padding-top: 6rem; } }
         @media (min-width: 64rem) { .ds-inner-card { padding-top: 8rem; } }
 
-        .ds-header {
-            text-align: center;
-            position: relative;
-            z-index: 20;
-            padding: 0 1.5rem;
-            margin: 0;
-        }
-
+        .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0; }
         .ds-header h2 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 0.5rem 0; }
         @media (min-width: 48rem) { .ds-header h2 { font-size: 4.5rem; line-height: 1; margin: 0 0 1rem 0; } }
-        
-        .ds-header p {
-            font-size: 1rem; color: #a1a1aa; max-width: 40rem; margin: 0 auto; font-weight: 500;
-        }
+        .ds-header p { font-size: 1rem; color: #a1a1aa; max-width: 40rem; margin: 0 auto; font-weight: 500; }
         @media (min-width: 48rem) { .ds-header p { font-size: 1.25rem; } }
 
-        /* Třída pro Javascript animaci při scrollování */
-        .ds-reveal-el {
-            opacity: 0;
-            transform: translateY(3rem);
-            will-change: opacity, transform;
-        }
+        .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
 
-        /* Nová oddělená buňka gridu. Chrání náš scale() před smazáním z JavaScriptu. */
-        .ds-3d-container-cell {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            position: relative;
-            padding-bottom: 2rem;
-        }
+        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; padding-bottom: 2rem; }
 
         .ds-3d-wrapper {
-            position: relative;
-            width: 340px;  /* Základní originální velikost zařízení */
-            height: 680px; /* Základní originální výška zařízení */
-            transform: scale(0.45); /* Na mobilu cca dvakrát menší */
+            position: relative; width: 340px; height: 680px; transform: scale(0.45); 
         }
         @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.55); } }
         @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.75); } }
@@ -359,53 +376,16 @@
         .c-ring-2 { width: 800px; height: 800px; border: 1px solid rgba(99, 102, 241, 0.2); }
         .c-ring-3 { width: 1100px; height: 1100px; border: 1px solid rgba(59, 130, 246, 0.1); }
         
-        .mockup-picture {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 340px;
-            height: 680px;
-            z-index: 60;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .mockup-picture img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 60px rgba(0,0,0,0.8));
-        }
+        .mockup-picture { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 680px; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+        .mockup-picture img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 60px rgba(0,0,0,0.8)); }
 
-        .carousel-scene-3d {
-            perspective: 1200px;
-            transform-style: preserve-3d;
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .c3d-item {
-            position: absolute;
-            width: 316px;
-            height: 656px;
-            border-radius: 42px;
-            background: #18181b;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-        }
+        .carousel-scene-3d { perspective: 1200px; transform-style: preserve-3d; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .c3d-item { position: absolute; width: 316px; height: 656px; border-radius: 42px; background: #18181b; overflow: hidden; transform-style: preserve-3d; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
         .c3d-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         .c3d-grad-top { position: absolute; inset: 0 0 auto 0; height: 8rem; background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent); }
         .c3d-grad-bot { position: absolute; inset: auto 0 0 0; height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4), transparent); }
         
-        /* Inner App UI styles */
-        .c3d-ui {
-            position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between;
-            opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 10; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+        .c3d-ui { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 10; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         .c3d-item.is-active .c3d-ui { opacity: 1; pointer-events: auto; }
         
         .cui-top { display: flex; justify-content: space-between; align-items: center; padding: 3.5rem 1.25rem 0.5rem; }
@@ -500,38 +480,24 @@
         <button class="btn-nav">Join the Club</button>
     </nav>
 
-    <!-- NEW HERO -->
+    <!-- SIMPLIFIED HERO -->
     <main class="container">
         <section class="hero-new">
             <div class="hero-text">
                 <div class="hero-badge">Now available in 40+ countries</div>
                 <h1 class="font-display">Internet<br><span class="gradient-text">Without</span><br>The Leash.</h1>
                 <p class="subtitle">Forget cables. Forget landlords. The web flows where you flow.</p>
-                <div class="hero-actions">
-                    <button class="btn-primary">Gimme Access</button>
-                    <a href="#tech" class="btn-text">Learn more <span aria-hidden="true">›</span></a>
-                </div>
+                
                 <div class="hero-sticker-wrap">
                     <div class="sticker">
                         <strong class="font-display sticker-val">88 CR</strong>
                         <small class="sticker-label">PER MONTH</small>
                     </div>
-                    <p>No contract. No limits. Just pure speed.</p>
                 </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="hero-pulse-ring ring-1"></div>
-                <div class="hero-pulse-ring ring-2"></div>
-                <div class="hero-pulse-ring ring-3"></div>
-                
-                <div class="puck-device">
-                    <div class="puck-notch"></div>
-                    <div class="puck-spinner-wrap">
-                        <div class="puck-spinner"></div>
-                        <div class="puck-inner-glow"></div>
-                    </div>
-                    <span class="puck-label">Active Signal</span>
+
+                <div class="hero-actions">
+                    <button class="btn-primary">Gimme Access</button>
+                    <a href="#tech" class="btn-text">Learn more <span aria-hidden="true">›</span></a>
                 </div>
             </div>
         </section>
@@ -584,6 +550,66 @@
                 </div>
             </div>
         </section>
+
+        <!-- SHARE THE SIGNAL -->
+        <section class="share-section" id="share-section">
+            <div class="share-inner">
+                <div class="signal-transmitter">
+                    <h2 class="font-display share-title">Share<br>the Signal.</h2>
+
+                    <div class="wave-ring" style="width: 400px; height: 400px;">
+                        <div class="wave-pulse"></div>
+                        <div class="face-pos" style="top: -24px; left: 50%; transform: translateX(-50%);">
+                            <div class="face-avatar">
+                                <div class="face-bubble">😎</div>
+                                <div class="face-label">Tom</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wave-ring" style="width: 650px; height: 650px;">
+                        <div class="wave-pulse" style="animation-delay: -1s;"></div>
+                        <div class="face-pos" style="top: 15%; left: 5%;">
+                            <div class="face-avatar">
+                                <div class="face-bubble">🤩</div>
+                                <div class="face-label">Sara</div>
+                            </div>
+                        </div>
+                        <div class="face-pos" style="top: 15%; right: 5%;">
+                            <div class="face-avatar">
+                                <div class="face-bubble">🥳</div>
+                                <div class="face-label">Leo</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wave-ring" style="width: 900px; height: 900px;">
+                        <div class="wave-pulse" style="animation-delay: -2s;"></div>
+                        <div class="face-pos" style="bottom: 10%; left: 20%;">
+                            <div class="face-avatar">
+                                <div class="face-bubble">🙌</div>
+                                <div class="face-label">Yuki</div>
+                            </div>
+                        </div>
+                        <div class="face-pos" style="bottom: 10%; right: 20%;">
+                            <div class="face-avatar">
+                                <div class="face-bubble">✨</div>
+                                <div class="face-label">Mia</div>
+                            </div>
+                        </div>
+                        <div class="face-pos" style="top: 50%; right: -24px; transform: translateY(-50%);">
+                            <div class="face-avatar">
+                                <div class="face-bubble">😁</div>
+                                <div class="face-label">Max</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="share-subtitle">Turn your text into a transmitter. Connect your tribe with a single tap.</p>
+            </div>
+        </section>
+
     </main>
 
     <!-- CAROUSEL -->
@@ -675,10 +701,10 @@
                     <p class="fs-desc">One Puck. Up to 10 friends. Your own personal local network, anywhere on Earth.</p>
                 </div>
                 <div class="fs-c5-avatars">
-                    <div class="fs-avatar">😎</div>
-                    <div class="fs-avatar">🤩</div>
-                    <div class="fs-avatar">🥳</div>
-                    <div class="fs-avatar fs-avatar-more">+7</div>
+                    <div class="fs-avatar-static">😎</div>
+                    <div class="fs-avatar-static">🤩</div>
+                    <div class="fs-avatar-static">🥳</div>
+                    <div class="fs-avatar-static fs-avatar-more">+7</div>
                 </div>
             </div>
 
@@ -705,30 +731,24 @@
     <!-- NEW 3D PHONE SHOWCASE WITH SCROLL-DRIVEN ANIMATION & GRID FIX -->
     <div class="ds-scroll-wrapper" id="phone-scroll-wrapper">
         <div class="ds-sticky-container">
-            <!-- Vnitřní kontejner používá GRID rozvržení -->
             <section class="ds-inner-card" id="phone-inner-card">
                 
                 <div class="ds-header">
-                    <!-- Texty se postupně objeví ze spoda nahoru -->
                     <h2 class="font-display ds-reveal-el">Limitless content.<br><span class="gradient-text">Zero interruptions.</span></h2>
                     <p class="ds-reveal-el">Swipe through your favorite feeds, stream in 4K, and share your moments instantly. VIBE_NET ensures your content never skips a beat, no matter where you are.</p>
                 </div>
 
-                <!-- Oddělená buňka gridu pro telefon zaručuje, že animace nepřepíše CSS zmenšení -->
                 <div class="ds-3d-container-cell ds-reveal-el">
                     <div class="ds-3d-wrapper">
-                        <!-- Ozdobné kruhy na pozadí telefonu -->
                         <div class="c-ring c-ring-1"></div>
                         <div class="c-ring c-ring-2"></div>
                         <div class="c-ring c-ring-3"></div>
                         
-                        <!-- Opravené na webp -->
                         <picture class="mockup-picture">
                             <source media="(min-width: 768px)" srcset="telefon-800.webp">
                             <img src="telefon-400.webp" alt="Phone interface frame">
                         </picture>
 
-                        <!-- 3D Karusel -->
                         <div class="carousel-scene-3d" id="phone3DCarousel">
                             <!-- Reel 1 -->
                             <div class="c3d-item is-active" data-index="0">
@@ -1024,33 +1044,26 @@
                 const rect = phoneScrollWrapper.getBoundingClientRect();
                 const scrollDistance = phoneScrollWrapper.offsetHeight - window.innerHeight;
                 
-                // Vypočte progress scrollování obalového kontejneru (0.0 - 1.0)
                 let progress = -rect.top / scrollDistance;
                 progress = Math.max(0, Math.min(1, progress));
 
-                // Fáze 1: Postupné odhalení textů a buňky telefonu (při progressu 0.0 - 0.4)
                 revealElements.forEach((el, index) => {
                     const startReveal = index * 0.1; 
                     const endReveal = startReveal + 0.25;
                     let rProgress = (progress - startReveal) / (endReveal - startReveal);
                     rProgress = Math.max(0, Math.min(1, rProgress));
                     
-                    // Ease-out efekt pro plynulý dojezd
                     const easeOut = 1 - Math.pow(1 - rProgress, 3);
                     
                     el.style.opacity = easeOut;
-                    // Mění transformaci buňky, takže nepřepíše CSS zmenšení (scale) na vnitřním obalu!
                     el.style.transform = `translateY(${(1 - easeOut) * 3}rem)`;
                 });
 
-                // Fáze 2: Zmenšení okna "do komponenty" (při progressu 0.65 - 1.0)
                 let shrinkProgress = (progress - 0.65) / 0.35;
                 shrinkProgress = Math.max(0, Math.min(1, shrinkProgress));
                 
-                // Ease-in-out křivka pro zmenšení
                 const easeInOut = shrinkProgress < 0.5 ? 2 * shrinkProgress * shrinkProgress : 1 - Math.pow(-2 * shrinkProgress + 2, 2) / 2;
 
-                // Oprava horizontalního scrollu
                 const currentVW = document.documentElement.clientWidth;
                 const containerWidth = Math.min(currentVW, 1200); 
                 
@@ -1062,12 +1075,11 @@
                 phoneInnerCard.style.borderRadius = `${easeInOut * 40}px`; 
             }
 
-            // Bind scroll & resize listeners
             window.addEventListener('scroll', updateScrollAnimation, { passive: true });
             window.addEventListener('resize', updateScrollAnimation, { passive: true });
-            updateScrollAnimation(); // Iniciační spuštění
+            updateScrollAnimation(); 
 
-            // 3D Karusel Logika (točení telefonu)
+            // 3D Karusel Logika
             const phoneItems = document.querySelectorAll('.c3d-item');
             if (phoneItems.length > 0) {
                 const totalPhoneItems = phoneItems.length;
@@ -1113,13 +1125,43 @@
                 }
 
                 updatePhoneCarousel(true);
-                void document.body.offsetHeight; // force reflow
+                void document.body.offsetHeight; 
 
                 setInterval(() => {
                     activePhoneIndex = (activePhoneIndex + 1) % totalPhoneItems;
                     updatePhoneCarousel();
                 }, 3500); 
             }
+
+            // Share the Signal Animace
+            const shareSection = document.getElementById('share-section');
+            const rings = document.querySelectorAll('.wave-ring');
+
+            function updateShareScroll() {
+                if (!shareSection) return;
+                const rect = shareSection.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+                
+                const start = viewHeight * 0.8;
+                const end = -rect.height * 0.2;
+                let progress = (start - rect.top) / (start - end);
+                progress = Math.max(0, Math.min(1, progress));
+
+                rings.forEach((ring, i) => {
+                    const threshold = (i + 1) / (rings.length + 1);
+                    if (progress > threshold) {
+                        ring.classList.add('active');
+                        ring.querySelectorAll('.face-avatar').forEach(f => f.classList.add('visible'));
+                    } else {
+                        ring.classList.remove('active');
+                        ring.querySelectorAll('.face-avatar').forEach(f => f.classList.remove('visible'));
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateShareScroll, { passive: true });
+            window.addEventListener('resize', updateShareScroll, { passive: true });
+            updateShareScroll();
         });
     </script>
 </body>
