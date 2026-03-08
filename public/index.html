@@ -176,7 +176,7 @@
             overflow: hidden; 
             margin-top: 4rem;
             
-            /* Změněno na bílé pozadí s velmi jemným ohraničením/stínem pro vymezení ořezu vln */
+            /* Bílé pozadí s velmi jemným ohraničením/stínem pro vymezení ořezu vln */
             background: #ffffff;
             border: 1px solid rgba(0,0,0,0.04);
             box-shadow: 0 20px 40px rgba(0,0,0,0.02);
@@ -359,33 +359,52 @@
             
             display: grid;
             grid-template-rows: auto 1fr;
-            padding-top: 2.5rem; /* Upraveno pro méně prázdného místa nahoře a lepší fit telefonu */
+            padding-top: 2rem; /* Menší padding pro více místa */
             
             overflow: hidden;
             will-change: width, height, border-radius; 
         }
-        @media (min-width: 48rem) { .ds-inner-card { padding-top: 3.5rem; } }
-        @media (min-width: 64rem) { .ds-inner-card { padding-top: 4rem; } } /* Zmenšeno z 8rem na 4rem */
+        @media (min-width: 48rem) { .ds-inner-card { padding-top: 2.5rem; } }
+        @media (min-width: 64rem) { .ds-inner-card { padding-top: 3rem; } }
 
-        .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0 0 1.5rem 0; } /* Přidán spodní margin pro odstup od telefonu */
+        .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0 0 1rem 0; }
         .ds-header h2 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 0.5rem 0; }
-        @media (min-width: 48rem) { .ds-header h2 { font-size: 4.5rem; line-height: 1; margin: 0 0 1rem 0; } }
+        /* Zmenšená velikost H2 na větších displejích (z 4.5rem na 3.5rem), aby nezabíral tolik vertikálního místa */
+        @media (min-width: 48rem) { .ds-header h2 { font-size: 3.5rem; line-height: 1; margin: 0 0 1rem 0; } }
         .ds-header p { font-size: 1rem; color: #a1a1aa; max-width: 40rem; margin: 0 auto; font-weight: 500; }
-        @media (min-width: 48rem) { .ds-header p { font-size: 1.25rem; } }
+        @media (min-width: 48rem) { .ds-header p { font-size: 1.125rem; } }
 
         .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
 
-        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; padding-bottom: 0; } /* Odstraněn spodní padding, který ořezával telefon */
+        .ds-3d-container-cell { 
+            display: flex; align-items: center; justify-content: center; 
+            width: 100%; height: 100%; position: relative; padding-bottom: 0; 
+            min-height: 0; /* Extrémně důležité pro zabránění přetečení v CSS Gridu */
+        }
+
+        /* Nový "kotvící" kontejner - garantuje, že telefon neovlivní výšku zbytku mřížky a perfektně se vycentruje */
+        .ds-3d-anchor {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10;
+        }
 
         .ds-3d-wrapper {
             position: relative; width: 340px; height: 680px; transform: scale(0.45); 
             transform-origin: center center;
         }
+        
+        /* Chytřejší škálování zohledňující šířku I VÝŠKU displeje */
         @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.55); } }
         @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.65); } }
-        @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.75); } } /* Zmenšeno měřítko z 1, aby se telefon na běžných displejích celý vešel */
-        @media (min-width: 64rem) and (min-height: 900px) { .ds-3d-wrapper { transform: scale(0.85); } } /* Pokud je displej hodně vysoký, zvětšíme ho */
-        @media (min-width: 64rem) and (min-height: 1080px) { .ds-3d-wrapper { transform: scale(1); } }
+        @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.75); } }
+        
+        /* Pro nižší displeje (Macbook Air atd.) agresivně zmenšíme měřítko, aby se telefon vždy vešel */
+        @media (max-height: 850px) and (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.65); } }
+        @media (max-height: 750px) and (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.58); } }
+        @media (max-height: 650px) { .ds-3d-wrapper { transform: scale(0.45); } }
         
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .c-ring-1 { width: 500px; height: 500px; border: 1px solid rgba(168, 85, 247, 0.3); }
@@ -755,229 +774,231 @@
                 </div>
 
                 <div class="ds-3d-container-cell ds-reveal-el">
-                    <div class="ds-3d-wrapper">
-                        <div class="c-ring c-ring-1"></div>
-                        <div class="c-ring c-ring-2"></div>
-                        <div class="c-ring c-ring-3"></div>
-                        
-                        <picture class="mockup-picture">
-                            <source media="(min-width: 768px)" srcset="telefon-800.webp">
-                            <img src="telefon-400.webp" alt="Phone interface frame">
-                        </picture>
+                    <div class="ds-3d-anchor">
+                        <div class="ds-3d-wrapper">
+                            <div class="c-ring c-ring-1"></div>
+                            <div class="c-ring c-ring-2"></div>
+                            <div class="c-ring c-ring-3"></div>
+                            
+                            <picture class="mockup-picture">
+                                <source media="(min-width: 768px)" srcset="telefon-800.webp">
+                                <img src="telefon-400.webp" alt="Phone interface frame">
+                            </picture>
 
-                        <div class="carousel-scene-3d" id="phone3DCarousel">
-                            <!-- Reel 1 -->
-                            <div class="c3d-item is-active" data-index="0">
-                                <img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?q=80&w=800&auto=format&fit=crop" alt="Snowboarding" class="c3d-bg">
-                                <div class="c3d-grad-top"></div>
-                                <div class="c3d-grad-bot"></div>
-                                <div class="c3d-ui">
-                                    <div class="cui-top">
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                                        <div class="cui-tabs">
-                                            <span class="cui-tab-dim">Following</span>
-                                            <span class="cui-tab-active">For you</span>
+                            <div class="carousel-scene-3d" id="phone3DCarousel">
+                                <!-- Reel 1 -->
+                                <div class="c3d-item is-active" data-index="0">
+                                    <img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?q=80&w=800&auto=format&fit=crop" alt="Snowboarding" class="c3d-bg">
+                                    <div class="c3d-grad-top"></div>
+                                    <div class="c3d-grad-bot"></div>
+                                    <div class="c3d-ui">
+                                        <div class="cui-top">
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <div class="cui-tabs">
+                                                <span class="cui-tab-dim">Following</span>
+                                                <span class="cui-tab-active">For you</span>
+                                            </div>
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                    </div>
-                                    <div class="cui-bottom">
-                                        <div class="cui-info">
-                                            <h3 class="cui-username">@snow_junkie</h3>
-                                            <p class="cui-desc">Catching major air at the peak today! 🏂❄️ The powder is unbelievable. <strong>#snowboard #extreme</strong></p>
-                                            <div class="cui-music">
-                                                <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
-                                                <div class="cui-music-ticker"><div class="cui-music-text">Original sound - Snow Junkie • Mountain Vibes</div></div>
+                                        <div class="cui-bottom">
+                                            <div class="cui-info">
+                                                <h3 class="cui-username">@snow_junkie</h3>
+                                                <p class="cui-desc">Catching major air at the peak today! 🏂❄️ The powder is unbelievable. <strong>#snowboard #extreme</strong></p>
+                                                <div class="cui-music">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+                                                    <div class="cui-music-ticker"><div class="cui-music-text">Original sound - Snow Junkie • Mountain Vibes</div></div>
+                                                </div>
+                                            </div>
+                                            <div class="cui-actions">
+                                                <div class="cui-avatar-wrap">
+                                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
+                                                    <div class="cui-avatar-plus">+</div>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                                    <span class="cui-action-text">1.2M</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
+                                                    <span class="cui-action-text">4,821</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                                    <span class="cui-action-text">120K</span>
+                                                </div>
+                                                <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?q=80&w=100&auto=format&fit=crop"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-actions">
-                                            <div class="cui-avatar-wrap">
-                                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
-                                                <div class="cui-avatar-plus">+</div>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
-                                                <span class="cui-action-text">1.2M</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
-                                                <span class="cui-action-text">4,821</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
-                                                <span class="cui-action-text">120K</span>
-                                            </div>
-                                            <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?q=80&w=100&auto=format&fit=crop"></div>
+                                        <div class="cui-nav">
+                                            <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
+                                            <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p><div class="cui-nav-badge">5</div></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                         </div>
-                                    </div>
-                                    <div class="cui-nav">
-                                        <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
-                                        <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p><div class="cui-nav-badge">5</div></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Reel 2 -->
-                            <div class="c3d-item" data-index="1">
-                                <img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=800&auto=format&fit=crop" alt="Dancing" class="c3d-bg">
-                                <div class="c3d-grad-top"></div>
-                                <div class="c3d-grad-bot"></div>
-                                <div class="c3d-ui">
-                                    <div class="cui-top">
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                                        <div class="cui-tabs">
-                                            <span class="cui-tab-dim">Following</span>
-                                            <span class="cui-tab-active">For you</span>
+                                <!-- Reel 2 -->
+                                <div class="c3d-item" data-index="1">
+                                    <img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=800&auto=format&fit=crop" alt="Dancing" class="c3d-bg">
+                                    <div class="c3d-grad-top"></div>
+                                    <div class="c3d-grad-bot"></div>
+                                    <div class="c3d-ui">
+                                        <div class="cui-top">
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <div class="cui-tabs">
+                                                <span class="cui-tab-dim">Following</span>
+                                                <span class="cui-tab-active">For you</span>
+                                            </div>
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                    </div>
-                                    <div class="cui-bottom">
-                                        <div class="cui-info">
-                                            <h3 class="cui-username">@sophia_dance</h3>
-                                            <p class="cui-desc">Defying gravity today! ✨ Feels so good to be outside. <strong>#jump #happy #vibes</strong></p>
-                                            <div class="cui-music">
-                                                <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
-                                                <div class="cui-music-ticker"><div class="cui-music-text">Summer Feels - DJ Sunny</div></div>
+                                        <div class="cui-bottom">
+                                            <div class="cui-info">
+                                                <h3 class="cui-username">@sophia_dance</h3>
+                                                <p class="cui-desc">Defying gravity today! ✨ Feels so good to be outside. <strong>#jump #happy #vibes</strong></p>
+                                                <div class="cui-music">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+                                                    <div class="cui-music-ticker"><div class="cui-music-text">Summer Feels - DJ Sunny</div></div>
+                                                </div>
+                                            </div>
+                                            <div class="cui-actions">
+                                                <div class="cui-avatar-wrap">
+                                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop">
+                                                    <div class="cui-avatar-plus">+</div>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon text-rose" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                                    <span class="cui-action-text">2.1M</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
+                                                    <span class="cui-action-text">12.5K</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon text-yellow" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                                    <span class="cui-action-text">340K</span>
+                                                </div>
+                                                <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-actions">
-                                            <div class="cui-avatar-wrap">
-                                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop">
-                                                <div class="cui-avatar-plus">+</div>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon text-rose" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
-                                                <span class="cui-action-text">2.1M</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
-                                                <span class="cui-action-text">12.5K</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon text-yellow" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
-                                                <span class="cui-action-text">340K</span>
-                                            </div>
-                                            <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop"></div>
+                                        <div class="cui-nav">
+                                            <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
+                                            <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p><div class="cui-nav-badge">12</div></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                         </div>
-                                    </div>
-                                    <div class="cui-nav">
-                                        <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
-                                        <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p><div class="cui-nav-badge">12</div></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Reel 3 -->
-                            <div class="c3d-item" data-index="2">
-                                <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop" alt="Neon City" class="c3d-bg">
-                                <div class="c3d-grad-top"></div>
-                                <div class="c3d-grad-bot"></div>
-                                <div class="c3d-ui">
-                                    <div class="cui-top">
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                                        <div class="cui-tabs">
-                                            <span class="cui-tab-dim">Following</span>
-                                            <span class="cui-tab-active">For you</span>
+                                <!-- Reel 3 -->
+                                <div class="c3d-item" data-index="2">
+                                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop" alt="Neon City" class="c3d-bg">
+                                    <div class="c3d-grad-top"></div>
+                                    <div class="c3d-grad-bot"></div>
+                                    <div class="c3d-ui">
+                                        <div class="cui-top">
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <div class="cui-tabs">
+                                                <span class="cui-tab-dim">Following</span>
+                                                <span class="cui-tab-active">For you</span>
+                                            </div>
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                    </div>
-                                    <div class="cui-bottom">
-                                        <div class="cui-info">
-                                            <h3 class="cui-username">@cyber_walker</h3>
-                                            <p class="cui-desc">Night walks in Tokyo. The neon lights hit different. 🌃✨ <strong>#tokyo #neon #cyberpunk</strong></p>
-                                            <div class="cui-music">
-                                                <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
-                                                <div class="cui-music-ticker"><div class="cui-music-text">Midnight City - Cyber Walker</div></div>
+                                        <div class="cui-bottom">
+                                            <div class="cui-info">
+                                                <h3 class="cui-username">@cyber_walker</h3>
+                                                <p class="cui-desc">Night walks in Tokyo. The neon lights hit different. 🌃✨ <strong>#tokyo #neon #cyberpunk</strong></p>
+                                                <div class="cui-music">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+                                                    <div class="cui-music-ticker"><div class="cui-music-text">Midnight City - Cyber Walker</div></div>
+                                                </div>
+                                            </div>
+                                            <div class="cui-actions">
+                                                <div class="cui-avatar-wrap">
+                                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop">
+                                                    <div class="cui-avatar-plus">+</div>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                                    <span class="cui-action-text">720K</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
+                                                    <span class="cui-action-text">5,430</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                                    <span class="cui-action-text">88K</span>
+                                                </div>
+                                                <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=100&auto=format&fit=crop"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-actions">
-                                            <div class="cui-avatar-wrap">
-                                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop">
-                                                <div class="cui-avatar-plus">+</div>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
-                                                <span class="cui-action-text">720K</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
-                                                <span class="cui-action-text">5,430</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
-                                                <span class="cui-action-text">88K</span>
-                                            </div>
-                                            <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=100&auto=format&fit=crop"></div>
+                                        <div class="cui-nav">
+                                            <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
+                                            <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                         </div>
-                                    </div>
-                                    <div class="cui-nav">
-                                        <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
-                                        <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Reel 4 -->
-                            <div class="c3d-item" data-index="3">
-                                <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&auto=format&fit=crop" alt="Surfing" class="c3d-bg">
-                                <div class="c3d-grad-top"></div>
-                                <div class="c3d-grad-bot"></div>
-                                <div class="c3d-ui">
-                                    <div class="cui-top">
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                                        <div class="cui-tabs">
-                                            <span class="cui-tab-dim">Following</span>
-                                            <span class="cui-tab-active">For you</span>
+                                <!-- Reel 4 -->
+                                <div class="c3d-item" data-index="3">
+                                    <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&auto=format&fit=crop" alt="Surfing" class="c3d-bg">
+                                    <div class="c3d-grad-top"></div>
+                                    <div class="c3d-grad-bot"></div>
+                                    <div class="c3d-ui">
+                                        <div class="cui-top">
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <div class="cui-tabs">
+                                                <span class="cui-tab-dim">Following</span>
+                                                <span class="cui-tab-active">For you</span>
+                                            </div>
+                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
-                                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                    </div>
-                                    <div class="cui-bottom">
-                                        <div class="cui-info">
-                                            <h3 class="cui-username">@wave_rider</h3>
-                                            <p class="cui-desc">Perfect conditions this morning! 🌊 Endless summer. <strong>#surf #ocean #lifestyle</strong></p>
-                                            <div class="cui-music">
-                                                <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
-                                                <div class="cui-music-ticker"><div class="cui-music-text">Ocean Breeze - Beach Vibes</div></div>
+                                        <div class="cui-bottom">
+                                            <div class="cui-info">
+                                                <h3 class="cui-username">@wave_rider</h3>
+                                                <p class="cui-desc">Perfect conditions this morning! 🌊 Endless summer. <strong>#surf #ocean #lifestyle</strong></p>
+                                                <div class="cui-music">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+                                                    <div class="cui-music-ticker"><div class="cui-music-text">Ocean Breeze - Beach Vibes</div></div>
+                                                </div>
+                                            </div>
+                                            <div class="cui-actions">
+                                                <div class="cui-avatar-wrap">
+                                                    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=200&auto=format&fit=crop">
+                                                    <div class="cui-avatar-plus">+</div>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                                    <span class="cui-action-text">512K</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
+                                                    <span class="cui-action-text">2,104</span>
+                                                </div>
+                                                <div class="cui-action-btn">
+                                                    <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                                    <span class="cui-action-text">38K</span>
+                                                </div>
+                                                <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=100&auto=format&fit=crop"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-actions">
-                                            <div class="cui-avatar-wrap">
-                                                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=200&auto=format&fit=crop">
-                                                <div class="cui-avatar-plus">+</div>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
-                                                <span class="cui-action-text">512K</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg>
-                                                <span class="cui-action-text">2,104</span>
-                                            </div>
-                                            <div class="cui-action-btn">
-                                                <svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
-                                                <span class="cui-action-text">38K</span>
-                                            </div>
-                                            <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=100&auto=format&fit=crop"></div>
+                                        <div class="cui-nav">
+                                            <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
+                                            <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p></div>
+                                            <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                         </div>
-                                    </div>
-                                    <div class="cui-nav">
-                                        <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
-                                        <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p></div>
-                                        <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
