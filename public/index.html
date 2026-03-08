@@ -89,7 +89,7 @@
         .btn-nav:active { transform: scale(0.95); }
         @media (min-width: 48rem) { .nav-links { display: flex; } }
 
-        /* --- NEW HERO SECTION (REVERTED) --- */
+        /* --- NEW HERO SECTION --- */
         .hero-new {
             display: flex;
             flex-direction: column;
@@ -138,9 +138,11 @@
         
         .hero-pulse-ring { position: absolute; top: 50%; left: 50%; border: 1px solid var(--apple-blue); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
         
-        .ring-1 { width: 200px; height: 200px; animation: pulse-ring 4s infinite; }
-        .ring-2 { width: 280px; height: 280px; animation: pulse-ring 4s infinite 1.3s; }
-        .ring-3 { width: 360px; height: 360px; animation: pulse-ring 4s infinite 2.6s; }
+        /* FIX: Dynamické zmenšování (vw) zajišťuje kulatý tvar a zároveň brání přetékání na mobilech */
+        .ring-1 { width: min(50vw, 200px); height: min(50vw, 200px); animation: pulse-ring 4s infinite; }
+        .ring-2 { width: min(70vw, 280px); height: min(70vw, 280px); animation: pulse-ring 4s infinite 1.3s; }
+        .ring-3 { width: min(90vw, 360px); height: min(90vw, 360px); animation: pulse-ring 4s infinite 2.6s; }
+        
         @media (min-width: 48rem) {
             .ring-1 { width: 300px; height: 300px; }
             .ring-2 { width: 450px; height: 450px; }
