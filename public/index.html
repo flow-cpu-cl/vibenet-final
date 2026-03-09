@@ -230,16 +230,16 @@
         /* Konstanty pro scroll animaci jsou popsany v JS sekci */
         .ds-scroll-wrapper { position: relative; height: 250vh; z-index: 20; width: 100%; }
         .ds-sticky-container { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: transparent; }
-        .ds-inner-card { background-color: #000; color: #fff; width: 100%; height: 100vh; border-radius: 0; position: relative; display: grid; grid-template-rows: auto 1fr; padding-top: 2rem; overflow: hidden; will-change: width, height, border-radius; }
-        @media (min-width: 48rem) { .ds-inner-card { padding-top: 2.5rem; } }
-        @media (min-width: 64rem) { .ds-inner-card { padding-top: 3rem; } }
+        .ds-inner-card { background-color: #000; color: #fff; width: 100%; height: 100vh; border-radius: 0; position: relative; display: grid; grid-template-rows: auto 1fr; padding-top: 2rem; padding-bottom: 2rem; overflow: hidden; will-change: width, height, border-radius; }
+        @media (min-width: 48rem) { .ds-inner-card { padding-top: 2.5rem; padding-bottom: 2.5rem; } }
+        @media (min-width: 64rem) { .ds-inner-card { padding-top: 3rem; padding-bottom: 3rem; } }
         .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0 0 1rem 0; }
         .ds-header h2 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 0.5rem 0; }
         @media (min-width: 48rem) { .ds-header h2 { font-size: 3.5rem; line-height: 1; margin: 0 0 1rem 0; } }
         .ds-header p { font-size: 1rem; color: #d4d4d8; max-width: 40rem; margin: 0 auto; font-weight: 500; }
         @media (min-width: 48rem) { .ds-header p { font-size: 1.125rem; } }
         .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
-        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; padding-bottom: 0; min-height: 0; }
+        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; min-height: 0; }
         .ds-3d-anchor { position: absolute; top: 50%; left: 50%; width: 0; height: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
         .ds-3d-wrapper { position: relative; width: 340px; height: 680px; transform: scale(0.45); transform-origin: center center; }
         @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.55); } }
