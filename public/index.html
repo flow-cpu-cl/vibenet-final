@@ -19,7 +19,6 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* FIX: scroll-behavior pouze pokud uzivatel nevyzaduje redukci pohybu */
         @media (prefers-reduced-motion: no-preference) {
             html { scroll-behavior: smooth; }
         }
@@ -44,7 +43,6 @@
         ul { list-style: none; }
         button { cursor: pointer; font-family: inherit; border: none; background: transparent; }
 
-        /* FIX: Prejmenovano z font-display na text-display — predchazi kolizi s CSS vlastnosti font-display */
         .text-display { font-weight: 700; letter-spacing: -0.02em; }
         .gradient-text {
             background: linear-gradient(135deg, #1d4ed8, #be185d);
@@ -52,7 +50,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* FIX: prefers-reduced-motion — vsechny animace se vypnou pro dotcene uzivatele */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -79,8 +76,6 @@
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* FIX: Zmeneno z position:fixed na position:absolute — resi vykonnnostni
-           problemy s filter:blur() na iOS Safari */
         .blobs-wrapper {
             position: absolute;
             top: 0; left: 0;
@@ -141,7 +136,6 @@
         .usp-card p { color: var(--apple-gray); font-size: 0.9375rem; font-weight: 500; margin: 0; line-height: 1.6; }
 
         .pricing-new { margin-top: 4rem; }
-        /* FIX: pricing-new-inner nerozsiruji glass-panel — predchazi konfliktu zodpovdnosti trid */
         .pricing-new-inner { background: var(--apple-light-gray); border-radius: 3.125rem; padding: 3rem 2rem; display: flex; flex-direction: column; gap: 4rem; align-items: center; }
         @media (min-width: 64rem) { .pricing-new-inner { flex-direction: row; padding: 6rem; gap: 4rem; } }
         .pricing-text-area { flex: 1; width: 100%; text-align: left; }
@@ -149,7 +143,6 @@
         @media (min-width: 64rem) { .pricing-text-area h2 { font-size: 4.5rem; } }
         .pricing-features { display: flex; flex-direction: column; gap: 1.5rem; }
         .pricing-features li { display: flex; align-items: center; gap: 1rem; font-size: 1.25rem; font-weight: 500; color: var(--apple-black); }
-        /* FIX: aria-hidden odstranen z CSS — nyni v HTML atributu SVG prvku */
         .pricing-features svg { width: 1.5rem; height: 1.5rem; color: var(--apple-blue); flex-shrink: 0; }
         .pricing-card-area { flex: 1; width: 100%; }
         .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; overflow: hidden; width: 100%; max-width: 32rem; margin: 0 auto; text-align: left; }
@@ -191,7 +184,6 @@
         .filmstrip-card { flex: 0 0 85vw; max-width: 31.25rem; height: 37.5rem; scroll-snap-align: center; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 3rem; position: relative; overflow: hidden; }
         @media (min-width: 48rem) { .filmstrip-card { flex: 0 0 40vw; } }
         .fs-tag { font-size: 0.6875rem; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
-        /* Karty v karuselu pouzivaji h3, semanticky spravne — h2 "Signal. Everywhere." je v .carousel-header */
         .fs-title { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
         .fs-desc { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; line-height: 1.6; }
         .fs-c1-visual { display: flex; justify-content: center; padding: 2rem 0; }
@@ -200,7 +192,6 @@
         .fs-c1-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
         .fs-c1-badges { display: flex; gap: 0.5rem; }
         .fs-c1-badge { background: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--apple-black); }
-        /* FIX: Nahrazuje inline style="margin:0" pro cenu karty 1 */
         .fs-c1-price { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--apple-black); margin: 0; }
         .fs-c2 { background: white; }
         .fs-icon-box { width: 4rem; height: 4rem; border-radius: 1rem; background: #eff6ff; color: var(--apple-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
@@ -227,7 +218,7 @@
         .fs-avatar-static { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
         .fs-avatar-more { background: #eff6ff; color: var(--apple-blue); font-weight: 700; font-size: 0.625rem; }
 
-        /* Konstanty pro scroll animaci jsou popsany v JS sekci */
+        /* --- SCROLL ANIMACE TELEFONU --- */
         .ds-scroll-wrapper { position: relative; height: 250vh; z-index: 20; width: 100%; }
         .ds-sticky-container { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: transparent; }
         .ds-inner-card { background-color: #000; color: #fff; width: 100%; height: 100vh; border-radius: 0; position: relative; display: grid; grid-template-rows: auto 1fr; padding-top: 2rem; padding-bottom: 2rem; overflow: hidden; will-change: width, height, border-radius; }
@@ -241,22 +232,16 @@
         .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
         .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; min-height: 0; overflow: hidden; }
         .ds-3d-anchor { position: absolute; top: 50%; left: 50%; width: 0; height: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
-        .ds-3d-wrapper { position: relative; width: 340px; height: 680px; transform: scale(0.45); transform-origin: center center; }
-        @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.55); } }
-        @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.65); } }
-        @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.75); } }
-        /* MacBook Air M2 a podobné — viewport ~870–950px výšky */
-        @media (max-height: 950px) and (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.68); } }
-        @media (max-height: 850px) and (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.60); } }
-        @media (max-height: 750px) and (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.53); } }
-        @media (max-height: 650px) { .ds-3d-wrapper { transform: scale(0.42); } }
+        
+        /* FIX: Odstraněny tvrdé zarážky z CSS. Měřítko řídí plně JS na základě aktuálního dostupného místa! */
+        .ds-3d-wrapper { position: relative; width: 340px; height: 680px; transform-origin: center center; will-change: transform; }
+        
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .c-ring-1 { width: 500px; height: 500px; border: 1px solid rgba(168, 85, 247, 0.3); }
         .c-ring-2 { width: 800px; height: 800px; border: 1px solid rgba(99, 102, 241, 0.2); }
         .c-ring-3 { width: 1100px; height: 1100px; border: 1px solid rgba(59, 130, 246, 0.1); }
         .mockup-picture { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 680px; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; }
         .mockup-picture img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 60px rgba(0,0,0,0.8)); }
-        /* FIX: Fallback pro chybejici obrazek telefonu */
         .mockup-picture img.img-error { visibility: hidden; }
         .carousel-scene-3d { perspective: 1200px; transform-style: preserve-3d; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
         .c3d-item { position: absolute; width: 316px; height: 656px; border-radius: 42px; background: #18181b; overflow: hidden; transform-style: preserve-3d; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
@@ -309,7 +294,6 @@
         .device-specs-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 14rem; z-index: 10; }
         @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } }
         .puck-product-image { width: 100%; height: auto; display: block; object-fit: contain; filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); border-radius: 2rem; }
-        /* FIX: Fallback styl pro chybejici produktovy obrazek */
         .puck-product-image.img-error { min-height: 12rem; background: var(--apple-light-gray); border-radius: 2rem; border: 2px dashed #d1d5db; }
         .puck-specs-glow { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); background: rgba(0, 86, 179, 0.2); filter: blur(4rem); border-radius: 50%; z-index: -1; pointer-events: none; }
         .specs-content { width: 100%; position: relative; z-index: 10; }
@@ -322,9 +306,6 @@
         .spec-label { font-weight: 600; color: var(--apple-black); margin: 0; }
         .spec-val { color: var(--apple-gray); font-weight: 500; font-size: 0.875rem; margin: 0; text-align: right; }
 
-        /* PERF: content-visibility: auto přeskočí layout a paint pro prvky mimo viewport.
-           Ušetří ~40–60 ms na main threadu při načítání — prohlížeč je zpracuje až při scrollu.
-           contain-intrinsic-size předchází layout shiftu když se obsah skutečně renderuje. */
         .carousel-section,
         .ds-scroll-wrapper,
         .share-section {
@@ -367,10 +348,8 @@
         <button class="btn-nav">Join the Club</button>
     </nav>
 
-    <!-- FIX: Pouze jeden <main> obaluje veskerou hlavni strankovou obsahovou strukturu -->
     <main>
         <div class="container">
-
             <section class="hero-new" aria-labelledby="hero-heading">
                 <div class="hero-text">
                     <div class="hero-badge">Now available in 40+ countries</div>
@@ -417,7 +396,6 @@
                     <div class="pricing-text-area">
                         <h2 class="text-display" id="pricing-heading">One plan.<br>Infinite freedom.</h2>
                         <ul class="pricing-features">
-                            <!-- FIX: aria-hidden je HTML atribut na SVG, nikoliv CSS vlastnost -->
                             <li><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Unlimited 5G Data</li>
                             <li><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Global Roaming Included</li>
                             <li><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Priority Support 24/7</li>
@@ -481,7 +459,6 @@
                     <p>Swipe to explore the future of connectivity.</p>
                 </div>
                 <div class="carousel-arrows">
-                    <!-- FIX: Sipky opraveny — spravne ikony i spravne aria-labely -->
                     <button class="arrow-btn" id="btn-prev" aria-label="Previous card">←</button>
                     <button class="arrow-btn" id="btn-next" aria-label="Next card">→</button>
                 </div>
@@ -496,7 +473,6 @@
                     <div class="fs-c1-visual"><div class="fs-c1-puck"><div class="fs-c1-puck-inner"></div></div></div>
                     <div class="fs-c1-bottom">
                         <div class="fs-c1-badges"><span class="fs-c1-badge">Van Life</span><span class="fs-c1-badge">Remote</span></div>
-                        <!-- FIX: Inline style margin:0 nahrazen tridou fs-c1-price -->
                         <p class="text-display fs-c1-price">199 CR</p>
                     </div>
                 </div>
@@ -546,6 +522,7 @@
             </div>
         </section>
 
+        <!-- --- OPRAVENÁ SEKCE S TELEFONEM --- -->
         <div class="ds-scroll-wrapper" id="phone-scroll-wrapper">
             <div class="ds-sticky-container">
                 <section class="ds-inner-card" id="phone-inner-card" aria-labelledby="phone-section-heading">
@@ -559,12 +536,10 @@
                                 <div class="c-ring c-ring-1"></div>
                                 <div class="c-ring c-ring-2"></div>
                                 <div class="c-ring c-ring-3"></div>
-                                <!-- FIX: onerror fallback pro chybejici soubor telefonu -->
                                 <picture class="mockup-picture">
                                     <source media="(min-width: 768px)" srcset="telefon-800.webp">
                                     <img src="telefon-400.webp" alt="VIBE_NET app on smartphone" loading="lazy" decoding="async" onerror="this.classList.add('img-error')">
                                 </picture>
-                                <!-- Dekorativni UI mock — spravne skryto pred screenreadery -->
                                 <div class="carousel-scene-3d" id="phone3DCarousel" aria-hidden="true">
                                     <div class="c3d-item is-active" data-index="0">
                                         <img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?q=80&w=800&auto=format&fit=crop" alt="" class="c3d-bg" loading="lazy" decoding="async">
@@ -607,7 +582,6 @@
                                                 <div class="cui-info"><p class="cui-username">@sophia_dance</p><p class="cui-desc">Defying gravity today! ✨ <strong>#jump #happy #vibes</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Summer Feels - DJ Sunny</div></div></div></div>
                                                 <div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon text-rose" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">2.1M</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">12.5K</span></div><div class="cui-action-btn"><svg class="cui-action-icon text-yellow" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">340K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="c3d-item" data-index="2">
@@ -616,7 +590,6 @@
                                         <div class="c3d-ui">
                                             <div class="cui-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg><div class="cui-tabs"><span class="cui-tab-dim">Following</span><span class="cui-tab-active">For you</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
                                             <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@cyber_walker</p><p class="cui-desc">Night walks in Tokyo. 🌃✨ <strong>#tokyo #neon #cyberpunk</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Midnight City - Cyber Walker</div></div></div></div><div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">720K</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">5,430</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">88K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div></div>
-
                                         </div>
                                     </div>
                                     <div class="c3d-item" data-index="3">
@@ -625,7 +598,6 @@
                                         <div class="c3d-ui">
                                             <div class="cui-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg><div class="cui-tabs"><span class="cui-tab-dim">Following</span><span class="cui-tab-active">For you</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
                                             <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@wave_rider</p><p class="cui-desc">Perfect conditions this morning! 🌊 <strong>#surf #ocean #lifestyle</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Ocean Breeze - Beach Vibes</div></div></div></div><div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">512K</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">2,104</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">38K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div></div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -636,13 +608,11 @@
             </div>
         </div>
 
-        <!-- FIX: Druhy <main> zmenen na <div> — stranka smi mit pouze jeden <main> -->
         <div class="container section-gap" style="margin-top: 4rem;">
             <section class="specs-section" id="tech" aria-labelledby="specs-heading">
                 <div class="specs-bg-glow" aria-hidden="true"></div>
                 <div class="specs-image">
                     <div class="device-specs-wrapper">
-                        <!-- FIX: onerror fallback pro chybejici produktovy obrazek -->
                         <img src="modem-476.webp" srcset="modem-256.webp 256w, modem-476.webp 476w"
                              sizes="(max-width: 768px) 224px, 320px" width="446" height="642"
                              loading="lazy" decoding="async" alt="VIBE_NET Nomad Puck modem"
@@ -672,7 +642,6 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <p class="footer-logo">VIBE_NET</p>
-                <!-- FIX: Rok nastavovan dynamicky pres JS -->
                 <p class="footer-desc">© <span id="footer-year"></span> VIBE_NET. Built for the nomads.</p>
             </div>
             <nav class="footer-links" aria-label="Footer navigation">
@@ -682,7 +651,6 @@
             </nav>
             <div class="footer-status">
                 <div class="status-dot-green"></div>
-                <!-- FIX: <strong> nahrazen <span> — jde o vizualni label, ne zdurazneni obsahu -->
                 <span class="status-text">System Online</span>
             </div>
         </div>
@@ -691,19 +659,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // FIX: Dynamicky rok v patice
             const footerYear = document.getElementById('footer-year');
             if (footerYear) footerYear.textContent = new Date().getFullYear();
 
-            // FIX: Sipky opraveny — prev scrolluje doleva, next doprava
             const filmstrip = document.getElementById('filmstrip');
             const filmCards = document.querySelectorAll('.filmstrip-card');
             const btnPrev = document.getElementById('btn-prev');
             const btnNext = document.getElementById('btn-next');
 
             if (filmstrip && btnPrev && btnNext && filmCards.length > 0) {
-                // PERF: Nečteme offsetWidth při DOMContentLoaded — vynutilo by reflow dřív než je layout stabilní.
-                // Cachujeme lazily při prvním kliknutí a invalidujeme při resize.
                 let cachedScrollAmt = 0;
                 const getScrollAmt = () => cachedScrollAmt || (cachedScrollAmt = filmCards[0].offsetWidth + 32);
                 window.addEventListener('resize', () => { cachedScrollAmt = 0; }, { passive: true });
@@ -711,16 +675,15 @@
                 btnPrev.addEventListener('click', () => filmstrip.scrollBy({ left: -getScrollAmt(), behavior: 'smooth' }));
             }
 
-            // FIX: Magic numbers nahrazeny pojmenovanymi konstantami
             const SCROLL_ANIM = {
-                SHRINK_START:      0.65, // Podil scrollu wrapperu, od ktereho karta zacina "plout"
-                SHRINK_DURATION:   0.35, // Delka shrink animace (zbytek scrollu)
-                MAX_CARD_WIDTH:    1200, // Max sirka plovouci karty v px
-                MAX_HEIGHT_REDUCE: 80,   // O kolik px se zmensuje vyska karty
-                MAX_BORDER_RADIUS: 40,   // Max zaobleni rohu
-                REVEAL_STAGGER:    0.1,  // Zpozdeni entre jednotlivych reveal elementu
-                REVEAL_DURATION:   0.25, // Delka reveal animace jednoho elementu
-                CAROUSEL_INTERVAL: 3500, // Interval pro autorotaci karuselu (ms)
+                SHRINK_START:      0.65, 
+                SHRINK_DURATION:   0.35, 
+                MAX_CARD_WIDTH:    1200, 
+                MAX_HEIGHT_REDUCE: 80,   
+                MAX_BORDER_RADIUS: 40,   
+                REVEAL_STAGGER:    0.1,  
+                REVEAL_DURATION:   0.25, 
+                CAROUSEL_INTERVAL: 3500, 
             };
 
             const phoneScrollWrapper = document.getElementById('phone-scroll-wrapper');
@@ -729,46 +692,68 @@
             const shareSection = document.getElementById('share-section');
             const rings = document.querySelectorAll('.wave-ring');
 
-            // FIX: Respektujeme prefers-reduced-motion pro vsechny scroll animace
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             function updateScrollAnimation() {
                 if (!phoneScrollWrapper || !phoneInnerCard) return;
 
-                if (prefersReducedMotion) {
+                // 1) ČÁST: Animace scrollu (opacita textů a zmenšování celé černé karty)
+                if (!prefersReducedMotion) {
+                    const rect = phoneScrollWrapper.getBoundingClientRect();
+                    const scrollDistance = phoneScrollWrapper.offsetHeight - window.innerHeight;
+                    let progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
+
+                    revealElements.forEach((el, i) => {
+                        const start = i * SCROLL_ANIM.REVEAL_STAGGER;
+                        const end = start + SCROLL_ANIM.REVEAL_DURATION;
+                        const p = Math.max(0, Math.min(1, (progress - start) / (end - start)));
+                        const ease = 1 - Math.pow(1 - p, 3);
+                        el.style.opacity = ease;
+                        el.style.transform = `translateY(${(1 - ease) * 3}rem)`;
+                    });
+
+                    let shrink = Math.max(0, Math.min(1, (progress - SCROLL_ANIM.SHRINK_START) / SCROLL_ANIM.SHRINK_DURATION));
+                    const ease = shrink < 0.5 ? 2 * shrink * shrink : 1 - Math.pow(-2 * shrink + 2, 2) / 2;
+
+                    const vw = document.documentElement.clientWidth;
+                    const target = Math.min(vw - 48, SCROLL_ANIM.MAX_CARD_WIDTH - 48);
+
+                    phoneInnerCard.style.width = `calc(100% - ${ease * (vw - target)}px)`;
+                    phoneInnerCard.style.height = `calc(100vh - ${ease * SCROLL_ANIM.MAX_HEIGHT_REDUCE}px)`;
+                    phoneInnerCard.style.borderRadius = `${ease * SCROLL_ANIM.MAX_BORDER_RADIUS}px`;
+                } else {
                     revealElements.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
-                    return;
                 }
 
-                const rect = phoneScrollWrapper.getBoundingClientRect();
-                const scrollDistance = phoneScrollWrapper.offsetHeight - window.innerHeight;
-                let progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
+                // 2) ČÁST (FIX): Dynamické měřítko telefonu - garantuje, že nebude nikdy ořízlý!
+                // Spouští se vždy, i při zakázaných animacích (přepočítá se na velikost okna)
+                const containerCell = document.querySelector('.ds-3d-container-cell');
+                const phoneWrapper = document.querySelector('.ds-3d-wrapper');
+                
+                if (containerCell && phoneWrapper) {
+                    // Přečteme skutečně zbývající místo po vykreslení textu v nadpisu
+                    const cellHeight = containerCell.clientHeight;
+                    const cellWidth = containerCell.clientWidth;
+                    
+                    // Bezpečnostní základní velikost s menším okrajem (padding), aby nebyl přilepený na okraje
+                    const safeHeight = 680 + 40; 
+                    const safeWidth = 340 + 40;
 
-                revealElements.forEach((el, i) => {
-                    const start = i * SCROLL_ANIM.REVEAL_STAGGER;
-                    const end = start + SCROLL_ANIM.REVEAL_DURATION;
-                    const p = Math.max(0, Math.min(1, (progress - start) / (end - start)));
-                    const ease = 1 - Math.pow(1 - p, 3);
-                    el.style.opacity = ease;
-                    el.style.transform = `translateY(${(1 - ease) * 3}rem)`;
-                });
+                    // Jaká škála je potřeba, aby se vešel?
+                    const scaleY = cellHeight / safeHeight;
+                    const scaleX = cellWidth / safeWidth;
 
-                let shrink = Math.max(0, Math.min(1, (progress - SCROLL_ANIM.SHRINK_START) / SCROLL_ANIM.SHRINK_DURATION));
-                const ease = shrink < 0.5 ? 2 * shrink * shrink : 1 - Math.pow(-2 * shrink + 2, 2) / 2;
-
-                const vw = document.documentElement.clientWidth;
-                const target = Math.min(vw - 48, SCROLL_ANIM.MAX_CARD_WIDTH - 48);
-
-                phoneInnerCard.style.width = `calc(100% - ${ease * (vw - target)}px)`;
-                phoneInnerCard.style.height = `calc(100vh - ${ease * SCROLL_ANIM.MAX_HEIGHT_REDUCE}px)`;
-                phoneInnerCard.style.borderRadius = `${ease * SCROLL_ANIM.MAX_BORDER_RADIUS}px`;
+                    // Telefon přizpůsobíme nejmenší hodnotě (nepřekročí kontejner), maximum je 0.9 aby nebyl "obří" na desktopu
+                    const finalScale = Math.max(0.2, Math.min(scaleX, scaleY, 0.9));
+                    
+                    phoneWrapper.style.transform = `scale(${finalScale})`;
+                }
             }
 
             function updateShareScroll() {
                 if (!shareSection) return;
                 const rect = shareSection.getBoundingClientRect();
                 const vh = window.innerHeight;
-                // Animace zacina 80 % pod okrajem viewportu, konci kdyz sekce dosahne 20 % sve vysky
                 const progress = Math.max(0, Math.min(1, (vh * 0.8 - rect.top) / (vh * 0.8 + rect.height * 0.2)));
 
                 rings.forEach((ring, i) => {
@@ -795,56 +780,49 @@
             window.addEventListener('resize', onScrollResize, { passive: true });
             onScrollResize();
 
-            // LCP PERF: Karusel je hluboko pod foldem — jeho inicializace nesmí blokovat první render.
-            // requestIdleCallback spustí kód až když je main thread volný po prvním paintu.
             const scheduleCarousel = window.requestIdleCallback
                 ? (fn) => requestIdleCallback(fn, { timeout: 2000 })
                 : (fn) => setTimeout(fn, 200);
 
             scheduleCarousel(() => {
-            // 3D karusel
-            const phoneItems = document.querySelectorAll('.c3d-item');
-            if (phoneItems.length > 0) {
-                let activeIdx = 0;
-                const total = phoneItems.length;
+                const phoneItems = document.querySelectorAll('.c3d-item');
+                if (phoneItems.length > 0) {
+                    let activeIdx = 0;
+                    const total = phoneItems.length;
 
-                function updateCarousel(instant) {
-                    phoneItems.forEach((item, i) => {
-                        let offset = i - activeIdx;
-                        if (offset > Math.floor(total / 2)) offset -= total;
-                        if (offset < -Math.floor(total / 2)) offset += total;
+                    function updateCarousel(instant) {
+                        phoneItems.forEach((item, i) => {
+                            let offset = i - activeIdx;
+                            if (offset > Math.floor(total / 2)) offset -= total;
+                            if (offset < -Math.floor(total / 2)) offset += total;
 
-                        let tx = 0, tz = 0, ry = 0, scale = 1, z = 0, opacity = 1, brightness = 1;
+                            let tx = 0, tz = 0, ry = 0, scale = 1, z = 0, opacity = 1, brightness = 1;
 
-                        if      (offset === 0)   { tx=0;    tz=0;    scale=1;    ry=0;   z=50; opacity=1;   brightness=1;   item.classList.add('is-active'); }
-                        else if (offset === -1)  { tx=-220; tz=-100; scale=0.85; ry=12;  z=40; opacity=0.9; brightness=0.5; item.classList.remove('is-active'); }
-                        else if (offset === 1)   { tx=220;  tz=-100; scale=0.85; ry=-12; z=40; opacity=0.9; brightness=0.5; item.classList.remove('is-active'); }
-                        else if (offset <= -2)   { tx=-380; tz=-250; scale=0.7;  ry=20;  z=30; opacity=0.6; brightness=0.3; item.classList.remove('is-active'); }
-                        else                     { tx=380;  tz=-250; scale=0.7;  ry=-20; z=30; opacity=0.6; brightness=0.3; item.classList.remove('is-active'); }
+                            if      (offset === 0)   { tx=0;    tz=0;    scale=1;    ry=0;   z=50; opacity=1;   brightness=1;   item.classList.add('is-active'); }
+                            else if (offset === -1)  { tx=-220; tz=-100; scale=0.85; ry=12;  z=40; opacity=0.9; brightness=0.5; item.classList.remove('is-active'); }
+                            else if (offset === 1)   { tx=220;  tz=-100; scale=0.85; ry=-12; z=40; opacity=0.9; brightness=0.5; item.classList.remove('is-active'); }
+                            else if (offset <= -2)   { tx=-380; tz=-250; scale=0.7;  ry=20;  z=30; opacity=0.6; brightness=0.3; item.classList.remove('is-active'); }
+                            else                     { tx=380;  tz=-250; scale=0.7;  ry=-20; z=30; opacity=0.6; brightness=0.3; item.classList.remove('is-active'); }
 
-                        item.style.transition = (instant || prefersReducedMotion) ? 'none' : 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
-                        item.style.transform = `translateX(${tx}px) translateZ(${tz}px) scale(${scale}) rotateY(${ry}deg)`;
-                        item.style.zIndex = z;
-                        item.style.opacity = opacity;
-                        item.style.filter = `brightness(${brightness})`;
-                    });
+                            item.style.transition = (instant || prefersReducedMotion) ? 'none' : 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+                            item.style.transform = `translateX(${tx}px) translateZ(${tz}px) scale(${scale}) rotateY(${ry}deg)`;
+                            item.style.zIndex = z;
+                            item.style.opacity = opacity;
+                            item.style.filter = `brightness(${brightness})`;
+                        });
+                    }
+
+                    updateCarousel(true);
+                    requestAnimationFrame(() => requestAnimationFrame(() => updateCarousel(false)));
+
+                    const carouselTimer = setInterval(() => {
+                        activeIdx = (activeIdx + 1) % total;
+                        updateCarousel(false);
+                    }, SCROLL_ANIM.CAROUSEL_INTERVAL);
+
+                    window.addEventListener('pagehide', () => clearInterval(carouselTimer));
                 }
-
-                updateCarousel(true);
-                // PERF: Nahrazujeme void document.body.offsetHeight (forced reflow) double-rAF.
-                // První rAF nechá prohlížeč zapsat styly, druhý spustí animaci až po commitu.
-                requestAnimationFrame(() => requestAnimationFrame(() => updateCarousel(false)));
-
-                // FIX: Interval ulozeny pro pozdejsi cleanup
-                const carouselTimer = setInterval(() => {
-                    activeIdx = (activeIdx + 1) % total;
-                    updateCarousel(false);
-                }, SCROLL_ANIM.CAROUSEL_INTERVAL);
-
-                // FIX: Cleanup pri opusteni stranky (relevantni v SPA / HMR prostredi)
-                window.addEventListener('pagehide', () => clearInterval(carouselTimer));
-            }
-            }); // end scheduleCarousel
+            }); 
         });
     </script>
 </body>
