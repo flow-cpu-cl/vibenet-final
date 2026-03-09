@@ -217,6 +217,8 @@
         .fs-c5-avatars { height: 8rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         .fs-avatar-static { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
         .fs-avatar-more { background: #eff6ff; color: var(--apple-blue); font-weight: 700; font-size: 0.625rem; }
+        .fs-bg-image { background-size: cover; background-position: center; background-repeat: no-repeat; }
+        .fs-bg-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%); pointer-events: none; border-radius: inherit; }
 
         /* --- SCROLL ANIMACE TELEFONU --- */
         .ds-scroll-wrapper { position: relative; height: 250vh; z-index: 20; width: 100%; }
@@ -464,6 +466,29 @@
                 </div>
             </div>
             <div class="filmstrip-container" id="filmstrip">
+                
+                <!-- NOVÁ KARTA S OBRÁZKEM V POZADÍ -->
+                <div class="filmstrip-card">
+                    <!-- Responzivní obrázek (Picture tag) -->
+                    <picture style="position: absolute; inset: 0; z-index: 0;">
+                        <!-- Pro desktop (šířka 768px a více) -->
+                        <source media="(min-width: 768px)" srcset="social-desktop.png">
+                        <!-- Pro mobily (výchozí) -->
+                        <img src="social-mobile.png" alt="Share the Signal" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                    </picture>
+                    <!-- Přechod shora dolů (aby byl text nahoře čitelný) -->
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 60%); z-index: 1; pointer-events: none;"></div>
+                    
+                    <!-- Obsah karty (zarovnán nahoru díky justify-content: flex-start) -->
+                    <div style="position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: flex-start; height: 100%;">
+                        <div>
+                            <span class="fs-tag" style="color: #93c5fd;">Social Protocol</span>
+                            <h3 class="text-display fs-title" style="color: white;">Share the Signal</h3>
+                            <p class="fs-desc" style="color: rgba(255,255,255,0.9);">One Puck. Up to 10 friends. Your own personal local network, anywhere on Earth.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="filmstrip-card glass-panel fs-c5">
                     <div>
                         <span class="fs-tag">Social Protocol</span>
