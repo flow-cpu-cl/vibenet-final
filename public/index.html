@@ -239,15 +239,17 @@
         .ds-header p { font-size: 1rem; color: #d4d4d8; max-width: 40rem; margin: 0 auto; font-weight: 500; }
         @media (min-width: 48rem) { .ds-header p { font-size: 1.125rem; } }
         .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
-        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; min-height: 0; }
+        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; min-height: 0; overflow: hidden; }
         .ds-3d-anchor { position: absolute; top: 50%; left: 50%; width: 0; height: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
         .ds-3d-wrapper { position: relative; width: 340px; height: 680px; transform: scale(0.45); transform-origin: center center; }
         @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.55); } }
         @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.65); } }
         @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.75); } }
-        @media (max-height: 850px) and (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.65); } }
-        @media (max-height: 750px) and (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.58); } }
-        @media (max-height: 650px) { .ds-3d-wrapper { transform: scale(0.45); } }
+        /* MacBook Air M2 a podobné — viewport ~870–950px výšky */
+        @media (max-height: 950px) and (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.68); } }
+        @media (max-height: 850px) and (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.60); } }
+        @media (max-height: 750px) and (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.53); } }
+        @media (max-height: 650px) { .ds-3d-wrapper { transform: scale(0.42); } }
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .c-ring-1 { width: 500px; height: 500px; border: 1px solid rgba(168, 85, 247, 0.3); }
         .c-ring-2 { width: 800px; height: 800px; border: 1px solid rgba(99, 102, 241, 0.2); }
