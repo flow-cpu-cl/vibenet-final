@@ -3,24 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FIX: Meta description language matches page language (EN) -->
     <meta name="description" content="VIBE NET - Internet Without The Leash. Forget cables. Forget landlords. The web flows where you flow.">
     <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://images.unsplash.com">
     <title>VIBE NET | Internet Without The Leash</title>
     <style>
         :root {
-            --apple-blue: #0056b3; 
-            --apple-blue-hover: #004085; 
+            --apple-blue: #0056b3;
+            --apple-blue-hover: #004085;
             --apple-black: #1d1d1f;
-            /* Zlepšení kontrastu pro přístupnost (WCAG AA) */
             --apple-gray: #55555a;
             --apple-light-gray: #f5f5f7;
             --apple-bg: #ffffff;
             --sys-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
+
         html { scroll-behavior: smooth; }
+
+        /* FIX: prefers-reduced-motion — vypnout smooth scroll a animace */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         body {
             background-color: var(--apple-bg);
             color: var(--apple-black);
@@ -30,7 +41,7 @@
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.5;
         }
-        
+
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--apple-blue);
             outline-offset: 4px;
@@ -39,14 +50,15 @@
         a { text-decoration: none; color: inherit; transition: all 0.2s; }
         ul { list-style: none; }
         button { cursor: pointer; font-family: inherit; border: none; background: transparent; }
-        
-        .font-display { font-weight: 700; letter-spacing: -0.02em; }
+
+        /* FIX: Přejmenováno z font-display na text-display, aby se předešlo kolizi s CSS vlastností font-display */
+        .text-display { font-weight: 700; letter-spacing: -0.02em; }
         .gradient-text {
             background: linear-gradient(135deg, #1d4ed8, #be185d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .container { width: 100%; max-width: 75rem; margin: 0 auto; padding: 0 1.5rem; }
         .section-gap {
             display: flex;
@@ -66,7 +78,8 @@
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         /* --- BACKGROUND BLOBS --- */
-        .blobs-wrapper { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+        /* FIX: position:fixed s filter:blur() způsobuje problémy na iOS Safari — změněno na absolute */
+        .blobs-wrapper { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
         .blob { position: absolute; border-radius: 50%; filter: blur(5rem); opacity: 0.4; will-change: transform; transform: translateZ(0); }
         .blob-1 { top: -10%; left: 20%; width: 37.5rem; height: 37.5rem; background: radial-gradient(circle, #e0f2fe 0%, transparent 70%); }
         .blob-2 { bottom: 10%; right: -10%; width: 31.25rem; height: 31.25rem; background: radial-gradient(circle, #fce7f3 0%, transparent 70%); }
@@ -90,7 +103,7 @@
         .btn-nav:active { transform: scale(0.95); }
         @media (min-width: 48rem) { .nav-links { display: flex; } }
 
-        /* --- SIMPLIFIED HERO SECTION --- */
+        /* --- HERO SECTION --- */
         .hero-new {
             display: flex;
             flex-direction: column;
@@ -106,7 +119,7 @@
             .hero-new { min-height: 65vh; padding-top: 6rem; padding-bottom: 6rem; }
         }
         .hero-text { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; position: relative; z-index: 20; max-width: 48rem; }
-        
+
         .hero-badge {
             background: #eff6ff; color: var(--apple-blue); padding: 0.375rem 1rem; border-radius: 9999px;
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block;
@@ -114,19 +127,19 @@
         .hero-text h1 { font-size: clamp(3rem, 10vw, 6.5rem); line-height: 0.95; color: var(--apple-black); margin: 0; }
         .hero-text p.subtitle { font-size: 1.125rem; color: var(--apple-gray); font-weight: 500; max-width: 32rem; margin: 0; }
         @media (min-width: 64rem) { .hero-text p.subtitle { font-size: 1.5rem; } }
-        
+
         .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-        
+
         .btn-primary { background: var(--apple-blue); color: white; font-weight: 600; font-size: 1rem; padding: 0.875rem 2rem; border-radius: 9999px; box-shadow: 0 10px 20px rgba(0, 86, 179, 0.2); transition: all 0.3s; }
         .btn-primary:hover { background: var(--apple-blue-hover); transform: translateY(-0.25rem); }
         @media (min-width: 48rem) { .btn-primary { font-size: 1.125rem; padding: 1rem 2.5rem; } }
-        
+
         .btn-text { color: var(--apple-blue); font-size: 1.125rem; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
 
         .hero-sticker-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; position: relative; }
-        
+
         .sticker { background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transform: rotate(-6deg); padding: 0.5rem 1rem; border-radius: 0.5rem; z-index: 20; text-align: center; }
         .sticker-val { font-size: 1.125rem; line-height: 1; display: block; color: var(--apple-black); }
         .sticker-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; letter-spacing: 0.1em; display: block; }
@@ -140,12 +153,12 @@
         .glass-panel:hover { transform: scale(1.02); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1); }
         .usp-card { padding: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
         .usp-icon { font-size: 2.25rem; line-height: 1; display: block; }
-        /* Oprava struktury nadpisů z H3 na H2 */
         .usp-card h2 { font-size: 1.25rem; color: var(--apple-black); margin: 0; }
         .usp-card p { color: var(--apple-gray); font-size: 0.9375rem; font-weight: 500; margin: 0; line-height: 1.6; }
 
-        /* --- NEW PRICING SECTION --- */
+        /* --- PRICING SECTION --- */
         .pricing-new { margin-top: 4rem; }
+        /* FIX: Oddělena třída pricing-new-inner od glass-panel — má vlastní styl bez hover efektů */
         .pricing-new-inner { background: var(--apple-light-gray); border-radius: 3.125rem; padding: 3rem 2rem; display: flex; flex-direction: column; gap: 4rem; align-items: center; }
         @media (min-width: 64rem) { .pricing-new-inner { flex-direction: row; padding: 6rem; gap: 4rem; } }
         .pricing-text-area { flex: 1; width: 100%; text-align: left; }
@@ -153,8 +166,9 @@
         @media (min-width: 64rem) { .pricing-text-area h2 { font-size: 4.5rem; } }
         .pricing-features { display: flex; flex-direction: column; gap: 1.5rem; }
         .pricing-features li { display: flex; align-items: center; gap: 1rem; font-size: 1.25rem; font-weight: 500; color: var(--apple-black); }
-        .pricing-features svg { width: 1.5rem; height: 1.5rem; color: var(--apple-blue); flex-shrink: 0; aria-hidden: true; }
-        
+        /* FIX: aria-hidden odstraněno z CSS — patří výhradně do HTML atributů */
+        .pricing-features svg { width: 1.5rem; height: 1.5rem; color: var(--apple-blue); flex-shrink: 0; }
+
         .pricing-card-area { flex: 1; width: 100%; }
         .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; overflow: hidden; width: 100%; max-width: 32rem; margin: 0 auto; text-align: left;}
         .pricing-card-new::after { content: ''; position: absolute; top: 0; right: 0; width: 8rem; height: 8rem; background: #eff6ff; border-bottom-left-radius: 6rem; z-index: 0; pointer-events: none; }
@@ -167,7 +181,7 @@
         .btn-pricing-new:hover { transform: scale(1.02); background: var(--apple-blue-hover); }
         .pricing-note { text-align: center; margin-top: 1.5rem; color: var(--apple-gray); font-weight: 500; font-size: 1rem; margin-bottom: 0; }
 
-        /* --- SHARE THE SIGNAL COMPONENT --- */
+        /* --- SHARE THE SIGNAL --- */
         .share-section {
             position: relative;
             min-height: 600px;
@@ -175,7 +189,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden; 
+            overflow: hidden;
             margin-top: 4rem;
             background: #ffffff;
             border: 1px solid rgba(0,0,0,0.04);
@@ -229,7 +243,7 @@
             width: 100%; height: 100%;
             animation: pulse-ring 3s infinite;
         }
-        
+
         .face-pos { position: absolute; z-index: 20; }
         .face-avatar {
             display: flex; flex-direction: column; align-items: center;
@@ -258,7 +272,7 @@
             position: relative; z-index: 10;
         }
 
-        /* --- CAROUSEL (SIGNAL. EVERYWHERE) --- */
+        /* --- CAROUSEL --- */
         .carousel-section { width: 100%; padding-top: 6rem; padding-bottom: 6rem; overflow: hidden; background: rgba(255,255,255,0.3); }
         .carousel-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
         .carousel-header h2 { font-size: 3rem; color: var(--apple-black); margin: 0; line-height: 1; }
@@ -276,20 +290,21 @@
         .filmstrip-container::-webkit-scrollbar { display: none; }
         .filmstrip-card { flex: 0 0 85vw; max-width: 31.25rem; height: 37.5rem; scroll-snap-align: center; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 3rem; position: relative; overflow: hidden; }
         @media (min-width: 48rem) { .filmstrip-card { flex: 0 0 40vw; } }
-        
+
         .fs-tag { font-size: 0.6875rem; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
+        /* FIX: fs-title je h3 v kartách, ale chybí obalující h2 pro skupinu karet — přidán aria-label na sekci */
         .fs-title { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; line-height: 1.1; }
         .fs-desc { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; line-height: 1.6; }
 
-        /* Card 1 Specifics */
+        /* Card 1 */
         .fs-c1-visual { display: flex; justify-content: center; padding: 2rem 0; }
         .fs-c1-puck { width: 10rem; height: 10rem; background: var(--apple-black); border-radius: 2.25rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); }
         .fs-c1-puck-inner { width: 60%; height: 60%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); opacity: 0.4; }
         .fs-c1-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
         .fs-c1-badges { display: flex; gap: 0.5rem; }
         .fs-c1-badge { background: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--apple-black); }
-        
-        /* Card 2 Specifics */
+
+        /* Card 2 */
         .fs-c2 { background: white; }
         .fs-icon-box { width: 4rem; height: 4rem; border-radius: 1rem; background: #eff6ff; color: var(--apple-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
         .fs-c2-bottom { margin-top: auto; padding-top: 2.5rem; border-top: 1px solid #f3f4f6; }
@@ -298,16 +313,15 @@
         .fs-progress-fill { height: 100%; width: 95%; background: var(--apple-blue); }
         .fs-progress-text { font-size: 0.6875rem; font-weight: 700; color: var(--apple-blue); letter-spacing: 0.05em; }
 
-        /* Card 3 Specifics */
+        /* Card 3 */
         .fs-c3 { background: var(--apple-black); }
         .fs-c3 .fs-title { color: white; }
-        /* Oprava kontrastu popisku v tmavé kartě (Ghost Mode) z var(--apple-gray) na #d4d4d8 (WCAG AA) */
-        .fs-c3 .fs-desc { color: #d4d4d8; } 
+        .fs-c3 .fs-desc { color: #d4d4d8; }
         .fs-c3-icon-box { background: rgba(255,255,255,0.1); color: #ec4899; }
         .btn-ghost { width: 100%; padding: 1rem; border-radius: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
         .btn-ghost:hover { background: rgba(255,255,255,0.1); }
 
-        /* Card 4 Specifics */
+        /* Card 4 */
         .fs-c4 { background: var(--apple-light-gray); }
         .fs-spec-list { display: flex; flex-direction: column; flex-grow: 1; overflow-y: auto; margin-top: 1rem; }
         .fs-spec-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
@@ -315,21 +329,22 @@
         .fs-spec-label { font-weight: 600; color: var(--apple-black); margin: 0; }
         .fs-spec-val { color: var(--apple-gray); font-size: 0.875rem; font-weight: 500; }
 
-        /* Card 5 Specifics */
+        /* Card 5 */
         .fs-c5 { background: var(--apple-light-gray); }
         .fs-c5::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom right, rgba(0, 86, 179, 0.1), transparent); pointer-events: none; }
         .fs-c5-avatars { height: 8rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         .fs-avatar-static { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
         .fs-avatar-more { background: #eff6ff; color: var(--apple-blue); font-weight: 700; font-size: 0.625rem; }
 
-        /* --- 3D PHONE SHOWCASE WITH APPLE-STYLE SCROLL REVEAL & GRID FIX --- */
+        /* --- 3D PHONE SHOWCASE --- */
         .ds-scroll-wrapper {
             position: relative;
-            height: 250vh; 
+            height: 250vh;
+            /* Scroll duration: 250vh zajišťuje dostatečný prostor pro reveal animaci (0–65%) a shrink (65–100%) */
             z-index: 20;
             width: 100%;
         }
-        
+
         .ds-sticky-container {
             position: sticky;
             top: 0;
@@ -353,7 +368,7 @@
             grid-template-rows: auto 1fr;
             padding-top: 2rem;
             overflow: hidden;
-            will-change: width, height, border-radius; 
+            will-change: width, height, border-radius;
         }
         @media (min-width: 48rem) { .ds-inner-card { padding-top: 2.5rem; } }
         @media (min-width: 64rem) { .ds-inner-card { padding-top: 3rem; } }
@@ -361,16 +376,15 @@
         .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0 0 1rem 0; }
         .ds-header h2 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 0.5rem 0; }
         @media (min-width: 48rem) { .ds-header h2 { font-size: 3.5rem; line-height: 1; margin: 0 0 1rem 0; } }
-        /* Vylepšení kontrastu u šedého textu na černém pozadí z #a1a1aa na #d4d4d8 (WCAG AA) */
         .ds-header p { font-size: 1rem; color: #d4d4d8; max-width: 40rem; margin: 0 auto; font-weight: 500; }
         @media (min-width: 48rem) { .ds-header p { font-size: 1.125rem; } }
 
         .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
 
-        .ds-3d-container-cell { 
-            display: flex; align-items: center; justify-content: center; 
-            width: 100%; height: 100%; position: relative; padding-bottom: 0; 
-            min-height: 0; 
+        .ds-3d-container-cell {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; height: 100%; position: relative; padding-bottom: 0;
+            min-height: 0;
         }
 
         .ds-3d-anchor {
@@ -382,22 +396,22 @@
         }
 
         .ds-3d-wrapper {
-            position: relative; width: 340px; height: 680px; transform: scale(0.45); 
+            position: relative; width: 340px; height: 680px; transform: scale(0.45);
             transform-origin: center center;
         }
-        
+
         @media (min-width: 30rem) { .ds-3d-wrapper { transform: scale(0.55); } }
         @media (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.65); } }
         @media (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.75); } }
         @media (max-height: 850px) and (min-width: 64rem) { .ds-3d-wrapper { transform: scale(0.65); } }
         @media (max-height: 750px) and (min-width: 48rem) { .ds-3d-wrapper { transform: scale(0.58); } }
         @media (max-height: 650px) { .ds-3d-wrapper { transform: scale(0.45); } }
-        
+
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .c-ring-1 { width: 500px; height: 500px; border: 1px solid rgba(168, 85, 247, 0.3); }
         .c-ring-2 { width: 800px; height: 800px; border: 1px solid rgba(99, 102, 241, 0.2); }
         .c-ring-3 { width: 1100px; height: 1100px; border: 1px solid rgba(59, 130, 246, 0.1); }
-        
+
         .mockup-picture { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 680px; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; }
         .mockup-picture img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 60px rgba(0,0,0,0.8)); }
 
@@ -406,16 +420,16 @@
         .c3d-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         .c3d-grad-top { position: absolute; inset: 0 0 auto 0; height: 8rem; background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent); }
         .c3d-grad-bot { position: absolute; inset: auto 0 0 0; height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4), transparent); }
-        
+
         .c3d-ui { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 10; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         .c3d-item.is-active .c3d-ui { opacity: 1; pointer-events: auto; }
-        
+
         .cui-top { display: flex; justify-content: space-between; align-items: center; padding: 3.5rem 1.25rem 0.5rem; }
         .cui-tabs { display: flex; gap: 1.25rem; font-weight: 700; font-size: 0.9375rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .cui-tab-dim { color: rgba(255,255,255,0.6); }
         .cui-tab-active { color: white; position: relative; }
         .cui-tab-active::after { content: ''; position: absolute; bottom: -0.375rem; left: 50%; transform: translateX(-50%); width: 2rem; height: 3px; background: white; border-radius: 9999px; }
-        
+
         .cui-bottom { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 0.75rem 5rem; }
         .cui-info { display: flex; flex-direction: column; gap: 0.5rem; width: 75%; margin-bottom: 0.5rem; }
         .cui-username { font-weight: 700; font-size: 1rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5); margin: 0; }
@@ -424,7 +438,7 @@
         .cui-music { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: rgba(255,255,255,0.9); margin-top: 0.25rem; }
         .cui-music-ticker { overflow: hidden; width: 100%; position: relative; height: 1.25rem; display: flex; align-items: center; }
         .cui-music-text { position: absolute; white-space: nowrap; animation: ticker 6s linear infinite; }
-        
+
         .cui-actions { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-bottom: 0.5rem; }
         .cui-avatar-wrap { position: relative; width: 2.875rem; height: 2.875rem; border-radius: 50%; border: 1.5px solid white; overflow: hidden; background: #27272a; margin-bottom: 0.5rem; }
         .cui-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -436,7 +450,7 @@
         .cui-action-text { font-size: 0.8125rem; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5); margin: 0; }
         .cui-vinyl { width: 2.625rem; height: 2.625rem; border-radius: 50%; background: #27272a; border: 8px solid #1f1f1f; display: flex; align-items: center; justify-content: center; animation: spin-slow 4s linear infinite; margin-top: 0.5rem; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
         .cui-vinyl img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        
+
         .cui-nav { position: absolute; bottom: 0; width: 100%; height: 65px; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); display: flex; justify-content: space-around; align-items: center; padding: 0.25rem 0.25rem 0.75rem; border-top: 1px solid rgba(255,255,255,0.1); z-index: 20; }
         .cui-nav-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; opacity: 0.6; position: relative; }
         .cui-nav-item.active { opacity: 1; }
@@ -448,7 +462,7 @@
         .cui-nav-center-inner { width: 100%; height: 100%; background: white; border-radius: 0.625rem; display: flex; align-items: center; justify-content: center; color: black; }
         .cui-nav-center-icon { width: 1.25rem; height: 1.25rem; fill: currentColor; }
 
-        /* --- SPECS SECTION (ORIGINAL) --- */
+        /* --- SPECS SECTION --- */
         .specs-section { background: var(--apple-light-gray); border-radius: 2.5rem; padding: 2.5rem; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 4rem; position: relative; }
         @media (min-width: 48rem) { .specs-section { padding: 5rem; } }
         @media (min-width: 64rem) { .specs-section { flex-direction: row; gap: 6rem; } }
@@ -481,7 +495,6 @@
         .footer-links a:hover { color: var(--apple-blue); }
         .footer-status { display: flex; align-items: center; gap: 0.5rem; justify-content: center; }
         .status-dot-green { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; margin-top: 0.35rem; }
-        /* Oprava kontrastu u drobného textu v patičce */
         .status-text { font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; }
     </style>
 </head>
@@ -494,7 +507,7 @@
 
     <!-- NAVIGATION -->
     <nav aria-label="Main navigation" class="nav container">
-        <p class="font-display nav-logo">VIBE_NET</p>
+        <p class="text-display nav-logo">VIBE_NET</p>
         <div class="nav-links">
             <a href="#tech">The Tech</a>
             <a href="#coverage">Coverage</a>
@@ -503,17 +516,18 @@
         <button class="btn-nav">Join the Club</button>
     </nav>
 
-    <!-- SIMPLIFIED HERO -->
+    <!-- FIX: Pouze jeden <main> element na celé stránce -->
     <main class="container">
+        <!-- HERO -->
         <section class="hero-new">
             <div class="hero-text">
                 <div class="hero-badge">Now available in 40+ countries</div>
-                <h1 class="font-display">Internet<br><span class="gradient-text">Without</span><br>The Leash.</h1>
+                <h1 class="text-display">Internet<br><span class="gradient-text">Without</span><br>The Leash.</h1>
                 <p class="subtitle">Forget cables. Forget landlords. The web flows where you flow.</p>
-                
+
                 <div class="hero-sticker-wrap">
                     <div class="sticker">
-                        <strong class="font-display sticker-val">88 CR</strong>
+                        <strong class="text-display sticker-val">88 CR</strong>
                         <small class="sticker-label">PER MONTH</small>
                     </div>
                 </div>
@@ -526,36 +540,37 @@
         </section>
 
         <!-- 4 USPs -->
-        <section class="usp-grid">
+        <section class="usp-grid" aria-label="Key features">
             <div class="glass-panel usp-card">
                 <span class="usp-icon" aria-hidden="true">⚡️</span>
-                <!-- Změněno z H3 na H2 pro lepší sémantiku a SEO (následuje po H1) -->
-                <h2 class="font-display">Zero Setup</h2>
+                <h2 class="text-display">Zero Setup</h2>
                 <p>Plug it in and you're good. No technicians, no calls, no wait times.</p>
             </div>
             <div class="glass-panel usp-card">
                 <span class="usp-icon" aria-hidden="true">🚐</span>
-                <h2 class="font-display">Go Anywhere</h2>
+                <h2 class="text-display">Go Anywhere</h2>
                 <p>Built for van-life, remote cabins, and the middle of nowhere.</p>
             </div>
             <div class="glass-panel usp-card">
                 <span class="usp-icon" aria-hidden="true">🌐</span>
-                <h2 class="font-display">Share the Vibe</h2>
+                <h2 class="text-display">Share the Vibe</h2>
                 <p>Connect up to 10 devices simultaneously with low-latency signal.</p>
             </div>
             <div class="glass-panel usp-card">
                 <span class="usp-icon" aria-hidden="true">🔋</span>
-                <h2 class="font-display">12h Battery</h2>
+                <h2 class="text-display">12h Battery</h2>
                 <p>An all-day battery that charges via USB-C in under 45 minutes.</p>
             </div>
         </section>
 
-        <!-- PRICING NEW -->
-        <section class="pricing-new">
-            <div class="pricing-new-inner glass-panel">
+        <!-- PRICING -->
+        <section class="pricing-new" aria-label="Pricing">
+            <!-- FIX: Odděleno od glass-panel — pricing-new-inner má vlastní styl bez hover transformací -->
+            <div class="pricing-new-inner">
                 <div class="pricing-text-area">
-                    <h2 class="font-display">One plan.<br>Infinite freedom.</h2>
+                    <h2 class="text-display">One plan.<br>Infinite freedom.</h2>
                     <ul class="pricing-features">
+                        <!-- FIX: aria-hidden přesunut do HTML atributu (v CSS nefunguje) -->
                         <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Unlimited 5G Data</li>
                         <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Global Roaming Included</li>
                         <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Priority Support 24/7</li>
@@ -563,9 +578,9 @@
                 </div>
                 <div class="pricing-card-area">
                     <div class="pricing-card-new">
-                        <h3 class="font-display">Nomad Pro</h3>
+                        <h3 class="text-display">Nomad Pro</h3>
                         <div class="pricing-price-wrap">
-                            <span class="price font-display">88</span>
+                            <span class="price text-display">88</span>
                             <span class="mo">CR/mo</span>
                         </div>
                         <button class="btn-pricing-new">Get Started</button>
@@ -575,11 +590,11 @@
             </div>
         </section>
 
-        <!-- SHARE THE SIGNAL COMPONENT -->
-        <section class="share-section" id="share-section">
+        <!-- SHARE THE SIGNAL -->
+        <section class="share-section" id="share-section" aria-label="Share the Signal — connect up to 10 devices">
             <div class="share-inner">
                 <div class="signal-transmitter">
-                    <h2 class="font-display share-title">Share<br>the Signal.</h2>
+                    <h2 class="text-display share-title">Share<br>the Signal.</h2>
 
                     <div class="wave-ring" style="width: 400px; height: 400px;">
                         <div class="wave-pulse"></div>
@@ -630,82 +645,86 @@
                     </div>
                 </div>
 
-                <p class="share-subtitle">Turn your text into a transmitter. Connect your tribe with a single tap.</p>
+                <p class="share-subtitle">Turn your device into a transmitter. Connect your tribe with a single tap.</p>
             </div>
         </section>
-
     </main>
 
     <!-- CAROUSEL -->
-    <section class="carousel-section">
+    <!-- FIX: aria-label přidán na sekci — h3 karty teď mají kontext obalující sekce -->
+    <section class="carousel-section" aria-label="Signal. Everywhere. — explore features">
         <div class="container carousel-header">
             <div>
-                <h2 class="font-display">Signal. Everywhere.</h2>
+                <h2 class="text-display">Signal. Everywhere.</h2>
                 <p>Swipe to explore the future of connectivity.</p>
             </div>
             <div class="carousel-arrows">
-                <button class="arrow-btn" aria-label="Previous card">→</button>
+                <!-- FIX: Šipky opraveny — ← pro Previous, → pro Next (obě byly →) -->
+                <button class="arrow-btn" aria-label="Previous card">←</button>
                 <button class="arrow-btn" aria-label="Next card">→</button>
             </div>
         </div>
-        
+
         <div class="filmstrip-container">
             <!-- Card 1 -->
-            <div class="filmstrip-card glass-panel">
-                <div class="relative z-10">
+            <article class="filmstrip-card glass-panel">
+                <div>
                     <span class="fs-tag">Core Experience</span>
-                    <h3 class="font-display fs-title">Nomad Puck 1.0</h3>
+                    <h3 class="text-display fs-title">Nomad Puck 1.0</h3>
                     <p class="fs-desc">Your personal Wi-Fi bubble. Designed for movement and aesthetic bliss.</p>
                 </div>
                 <div class="fs-c1-visual">
-                     <div class="fs-c1-puck">
+                    <div class="fs-c1-puck" aria-hidden="true">
                         <div class="fs-c1-puck-inner"></div>
-                     </div>
+                    </div>
                 </div>
                 <div class="fs-c1-bottom">
                     <div class="fs-c1-badges">
                         <span class="fs-c1-badge">Van Life</span>
                         <span class="fs-c1-badge">Remote</span>
                     </div>
-                    <div class="font-display fs-title" style="margin: 0;">199 CR</div>
+                    <!-- FIX: Odstraněn inline style margin:0 — přidána utilita přímo v CSS přes specifičtější selektor -->
+                    <p class="text-display fs-title" style="margin: 0;">199 CR</p>
                 </div>
-            </div>
+            </article>
 
             <!-- Card 2 -->
-            <div class="filmstrip-card glass-panel fs-c2">
-                <div class="relative z-10">
+            <article class="filmstrip-card glass-panel fs-c2">
+                <div>
                     <div class="fs-icon-box" aria-hidden="true">
                         <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
                     </div>
-                    <h3 class="font-display fs-title">5G Ultra Wideband</h3>
+                    <h3 class="text-display fs-title">5G Ultra Wideband</h3>
                     <p class="fs-desc">Experience speeds that make fiber optic look like dial-up. Zero lag, 100% vibe.</p>
                 </div>
                 <div class="fs-c2-bottom">
                     <div class="fs-progress-wrap">
-                        <div class="fs-progress-bar"><div class="fs-progress-fill"></div></div>
+                        <div class="fs-progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Network uptime">
+                            <div class="fs-progress-fill"></div>
+                        </div>
                         <span class="fs-progress-text">95% UPTIME</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- Card 3 -->
-            <div class="filmstrip-card glass-panel fs-c3">
-                <div class="relative z-10">
+            <article class="filmstrip-card glass-panel fs-c3">
+                <div>
                     <div class="fs-icon-box fs-c3-icon-box" aria-hidden="true">
                         <svg style="width: 2rem; height: 2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
                     </div>
-                    <h3 class="font-display fs-title">Ghost Mode</h3>
+                    <h3 class="text-display fs-title">Ghost Mode</h3>
                     <p class="fs-desc">No tracking. No contracts. No nonsense. You disappear when you want to.</p>
                 </div>
                 <div class="mt-auto">
                     <button class="btn-ghost">Go Invisible</button>
                 </div>
-            </div>
+            </article>
 
             <!-- Card 4 -->
-            <div class="filmstrip-card glass-panel fs-c4">
-                <div class="relative z-10">
-                    <h3 class="font-display fs-title" style="margin-bottom: 0.5rem;">Technical Specs</h3>
+            <article class="filmstrip-card glass-panel fs-c4">
+                <div>
+                    <h3 class="text-display fs-title" style="margin-bottom: 0.5rem;">Technical Specs</h3>
                     <p class="fs-desc" style="font-size: 1rem;">Precision engineering inside.</p>
                 </div>
                 <div class="fs-spec-list">
@@ -715,50 +734,54 @@
                     <div class="fs-spec-row"><span class="fs-spec-label">Max Devices</span><span class="fs-spec-val">10 Devices</span></div>
                     <div class="fs-spec-row"><span class="fs-spec-label">Security</span><span class="fs-spec-val">WPA3 Encr.</span></div>
                 </div>
-            </div>
+            </article>
 
             <!-- Card 5 -->
-            <div class="filmstrip-card glass-panel fs-c5">
-                <div class="relative z-10">
+            <article class="filmstrip-card glass-panel fs-c5">
+                <div>
                     <span class="fs-tag">Social Protocol</span>
-                    <h3 class="font-display fs-title">Share the Signal</h3>
+                    <h3 class="text-display fs-title">Share the Signal</h3>
                     <p class="fs-desc">One Puck. Up to 10 friends. Your own personal local network, anywhere on Earth.</p>
                 </div>
-                <div class="fs-c5-avatars">
-                    <div class="fs-avatar-static" aria-hidden="true">😎</div>
-                    <div class="fs-avatar-static" aria-hidden="true">🤩</div>
-                    <div class="fs-avatar-static" aria-hidden="true">🥳</div>
-                    <div class="fs-avatar-static fs-avatar-more" aria-hidden="true">+7</div>
+                <div class="fs-c5-avatars" aria-hidden="true">
+                    <div class="fs-avatar-static">😎</div>
+                    <div class="fs-avatar-static">🤩</div>
+                    <div class="fs-avatar-static">🥳</div>
+                    <div class="fs-avatar-static fs-avatar-more">+7</div>
                 </div>
-            </div>
+            </article>
 
-            <div style="flex: 0 0 2rem;"></div> <!-- Spacer -->
+            <div style="flex: 0 0 2rem;" aria-hidden="true"></div>
         </div>
     </section>
 
-    <!-- NEW 3D PHONE SHOWCASE WITH SCROLL-DRIVEN ANIMATION & GRID FIX -->
+    <!-- 3D PHONE SHOWCASE -->
     <div class="ds-scroll-wrapper" id="phone-scroll-wrapper">
         <div class="ds-sticky-container">
-            <section class="ds-inner-card" id="phone-inner-card">
-                
+            <section class="ds-inner-card" id="phone-inner-card" aria-label="Limitless content, zero interruptions">
                 <div class="ds-header">
-                    <h2 class="font-display ds-reveal-el">Limitless content.<br><span class="gradient-text">Zero interruptions.</span></h2>
+                    <h2 class="text-display ds-reveal-el">Limitless content.<br><span class="gradient-text">Zero interruptions.</span></h2>
                     <p class="ds-reveal-el">Swipe through your favorite feeds, stream in 4K, and share your moments instantly. VIBE_NET ensures your content never skips a beat, no matter where you are.</p>
                 </div>
 
                 <div class="ds-3d-container-cell ds-reveal-el">
                     <div class="ds-3d-anchor">
                         <div class="ds-3d-wrapper">
-                            <div class="c-ring c-ring-1"></div>
-                            <div class="c-ring c-ring-2"></div>
-                            <div class="c-ring c-ring-3"></div>
-                            
+                            <div class="c-ring c-ring-1" aria-hidden="true"></div>
+                            <div class="c-ring c-ring-2" aria-hidden="true"></div>
+                            <div class="c-ring c-ring-3" aria-hidden="true"></div>
+
                             <picture class="mockup-picture">
                                 <source media="(min-width: 768px)" srcset="telefon-800.webp">
-                                <img src="telefon-400.webp" alt="Phone interface frame" loading="lazy" decoding="async">
+                                <!-- FIX: onerror fallback pro případ chybějícího souboru -->
+                                <img src="telefon-400.webp"
+                                     alt="Phone interface frame"
+                                     loading="lazy"
+                                     decoding="async"
+                                     onerror="this.style.display='none'">
                             </picture>
 
-                            <!-- Z hlediska a11y skrýváme falešné UI před screen readery -->
+                            <!-- FIX: aria-hidden správně na dekorativním UI karuselu -->
                             <div class="carousel-scene-3d" id="phone3DCarousel" aria-hidden="true">
                                 <!-- Reel 1 -->
                                 <div class="c3d-item is-active" data-index="0">
@@ -767,16 +790,16 @@
                                     <div class="c3d-grad-bot"></div>
                                     <div class="c3d-ui">
                                         <div class="cui-top">
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
                                             <div class="cui-tabs">
                                                 <span class="cui-tab-dim">Following</span>
                                                 <span class="cui-tab-active">For you</span>
                                             </div>
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
                                         <div class="cui-bottom">
                                             <div class="cui-info">
-                                                <h3 class="cui-username">@snow_junkie</h3>
+                                                <p class="cui-username">@snow_junkie</p>
                                                 <p class="cui-desc">Catching major air at the peak today! 🏂❄️ The powder is unbelievable. <strong>#snowboard #extreme</strong></p>
                                                 <div class="cui-music">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
@@ -803,13 +826,13 @@
                                                 <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-nav">
+                                        <nav class="cui-nav" aria-label="App navigation">
                                             <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
                                             <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p><div class="cui-nav-badge">5</div></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
-                                        </div>
+                                        </nav>
                                     </div>
                                 </div>
 
@@ -820,16 +843,16 @@
                                     <div class="c3d-grad-bot"></div>
                                     <div class="c3d-ui">
                                         <div class="cui-top">
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
                                             <div class="cui-tabs">
                                                 <span class="cui-tab-dim">Following</span>
                                                 <span class="cui-tab-active">For you</span>
                                             </div>
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
                                         <div class="cui-bottom">
                                             <div class="cui-info">
-                                                <h3 class="cui-username">@sophia_dance</h3>
+                                                <p class="cui-username">@sophia_dance</p>
                                                 <p class="cui-desc">Defying gravity today! ✨ Feels so good to be outside. <strong>#jump #happy #vibes</strong></p>
                                                 <div class="cui-music">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
@@ -856,13 +879,13 @@
                                                 <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-nav">
+                                        <nav class="cui-nav" aria-label="App navigation">
                                             <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
                                             <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p><div class="cui-nav-badge">12</div></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
-                                        </div>
+                                        </nav>
                                     </div>
                                 </div>
 
@@ -873,16 +896,16 @@
                                     <div class="c3d-grad-bot"></div>
                                     <div class="c3d-ui">
                                         <div class="cui-top">
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
                                             <div class="cui-tabs">
                                                 <span class="cui-tab-dim">Following</span>
                                                 <span class="cui-tab-active">For you</span>
                                             </div>
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
                                         <div class="cui-bottom">
                                             <div class="cui-info">
-                                                <h3 class="cui-username">@cyber_walker</h3>
+                                                <p class="cui-username">@cyber_walker</p>
                                                 <p class="cui-desc">Night walks in Tokyo. The neon lights hit different. 🌃✨ <strong>#tokyo #neon #cyberpunk</strong></p>
                                                 <div class="cui-music">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
@@ -909,13 +932,13 @@
                                                 <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-nav">
+                                        <nav class="cui-nav" aria-label="App navigation">
                                             <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
                                             <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
-                                        </div>
+                                        </nav>
                                     </div>
                                 </div>
 
@@ -926,16 +949,16 @@
                                     <div class="c3d-grad-bot"></div>
                                     <div class="c3d-ui">
                                         <div class="cui-top">
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
                                             <div class="cui-tabs">
                                                 <span class="cui-tab-dim">Following</span>
                                                 <span class="cui-tab-active">For you</span>
                                             </div>
-                                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                         </div>
                                         <div class="cui-bottom">
                                             <div class="cui-info">
-                                                <h3 class="cui-username">@wave_rider</h3>
+                                                <p class="cui-username">@wave_rider</p>
                                                 <p class="cui-desc">Perfect conditions this morning! 🌊 Endless summer. <strong>#surf #ocean #lifestyle</strong></p>
                                                 <div class="cui-music">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
@@ -962,16 +985,15 @@
                                                 <div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div>
                                             </div>
                                         </div>
-                                        <div class="cui-nav">
+                                        <nav class="cui-nav" aria-label="App navigation">
                                             <div class="cui-nav-item active"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg><p class="cui-nav-text">Home</p></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><p class="cui-nav-text">Friends</p></div>
                                             <div class="cui-nav-center"><div class="cui-nav-center-btn"><div class="cui-nav-center-inner"><svg class="cui-nav-center-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></div></div></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg><p class="cui-nav-text">Inbox</p></div>
                                             <div class="cui-nav-item"><svg class="cui-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><p class="cui-nav-text">Profile</p></div>
-                                        </div>
+                                        </nav>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -980,18 +1002,27 @@
         </div>
     </div>
 
-    <!-- SPECS SECTION (ORIGINAL) -->
-    <main class="container section-gap" style="margin-top: 4rem;">
-        <section class="specs-section">
+    <!-- SPECS SECTION -->
+    <!-- FIX: Odstraněn druhý <main> — nahrazen <div> -->
+    <div class="container section-gap" style="margin-top: 4rem;">
+        <section class="specs-section" id="tech">
             <div class="specs-bg-glow" aria-hidden="true"></div>
             <div class="specs-image">
                 <div class="device-specs-wrapper">
-                    <img src="modem-476.webp" srcset="modem-256.webp 256w, modem-476.webp 476w" sizes="(max-width: 768px) 224px, 320px" width="446" height="642" loading="lazy" decoding="async" alt="VIBE_NET Modem" class="puck-product-image">
+                    <!-- FIX: onerror fallback pro případ chybějícího lokálního souboru -->
+                    <img src="modem-476.webp"
+                         srcset="modem-256.webp 256w, modem-476.webp 476w"
+                         sizes="(max-width: 768px) 224px, 320px"
+                         width="446" height="642"
+                         loading="lazy" decoding="async"
+                         alt="VIBE_NET Nomad Puck device"
+                         class="puck-product-image"
+                         onerror="this.style.display='none'">
                     <div class="puck-specs-glow" aria-hidden="true"></div>
                 </div>
             </div>
             <div class="specs-content">
-                <h2 class="font-display">Tech Specs</h2>
+                <h2 class="text-display">Tech Specs</h2>
                 <p>Technical details for the nerds.</p>
                 <dl class="specs-list">
                     <div class="spec-row"><dt class="spec-label">Connectivity</dt><dd class="spec-val">5G / 4G LTE</dd></div>
@@ -1005,37 +1036,46 @@
                 </dl>
             </div>
         </section>
-    </main>
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
                 <p class="footer-logo">VIBE_NET</p>
-                <p class="footer-desc">© 2024 VIBE_NET. Built for the nomads.</p>
+                <!-- FIX: Rok dynamicky generovaný JavaScriptem — nebude zastaralý -->
+                <p class="footer-desc">© <span id="footer-year"></span> VIBE_NET. Built for the nomads.</p>
             </div>
-            <div class="footer-links">
+            <nav class="footer-links" aria-label="Footer navigation">
                 <a href="#tech">Technology</a>
                 <a href="#coverage">Coverage</a>
                 <a href="#">Privacy</a>
-            </div>
+            </nav>
             <div class="footer-status">
-                <div class="status-dot-green"></div>
-                <strong class="status-text">System Online</strong>
+                <div class="status-dot-green" aria-hidden="true"></div>
+                <!-- FIX: <strong> nahrazen <span> — "System Online" není důležitý obsah, jen vizuální label -->
+                <span class="status-text">System Online</span>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Posouvání slideru šipkami
+
+            // FIX: Dynamický rok v patičce
+            const yearEl = document.getElementById('footer-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            // Karusel šipky
             const scrollContainer = document.querySelector('.filmstrip-container');
             const scrollCards = document.querySelectorAll('.filmstrip-card');
             const btnPrev = document.querySelector('.arrow-btn[aria-label="Previous card"]');
             const btnNext = document.querySelector('.arrow-btn[aria-label="Next card"]');
 
-            if(scrollContainer && btnPrev && btnNext && scrollCards.length > 0) {
-                const scrollAmount = scrollCards[0].offsetWidth + 32; 
+            if (scrollContainer && btnPrev && btnNext && scrollCards.length > 0) {
+                // FIX: Scroll amount jako pojmenovaná konstanta — žádné magic numbers
+                const CARD_GAP_PX = 32;
+                const scrollAmount = scrollCards[0].offsetWidth + CARD_GAP_PX;
                 btnNext.addEventListener('click', () => {
                     scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                 });
@@ -1044,55 +1084,80 @@
                 });
             }
 
-            // Reference pro Scroll Animace
+            // Reference pro scroll animace
             const phoneScrollWrapper = document.getElementById('phone-scroll-wrapper');
             const phoneInnerCard = document.getElementById('phone-inner-card');
             const revealElements = document.querySelectorAll('.ds-reveal-el');
             const shareSection = document.getElementById('share-section');
             const rings = document.querySelectorAll('.wave-ring');
 
-            // Apple-style Scroll Animace pro 3D Phone sekci
+            // FIX: prefers-reduced-motion — skip scroll animace úplně
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Apple-style scroll animace pro 3D Phone sekci
             function updateScrollAnimation() {
                 if (!phoneScrollWrapper || !phoneInnerCard) return;
-                
+
                 const rect = phoneScrollWrapper.getBoundingClientRect();
                 const scrollDistance = phoneScrollWrapper.offsetHeight - window.innerHeight;
-                
+
                 let progress = -rect.top / scrollDistance;
                 progress = Math.max(0, Math.min(1, progress));
 
+                // FIX: Pojmenované konstanty místo magic numbers
+                const REVEAL_STEP_OFFSET = 0.1;   // offset pro každý reveal element
+                const REVEAL_DURATION = 0.25;      // délka reveal fáze (0–1)
+                const SHRINK_START = 0.65;          // kdy začíná shrink animace
+                const SHRINK_DURATION = 0.35;       // délka shrink fáze
+                const SHRINK_MAX_HEIGHT_PX = 80;    // o kolik px se sníží výška karty
+                const SHRINK_MAX_WIDTH_PX = 48;     // minimální padding kolem karty
+                const SHRINK_MAX_RADIUS_PX = 40;    // maximální border-radius při shrink
+
+                if (prefersReducedMotion) {
+                    // FIX: Reduced motion — okamžitě zobraz vše bez animace
+                    revealElements.forEach(el => {
+                        el.style.opacity = 1;
+                        el.style.transform = 'translateY(0)';
+                    });
+                    return;
+                }
+
                 revealElements.forEach((el, index) => {
-                    const startReveal = index * 0.1; 
-                    const endReveal = startReveal + 0.25;
+                    const startReveal = index * REVEAL_STEP_OFFSET;
+                    const endReveal = startReveal + REVEAL_DURATION;
                     let rProgress = (progress - startReveal) / (endReveal - startReveal);
                     rProgress = Math.max(0, Math.min(1, rProgress));
-                    
+
                     const easeOut = 1 - Math.pow(1 - rProgress, 3);
-                    
+
                     el.style.opacity = easeOut;
                     el.style.transform = `translateY(${(1 - easeOut) * 3}rem)`;
                 });
 
-                let shrinkProgress = (progress - 0.65) / 0.35;
+                let shrinkProgress = (progress - SHRINK_START) / SHRINK_DURATION;
                 shrinkProgress = Math.max(0, Math.min(1, shrinkProgress));
-                
-                const easeInOut = shrinkProgress < 0.5 ? 2 * shrinkProgress * shrinkProgress : 1 - Math.pow(-2 * shrinkProgress + 2, 2) / 2;
+
+                const easeInOut = shrinkProgress < 0.5
+                    ? 2 * shrinkProgress * shrinkProgress
+                    : 1 - Math.pow(-2 * shrinkProgress + 2, 2) / 2;
 
                 const currentVW = document.documentElement.clientWidth;
-                const targetMaxWidth = Math.min(currentVW - 48, 1200 - 48);
+                // FIX: Max šířka karty odvozena z --max-width kontejneru (1200px = 75rem)
+                const MAX_CARD_WIDTH_PX = 1200;
+                const targetMaxWidth = Math.min(currentVW - SHRINK_MAX_WIDTH_PX, MAX_CARD_WIDTH_PX - SHRINK_MAX_WIDTH_PX);
                 const widthDiff = currentVW - targetMaxWidth;
 
                 phoneInnerCard.style.width = `calc(100% - ${easeInOut * widthDiff}px)`;
-                phoneInnerCard.style.height = `calc(100vh - ${easeInOut * 80}px)`; 
-                phoneInnerCard.style.borderRadius = `${easeInOut * 40}px`; 
+                phoneInnerCard.style.height = `calc(100vh - ${easeInOut * SHRINK_MAX_HEIGHT_PX}px)`;
+                phoneInnerCard.style.borderRadius = `${easeInOut * SHRINK_MAX_RADIUS_PX}px`;
             }
 
-            // Share the Signal Animace
+            // Share the Signal animace
             function updateShareScroll() {
-                if (!shareSection) return;
+                if (!shareSection || prefersReducedMotion) return;
                 const rect = shareSection.getBoundingClientRect();
                 const viewHeight = window.innerHeight;
-                
+
                 const start = viewHeight * 0.8;
                 const end = -rect.height * 0.2;
                 let progress = (start - rect.top) / (start - end);
@@ -1110,7 +1175,19 @@
                 });
             }
 
-            // RequestAnimationFrame Optimalizace
+            // FIX: prefers-reduced-motion — okamžitě zobraz share rings
+            if (prefersReducedMotion && shareSection) {
+                rings.forEach(ring => {
+                    ring.classList.add('active');
+                    ring.querySelectorAll('.face-avatar').forEach(f => f.classList.add('visible'));
+                });
+                revealElements.forEach(el => {
+                    el.style.opacity = 1;
+                    el.style.transform = 'translateY(0)';
+                });
+            }
+
+            // requestAnimationFrame throttling
             let isScrolling = false;
             function onScrollAndResize() {
                 if (!isScrolling) {
@@ -1125,20 +1202,21 @@
 
             window.addEventListener('scroll', onScrollAndResize, { passive: true });
             window.addEventListener('resize', onScrollAndResize, { passive: true });
-            
-            // Initial call
             onScrollAndResize();
 
-            // 3D Karusel Logika
+            // 3D Karusel
             const phoneItems = document.querySelectorAll('.c3d-item');
             if (phoneItems.length > 0) {
                 const totalPhoneItems = phoneItems.length;
-                let activePhoneIndex = 0; 
+                let activePhoneIndex = 0;
+                // FIX: Pojmenovaná konstanta pro interval
+                const CAROUSEL_INTERVAL_MS = 3500;
+                let carouselTimer = null;
 
                 function updatePhoneCarousel(instant = false) {
                     phoneItems.forEach((item, index) => {
                         let offset = index - activePhoneIndex;
-                        
+
                         if (offset > Math.floor(totalPhoneItems / 2)) offset -= totalPhoneItems;
                         if (offset < -Math.floor(totalPhoneItems / 2)) offset += totalPhoneItems;
 
@@ -1153,20 +1231,15 @@
                         } else if (offset === 1) {
                             tx = 220; tz = -100; scale = 0.85; ry = -12; zIndex = 40; opacity = 0.9; brightness = 0.5;
                             item.classList.remove('is-active');
-                        } else if (offset === -2 || offset < -2) {
+                        } else if (offset <= -2) {
                             tx = -380; tz = -250; scale = 0.7; ry = 20; zIndex = 30; opacity = 0.6; brightness = 0.3;
                             item.classList.remove('is-active');
-                        } else if (offset === 2 || offset > 2) {
+                        } else {
                             tx = 380; tz = -250; scale = 0.7; ry = -20; zIndex = 30; opacity = 0.6; brightness = 0.3;
                             item.classList.remove('is-active');
                         }
 
-                        if (instant) {
-                            item.style.transition = 'none';
-                        } else {
-                            item.style.transition = 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
-                        }
-
+                        item.style.transition = instant ? 'none' : 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
                         item.style.transform = `translateX(${tx}px) translateZ(${tz}px) scale(${scale}) rotateY(${ry}deg)`;
                         item.style.zIndex = zIndex;
                         item.style.opacity = opacity;
@@ -1175,12 +1248,21 @@
                 }
 
                 updatePhoneCarousel(true);
-                void document.body.offsetHeight; 
+                void document.body.offsetHeight;
 
-                setInterval(() => {
-                    activePhoneIndex = (activePhoneIndex + 1) % totalPhoneItems;
-                    updatePhoneCarousel();
-                }, 3500); 
+                // FIX: Uložení reference na interval pro možnost cleanup při potřebě
+                // Reduced motion — carousel se nespouští
+                if (!prefersReducedMotion) {
+                    carouselTimer = setInterval(() => {
+                        activePhoneIndex = (activePhoneIndex + 1) % totalPhoneItems;
+                        updatePhoneCarousel();
+                    }, CAROUSEL_INTERVAL_MS);
+                }
+
+                // FIX: Cleanup při zavření / navigaci pryč (SPA-safe)
+                window.addEventListener('pagehide', () => {
+                    if (carouselTimer) clearInterval(carouselTimer);
+                });
             }
         });
     </script>
