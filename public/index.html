@@ -1,26 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="VIBE NET - Internet Without The Leash. Forget cables. Forget landlords. The web flows where you flow.">
     <meta name="theme-color" content="#ffffff">
+    <!-- Security meta tags -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <link rel="preconnect" href="https://images.unsplash.com">
     <title>VIBE NET | Internet Without The Leash</title>
     <style>
+        /* =========================================================
+           DESIGN TOKENS
+           ========================================================= */
         :root {
-            --apple-blue: #0056b3;
+            --apple-blue:       #0056b3;
             --apple-blue-hover: #004085;
-            --apple-black: #1d1d1f;
-            --apple-gray: #55555a;
+            --apple-black:      #1d1d1f;
+            --apple-gray:       #55555a;
             --apple-light-gray: #f5f5f7;
-            --apple-bg: #ffffff;
-            --sticker-pink: #ff2d55;
-            --sticker-blue: #007aff;
-            --sticker-green: #34c759;
-            --sticker-orange: #ff9500;
-            --sys-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --apple-bg:         #ffffff;
+            --sticker-pink:     #ff2d55;
+            --sticker-blue:     #007aff;
+            --sticker-green:    #34c759;
+            --sticker-orange:   #ff9500;
+            --sys-font: system-ui, -apple-system, BlinkMacSystemFont,
+                        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+
+        /* =========================================================
+           RESET & BASE
+           ========================================================= */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         @media (prefers-reduced-motion: no-preference) {
@@ -38,32 +50,47 @@
             position: relative;
         }
 
-        a:focus-visible, button:focus-visible {
+        a:focus-visible,
+        button:focus-visible {
             outline: 2px solid var(--apple-blue);
             outline-offset: 4px;
             border-radius: 4px;
         }
-        a { text-decoration: none; color: inherit; transition: all 0.2s; }
-        ul { list-style: none; }
+        a   { text-decoration: none; color: inherit; transition: all 0.2s; }
+        ul  { list-style: none; }
         button { cursor: pointer; font-family: inherit; border: none; background: transparent; }
 
-        .text-display { font-weight: 700; letter-spacing: -0.02em; }
-        .gradient-text {
+        /* =========================================================
+           UTILITY CLASSES
+           ========================================================= */
+        .text-display   { font-weight: 700; letter-spacing: -0.02em; }
+        .gradient-text  {
             background: linear-gradient(135deg, #1d4ed8, #be185d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        /* =========================================================
+           REDUCED-MOTION OVERRIDES
+           ========================================================= */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+                animation-duration:        0.01ms !important;
+                animation-iteration-count: 1      !important;
+                transition-duration:       0.01ms !important;
             }
             .ds-reveal-el { opacity: 1 !important; transform: none !important; }
         }
 
-        .container { width: 100%; max-width: 75rem; margin: 0 auto; padding: 0 1.5rem; }
+        /* =========================================================
+           LAYOUT
+           ========================================================= */
+        .container {
+            width: 100%;
+            max-width: 75rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
         .section-gap {
             display: flex;
             flex-direction: column;
@@ -74,12 +101,34 @@
             z-index: 10;
         }
 
-        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-1.25rem); } 100% { transform: translateY(0); } }
-        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        /* =========================================================
+           KEYFRAMES
+           ========================================================= */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-1.25rem); }
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        @keyframes pulse-ring {
+            0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+            50%  { opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: .5; }
+        }
+        @keyframes ticker {
+            0%   { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
 
+        /* =========================================================
+           BACKGROUND BLOBS
+           ========================================================= */
         .blobs-wrapper {
             position: absolute;
             top: 0; left: 0;
@@ -89,37 +138,98 @@
             pointer-events: none;
             z-index: 0;
         }
-        .blob { position: absolute; border-radius: 50%; filter: blur(5rem); opacity: 0.4; will-change: transform; transform: translateZ(0); }
-        .blob-1 { top: -10%; left: 20%; width: 37.5rem; height: 37.5rem; background: radial-gradient(circle, #e0f2fe 0%, transparent 70%); }
-        .blob-2 { bottom: 10%; right: -10%; width: 31.25rem; height: 31.25rem; background: radial-gradient(circle, #fce7f3 0%, transparent 70%); }
-        .blob-3 { top: 40%; left: -10%; width: 25rem; height: 25rem; background: radial-gradient(circle, #e0f2fe 0%, transparent 70%); }
-
-        .nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding-top: 2rem; padding-bottom: 2rem;
-            position: relative; z-index: 50;
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(5rem);
+            opacity: 0.4;
+            will-change: transform;
+            transform: translateZ(0);
         }
-        .nav-logo { font-size: 1.25rem; color: var(--apple-black); margin: 0; }
-        .nav-links { display: none; gap: 2.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--apple-black); }
+        .blob-1 {
+            top: -10%; left: 20%;
+            width: 37.5rem; height: 37.5rem;
+            background: radial-gradient(circle, #e0f2fe 0%, transparent 70%);
+        }
+        .blob-2 {
+            bottom: 10%; right: -10%;
+            width: 31.25rem; height: 31.25rem;
+            background: radial-gradient(circle, #fce7f3 0%, transparent 70%);
+        }
+        .blob-3 {
+            top: 40%; left: -10%;
+            width: 25rem; height: 25rem;
+            background: radial-gradient(circle, #e0f2fe 0%, transparent 70%);
+        }
+
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            position: relative;
+            z-index: 50;
+        }
+        .nav-logo   { font-size: 1.25rem; color: var(--apple-black); margin: 0; }
+        .nav-links  { display: none; gap: 2.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--apple-black); }
         .nav-links a:hover { color: var(--apple-blue); }
-        .btn-nav { padding: 0.625rem 1.5rem; background: var(--apple-black); color: white; border-radius: 9999px; font-weight: 500; font-size: 0.8125rem; transition: all 0.2s; }
-        .btn-nav:hover { background: #333; }
+        .btn-nav {
+            padding: 0.625rem 1.5rem;
+            background: var(--apple-black);
+            color: white;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.8125rem;
+            transition: all 0.2s;
+        }
+        .btn-nav:hover  { background: #333; }
         .btn-nav:active { transform: scale(0.95); }
+
         @media (min-width: 48rem) { .nav-links { display: flex; } }
 
-        /* --- NOVÁ HERO SEKCE (Sticker Design) --- */
+        /* =========================================================
+           HERO
+           ========================================================= */
         .hero-new {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 2rem; min-height: auto; padding-top: 6rem; padding-bottom: 4rem; text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            min-height: auto;
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+            text-align: center;
         }
-        @media (min-width: 64rem) { .hero-new { min-height: 65vh; padding-top: 8rem; padding-bottom: 6rem; } }
-        
-        .hero-text { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; position: relative; z-index: 20; max-width: 64rem; }
-        
-        .hero-badge { 
-            background: #eff6ff; color: var(--apple-blue); padding: 0.375rem 1rem; border-radius: 9999px; 
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; 
-            display: inline-block; margin-bottom: 1.5rem; 
+        @media (min-width: 64rem) {
+            .hero-new { min-height: 65vh; padding-top: 8rem; padding-bottom: 6rem; }
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 20;
+            max-width: 64rem;
+        }
+
+        .hero-badge {
+            background: #eff6ff;
+            color: var(--apple-blue);
+            padding: 0.375rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 1.5rem;
         }
 
         .display-title {
@@ -161,7 +271,7 @@
             padding: clamp(8px, 1.5vw, 14px) clamp(24px, 4vw, 48px);
             border-radius: 20px;
             font-size: clamp(48px, 6vw, 80px);
-            box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
@@ -175,206 +285,931 @@
             pointer-events: none;
         }
 
-        .hero-text p.subtitle { 
-            font-size: 1.125rem; color: var(--apple-gray); font-weight: 500; 
-            max-width: 42rem; margin: 2.5rem 0 0 0; line-height: 1.5;
+        .hero-text p.subtitle {
+            font-size: 1.125rem;
+            color: var(--apple-gray);
+            font-weight: 500;
+            max-width: 42rem;
+            margin: 2.5rem 0 0 0;
+            line-height: 1.5;
         }
         @media (min-width: 64rem) { .hero-text p.subtitle { font-size: 1.25rem; } }
-        
-        .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; }
-        
-        .btn-primary { background: var(--apple-black); color: white; font-weight: 500; font-size: 1rem; padding: 0.875rem 2rem; border-radius: 9999px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); transition: all 0.3s; }
-        .btn-primary:hover { transform: translateY(-0.15rem); box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        .btn-primary {
+            background: var(--apple-black);
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.875rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        .btn-primary:hover  { transform: translateY(-0.15rem); box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); }
         .btn-primary:active { transform: scale(0.98); }
         @media (min-width: 48rem) { .btn-primary { font-size: 1.0625rem; padding: 1rem 2.5rem; } }
-        
-        .btn-text { color: var(--apple-blue); font-size: 1.0625rem; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
+
+        .btn-text {
+            color: var(--apple-blue);
+            font-size: 1.0625rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
 
-        /* --- ZBYTEK STYLŮ --- */
-        .usp-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 4rem; }
+        /* =========================================================
+           USP GRID
+           ========================================================= */
+        .usp-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
         @media (min-width: 40rem) { .usp-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 64rem) { .usp-grid { grid-template-columns: repeat(4, 1fr); } }
-        .glass-panel { background: var(--apple-light-gray); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease; border-radius: 2.25rem; }
-        .glass-panel:hover { transform: scale(1.02); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1); }
+
+        .glass-panel {
+            background: var(--apple-light-gray);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+            border-radius: 2.25rem;
+        }
+        .glass-panel:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
+        }
+
         .usp-card { padding: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
-        .usp-icon { font-size: 2.25rem; line-height: 1; display: block; }
+        .usp-icon  { font-size: 2.25rem; line-height: 1; display: block; }
         .usp-card h2 { font-size: 1.25rem; color: var(--apple-black); margin: 0; }
-        .usp-card p { color: var(--apple-gray); font-size: 0.9375rem; font-weight: 500; margin: 0; line-height: 1.6; }
+        .usp-card p  { color: var(--apple-gray); font-size: 0.9375rem; font-weight: 500; margin: 0; line-height: 1.6; }
 
+        /* =========================================================
+           PRICING
+           ========================================================= */
         .pricing-new { margin-top: 4rem; }
-        .pricing-new-inner { background: var(--apple-light-gray); border-radius: 3.125rem; padding: 3rem 2rem; display: flex; flex-direction: column; gap: 4rem; align-items: center; }
-        @media (min-width: 64rem) { .pricing-new-inner { flex-direction: row; padding: 6rem; gap: 4rem; } }
+        .pricing-new-inner {
+            background: var(--apple-light-gray);
+            border-radius: 3.125rem;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (min-width: 64rem) {
+            .pricing-new-inner { flex-direction: row; padding: 6rem; gap: 4rem; }
+        }
+
         .pricing-text-area { flex: 1; width: 100%; text-align: left; }
-        .pricing-text-area h2 { font-size: 3rem; line-height: 1; color: var(--apple-black); margin: 0 0 2rem 0; }
+        .pricing-text-area h2 {
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--apple-black);
+            margin: 0 0 2rem 0;
+        }
         @media (min-width: 64rem) { .pricing-text-area h2 { font-size: 4.5rem; } }
+
         .pricing-features { display: flex; flex-direction: column; gap: 1.5rem; }
-        .pricing-features li { display: flex; align-items: center; gap: 1rem; font-size: 1.25rem; font-weight: 500; color: var(--apple-black); }
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--apple-black);
+        }
         .pricing-features svg { width: 1.5rem; height: 1.5rem; color: var(--apple-blue); flex-shrink: 0; }
+
         .pricing-card-area { flex: 1; width: 100%; }
-        .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; overflow: hidden; width: 100%; max-width: 32rem; margin: 0 auto; text-align: left; }
-        .pricing-card-new::after { content: ''; position: absolute; top: 0; right: 0; width: 8rem; height: 8rem; background: #eff6ff; border-bottom-left-radius: 6rem; z-index: 0; pointer-events: none; }
+        .pricing-card-new {
+            background: white;
+            border-radius: 2.5rem;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 32rem;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .pricing-card-new::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 8rem; height: 8rem;
+            background: #eff6ff;
+            border-bottom-left-radius: 6rem;
+            z-index: 0;
+            pointer-events: none;
+        }
         .pricing-card-new > * { position: relative; z-index: 10; }
-        .pricing-card-new h3 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 3rem 0; }
-        .pricing-price-wrap { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 2rem; }
+        .pricing-card-new h3  { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 3rem 0; }
+
+        .pricing-price-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
         .pricing-price-wrap .price { font-size: 6rem; line-height: 1; color: var(--apple-black); }
-        .pricing-price-wrap .mo { color: var(--apple-gray); font-weight: 500; font-size: 1.875rem; margin: 0; }
-        .btn-pricing-new { width: 100%; padding: 1.25rem; border-radius: 1rem; background: var(--apple-blue); color: white; font-weight: 700; font-size: 1.25rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 86, 179, 0.2); transition: transform 0.2s; }
+        .pricing-price-wrap .mo    { color: var(--apple-gray); font-weight: 500; font-size: 1.875rem; margin: 0; }
+
+        .btn-pricing-new {
+            width: 100%;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            background: var(--apple-blue);
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 86, 179, 0.2);
+            transition: transform 0.2s;
+        }
         .btn-pricing-new:hover { transform: scale(1.02); background: var(--apple-blue-hover); }
-        .pricing-note { text-align: center; margin-top: 1.5rem; color: var(--apple-gray); font-weight: 500; font-size: 1rem; margin-bottom: 0; }
 
-        .share-section { position: relative; min-height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; margin-top: 4rem; background: #ffffff; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 20px 40px rgba(0,0,0,0.02); border-radius: 3.125rem; padding: 4rem 1.5rem; width: 100%; }
-        @media (min-width: 64rem) { .share-section { min-height: 800px; padding: 6rem; } }
-        .share-inner { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .pricing-note {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--apple-gray);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* =========================================================
+           SHARE SECTION
+           ========================================================= */
+        .share-section {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 4rem;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.02);
+            border-radius: 3.125rem;
+            padding: 4rem 1.5rem;
+            width: 100%;
+        }
+        @media (min-width: 64rem) {
+            .share-section { min-height: 800px; padding: 6rem; }
+        }
+
+        .share-inner {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .signal-transmitter { position: relative; z-index: 10; width: 100%; }
-        .share-title { font-size: clamp(3rem, 10vw, 8rem); line-height: 1; color: var(--apple-black); letter-spacing: -0.02em; text-align: center; position: relative; z-index: 10; margin: 0; }
-        .wave-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); border: 2px solid var(--apple-blue); border-radius: 50%; pointer-events: none; opacity: 0; z-index: -1; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease; }
-        .wave-ring.active { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
-        .wave-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 1px solid var(--apple-blue); border-radius: 50%; width: 100%; height: 100%; animation: pulse-ring 3s infinite; }
-        .face-pos { position: absolute; z-index: 20; }
-        .face-avatar { display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .face-avatar.visible { opacity: 1; transform: scale(1); }
-        .face-bubble { width: 48px; height: 48px; border-radius: 50%; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .face-label { font-size: 9px; font-weight: 700; color: var(--apple-gray); margin-top: 4px; text-transform: uppercase; }
-        .share-subtitle { font-size: 1.25rem; color: var(--apple-gray); font-weight: 500; text-align: center; margin-top: 5rem; max-width: 24rem; position: relative; z-index: 10; }
+        .share-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 1;
+            color: var(--apple-black);
+            letter-spacing: -0.02em;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin: 0;
+        }
 
-        .carousel-section { width: 100%; padding-top: 6rem; padding-bottom: 6rem; overflow: hidden; background: rgba(255,255,255,0.3); }
-        .carousel-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+        .wave-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            border: 2px solid var(--apple-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            z-index: -1;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+        }
+        .wave-ring.active {
+            opacity: 0.2;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .wave-pulse {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid var(--apple-blue);
+            border-radius: 50%;
+            width: 100%; height: 100%;
+            animation: pulse-ring 3s infinite;
+        }
+
+        /* Wave ring face positions — extracted from inline styles */
+        .face-pos { position: absolute; z-index: 20; }
+
+        /* Ring 1 faces */
+        .face-pos--r1-top {
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Ring 2 faces */
+        .face-pos--r2-tl { top: 15%; left: 5%; }
+        .face-pos--r2-tr { top: 15%; right: 5%; }
+
+        /* Ring 3 faces */
+        .face-pos--r3-bl  { bottom: 10%; left: 20%; }
+        .face-pos--r3-br  { bottom: 10%; right: 20%; }
+        .face-pos--r3-mid {
+            top: 50%;
+            right: -24px;
+            transform: translateY(-50%);
+        }
+
+        .face-avatar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .face-avatar.visible { opacity: 1; transform: scale(1); }
+
+        .face-bubble {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .face-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--apple-gray);
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .share-subtitle {
+            font-size: 1.25rem;
+            color: var(--apple-gray);
+            font-weight: 500;
+            text-align: center;
+            margin-top: 5rem;
+            max-width: 24rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* =========================================================
+           FILMSTRIP CAROUSEL
+           ========================================================= */
+        .carousel-section {
+            width: 100%;
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+        }
         .carousel-header h2 { font-size: 3rem; color: var(--apple-black); margin: 0; line-height: 1; }
-        .carousel-header p { color: var(--apple-gray); font-size: 1.25rem; font-weight: 500; margin: 1rem 0 0 0; }
+        .carousel-header p  { color: var(--apple-gray); font-size: 1.25rem; font-weight: 500; margin: 1rem 0 0 0; }
+
         .carousel-arrows { display: none; gap: 0.75rem; }
         @media (min-width: 48rem) { .carousel-arrows { display: flex; } }
-        .arrow-btn { width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: center; color: #9ca3af; transition: background-color 0.2s; font-size: 1.25rem; }
+
+        .arrow-btn {
+            width: 3rem; height: 3rem;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            transition: background-color 0.2s;
+            font-size: 1.25rem;
+        }
         .arrow-btn:hover { background: #f9fafb; color: var(--apple-black); }
-        .filmstrip-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2.5rem max(1.5rem, calc((100% - 75rem) / 2)) 5rem; gap: 2rem; scrollbar-width: none; -ms-overflow-style: none; }
+
+        .filmstrip-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2.5rem max(1.5rem, calc((100% - 75rem) / 2)) 5rem;
+            gap: 2rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
         .filmstrip-container::-webkit-scrollbar { display: none; }
-        .filmstrip-card { flex: 0 0 85vw; max-width: 31.25rem; height: 37.5rem; scroll-snap-align: center; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 3rem; position: relative; overflow: hidden; }
+
+        .filmstrip-card {
+            flex: 0 0 85vw;
+            max-width: 31.25rem;
+            height: 37.5rem;
+            scroll-snap-align: center;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
         @media (min-width: 48rem) { .filmstrip-card { flex: 0 0 40vw; } }
-        .fs-tag { font-size: 0.6875rem; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
-        .fs-title { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 1rem 0; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+
+        .fs-tag {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--apple-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .fs-title {
+            font-size: 2.25rem;
+            color: var(--apple-black);
+            margin: 0 0 1rem 0;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
         .fs-desc { color: var(--apple-gray); font-size: 1.125rem; font-weight: 500; margin: 0; line-height: 1.6; }
-        .fs-c1-visual { display: flex; justify-content: center; padding: 2rem 0; }
-        .fs-c1-puck { width: 10rem; height: 10rem; background: var(--apple-black); border-radius: 2.25rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); }
-        .fs-c1-puck-inner { width: 60%; height: 60%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); opacity: 0.4; }
-        .fs-c1-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
-        .fs-c1-badges { display: flex; gap: 0.5rem; }
-        .fs-c1-badge { background: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--apple-black); }
-        .fs-c1-price { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--apple-black); margin: 0; }
-        .fs-c2 { background: white; }
-        .fs-icon-box { width: 4rem; height: 4rem; border-radius: 1rem; background: #eff6ff; color: var(--apple-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
-        .fs-c2-bottom { margin-top: auto; padding-top: 2.5rem; border-top: 1px solid #f3f4f6; }
+
+        /* Card 1 — image bg */
+        .fs-c1-visual     { display: flex; justify-content: center; padding: 2rem 0; }
+        .fs-c1-puck {
+            width: 10rem; height: 10rem;
+            background: var(--apple-black);
+            border-radius: 2.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .fs-c1-puck-inner {
+            width: 60%; height: 60%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.4;
+        }
+        .fs-c1-bottom   { display: flex; justify-content: space-between; align-items: flex-end; }
+        .fs-c1-badges   { display: flex; gap: 0.5rem; }
+        .fs-c1-badge    {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.625rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--apple-black);
+        }
+        .fs-c1-price    { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--apple-black); margin: 0; }
+
+        /* Card 2 */
+        .fs-c2          { background: white; }
+        .fs-icon-box {
+            width: 4rem; height: 4rem;
+            border-radius: 1rem;
+            background: #eff6ff;
+            color: var(--apple-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .fs-c2-bottom   { margin-top: auto; padding-top: 2.5rem; border-top: 1px solid #f3f4f6; }
         .fs-progress-wrap { display: flex; align-items: center; gap: 1rem; }
-        .fs-progress-bar { flex-grow: 1; height: 0.375rem; background: #f3f4f6; border-radius: 9999px; overflow: hidden; }
+        .fs-progress-bar  { flex-grow: 1; height: 0.375rem; background: #f3f4f6; border-radius: 9999px; overflow: hidden; }
         .fs-progress-fill { height: 100%; width: 95%; background: var(--apple-blue); }
         .fs-progress-text { font-size: 0.6875rem; font-weight: 700; color: var(--apple-blue); letter-spacing: 0.05em; }
-        .fs-c3 { background: var(--apple-black); }
+
+        /* Card 3 */
+        .fs-c3           { background: var(--apple-black); }
         .fs-c3 .fs-title { color: white; }
-        .fs-c3 .fs-desc { color: #d4d4d8; }
-        .fs-c3-icon-box { background: rgba(255,255,255,0.1); color: #ec4899; }
-        .btn-ghost { width: 100%; padding: 1rem; border-radius: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
-        .btn-ghost:hover { background: rgba(255,255,255,0.1); }
-        .fs-c4 { background: var(--apple-light-gray); }
+        .fs-c3 .fs-desc  { color: #d4d4d8; }
+        .fs-c3-icon-box  { background: rgba(255, 255, 255, 0.1); color: #ec4899; }
+
+        .btn-ghost {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: background 0.2s;
+        }
+        .btn-ghost:hover { background: rgba(255, 255, 255, 0.1); }
+
+        /* Card 4 */
+        .fs-c4      { background: var(--apple-light-gray); }
         .fs-spec-list { display: flex; flex-direction: column; flex-grow: 1; overflow-y: auto; margin-top: 1rem; }
-        .fs-spec-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+        .fs-spec-row  {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
         .fs-spec-row:last-child { border-bottom: none; }
         .fs-spec-label { font-weight: 600; color: var(--apple-black); margin: 0; }
-        .fs-spec-val { color: var(--apple-gray); font-size: 0.875rem; font-weight: 500; }
-        .fs-c5 { background: var(--apple-light-gray); }
-        .fs-c5::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom right, rgba(0, 86, 179, 0.1), transparent); pointer-events: none; }
-        .fs-c5-avatars { height: 8rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        .fs-avatar-static { width: 3rem; height: 3rem; border-radius: 50%; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
-        .fs-avatar-more { background: #eff6ff; color: var(--apple-blue); font-weight: 700; font-size: 0.625rem; }
-        .fs-bg-image { background-size: cover; background-position: center; background-repeat: no-repeat; }
-        .fs-bg-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%); pointer-events: none; border-radius: inherit; }
+        .fs-spec-val   { color: var(--apple-gray); font-size: 0.875rem; font-weight: 500; }
 
-        /* --- SCROLL ANIMACE TELEFONU --- */
-        .ds-scroll-wrapper { position: relative; height: 250vh; z-index: 20; width: 100%; }
-        .ds-sticky-container { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: transparent; }
-        .ds-inner-card { background-color: #000; color: #fff; width: 100%; height: 100vh; border-radius: 0; position: relative; display: grid; grid-template-rows: auto 1fr; padding-top: 2rem; padding-bottom: 2rem; overflow: hidden; will-change: width, height, border-radius; }
+        /* Card 5 */
+        .fs-c5::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom right, rgba(0, 86, 179, 0.1), transparent);
+            pointer-events: none;
+        }
+        .fs-c5-avatars {
+            height: 8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .fs-avatar-static {
+            width: 3rem; height: 3rem;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .fs-avatar-more { background: #eff6ff; color: var(--apple-blue); font-weight: 700; font-size: 0.625rem; }
+
+        .fs-bg-image    { background-size: cover; background-position: center; background-repeat: no-repeat; }
+        .fs-bg-overlay  {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* =========================================================
+           PHONE SCROLL SECTION
+           ========================================================= */
+        .ds-scroll-wrapper {
+            position: relative;
+            height: 250vh; /* Tall enough for sticky scroll effect */
+            z-index: 20;
+            width: 100%;
+        }
+        .ds-sticky-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: transparent;
+        }
+        .ds-inner-card {
+            background-color: #000;
+            color: #fff;
+            width: 100%;
+            height: 100vh;
+            border-radius: 0;
+            position: relative;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            overflow: hidden;
+            will-change: width, height, border-radius;
+        }
         @media (min-width: 48rem) { .ds-inner-card { padding-top: 2.5rem; padding-bottom: 2.5rem; } }
-        @media (min-width: 64rem) { .ds-inner-card { padding-top: 3rem; padding-bottom: 3rem; } }
-        .ds-header { text-align: center; position: relative; z-index: 20; padding: 0 1.5rem; margin: 0 0 1rem 0; }
+        @media (min-width: 64rem) { .ds-inner-card { padding-top: 3rem;   padding-bottom: 3rem;   } }
+
+        .ds-header {
+            text-align: center;
+            position: relative;
+            z-index: 20;
+            padding: 0 1.5rem;
+            margin: 0 0 1rem 0;
+        }
         .ds-header h2 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 0.5rem 0; }
         @media (min-width: 48rem) { .ds-header h2 { font-size: 3.5rem; line-height: 1; margin: 0 0 1rem 0; } }
-        .ds-header p { font-size: 1rem; color: #d4d4d8; max-width: 40rem; margin: 0 auto; font-weight: 500; }
+        .ds-header p  { font-size: 1rem; color: #d4d4d8; max-width: 40rem; margin: 0 auto; font-weight: 500; }
         @media (min-width: 48rem) { .ds-header p { font-size: 1.125rem; } }
-        .ds-reveal-el { opacity: 0; transform: translateY(3rem); will-change: opacity, transform; }
-        .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; min-height: 0; overflow: hidden; }
-        .ds-3d-anchor { position: absolute; top: 50%; left: 50%; width: 0; height: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
-        
-        .ds-3d-wrapper { position: relative; width: 340px; height: 680px; transform-origin: center center; will-change: transform; }
-        
-        .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-        .c-ring-1 { width: 500px; height: 500px; border: 1px solid rgba(168, 85, 247, 0.3); }
-        .c-ring-2 { width: 800px; height: 800px; border: 1px solid rgba(99, 102, 241, 0.2); }
+
+        .ds-reveal-el {
+            opacity: 0;
+            transform: translateY(3rem);
+            will-change: opacity, transform;
+        }
+
+        /* 3D Phone Carousel */
+        .ds-3d-container-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%; height: 100%;
+            position: relative;
+            min-height: 0;
+            overflow: hidden;
+        }
+        .ds-3d-anchor {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .ds-3d-wrapper {
+            position: relative;
+            width: 340px; height: 680px;
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        /* Decorative rings around phone */
+        .c-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .c-ring-1 { width: 500px;  height: 500px;  border: 1px solid rgba(168, 85, 247, 0.3); }
+        .c-ring-2 { width: 800px;  height: 800px;  border: 1px solid rgba(99, 102, 241, 0.2); }
         .c-ring-3 { width: 1100px; height: 1100px; border: 1px solid rgba(59, 130, 246, 0.1); }
-        .mockup-picture { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 680px; z-index: 60; pointer-events: none; display: flex; align-items: center; justify-content: center; }
-        .mockup-picture img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 60px rgba(0,0,0,0.8)); }
+
+        .mockup-picture {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 340px; height: 680px;
+            z-index: 60;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mockup-picture img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.8));
+        }
         .mockup-picture img.img-error { visibility: hidden; }
-        .carousel-scene-3d { perspective: 1200px; transform-style: preserve-3d; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-        .c3d-item { position: absolute; width: 316px; height: 656px; border-radius: 42px; background: #18181b; overflow: hidden; transform-style: preserve-3d; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-        .c3d-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .c3d-grad-top { position: absolute; inset: 0 0 auto 0; height: 8rem; background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent); }
-        .c3d-grad-bot { position: absolute; inset: auto 0 0 0; height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4), transparent); }
-        .c3d-ui { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 10; }
+
+        .carousel-scene-3d {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .c3d-item {
+            position: absolute;
+            width: 316px; height: 656px;
+            border-radius: 42px;
+            background: #18181b;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .c3d-bg      { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .c3d-grad-top {
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 8rem;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+        }
+        .c3d-grad-bot {
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), transparent);
+        }
+        .c3d-ui {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 10;
+        }
         .c3d-item.is-active .c3d-ui { opacity: 1; pointer-events: auto; }
-        .cui-top { display: flex; justify-content: space-between; align-items: center; padding: 3.5rem 1.25rem 0.5rem; }
-        .cui-tabs { display: flex; gap: 1.25rem; font-weight: 700; font-size: 0.9375rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .cui-tab-dim { color: rgba(255,255,255,0.6); }
-        .cui-tab-active { color: white; position: relative; }
-        .cui-tab-active::after { content: ''; position: absolute; bottom: -0.375rem; left: 50%; transform: translateX(-50%); width: 2rem; height: 3px; background: white; border-radius: 9999px; }
-        .cui-bottom { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 0.75rem 5rem; }
-        .cui-info { display: flex; flex-direction: column; gap: 0.5rem; width: 75%; margin-bottom: 0.5rem; }
-        .cui-username { font-weight: 700; font-size: 1rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5); margin: 0; }
-        .cui-desc { font-size: 0.875rem; color: rgba(255,255,255,0.95); text-shadow: 0 2px 4px rgba(0,0,0,0.5); line-height: 1.3; margin: 0; }
+
+        /* Phone UI — top bar */
+        .cui-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3.5rem 1.25rem 0.5rem;
+        }
+        .cui-tabs        { display: flex; gap: 1.25rem; font-weight: 700; font-size: 0.9375rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .cui-tab-dim     { color: rgba(255, 255, 255, 0.6); }
+        .cui-tab-active  { color: white; position: relative; }
+        .cui-tab-active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.375rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2rem; height: 3px;
+            background: white;
+            border-radius: 9999px;
+        }
+
+        /* Phone UI — bottom bar */
+        .cui-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 0.75rem 5rem;
+        }
+        .cui-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 75%;
+            margin-bottom: 0.5rem;
+        }
+        .cui-username { font-weight: 700; font-size: 1rem; color: white; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); margin: 0; }
+        .cui-desc {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.3;
+            margin: 0;
+        }
         .cui-desc strong { color: white; }
-        .cui-music { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: rgba(255,255,255,0.9); margin-top: 0.25rem; }
-        .cui-music-ticker { overflow: hidden; width: 100%; position: relative; height: 1.25rem; display: flex; align-items: center; }
+
+        .cui-music {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0.25rem;
+        }
+        .cui-music-ticker {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            height: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
         .cui-music-text { position: absolute; white-space: nowrap; animation: ticker 6s linear infinite; }
-        .cui-actions { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-bottom: 0.5rem; }
-        .cui-avatar-wrap { position: relative; width: 2.875rem; height: 2.875rem; border-radius: 50%; border: 1.5px solid white; overflow: hidden; background: #27272a; margin-bottom: 0.5rem; }
+
+        /* Phone UI — action buttons */
+        .cui-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 0.5rem;
+        }
+        .cui-avatar-wrap {
+            position: relative;
+            width: 2.875rem; height: 2.875rem;
+            border-radius: 50%;
+            border: 1.5px solid white;
+            overflow: hidden;
+            background: #27272a;
+            margin-bottom: 0.5rem;
+        }
         .cui-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
-        .cui-avatar-plus { position: absolute; bottom: -0.375rem; left: 50%; transform: translateX(-50%); background: #f43f5e; width: 1.25rem; height: 1.25rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.125rem; font-weight: 500; line-height: 1; box-shadow: 0 1px 2px rgba(0,0,0,0.1); padding-bottom: 2px; }
-        .cui-action-btn { display: flex; flex-direction: column; align-items: center; gap: 0.125rem; }
-        .cui-action-icon { width: 2.125rem; height: 2.125rem; color: white; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
-        .cui-action-icon.text-rose { color: #f43f5e; }
+        .cui-avatar-plus {
+            position: absolute;
+            bottom: -0.375rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f43f5e;
+            width: 1.25rem; height: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 500;
+            line-height: 1;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding-bottom: 2px;
+        }
+        .cui-action-btn  { display: flex; flex-direction: column; align-items: center; gap: 0.125rem; }
+        .cui-action-icon { width: 2.125rem; height: 2.125rem; color: white; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5)); }
+        .cui-action-icon.text-rose   { color: #f43f5e; }
         .cui-action-icon.text-yellow { color: #facc15; }
-        .cui-action-text { font-size: 0.8125rem; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5); margin: 0; }
-        .cui-vinyl { width: 2.625rem; height: 2.625rem; border-radius: 50%; background: #27272a; border: 8px solid #1f1f1f; display: flex; align-items: center; justify-content: center; animation: spin-slow 4s linear infinite; margin-top: 0.5rem; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        .cui-action-text { font-size: 0.8125rem; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); margin: 0; }
+
+        .cui-vinyl {
+            width: 2.625rem; height: 2.625rem;
+            border-radius: 50%;
+            background: #27272a;
+            border: 8px solid #1f1f1f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin-slow 4s linear infinite;
+            margin-top: 0.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
         .cui-vinyl img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        .cui-nav { position: absolute; bottom: 0; width: 100%; height: 65px; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); display: flex; justify-content: space-around; align-items: center; padding: 0.25rem 0.25rem 0.75rem; border-top: 1px solid rgba(255,255,255,0.1); z-index: 20; }
-        .cui-nav-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; opacity: 0.6; position: relative; }
+
+        /* Phone UI — tab nav */
+        .cui-nav {
+            position: absolute;
+            bottom: 0; width: 100%;
+            height: 65px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.25rem 0.25rem 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 20;
+        }
+        .cui-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            opacity: 0.6;
+            position: relative;
+        }
         .cui-nav-item.active { opacity: 1; }
         .cui-nav-icon { width: 1.5rem; height: 1.5rem; color: white; }
         .cui-nav-text { font-size: 0.625rem; font-weight: 500; color: white; margin: 0; }
-        .cui-nav-badge { position: absolute; top: -0.25rem; right: -0.25rem; width: 1rem; height: 1rem; background: #f43f5e; border-radius: 50%; font-size: 0.5625rem; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid black; }
-        .cui-nav-center { display: flex; align-items: center; justify-content: center; position: relative; top: -0.5rem; }
-        .cui-nav-center-btn { width: 2.875rem; height: 1.875rem; border-radius: 0.75rem; background: linear-gradient(to right, #22d3ee, white, #fb7185); padding: 2px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        .cui-nav-center-inner { width: 100%; height: 100%; background: white; border-radius: 0.625rem; display: flex; align-items: center; justify-content: center; color: black; }
+        .cui-nav-badge {
+            position: absolute;
+            top: -0.25rem; right: -0.25rem;
+            width: 1rem; height: 1rem;
+            background: #f43f5e;
+            border-radius: 50%;
+            font-size: 0.5625rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            border: 2px solid black;
+        }
+        .cui-nav-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: -0.5rem;
+        }
+        .cui-nav-center-btn {
+            width: 2.875rem; height: 1.875rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(to right, #22d3ee, white, #fb7185);
+            padding: 2px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .cui-nav-center-inner {
+            width: 100%; height: 100%;
+            background: white;
+            border-radius: 0.625rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+        }
         .cui-nav-center-icon { width: 1.25rem; height: 1.25rem; fill: currentColor; }
 
-        .specs-section { background: var(--apple-light-gray); border-radius: 2.5rem; padding: 2.5rem; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 4rem; position: relative; }
+        /* =========================================================
+           SPECS SECTION
+           ========================================================= */
+        .specs-section {
+            background: var(--apple-light-gray);
+            border-radius: 2.5rem;
+            padding: 2.5rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+        }
         @media (min-width: 48rem) { .specs-section { padding: 5rem; } }
         @media (min-width: 64rem) { .specs-section { flex-direction: row; gap: 6rem; } }
-        .specs-bg-glow { position: absolute; top: 50%; left: 25%; width: 31.25rem; height: 31.25rem; background: rgba(219, 234, 254, 0.5); border-radius: 50%; filter: blur(6.25rem); transform: translateY(-50%); pointer-events: none; }
-        .specs-image { width: 100%; display: flex; justify-content: center; position: relative; z-index: 10; }
+
+        .specs-bg-glow {
+            position: absolute;
+            top: 50%; left: 25%;
+            width: 31.25rem; height: 31.25rem;
+            background: rgba(219, 234, 254, 0.5);
+            border-radius: 50%;
+            filter: blur(6.25rem);
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        .specs-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
         @media (min-width: 64rem) { .specs-image { width: 50%; } }
-        .device-specs-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 14rem; z-index: 10; }
+
+        .device-specs-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 14rem;
+            z-index: 10;
+        }
         @media (min-width: 48rem) { .device-specs-wrapper { width: 20rem; } }
-        .puck-product-image { width: 100%; height: auto; display: block; object-fit: contain; filter: drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4)); border-radius: 2rem; }
-        .puck-product-image.img-error { min-height: 12rem; background: var(--apple-light-gray); border-radius: 2rem; border: 2px dashed #d1d5db; }
-        .puck-specs-glow { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); background: rgba(0, 86, 179, 0.2); filter: blur(4rem); border-radius: 50%; z-index: -1; pointer-events: none; }
-        .specs-content { width: 100%; position: relative; z-index: 10; }
+
+        .puck-product-image {
+            width: 100%; height: auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 1.5rem 2.5rem rgba(0, 0, 0, 0.4));
+            border-radius: 2rem;
+        }
+        .puck-product-image.img-error {
+            min-height: 12rem;
+            background: var(--apple-light-gray);
+            border-radius: 2rem;
+            border: 2px dashed #d1d5db;
+        }
+        .puck-specs-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 100%; height: 100%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 86, 179, 0.2);
+            filter: blur(4rem);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .specs-content        { width: 100%; position: relative; z-index: 10; }
         @media (min-width: 64rem) { .specs-content { width: 50%; } }
-        .specs-content h2 { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 0.5rem 0; }
-        .specs-content > p { color: var(--apple-gray); font-weight: 500; margin: 0 0 2rem 0; }
+
+        .specs-content h2     { font-size: 2.25rem; color: var(--apple-black); margin: 0 0 0.5rem 0; }
+        .specs-content > p    { color: var(--apple-gray); font-weight: 500; margin: 0 0 2rem 0; }
         .specs-list { width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; }
-        .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.1); margin: 0; }
+        .spec-row   {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin: 0;
+        }
         .spec-row:last-child { border-bottom: none; }
         .spec-label { font-weight: 600; color: var(--apple-black); margin: 0; }
-        .spec-val { color: var(--apple-gray); font-weight: 500; font-size: 0.875rem; margin: 0; text-align: right; }
+        .spec-val   { color: var(--apple-gray); font-weight: 500; font-size: 0.875rem; margin: 0; text-align: right; }
 
+        /* =========================================================
+           CONTENT-VISIBILITY (deferred paint for below-fold sections)
+           ========================================================= */
         .carousel-section,
         .ds-scroll-wrapper,
         .share-section {
@@ -386,17 +1221,52 @@
             contain-intrinsic-size: 0 500px;
         }
 
-        .footer { width: 100%; border-top: 1px solid #e5e7eb; background: white; position: relative; z-index: 50; }
-        .footer-inner { max-width: 75rem; margin: 0 auto; padding: 4rem 1.5rem; display: flex; flex-direction: column; gap: 2rem; }
-        @media (min-width: 48rem) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; } }
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+        .footer {
+            width: 100%;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+            position: relative;
+            z-index: 50;
+        }
+        .footer-inner {
+            max-width: 75rem;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        @media (min-width: 48rem) {
+            .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; }
+        }
         .footer-brand { text-align: center; }
         @media (min-width: 48rem) { .footer-brand { text-align: left; } }
-        .footer-logo { font-size: 1.25rem; font-weight: 700; color: var(--apple-black); letter-spacing: -0.02em; margin: 0 0 0.5rem 0; }
-        .footer-desc { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; margin: 0; }
-        .footer-links { display: flex; gap: 2.5rem; font-size: 0.875rem; font-weight: 600; color: var(--apple-black); flex-wrap: wrap; justify-content: center; }
+
+        .footer-logo  { font-size: 1.25rem; font-weight: 700; color: var(--apple-black); letter-spacing: -0.02em; margin: 0 0 0.5rem 0; }
+        .footer-desc  { font-size: 0.875rem; color: var(--apple-gray); font-weight: 500; margin: 0; }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--apple-black);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
         .footer-links a:hover { color: var(--apple-blue); }
+
         .footer-status { display: flex; align-items: center; gap: 0.5rem; justify-content: center; }
-        .status-dot-green { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; margin-top: 0.35rem; }
+        .status-dot-green {
+            width: 0.5rem; height: 0.5rem;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+            margin-top: 0.35rem;
+        }
         .status-text { font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--apple-gray); margin: 0; }
     </style>
 </head>
@@ -419,37 +1289,28 @@
 
     <main>
         <div class="container">
-            <!-- ========================= -->
-            <!-- NOVÁ HERO SEKCE (Sticker) -->
-            <!-- ========================= -->
+            <!-- HERO -->
             <section class="hero-new" aria-labelledby="hero-heading">
                 <div class="hero-text">
-                    
-                    <!-- Pilulka zachována -->
-                    <div class="hero-badge">Now available in 40+ countries</div>
-                    
-                    <h1 class="display-title" id="hero-heading">VIBE_NET.</h1>
-                    
+                    <div class="hero-badge">100 GB dat</div>
+                    <h1 class="display-title" id="hero-heading">Datamánie</h1>
                     <div class="sticker-row">
                         <div class="sticker-container">
-                            <div class="sticker" id="sticker" style="background: var(--sticker-pink);">Share.</div>
+                            <div class="sticker" id="sticker" style="background: var(--sticker-pink);">Sdílej</div>
                         </div>
                     </div>
-
                     <p class="subtitle">
-                        The most reliable cellular infrastructure ever deployed. Engineered for high-capacity throughput and ultra-wideband consistency across the globe.
+                        The most reliable cellular infrastructure ever deployed. Engineered for
+                        high-capacity throughput and ultra-wideband consistency across the globe.
                     </p>
-
                     <div class="hero-actions">
                         <button class="btn-primary">Get Started</button>
                         <a href="#coverage" class="btn-text">View Coverage <span aria-hidden="true">›</span></a>
                     </div>
                 </div>
             </section>
-            <!-- ========================= -->
-            <!-- KONEC NOVÉ HERO SEKCE -->
-            <!-- ========================= -->
 
+            <!-- USP GRID -->
             <section aria-label="Key features" class="usp-grid">
                 <div class="glass-panel usp-card">
                     <span class="usp-icon" aria-hidden="true">⚡️</span>
@@ -473,14 +1334,30 @@
                 </div>
             </section>
 
+            <!-- PRICING -->
             <section class="pricing-new" aria-labelledby="pricing-heading">
                 <div class="pricing-new-inner">
                     <div class="pricing-text-area">
                         <h2 class="text-display" id="pricing-heading">One plan.<br>Infinite freedom.</h2>
                         <ul class="pricing-features">
-                            <li><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Unlimited 5G Data</li>
-                            <li><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Global Roaming Included</li>
-                            <li><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Priority Support 24/7</li>
+                            <li>
+                                <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Unlimited 5G Data
+                            </li>
+                            <li>
+                                <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Global Roaming Included
+                            </li>
+                            <li>
+                                <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Priority Support 24/7
+                            </li>
                         </ul>
                     </div>
                     <div class="pricing-card-area">
@@ -497,35 +1374,60 @@
                 </div>
             </section>
 
+            <!-- SHARE / SIGNAL SECTION -->
             <section class="share-section" id="share-section" aria-labelledby="share-heading">
                 <div class="share-inner">
                     <div class="signal-transmitter">
                         <h2 class="text-display share-title" id="share-heading">Share<br>the Signal.</h2>
+
+                        <!-- Ring 1 -->
                         <div class="wave-ring" style="width: 400px; height: 400px;">
                             <div class="wave-pulse"></div>
-                            <div class="face-pos" style="top: -24px; left: 50%; transform: translateX(-50%);">
-                                <div class="face-avatar"><div class="face-bubble" aria-hidden="true">😎</div><div class="face-label">Tom</div></div>
+                            <div class="face-pos face-pos--r1-top">
+                                <div class="face-avatar">
+                                    <div class="face-bubble" aria-hidden="true">😎</div>
+                                    <div class="face-label">Tom</div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Ring 2 -->
                         <div class="wave-ring" style="width: 650px; height: 650px;">
                             <div class="wave-pulse" style="animation-delay: -1s;"></div>
-                            <div class="face-pos" style="top: 15%; left: 5%;">
-                                <div class="face-avatar"><div class="face-bubble" aria-hidden="true">🤩</div><div class="face-label">Sara</div></div>
+                            <div class="face-pos face-pos--r2-tl">
+                                <div class="face-avatar">
+                                    <div class="face-bubble" aria-hidden="true">🤩</div>
+                                    <div class="face-label">Sara</div>
+                                </div>
                             </div>
-                            <div class="face-pos" style="top: 15%; right: 5%;">
-                                <div class="face-avatar"><div class="face-bubble" aria-hidden="true">🥳</div><div class="face-label">Leo</div></div>
+                            <div class="face-pos face-pos--r2-tr">
+                                <div class="face-avatar">
+                                    <div class="face-bubble" aria-hidden="true">🥳</div>
+                                    <div class="face-label">Leo</div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Ring 3 -->
                         <div class="wave-ring" style="width: 900px; height: 900px;">
                             <div class="wave-pulse" style="animation-delay: -2s;"></div>
-                            <div class="face-pos" style="bottom: 10%; left: 20%;">
-                                <div class="face-avatar"><div class="face-bubble" aria-hidden="true">🙌</div><div class="face-label">Yuki</div></div>
+                            <div class="face-pos face-pos--r3-bl">
+                                <div class="face-avatar">
+                                    <div class="face-bubble" aria-hidden="true">🙌</div>
+                                    <div class="face-label">Yuki</div>
+                                </div>
                             </div>
-                            <div class="face-pos" style="bottom: 10%; right: 20%;">
-                                <div class="face-avatar"><div class="face-bubble" aria-hidden="true">✨</div><div class="face-label">Mia</div></div>
+                            <div class="face-pos face-pos--r3-br">
+                                <div class="face-avatar">
+                                    <div class="face-bubble" aria-hidden="true">✨</div>
+                                    <div class="face-label">Mia</div>
+                                </div>
                             </div>
-                            <div class="face-pos" style="top: 50%; right: -24px; transform: translateY(-50%);">
-                                <div class="face-avatar"><div class="face-bubble" aria-hidden="true">😁</div><div class="face-label">Max</div></div>
+                            <div class="face-pos face-pos--r3-mid">
+                                <div class="face-avatar">
+                                    <div class="face-bubble" aria-hidden="true">😁</div>
+                                    <div class="face-label">Max</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -534,6 +1436,7 @@
             </section>
         </div>
 
+        <!-- FILMSTRIP CAROUSEL -->
         <section class="carousel-section" aria-labelledby="carousel-heading">
             <div class="container carousel-header">
                 <div>
@@ -546,7 +1449,7 @@
                 </div>
             </div>
             <div class="filmstrip-container" id="filmstrip">
-                
+                <!-- Card: image bg -->
                 <div class="filmstrip-card fs-bg-image" style="background-image: url('social-desktop.png');">
                     <div style="position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: flex-start; height: 100%;">
                         <div>
@@ -557,6 +1460,7 @@
                     </div>
                 </div>
 
+                <!-- Card: Social -->
                 <div class="filmstrip-card glass-panel fs-c5">
                     <div>
                         <span class="fs-tag">Social Protocol</span>
@@ -570,22 +1474,41 @@
                         <div class="fs-avatar-static fs-avatar-more" aria-hidden="true">+7</div>
                     </div>
                 </div>
+
+                <!-- Card: 5G -->
                 <div class="filmstrip-card glass-panel fs-c2">
                     <div>
-                        <div class="fs-icon-box" aria-hidden="true"><svg style="width:2rem;height:2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg></div>
+                        <div class="fs-icon-box" aria-hidden="true">
+                            <svg style="width:2rem;height:2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                            </svg>
+                        </div>
                         <h3 class="text-display fs-title">5G Ultra Wideband</h3>
                         <p class="fs-desc">Experience speeds that make fiber optic look like dial-up. Zero lag, 100% vibe.</p>
                     </div>
-                    <div class="fs-c2-bottom"><div class="fs-progress-wrap"><div class="fs-progress-bar"><div class="fs-progress-fill"></div></div><span class="fs-progress-text">95% UPTIME</span></div></div>
+                    <div class="fs-c2-bottom">
+                        <div class="fs-progress-wrap">
+                            <div class="fs-progress-bar"><div class="fs-progress-fill"></div></div>
+                            <span class="fs-progress-text">95% UPTIME</span>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Card: Ghost Mode -->
                 <div class="filmstrip-card glass-panel fs-c3">
                     <div>
-                        <div class="fs-icon-box fs-c3-icon-box" aria-hidden="true"><svg style="width:2rem;height:2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div>
+                        <div class="fs-icon-box fs-c3-icon-box" aria-hidden="true">
+                            <svg style="width:2rem;height:2rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                        </div>
                         <h3 class="text-display fs-title">Ghost Mode</h3>
                         <p class="fs-desc">No tracking. No contracts. No nonsense. You disappear when you want to.</p>
                     </div>
                     <div style="margin-top:auto;"><button class="btn-ghost">Go Invisible</button></div>
                 </div>
+
+                <!-- Card: Specs -->
                 <div class="filmstrip-card glass-panel fs-c4">
                     <div>
                         <h3 class="text-display fs-title" style="margin-bottom:0.5rem;">Technical Specs</h3>
@@ -599,6 +1522,8 @@
                         <div class="fs-spec-row"><span class="fs-spec-label">Security</span><span class="fs-spec-val">WPA3 Encr.</span></div>
                     </div>
                 </div>
+
+                <!-- Card: Product -->
                 <div class="filmstrip-card glass-panel">
                     <div>
                         <span class="fs-tag">Core Experience</span>
@@ -607,21 +1532,30 @@
                     </div>
                     <div class="fs-c1-visual"><div class="fs-c1-puck"><div class="fs-c1-puck-inner"></div></div></div>
                     <div class="fs-c1-bottom">
-                        <div class="fs-c1-badges"><span class="fs-c1-badge">Van Life</span><span class="fs-c1-badge">Remote</span></div>
+                        <div class="fs-c1-badges">
+                            <span class="fs-c1-badge">Van Life</span>
+                            <span class="fs-c1-badge">Remote</span>
+                        </div>
                         <p class="text-display fs-c1-price">199 CR</p>
                     </div>
                 </div>
+
                 <div style="flex:0 0 2rem;" aria-hidden="true"></div>
             </div>
         </section>
 
-        <!-- --- SEKCE S TELEFONEM --- -->
+        <!-- PHONE SCROLL SECTION -->
         <div class="ds-scroll-wrapper" id="phone-scroll-wrapper">
             <div class="ds-sticky-container">
                 <section class="ds-inner-card" id="phone-inner-card" aria-labelledby="phone-section-heading">
                     <div class="ds-header">
-                        <h2 class="text-display ds-reveal-el" id="phone-section-heading">Limitless content.<br><span class="gradient-text">Zero interruptions.</span></h2>
-                        <p class="ds-reveal-el">Swipe through your favorite feeds, stream in 4K, and share your moments instantly. VIBE_NET ensures your content never skips a beat, no matter where you are.</p>
+                        <h2 class="text-display ds-reveal-el" id="phone-section-heading">
+                            Limitless content.<br><span class="gradient-text">Zero interruptions.</span>
+                        </h2>
+                        <p class="ds-reveal-el">
+                            Swipe through your favorite feeds, stream in 4K, and share your moments instantly.
+                            VIBE_NET ensures your content never skips a beat, no matter where you are.
+                        </p>
                     </div>
                     <div class="ds-3d-container-cell ds-reveal-el">
                         <div class="ds-3d-anchor">
@@ -634,9 +1568,11 @@
                                     <img src="telefon-400.webp" alt="VIBE_NET app on smartphone" loading="lazy" decoding="async" onerror="this.classList.add('img-error')">
                                 </picture>
                                 <div class="carousel-scene-3d" id="phone3DCarousel" aria-hidden="true">
+                                    <!-- Slide 1 -->
                                     <div class="c3d-item is-active" data-index="0">
                                         <img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?q=80&w=800&auto=format&fit=crop" alt="" class="c3d-bg" loading="lazy" decoding="async">
-                                        <div class="c3d-grad-top"></div><div class="c3d-grad-bot"></div>
+                                        <div class="c3d-grad-top"></div>
+                                        <div class="c3d-grad-bot"></div>
                                         <div class="c3d-ui">
                                             <div class="cui-top">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
@@ -647,10 +1583,16 @@
                                                 <div class="cui-info">
                                                     <p class="cui-username">@snow_junkie</p>
                                                     <p class="cui-desc">Catching major air at the peak today! 🏂❄️ <strong>#snowboard #extreme</strong></p>
-                                                    <div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Original sound - Snow Junkie • Mountain Vibes</div></div></div>
+                                                    <div class="cui-music">
+                                                        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+                                                        <div class="cui-music-ticker"><div class="cui-music-text">Original sound - Snow Junkie • Mountain Vibes</div></div>
+                                                    </div>
                                                 </div>
                                                 <div class="cui-actions">
-                                                    <div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div>
+                                                    <div class="cui-avatar-wrap">
+                                                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async">
+                                                        <div class="cui-avatar-plus">+</div>
+                                                    </div>
                                                     <div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">1.2M</span></div>
                                                     <div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">4,821</span></div>
                                                     <div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">120K</span></div>
@@ -666,27 +1608,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Slide 2 -->
                                     <div class="c3d-item" data-index="1">
                                         <img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=800&auto=format&fit=crop" alt="" class="c3d-bg" loading="lazy" decoding="async">
-                                        <div class="c3d-grad-top"></div><div class="c3d-grad-bot"></div>
+                                        <div class="c3d-grad-top"></div>
+                                        <div class="c3d-grad-bot"></div>
                                         <div class="c3d-ui">
                                             <div class="cui-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg><div class="cui-tabs"><span class="cui-tab-dim">Following</span><span class="cui-tab-active">For you</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-                                            <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@sophia_dance</p><p class="cui-desc">Defying gravity today! ✨ <strong>#jump #happy #vibes</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Summer Feels - DJ Sunny</div></div></div></div>
-                                            <div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon text-rose" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">2.1M</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">12.5K</span></div><div class="cui-action-btn"><svg class="cui-action-icon text-yellow" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">340K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div>
+                                            <div class="cui-bottom">
+                                                <div class="cui-info"><p class="cui-username">@sophia_dance</p><p class="cui-desc">Defying gravity today! ✨ <strong>#jump #happy #vibes</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Summer Feels - DJ Sunny</div></div></div></div>
+                                                <div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon text-rose" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">2.1M</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">12.5K</span></div><div class="cui-action-btn"><svg class="cui-action-icon text-yellow" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">340K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Slide 3 -->
                                     <div class="c3d-item" data-index="2">
                                         <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop" alt="" class="c3d-bg" loading="lazy" decoding="async">
-                                        <div class="c3d-grad-top"></div><div class="c3d-grad-bot"></div>
+                                        <div class="c3d-grad-top"></div>
+                                        <div class="c3d-grad-bot"></div>
                                         <div class="c3d-ui">
                                             <div class="cui-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg><div class="cui-tabs"><span class="cui-tab-dim">Following</span><span class="cui-tab-active">For you</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
                                             <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@cyber_walker</p><p class="cui-desc">Night walks in Tokyo. 🌃✨ <strong>#tokyo #neon #cyberpunk</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Midnight City - Cyber Walker</div></div></div></div><div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">720K</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">5,430</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">88K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div></div>
                                         </div>
                                     </div>
+                                    <!-- Slide 4 -->
                                     <div class="c3d-item" data-index="3">
                                         <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&auto=format&fit=crop" alt="" class="c3d-bg" loading="lazy" decoding="async">
-                                        <div class="c3d-grad-top"></div><div class="c3d-grad-bot"></div>
+                                        <div class="c3d-grad-top"></div>
+                                        <div class="c3d-grad-bot"></div>
                                         <div class="c3d-ui">
                                             <div class="cui-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg><div class="cui-tabs"><span class="cui-tab-dim">Following</span><span class="cui-tab-active">For you</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
                                             <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@wave_rider</p><p class="cui-desc">Perfect conditions this morning! 🌊 <strong>#surf #ocean #lifestyle</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Ocean Breeze - Beach Vibes</div></div></div></div><div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">512K</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">2,104</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">38K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div></div>
@@ -700,15 +1649,20 @@
             </div>
         </div>
 
+        <!-- SPECS -->
         <div class="container section-gap" style="margin-top: 4rem;">
             <section class="specs-section" id="tech" aria-labelledby="specs-heading">
                 <div class="specs-bg-glow" aria-hidden="true"></div>
                 <div class="specs-image">
                     <div class="device-specs-wrapper">
-                        <img src="modem-476.webp" srcset="modem-256.webp 256w, modem-476.webp 476w"
-                             sizes="(max-width: 768px) 224px, 320px" width="446" height="642"
-                             loading="lazy" decoding="async" alt="VIBE_NET Nomad Puck modem"
-                             class="puck-product-image" onerror="this.classList.add('img-error')">
+                        <img src="modem-476.webp"
+                             srcset="modem-256.webp 256w, modem-476.webp 476w"
+                             sizes="(max-width: 768px) 224px, 320px"
+                             width="446" height="642"
+                             loading="lazy" decoding="async"
+                             alt="VIBE_NET Nomad Puck modem"
+                             class="puck-product-image"
+                             onerror="this.classList.add('img-error')">
                         <div class="puck-specs-glow" aria-hidden="true"></div>
                     </div>
                 </div>
@@ -749,194 +1703,331 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    (() => {
+        'use strict';
 
-            const footerYear = document.getElementById('footer-year');
-            if (footerYear) footerYear.textContent = new Date().getFullYear();
+        // =========================================================
+        // CONFIGURATION
+        // =========================================================
+        const CONFIG = {
+            sticker: {
+                interval:  3000, // ms between sticker text changes
+                exitDelay: 400,  // ms to wait for exit animation before swapping text
+                states: [
+                    { text: 'Sdílej',      color: 'var(--sticker-pink)',   rotate: -3   },
+                    { text: 'Objevuj',     color: 'var(--sticker-blue)',   rotate:  2   },
+                    { text: 'Poslouchej', color: 'var(--sticker-orange)', rotate:  3   },
+                    { text: 'Vytvářej',   color: 'var(--sticker-green)',  rotate: -2.5 },
+                ],
+            },
+            scrollAnim: {
+                shrinkStart:     0.65, // scroll progress (0–1) when card starts shrinking
+                shrinkDuration:  0.35, // how long (in progress units) the shrink takes
+                maxCardWidth:    1200, // max px width of the shrunk card
+                maxHeightReduce: 80,   // px to subtract from 100vh at max shrink
+                maxBorderRadius: 40,   // px border-radius at max shrink
+                revealStagger:   0.1,  // scroll-progress gap between each reveal element
+                revealDuration:  0.25, // scroll-progress span for each reveal element
+            },
+            carousel: {
+                interval: 3500, // ms between auto-advances
+            },
+            filmstrip: {
+                gap: 32, // px gap between cards (matches CSS gap: 2rem)
+            },
+        };
 
-            // --- ANIMACE NOVÉ HERO SEKCE (Sticker) ---
+        // =========================================================
+        // HELPERS
+        // =========================================================
+
+        /** Clamps a value between min and max. */
+        const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
+
+        /** Ease-out cubic (fast start, slow end). */
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+        /** Ease-in-out quad. */
+        const easeInOutQuad = (t) =>
+            t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+        /** Returns true when the user prefers reduced motion. */
+        const prefersReducedMotion = () =>
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // =========================================================
+        // FOOTER YEAR
+        // =========================================================
+        function initFooterYear() {
+            const el = document.getElementById('footer-year');
+            if (el) el.textContent = new Date().getFullYear();
+        }
+
+        // =========================================================
+        // STICKER ANIMATION
+        // Returns a cleanup function.
+        // =========================================================
+        function initSticker() {
             const sticker = document.getElementById('sticker');
-            if (sticker) {
-                const states = [
-                    { text: 'Share.', color: 'var(--sticker-pink)', rotate: -3 },
-                    { text: 'Explore.', color: 'var(--sticker-blue)', rotate: 2 },
-                    { text: 'Build.', color: 'var(--sticker-green)', rotate: -2.5 },
-                    { text: 'Listen.', color: 'var(--sticker-orange)', rotate: 3 }
-                ];
-                let index = 0;
+            if (!sticker) return () => {};
 
-                function updateSticker() {
-                    sticker.classList.add('hidden');
-                    setTimeout(() => {
-                        index = (index + 1) % states.length;
-                        const state = states[index];
-                        
-                        sticker.textContent = state.text;
-                        sticker.style.backgroundColor = state.color;
-                        sticker.style.transform = `translate(-50%, -50%) rotate(${state.rotate}deg)`;
-                        
-                        sticker.classList.remove('hidden');
-                    }, 400);
-                }
-                setInterval(updateSticker, 3000);
+            const { states, interval, exitDelay } = CONFIG.sticker;
+            let index = 0;
+
+            function updateSticker() {
+                sticker.classList.add('hidden');
+                setTimeout(() => {
+                    index = (index + 1) % states.length;
+                    const { text, color, rotate } = states[index];
+                    sticker.textContent = state.text; // fix: use local var
+                    sticker.style.backgroundColor = color;
+                    sticker.style.transform = `translate(-50%, -50%) rotate(${rotate}deg)`;
+                    sticker.classList.remove('hidden');
+                }, exitDelay);
             }
-            // -------------------------------
 
+            // Fix: local state reference inside closure
+            function tick() {
+                sticker.classList.add('hidden');
+                setTimeout(() => {
+                    index = (index + 1) % states.length;
+                    const { text, color, rotate } = states[index];
+                    sticker.textContent = text;
+                    sticker.style.backgroundColor = color;
+                    sticker.style.transform = `translate(-50%, -50%) rotate(${rotate}deg)`;
+                    sticker.classList.remove('hidden');
+                }, exitDelay);
+            }
+
+            const timerId = setInterval(tick, interval);
+            return () => clearInterval(timerId);
+        }
+
+        // =========================================================
+        // FILMSTRIP CAROUSEL (horizontal scroll + arrow buttons)
+        // =========================================================
+        function initFilmstrip() {
             const filmstrip = document.getElementById('filmstrip');
-            const filmCards = document.querySelectorAll('.filmstrip-card');
-            const btnPrev = document.getElementById('btn-prev');
-            const btnNext = document.getElementById('btn-next');
+            const btnPrev   = document.getElementById('btn-prev');
+            const btnNext   = document.getElementById('btn-next');
+            const cards     = filmstrip ? filmstrip.querySelectorAll('.filmstrip-card') : [];
 
-            if (filmstrip && btnPrev && btnNext && filmCards.length > 0) {
-                let cachedScrollAmt = 0;
-                const getScrollAmt = () => cachedScrollAmt || (cachedScrollAmt = filmCards[0].offsetWidth + 32);
-                window.addEventListener('resize', () => { cachedScrollAmt = 0; }, { passive: true });
-                btnNext.addEventListener('click', () => filmstrip.scrollBy({ left:  getScrollAmt(), behavior: 'smooth' }));
-                btnPrev.addEventListener('click', () => filmstrip.scrollBy({ left: -getScrollAmt(), behavior: 'smooth' }));
+            if (!filmstrip || !btnPrev || !btnNext || cards.length === 0) return;
+
+            // Cache scroll amount; invalidate on resize.
+            let cachedScrollAmt = 0;
+            const getScrollAmt = () =>
+                cachedScrollAmt || (cachedScrollAmt = cards[0].offsetWidth + CONFIG.filmstrip.gap);
+
+            window.addEventListener('resize', () => { cachedScrollAmt = 0; }, { passive: true });
+            btnNext.addEventListener('click', () => filmstrip.scrollBy({ left:  getScrollAmt(), behavior: 'smooth' }));
+            btnPrev.addEventListener('click', () => filmstrip.scrollBy({ left: -getScrollAmt(), behavior: 'smooth' }));
+        }
+
+        // =========================================================
+        // SCROLL ANIMATION — phone card shrink + reveal
+        // =========================================================
+        function initScrollAnimation() {
+            const wrapper      = document.getElementById('phone-scroll-wrapper');
+            const card         = document.getElementById('phone-inner-card');
+            const revealEls    = document.querySelectorAll('.ds-reveal-el');
+            const containerCell = document.querySelector('.ds-3d-container-cell');
+            const phoneWrapper = document.querySelector('.ds-3d-wrapper');
+
+            if (!wrapper || !card) return;
+
+            const reduced = prefersReducedMotion();
+            const { shrinkStart, shrinkDuration, maxCardWidth, maxHeightReduce, maxBorderRadius, revealStagger, revealDuration } = CONFIG.scrollAnim;
+
+            if (reduced) {
+                revealEls.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
             }
 
-            const SCROLL_ANIM = {
-                SHRINK_START:      0.65, 
-                SHRINK_DURATION:   0.35, 
-                MAX_CARD_WIDTH:    1200, 
-                MAX_HEIGHT_REDUCE: 80,   
-                MAX_BORDER_RADIUS: 40,   
-                REVEAL_STAGGER:    0.1,  
-                REVEAL_DURATION:   0.25, 
-                CAROUSEL_INTERVAL: 3500, 
-            };
+            function update() {
+                const rect           = wrapper.getBoundingClientRect();
+                const scrollDistance = wrapper.offsetHeight - window.innerHeight;
+                const progress       = clamp(-rect.top / scrollDistance, 0, 1);
 
-            const phoneScrollWrapper = document.getElementById('phone-scroll-wrapper');
-            const phoneInnerCard = document.getElementById('phone-inner-card');
-            const revealElements = document.querySelectorAll('.ds-reveal-el');
-            const shareSection = document.getElementById('share-section');
-            const rings = document.querySelectorAll('.wave-ring');
-
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            function updateScrollAnimation() {
-                if (!phoneScrollWrapper || !phoneInnerCard) return;
-
-                if (!prefersReducedMotion) {
-                    const rect = phoneScrollWrapper.getBoundingClientRect();
-                    const scrollDistance = phoneScrollWrapper.offsetHeight - window.innerHeight;
-                    let progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
-
-                    revealElements.forEach((el, i) => {
-                        const start = i * SCROLL_ANIM.REVEAL_STAGGER;
-                        const end = start + SCROLL_ANIM.REVEAL_DURATION;
-                        const p = Math.max(0, Math.min(1, (progress - start) / (end - start)));
-                        const ease = 1 - Math.pow(1 - p, 3);
-                        el.style.opacity = ease;
-                        el.style.transform = `translateY(${(1 - ease) * 3}rem)`;
+                // Staggered reveal for text elements
+                if (!reduced) {
+                    revealEls.forEach((el, i) => {
+                        const start = i * revealStagger;
+                        const end   = start + revealDuration;
+                        const t     = easeOutCubic(clamp((progress - start) / (end - start), 0, 1));
+                        el.style.opacity   = t;
+                        el.style.transform = `translateY(${(1 - t) * 3}rem)`;
                     });
 
-                    let shrink = Math.max(0, Math.min(1, (progress - SCROLL_ANIM.SHRINK_START) / SCROLL_ANIM.SHRINK_DURATION));
-                    const ease = shrink < 0.5 ? 2 * shrink * shrink : 1 - Math.pow(-2 * shrink + 2, 2) / 2;
+                    // Card shrink/round animation
+                    const shrinkRaw = clamp((progress - shrinkStart) / shrinkDuration, 0, 1);
+                    const ease      = easeInOutQuad(shrinkRaw);
+                    const vw        = document.documentElement.clientWidth;
+                    const targetW   = Math.min(vw - 48, maxCardWidth - 48);
 
-                    const vw = document.documentElement.clientWidth;
-                    const target = Math.min(vw - 48, SCROLL_ANIM.MAX_CARD_WIDTH - 48);
-
-                    phoneInnerCard.style.width = `calc(100% - ${ease * (vw - target)}px)`;
-                    phoneInnerCard.style.height = `calc(100vh - ${ease * SCROLL_ANIM.MAX_HEIGHT_REDUCE}px)`;
-                    phoneInnerCard.style.borderRadius = `${ease * SCROLL_ANIM.MAX_BORDER_RADIUS}px`;
-                } else {
-                    revealElements.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+                    card.style.width        = `calc(100% - ${ease * (vw - targetW)}px)`;
+                    card.style.height       = `calc(100vh - ${ease * maxHeightReduce}px)`;
+                    card.style.borderRadius = `${ease * maxBorderRadius}px`;
                 }
 
-                const containerCell = document.querySelector('.ds-3d-container-cell');
-                const phoneWrapper = document.querySelector('.ds-3d-wrapper');
-                
+                // Phone mockup scale-to-fit
                 if (containerCell && phoneWrapper) {
-                    const cellHeight = containerCell.clientHeight;
-                    const cellWidth = containerCell.clientWidth;
-                    
-                    const safeHeight = 680 + 40; 
-                    const safeWidth = 340 + 40;
-
-                    const scaleY = cellHeight / safeHeight;
-                    const scaleX = cellWidth / safeWidth;
-
-                    const finalScale = Math.max(0.2, Math.min(scaleX, scaleY, 0.9));
-                    
-                    phoneWrapper.style.transform = `scale(${finalScale})`;
+                    // Phone natural size: 340 × 680 px; add 40 px breathing room
+                    const scaleY = containerCell.clientHeight / (680 + 40);
+                    const scaleX = containerCell.clientWidth  / (340 + 40);
+                    const scale  = clamp(Math.min(scaleX, scaleY), 0.2, 0.9);
+                    phoneWrapper.style.transform = `scale(${scale})`;
                 }
             }
 
-            function updateShareScroll() {
-                if (!shareSection) return;
-                const rect = shareSection.getBoundingClientRect();
-                const vh = window.innerHeight;
-                const progress = Math.max(0, Math.min(1, (vh * 0.8 - rect.top) / (vh * 0.8 + rect.height * 0.2)));
+            return update;
+        }
+
+        // =========================================================
+        // SHARE SECTION — wave ring reveal on scroll
+        // =========================================================
+        function initShareSection() {
+            const section = document.getElementById('share-section');
+            const rings   = section ? section.querySelectorAll('.wave-ring') : [];
+
+            if (!section || rings.length === 0) return;
+
+            function update() {
+                const rect     = section.getBoundingClientRect();
+                const vh       = window.innerHeight;
+                // Progress: 0 when section top is at 80% viewport, 1 when section scrolls past.
+                const progress = clamp((vh * 0.8 - rect.top) / (vh * 0.8 + rect.height * 0.2), 0, 1);
 
                 rings.forEach((ring, i) => {
                     const threshold = (i + 1) / (rings.length + 1);
-                    const active = progress > threshold;
+                    const active    = progress > threshold;
                     ring.classList.toggle('active', active);
                     ring.querySelectorAll('.face-avatar').forEach(f => f.classList.toggle('visible', active));
                 });
             }
 
-            let rafPending = false;
-            function onScrollResize() {
-                if (!rafPending) {
-                    requestAnimationFrame(() => {
-                        updateScrollAnimation();
-                        updateShareScroll();
-                        rafPending = false;
-                    });
-                    rafPending = true;
+            return update;
+        }
+
+        // =========================================================
+        // COMBINED SCROLL / RESIZE HANDLER (single rAF per frame)
+        // =========================================================
+        function initScrollHandler(updateFns) {
+            let pending = false;
+
+            function onFrame() {
+                updateFns.forEach(fn => fn && fn());
+                pending = false;
+            }
+
+            function schedule() {
+                if (!pending) {
+                    requestAnimationFrame(onFrame);
+                    pending = true;
                 }
             }
 
-            window.addEventListener('scroll', onScrollResize, { passive: true });
-            window.addEventListener('resize', onScrollResize, { passive: true });
-            onScrollResize();
+            window.addEventListener('scroll', schedule, { passive: true });
+            window.addEventListener('resize', schedule, { passive: true });
+            schedule(); // run once on load
+        }
 
-            const scheduleCarousel = window.requestIdleCallback
+        // =========================================================
+        // 3D PHONE CAROUSEL (auto-rotating TikTok-style cards)
+        // Returns a cleanup function.
+        // =========================================================
+        function initPhoneCarousel() {
+            const items = document.querySelectorAll('.c3d-item');
+            if (items.length === 0) return () => {};
+
+            const total   = items.length;
+            let activeIdx = 0;
+            const reduced = prefersReducedMotion();
+
+            // Position offsets for each relative slot (0 = center, ±1 = sides, ±2+ = hidden)
+            const SLOT_STYLES = [
+                /* offset  0 */ { tx:    0, tz:    0, scale: 1,    ry:   0, z: 50, opacity: 1,   brightness: 1,   active: true  },
+                /* offset -1 */ { tx: -220, tz: -100, scale: 0.85, ry:  12, z: 40, opacity: 0.9, brightness: 0.5, active: false },
+                /* offset +1 */ { tx:  220, tz: -100, scale: 0.85, ry: -12, z: 40, opacity: 0.9, brightness: 0.5, active: false },
+                /* offset -2 */ { tx: -380, tz: -250, scale: 0.7,  ry:  20, z: 30, opacity: 0.6, brightness: 0.3, active: false },
+                /* offset +2 */ { tx:  380, tz: -250, scale: 0.7,  ry: -20, z: 30, opacity: 0.6, brightness: 0.3, active: false },
+            ];
+
+            function getSlotStyle(offset) {
+                if (offset === 0)  return SLOT_STYLES[0];
+                if (offset === -1) return SLOT_STYLES[1];
+                if (offset === 1)  return SLOT_STYLES[2];
+                if (offset <= -2)  return SLOT_STYLES[3];
+                return SLOT_STYLES[4];
+            }
+
+            function render(instant) {
+                items.forEach((item, i) => {
+                    let offset = i - activeIdx;
+                    // Wrap offset for circular layout
+                    if (offset >  Math.floor(total / 2)) offset -= total;
+                    if (offset < -Math.floor(total / 2)) offset += total;
+
+                    const s = getSlotStyle(offset);
+                    item.style.transition = (instant || reduced)
+                        ? 'none'
+                        : 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+                    item.style.transform  = `translateX(${s.tx}px) translateZ(${s.tz}px) scale(${s.scale}) rotateY(${s.ry}deg)`;
+                    item.style.zIndex     = s.z;
+                    item.style.opacity    = s.opacity;
+                    item.style.filter     = `brightness(${s.brightness})`;
+                    item.classList.toggle('is-active', s.active);
+                });
+            }
+
+            // First frame: set positions instantly, then enable transitions.
+            render(true);
+            requestAnimationFrame(() => requestAnimationFrame(() => render(false)));
+
+            const timerId = setInterval(() => {
+                activeIdx = (activeIdx + 1) % total;
+                render(false);
+            }, CONFIG.carousel.interval);
+
+            return () => clearInterval(timerId);
+        }
+
+        // =========================================================
+        // BOOTSTRAP
+        // =========================================================
+        function init() {
+            initFooterYear();
+
+            const cleanupSticker = initSticker();
+            initFilmstrip();
+
+            const updateScroll = initScrollAnimation();
+            const updateShare  = initShareSection();
+
+            initScrollHandler([updateScroll, updateShare]);
+
+            // Defer heavy carousel init until browser is idle
+            const scheduleIdle = window.requestIdleCallback
                 ? (fn) => requestIdleCallback(fn, { timeout: 2000 })
                 : (fn) => setTimeout(fn, 200);
 
-            scheduleCarousel(() => {
-                const phoneItems = document.querySelectorAll('.c3d-item');
-                if (phoneItems.length > 0) {
-                    let activeIdx = 0;
-                    const total = phoneItems.length;
+            let cleanupCarousel = () => {};
+            scheduleIdle(() => { cleanupCarousel = initPhoneCarousel() || (() => {}); });
 
-                    function updateCarousel(instant) {
-                        phoneItems.forEach((item, i) => {
-                            let offset = i - activeIdx;
-                            if (offset > Math.floor(total / 2)) offset -= total;
-                            if (offset < -Math.floor(total / 2)) offset += total;
+            // Cleanup all intervals when the page is hidden/unloaded
+            window.addEventListener('pagehide', () => {
+                cleanupSticker();
+                cleanupCarousel();
+            });
+        }
 
-                            let tx = 0, tz = 0, ry = 0, scale = 1, z = 0, opacity = 1, brightness = 1;
+        // Run after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
 
-                            if      (offset === 0)   { tx=0;    tz=0;    scale=1;    ry=0;   z=50; opacity=1;   brightness=1;   item.classList.add('is-active'); }
-                            else if (offset === -1)  { tx=-220; tz=-100; scale=0.85; ry=12;  z=40; opacity=0.9; brightness=0.5; item.classList.remove('is-active'); }
-                            else if (offset === 1)   { tx=220;  tz=-100; scale=0.85; ry=-12; z=40; opacity=0.9; brightness=0.5; item.classList.remove('is-active'); }
-                            else if (offset <= -2)   { tx=-380; tz=-250; scale=0.7;  ry=20;  z=30; opacity=0.6; brightness=0.3; item.classList.remove('is-active'); }
-                            else                     { tx=380;  tz=-250; scale=0.7;  ry=-20; z=30; opacity=0.6; brightness=0.3; item.classList.remove('is-active'); }
-
-                            item.style.transition = (instant || prefersReducedMotion) ? 'none' : 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
-                            item.style.transform = `translateX(${tx}px) translateZ(${tz}px) scale(${scale}) rotateY(${ry}deg)`;
-                            item.style.zIndex = z;
-                            item.style.opacity = opacity;
-                            item.style.filter = `brightness(${brightness})`;
-                        });
-                    }
-
-                    updateCarousel(true);
-                    requestAnimationFrame(() => requestAnimationFrame(() => updateCarousel(false)));
-
-                    const carouselTimer = setInterval(() => {
-                        activeIdx = (activeIdx + 1) % total;
-                        updateCarousel(false);
-                    }, SCROLL_ANIM.CAROUSEL_INTERVAL);
-
-                    window.addEventListener('pagehide', () => clearInterval(carouselTimer));
-                }
-            }); 
-        });
+    })();
     </script>
 </body>
 </html>
