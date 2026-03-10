@@ -103,28 +103,121 @@
         .btn-nav:active { transform: scale(0.95); }
         @media (min-width: 48rem) { .nav-links { display: flex; } }
 
+        /* --- NOVÁ HERO SEKCE (Sloučená s původními styly VIBE NET) --- */
         .hero-new {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 2rem; min-height: auto; padding-top: 4rem; padding-bottom: 4rem; text-align: center;
+            gap: 2rem; min-height: auto; padding-top: 6rem; padding-bottom: 4rem; text-align: center;
         }
-        @media (min-width: 64rem) { .hero-new { min-height: 65vh; padding-top: 6rem; padding-bottom: 6rem; } }
-        .hero-text { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; position: relative; z-index: 20; max-width: 48rem; }
-        .hero-badge { background: #eff6ff; color: var(--apple-blue); padding: 0.375rem 1rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; }
-        .hero-text h1 { font-size: clamp(3rem, 10vw, 6.5rem); line-height: 0.95; color: var(--apple-black); margin: 0; }
-        .hero-text p.subtitle { font-size: 1.125rem; color: var(--apple-gray); font-weight: 500; max-width: 32rem; margin: 0; }
-        @media (min-width: 64rem) { .hero-text p.subtitle { font-size: 1.5rem; } }
-        .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-        .btn-primary { background: var(--apple-blue); color: white; font-weight: 600; font-size: 1rem; padding: 0.875rem 2rem; border-radius: 9999px; box-shadow: 0 10px 20px rgba(0, 86, 179, 0.2); transition: all 0.3s; }
-        .btn-primary:hover { background: var(--apple-blue-hover); transform: translateY(-0.25rem); }
-        @media (min-width: 48rem) { .btn-primary { font-size: 1.125rem; padding: 1rem 2.5rem; } }
-        .btn-text { color: var(--apple-blue); font-size: 1.125rem; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
+        @media (min-width: 64rem) { .hero-new { min-height: 65vh; padding-top: 8rem; padding-bottom: 6rem; } }
+        
+        .hero-text { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; position: relative; z-index: 20; max-width: 64rem; }
+        
+        .hero-badge { 
+            background: #eff6ff; color: var(--apple-blue); padding: 0.375rem 1rem; border-radius: 9999px; 
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; 
+            display: inline-block; margin-bottom: 1.5rem; 
+        }
+
+        .display-title {
+            font-size: clamp(4rem, 12vw, 8.5rem);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            color: var(--apple-black);
+            margin: 0;
+        }
+
+        .tagline-row {
+            font-size: clamp(1.75rem, 5vw, 3.75rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--apple-black);
+            position: relative;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .word-wrapper {
+            display: inline-flex;
+            position: relative;
+            padding: 0.5rem 1.5rem;
+            min-width: clamp(140px, 20vw, 240px);
+            justify-content: center;
+        }
+
+        .rotating-word {
+            color: var(--apple-blue);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .lasso-svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 125%;
+            height: 155%;
+            transform: translate(-50%, -50%) rotate(-2deg);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .lasso-path {
+            fill: none;
+            stroke: var(--apple-blue);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLasso 1s ease forwards;
+        }
+
+        .underline-svg {
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            width: 100%;
+            max-width: 300px;
+            height: 20px;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .underline-path {
+            fill: none;
+            stroke: var(--apple-gray);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            opacity: 0.4;
+        }
+
+        @keyframes drawLasso {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .hero-text p.subtitle { 
+            font-size: 1.125rem; color: var(--apple-gray); font-weight: 500; 
+            max-width: 42rem; margin: 2.5rem 0 0 0; line-height: 1.5;
+        }
+        @media (min-width: 64rem) { .hero-text p.subtitle { font-size: 1.25rem; } }
+        
+        .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+        
+        .btn-primary { background: var(--apple-black); color: white; font-weight: 500; font-size: 1rem; padding: 0.875rem 2rem; border-radius: 9999px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); transition: all 0.3s; }
+        .btn-primary:hover { transform: translateY(-0.15rem); box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); }
+        .btn-primary:active { transform: scale(0.98); }
+        @media (min-width: 48rem) { .btn-primary { font-size: 1.0625rem; padding: 1rem 2.5rem; } }
+        
+        .btn-text { color: var(--apple-blue); font-size: 1.0625rem; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
-        .hero-sticker-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; position: relative; }
-        .sticker { background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transform: rotate(-6deg); padding: 0.5rem 1rem; border-radius: 0.5rem; z-index: 20; text-align: center; }
-        .sticker-val { font-size: 1.125rem; line-height: 1; display: block; color: var(--apple-black); }
-        .sticker-label { font-size: 0.5625rem; font-weight: 700; color: var(--apple-gray); margin-top: 0.25rem; letter-spacing: 0.1em; display: block; }
 
+
+        /* --- ZBYTEK STYLŮ --- */
         .usp-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 4rem; }
         @media (min-width: 40rem) { .usp-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 64rem) { .usp-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -235,7 +328,6 @@
         .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; min-height: 0; overflow: hidden; }
         .ds-3d-anchor { position: absolute; top: 50%; left: 50%; width: 0; height: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
         
-        /* FIX: Odstraněny tvrdé zarážky z CSS. Měřítko řídí plně JS na základě aktuálního dostupného místa! */
         .ds-3d-wrapper { position: relative; width: 340px; height: 680px; transform-origin: center center; will-change: transform; }
         
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
@@ -352,23 +444,44 @@
 
     <main>
         <div class="container">
+            <!-- ========================= -->
+            <!-- NOVÁ HERO SEKCE ZAČÍNÁ ZDE -->
+            <!-- ========================= -->
             <section class="hero-new" aria-labelledby="hero-heading">
                 <div class="hero-text">
+                    
+                    <!-- PŮVODNÍ PILULKA, KTEROU JSI CHTĚL ZACHOVAT -->
                     <div class="hero-badge">Now available in 40+ countries</div>
-                    <h1 class="text-display" id="hero-heading">Internet<br><span class="gradient-text">Without</span><br>The Leash.</h1>
-                    <p class="subtitle">Forget cables. Forget landlords. The web flows where you flow.</p>
-                    <div class="hero-sticker-wrap">
-                        <div class="sticker">
-                            <strong class="text-display sticker-val">88 CR</strong>
-                            <small class="sticker-label">PER MONTH</small>
+                    
+                    <!-- NOVÝ NADPIS A DESIGN (VIBE_NET místo Dataplan pro dodržení brandingu) -->
+                    <h1 class="display-title" id="hero-heading">VIBE_NET.</h1>
+                    
+                    <div class="tagline-row">
+                        <span>Internet that lets you</span>
+                        <div class="word-wrapper">
+                            <svg class="lasso-svg" viewBox="0 0 200 100">
+                                <path class="lasso-path" id="lasso" d="M190,50 C190,80 150,90 100,90 C50,90 10,80 10,50 C10,20 50,10 100,10 C150,10 190,20 190,50 C192,65 170,85 140,88"></path>
+                            </svg>
+                            <span class="rotating-word" id="word">Share</span>
                         </div>
+                        <svg class="underline-svg" viewBox="0 0 300 20">
+                            <path class="underline-path" d="M10,10 Q150,18 290,12 M30,15 Q150,22 270,14"></path>
+                        </svg>
                     </div>
+
+                    <p class="subtitle">
+                        Forget cables. Forget landlords. The web flows where you flow. Engineered for high-capacity throughput and ultra-wideband consistency.
+                    </p>
+
                     <div class="hero-actions">
-                        <button class="btn-primary">Gimme Access</button>
-                        <a href="#tech" class="btn-text">Learn more <span aria-hidden="true">›</span></a>
+                        <button class="btn-primary">Get Started</button>
+                        <a href="#coverage" class="btn-text">View Coverage <span aria-hidden="true">›</span></a>
                     </div>
                 </div>
             </section>
+            <!-- ========================= -->
+            <!-- KONEC NOVÉ HERO SEKCE -->
+            <!-- ========================= -->
 
             <section aria-label="Key features" class="usp-grid">
                 <div class="glass-panel usp-card">
@@ -467,14 +580,7 @@
             </div>
             <div class="filmstrip-container" id="filmstrip">
                 
-                <!-- NOVÁ KARTA S OBRÁZKEM V POZADÍ -->
-                <!-- TIP: Pokud použiješ světlý obrázek v pozadí, změň barvy textu na tyto hex kódy:
-                     fs-tag (Social Protocol): style="color: #0056b3;"
-                     fs-title (nadpis): style="color: #1d1d1f;"
-                     fs-desc (perex): style="color: #55555a;"
-                -->
                 <div class="filmstrip-card fs-bg-image" style="background-image: url('social-desktop.png');">
-                    <!-- Obsah karty (zarovnán nahoru díky justify-content: flex-start) -->
                     <div style="position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: flex-start; height: 100%;">
                         <div>
                             <span class="fs-tag" style="color: #93c5fd;">Social Protocol</span>
@@ -598,9 +704,8 @@
                                         <div class="c3d-grad-top"></div><div class="c3d-grad-bot"></div>
                                         <div class="c3d-ui">
                                             <div class="cui-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg><div class="cui-tabs"><span class="cui-tab-dim">Following</span><span class="cui-tab-active">For you</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-                                            <div class="cui-bottom">
-                                                <div class="cui-info"><p class="cui-username">@sophia_dance</p><p class="cui-desc">Defying gravity today! ✨ <strong>#jump #happy #vibes</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Summer Feels - DJ Sunny</div></div></div></div>
-                                                <div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon text-rose" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">2.1M</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">12.5K</span></div><div class="cui-action-btn"><svg class="cui-action-icon text-yellow" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">340K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div>
+                                            <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@sophia_dance</p><p class="cui-desc">Defying gravity today! ✨ <strong>#jump #happy #vibes</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Summer Feels - DJ Sunny</div></div></div></div>
+                                            <div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon text-rose" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">2.1M</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">12.5K</span></div><div class="cui-action-btn"><svg class="cui-action-icon text-yellow" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">340K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1518809595274-9426d83050c2?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div>
                                             </div>
                                         </div>
                                     </div>
@@ -682,6 +787,31 @@
             const footerYear = document.getElementById('footer-year');
             if (footerYear) footerYear.textContent = new Date().getFullYear();
 
+            // --- ANIMACE NOVÉ HERO SEKCE ---
+            const wordEl = document.getElementById('word');
+            const lasso = document.getElementById('lasso');
+            if (wordEl && lasso) {
+                const words = ['Share', 'Explore', 'Build', 'Listen'];
+                let index = 0;
+
+                function updateWord() {
+                    wordEl.style.opacity = '0';
+                    wordEl.style.transform = 'translateY(5px)';
+                    lasso.style.animation = 'none';
+                    lasso.offsetHeight; // trigger reflow
+                    
+                    setTimeout(() => {
+                        index = (index + 1) % words.length;
+                        wordEl.textContent = words[index];
+                        wordEl.style.opacity = '1';
+                        wordEl.style.transform = 'translateY(0)';
+                        lasso.style.animation = 'drawLasso 0.8s ease forwards';
+                    }, 300);
+                }
+                setInterval(updateWord, 3000);
+            }
+            // -------------------------------
+
             const filmstrip = document.getElementById('filmstrip');
             const filmCards = document.querySelectorAll('.filmstrip-card');
             const btnPrev = document.getElementById('btn-prev');
@@ -717,7 +847,6 @@
             function updateScrollAnimation() {
                 if (!phoneScrollWrapper || !phoneInnerCard) return;
 
-                // 1) ČÁST: Animace scrollu (opacita textů a zmenšování celé černé karty)
                 if (!prefersReducedMotion) {
                     const rect = phoneScrollWrapper.getBoundingClientRect();
                     const scrollDistance = phoneScrollWrapper.offsetHeight - window.innerHeight;
@@ -745,25 +874,19 @@
                     revealElements.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
                 }
 
-                // 2) ČÁST (FIX): Dynamické měřítko telefonu - garantuje, že nebude nikdy ořízlý!
-                // Spouští se vždy, i při zakázaných animacích (přepočítá se na velikost okna)
                 const containerCell = document.querySelector('.ds-3d-container-cell');
                 const phoneWrapper = document.querySelector('.ds-3d-wrapper');
                 
                 if (containerCell && phoneWrapper) {
-                    // Přečteme skutečně zbývající místo po vykreslení textu v nadpisu
                     const cellHeight = containerCell.clientHeight;
                     const cellWidth = containerCell.clientWidth;
                     
-                    // Bezpečnostní základní velikost s menším okrajem (padding), aby nebyl přilepený na okraje
                     const safeHeight = 680 + 40; 
                     const safeWidth = 340 + 40;
 
-                    // Jaká škála je potřeba, aby se vešel?
                     const scaleY = cellHeight / safeHeight;
                     const scaleX = cellWidth / safeWidth;
 
-                    // Telefon přizpůsobíme nejmenší hodnotě (nepřekročí kontejner), maximum je 0.9 aby nebyl "obří" na desktopu
                     const finalScale = Math.max(0.2, Math.min(scaleX, scaleY, 0.9));
                     
                     phoneWrapper.style.transform = `scale(${finalScale})`;
