@@ -15,6 +15,10 @@
             --apple-gray: #55555a;
             --apple-light-gray: #f5f5f7;
             --apple-bg: #ffffff;
+            --sticker-pink: #ff2d55;
+            --sticker-blue: #007aff;
+            --sticker-green: #34c759;
+            --sticker-orange: #ff9500;
             --sys-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -103,7 +107,7 @@
         .btn-nav:active { transform: scale(0.95); }
         @media (min-width: 48rem) { .nav-links { display: flex; } }
 
-        /* --- NOVÁ HERO SEKCE (Sloučená s původními styly VIBE NET) --- */
+        /* --- NOVÁ HERO SEKCE (Sticker Design) --- */
         .hero-new {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             gap: 2rem; min-height: auto; padding-top: 6rem; padding-bottom: 4rem; text-align: center;
@@ -127,76 +131,48 @@
             margin: 0;
         }
 
-        .tagline-row {
-            font-size: clamp(1.75rem, 5vw, 3.75rem);
-            font-weight: 600;
+        .sticker-row {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
             letter-spacing: -0.02em;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
+            gap: 16px;
             color: var(--apple-black);
-            position: relative;
-            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 1rem;
         }
 
-        .word-wrapper {
-            display: inline-flex;
+        .sticker-container {
+            display: inline-block;
             position: relative;
-            padding: 0.5rem 1.5rem;
-            min-width: clamp(140px, 20vw, 240px);
-            justify-content: center;
+            height: clamp(80px, 10vw, 130px);
+            min-width: clamp(220px, 25vw, 360px);
+            vertical-align: middle;
         }
 
-        .rotating-word {
-            color: var(--apple-blue);
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-
-        .lasso-svg {
+        .sticker {
             position: absolute;
+            left: 50%;
             top: 50%;
-            left: 50%;
-            width: 125%;
-            height: 155%;
-            transform: translate(-50%, -50%) rotate(-2deg);
-            z-index: 1;
+            transform: translate(-50%, -50%) rotate(-3deg);
+            background: var(--sticker-pink);
+            color: white;
+            padding: clamp(8px, 1.5vw, 14px) clamp(24px, 4vw, 48px);
+            border-radius: 20px;
+            font-size: clamp(48px, 6vw, 80px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .sticker.hidden {
+            opacity: 0;
+            transform: translate(-50%, -30%) rotate(5deg) scale(0.8);
             pointer-events: none;
-        }
-
-        .lasso-path {
-            fill: none;
-            stroke: var(--apple-blue);
-            stroke-width: 3;
-            stroke-linecap: round;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawLasso 1s ease forwards;
-        }
-
-        .underline-svg {
-            position: absolute;
-            bottom: -1rem;
-            left: 50%;
-            width: 100%;
-            max-width: 300px;
-            height: 20px;
-            transform: translateX(-50%);
-            pointer-events: none;
-        }
-
-        .underline-path {
-            fill: none;
-            stroke: var(--apple-gray);
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            opacity: 0.4;
-        }
-
-        @keyframes drawLasso {
-            to { stroke-dashoffset: 0; }
         }
 
         .hero-text p.subtitle { 
@@ -205,7 +181,7 @@
         }
         @media (min-width: 64rem) { .hero-text p.subtitle { font-size: 1.25rem; } }
         
-        .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+        .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; }
         
         .btn-primary { background: var(--apple-black); color: white; font-weight: 500; font-size: 1rem; padding: 0.875rem 2rem; border-radius: 9999px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); transition: all 0.3s; }
         .btn-primary:hover { transform: translateY(-0.15rem); box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); }
@@ -215,7 +191,6 @@
         .btn-text { color: var(--apple-blue); font-size: 1.0625rem; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
         .btn-text span { transition: transform 0.2s; }
         .btn-text:hover span { transform: translateX(0.25rem); }
-
 
         /* --- ZBYTEK STYLŮ --- */
         .usp-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 4rem; }
@@ -445,32 +420,24 @@
     <main>
         <div class="container">
             <!-- ========================= -->
-            <!-- NOVÁ HERO SEKCE ZAČÍNÁ ZDE -->
+            <!-- NOVÁ HERO SEKCE (Sticker) -->
             <!-- ========================= -->
             <section class="hero-new" aria-labelledby="hero-heading">
                 <div class="hero-text">
                     
-                    <!-- PŮVODNÍ PILULKA, KTEROU JSI CHTĚL ZACHOVAT -->
+                    <!-- Pilulka zachována -->
                     <div class="hero-badge">Now available in 40+ countries</div>
                     
-                    <!-- NOVÝ NADPIS A DESIGN (VIBE_NET místo Dataplan pro dodržení brandingu) -->
                     <h1 class="display-title" id="hero-heading">VIBE_NET.</h1>
                     
-                    <div class="tagline-row">
-                        <span>Internet that lets you</span>
-                        <div class="word-wrapper">
-                            <svg class="lasso-svg" viewBox="0 0 200 100">
-                                <path class="lasso-path" id="lasso" d="M190,50 C190,80 150,90 100,90 C50,90 10,80 10,50 C10,20 50,10 100,10 C150,10 190,20 190,50 C192,65 170,85 140,88"></path>
-                            </svg>
-                            <span class="rotating-word" id="word">Share</span>
+                    <div class="sticker-row">
+                        <div class="sticker-container">
+                            <div class="sticker" id="sticker" style="background: var(--sticker-pink);">Share.</div>
                         </div>
-                        <svg class="underline-svg" viewBox="0 0 300 20">
-                            <path class="underline-path" d="M10,10 Q150,18 290,12 M30,15 Q150,22 270,14"></path>
-                        </svg>
                     </div>
 
                     <p class="subtitle">
-                        Forget cables. Forget landlords. The web flows where you flow. Engineered for high-capacity throughput and ultra-wideband consistency.
+                        The most reliable cellular infrastructure ever deployed. Engineered for high-capacity throughput and ultra-wideband consistency across the globe.
                     </p>
 
                     <div class="hero-actions">
@@ -648,7 +615,7 @@
             </div>
         </section>
 
-        <!-- --- OPRAVENÁ SEKCE S TELEFONEM --- -->
+        <!-- --- SEKCE S TELEFONEM --- -->
         <div class="ds-scroll-wrapper" id="phone-scroll-wrapper">
             <div class="ds-sticky-container">
                 <section class="ds-inner-card" id="phone-inner-card" aria-labelledby="phone-section-heading">
@@ -787,28 +754,31 @@
             const footerYear = document.getElementById('footer-year');
             if (footerYear) footerYear.textContent = new Date().getFullYear();
 
-            // --- ANIMACE NOVÉ HERO SEKCE ---
-            const wordEl = document.getElementById('word');
-            const lasso = document.getElementById('lasso');
-            if (wordEl && lasso) {
-                const words = ['Share', 'Explore', 'Build', 'Listen'];
+            // --- ANIMACE NOVÉ HERO SEKCE (Sticker) ---
+            const sticker = document.getElementById('sticker');
+            if (sticker) {
+                const states = [
+                    { text: 'Share.', color: 'var(--sticker-pink)', rotate: -3 },
+                    { text: 'Explore.', color: 'var(--sticker-blue)', rotate: 2 },
+                    { text: 'Build.', color: 'var(--sticker-green)', rotate: -2.5 },
+                    { text: 'Listen.', color: 'var(--sticker-orange)', rotate: 3 }
+                ];
                 let index = 0;
 
-                function updateWord() {
-                    wordEl.style.opacity = '0';
-                    wordEl.style.transform = 'translateY(5px)';
-                    lasso.style.animation = 'none';
-                    lasso.offsetHeight; // trigger reflow
-                    
+                function updateSticker() {
+                    sticker.classList.add('hidden');
                     setTimeout(() => {
-                        index = (index + 1) % words.length;
-                        wordEl.textContent = words[index];
-                        wordEl.style.opacity = '1';
-                        wordEl.style.transform = 'translateY(0)';
-                        lasso.style.animation = 'drawLasso 0.8s ease forwards';
-                    }, 300);
+                        index = (index + 1) % states.length;
+                        const state = states[index];
+                        
+                        sticker.textContent = state.text;
+                        sticker.style.backgroundColor = state.color;
+                        sticker.style.transform = `translate(-50%, -50%) rotate(${state.rotate}deg)`;
+                        
+                        sticker.classList.remove('hidden');
+                    }, 400);
                 }
-                setInterval(updateWord, 3000);
+                setInterval(updateSticker, 3000);
             }
             // -------------------------------
 
