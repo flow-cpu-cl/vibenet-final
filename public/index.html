@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://images.unsplash.com">
     <title>VIBE NET | Internet Without The Leash</title>
     
+    <!-- Tailwind CSS for the Bento Grid -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+
     <style id="critical">
         /* Critical above-the-fold styles */
         :root {
@@ -357,6 +360,34 @@
         .footer-status{display:flex;align-items:center;gap:0.5rem;justify-content:center}
         .status-dot-green{width:0.5rem;height:0.5rem;border-radius:50%;background:#22c55e;animation:pulse 2s infinite;margin-top:0.35rem}
         .status-text{font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--apple-gray);margin:0}
+
+        /* --- BENTO GRID ANIMATIONS & CUSTOM STYLES --- */
+        .bento-card {
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+
+        .phone-wrapper {
+            transform: translateY(-80px) scale(1.15);
+            animation: phoneSettle 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+        }
+        @keyframes phoneSettle {
+            0%   { transform: translateY(-80px) scale(1.15); opacity: 0; }
+            100% { transform: translateY(0px) scale(1); opacity: 1; }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -394,10 +425,282 @@
                     </p>
                     <div class="hero-actions">
                         <button type="button" class="btn-primary">Objednat tarif</button>
-                        <a href="#coverage" class="btn-secondary">Více informací</a>
+                        <a href="#coverage" class="btn-secondary">Zjistit pokrytí</a>
                     </div>
                 </div>
             </section>
+
+            <!-- BENTO GRID -->
+            <section class="max-w-[1200px] w-full mx-auto px-4 sm:px-8 pb-32 pt-16 relative z-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:auto-rows-[280px]">
+
+                    <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#62D362] to-[#45B845] p-8 flex flex-col justify-end shadow-sm bento-card lg:col-start-1 lg:col-span-1 lg:row-start-1 lg:row-span-1" style="min-height: 280px;">
+                        
+                        <div class="absolute -top-12 -right-8 w-56 h-36 bg-[#1A1C23] rounded-2xl transform rotate-[15deg] shadow-2xl transition-transform duration-700 ease-out hover:rotate-[20deg] hover:scale-105 border border-gray-700/50 flex flex-col items-end p-4">
+                            
+                            <div class="w-10 h-8 bg-gradient-to-br from-gray-200 to-gray-400 rounded-md flex items-center justify-center shadow-inner overflow-hidden mb-auto mt-4 mr-2">
+                                <div class="w-full h-full border border-gray-500/30 rounded-md grid grid-cols-3 gap-[1px] p-[2px]">
+                                    <div class="border-b border-r border-gray-500/20"></div><div class="border-b border-gray-500/20"></div><div class="border-b border-l border-gray-500/20"></div>
+                                    <div class="border-r border-gray-500/20"></div><div></div><div class="border-l border-gray-500/20"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-1 transform -rotate-90 origin-bottom-right opacity-60">
+                                <div class="w-1 h-1 bg-white rounded-full"></div>
+                                <div class="w-1.5 h-1.5 border-t border-r border-white rounded-tr-full"></div>
+                                <div class="w-2.5 h-2.5 border-t border-r border-white rounded-tr-full"></div>
+                                <div class="w-3.5 h-3.5 border-t border-r border-white rounded-tr-full"></div>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <h3 class="text-white text-[22px] font-bold mb-1.5 leading-tight tracking-tight">Get insured immediately</h3>
+                            <p class="text-white/90 text-[15px] font-medium">With a click of a button</p>
+                        </div>
+                    </div>
+
+                    <div class="relative rounded-[2rem] bg-[#1E293B] p-6 shadow-sm overflow-hidden flex flex-col bento-card lg:col-start-1 lg:col-span-1 lg:row-start-2 lg:row-span-1" style="min-height: 280px;">
+                        
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="px-3 py-1 rounded-full bg-[#3997f7]/20 text-[#3997f7] text-[10px] font-medium border border-[#3997f7]/30">Get a Payment API token</div>
+                                <div class="px-3 py-1 rounded-full text-gray-500 text-[10px] font-medium">Initiate a Payment</div>
+                            </div>
+                        </div>
+
+                        <div class="text-[11px] font-mono text-gray-300 leading-[1.7] overflow-x-auto custom-scrollbar whitespace-nowrap pb-2 flex-grow">
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">1</span><span class="text-[#A78BFA]"># Request:</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">2</span><span class="text-[#F8FAFC]">curl -X POST \</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">3</span><span class="text-[#F8FAFC]">  -d grant_type=<span class="text-[#FDE047]">client_credentials</span> \</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">4</span><span class="text-[#F8FAFC]">  -d client_id=<span class="text-[#93C5FD]">${client_id}</span> \</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">5</span><span class="text-[#F8FAFC]">  -d client_secret=<span class="text-[#93C5FD]">${client_secret}</span> \</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">6</span><span class="text-[#F8FAFC]">  -d scope=<span class="text-[#FDE047]">payments</span> \</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">7</span><span class="text-[#6EE7B7]">  https://auth.contiant.com/connect/token</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">8</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">9</span><span class="text-[#A78BFA]"># Response:</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">10</span><span class="text-[#F8FAFC]">{</span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">11</span><span class="text-[#F8FAFC]">  <span class="text-[#FCA5A5]">"access_token"</span>: <span class="text-[#FDE047]">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span></span></div>
+                            <div class="flex"><span class="text-gray-500 w-6 select-none">12</span><span class="text-[#F8FAFC]">}</span></div>
+                        </div>
+                    </div>
+
+                    <div class="relative rounded-[2rem] bg-white lg:bg-transparent p-0 flex items-start justify-center bento-card z-30 lg:col-start-2 lg:col-span-1 lg:row-start-1 lg:row-span-2" style="min-height: 584px;">
+                        
+                        <div class="phone-wrapper relative w-[280px] h-[580px] bg-[#111] rounded-[3rem] p-[10px] shadow-[0_30px_60px_rgba(0,0,0,0.25)] lg:-mt-24 ring-1 ring-gray-900/5">
+                            
+                            <div class="absolute top-[100px] -left-[2px] w-[2px] h-6 bg-gray-800 rounded-l-md"></div>
+                            <div class="absolute top-[140px] -left-[2px] w-[2px] h-12 bg-gray-800 rounded-l-md"></div>
+                            <div class="absolute top-[200px] -left-[2px] w-[2px] h-12 bg-gray-800 rounded-l-md"></div>
+                            <div class="absolute top-[160px] -right-[2px] w-[2px] h-16 bg-gray-800 rounded-r-md"></div>
+
+                            <div class="relative w-full h-full bg-[#E5E5EA] rounded-[2.4rem] overflow-hidden flex flex-col shadow-inner">
+                                
+                                <div class="absolute top-0 w-full h-12 px-6 flex justify-between items-center z-30 text-[12px] font-semibold text-black">
+                                    <span>12:16 <svg class="inline w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"></path></svg></span>
+                                    <div class="flex items-center gap-1.5">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21L22 4a12 12 0 00-20 0l10 17z"></path></svg>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2H2v20z"></path></svg>
+                                        <div class="w-6 h-3 border border-black rounded-sm relative"><div class="absolute top-0.5 left-0.5 bottom-0.5 right-[2px] bg-black rounded-[1px]"></div></div>
+                                    </div>
+                                </div>
+
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-[#111] rounded-b-[1.25rem] z-40 flex justify-center items-end pb-1.5">
+                                    <div class="w-10 h-1.5 bg-gray-800 rounded-full"></div>
+                                </div>
+
+                                <div class="absolute inset-0 bg-[#E8F0F2]">
+                                    
+                                    <svg class="absolute inset-0 w-full h-full opacity-60" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M150 0 L300 0 L300 600 L150 600 Q100 400 150 300 Q200 200 150 0 Z" fill="#B3DDF2"></path>
+                                        <path d="M-50 100 Q 100 150 200 50 T 400 200" stroke="#FFFFFF" stroke-width="8" fill="none"></path>
+                                        <path d="M-50 100 Q 100 150 200 50 T 400 200" stroke="#E2E2E2" stroke-width="4" fill="none"></path>
+                                        <path d="M50 -50 L 100 300 Q 150 400 300 500" stroke="#FFFFFF" stroke-width="12" fill="none"></path>
+                                        <path d="M50 -50 L 100 300 Q 150 400 300 500" stroke="#FFD085" stroke-width="8" fill="none"></path>
+                                        <path d="M0 250 Q 80 250 150 300 T 300 250 L 300 600 L 0 600 Z" fill="#DCEBCC" opacity="0.5"></path>
+                                        
+                                        <g stroke="#ffffff" stroke-width="2" fill="none" opacity="0.7">
+                                            <line x1="0" y1="350" x2="150" y2="350"></line>
+                                            <line x1="20" y1="400" x2="160" y2="380"></line>
+                                            <line x1="50" y1="450" x2="180" y2="420"></line>
+                                            <line x1="80" y1="500" x2="200" y2="460"></line>
+                                        </g>
+                                    </svg>
+
+                                    <div class="absolute top-[35%] left-[25%] text-center flex flex-col items-center">
+                                        <span class="text-[#FF5B5B] bg-white rounded-full p-0.5 shadow-sm inline-block mb-1 z-10 relative">
+                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                                        </span>
+                                        <div class="text-[9px] font-bold text-gray-600 leading-[1.1] bg-white/80 px-1 rounded backdrop-blur-sm">Monterey Bay<br>Aquarium</div>
+                                    </div>
+
+                                    <div class="absolute top-[48%] right-[20%] text-center flex flex-col items-center">
+                                        <span class="text-blue-500 bg-white rounded-full p-0.5 shadow-sm inline-block mb-1 z-10 relative">
+                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                                        </span>
+                                        <div class="text-[8px] font-bold text-gray-600 leading-[1.1] bg-white/80 px-1 rounded backdrop-blur-sm">Old Fisherman's<br>Wharf</div>
+                                    </div>
+
+                                    <div class="absolute top-[55%] left-1/2 -translate-x-1/2">
+                                        <h2 class="text-[22px] font-bold text-gray-800 drop-shadow-[0_2px_2px_rgba(255,255,255,0.9)] tracking-tight">Monterey</h2>
+                                    </div>
+                                </div>
+
+                                <div class="absolute top-16 right-3 flex flex-col gap-2 z-20">
+                                    <button class="w-9 h-9 bg-white rounded-[10px] shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                                    </button>
+                                    <button class="w-9 h-9 bg-white rounded-[10px] shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                    </button>
+                                </div>
+
+                                <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-white via-white/95 to-transparent z-20 flex flex-col justify-end px-4 pb-8 h-[160px]">
+                                    
+                                    <div class="self-end bg-white px-3 py-1.5 rounded-full shadow-sm border border-gray-100 text-[11px] font-bold text-gray-700 flex items-center gap-1.5 mb-3">
+                                        <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 4.22a1 1 0 011.415 0l.708.707a1 1 0 01-1.414 1.414l-.708-.707a1 1 0 010-1.414zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zm-4.22 4.22a1 1 0 010 1.415l-.707.708a1 1 0 01-1.414-1.414l.707-.708a1 1 0 011.414 0zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4.22-4.22a1 1 0 01-1.415 0l-.708-.707a1 1 0 011.414-1.414l.708.707a1 1 0 010 1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm4.22-4.22a1 1 0 010-1.415l.707-.708a1 1 0 011.414 1.414l-.707.708a1 1 0 01-1.414 0zM10 5a5 5 0 100 10 5 5 0 000-10z" clip-rule="evenodd"></path></svg>
+                                        17°
+                                    </div>
+                                    
+                                    <div class="w-full bg-[#EFEFF0] rounded-[14px] p-3 flex items-center gap-2 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                                        <svg class="w-5 h-5 text-gray-500 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        <input type="text" placeholder="Search Maps" class="bg-transparent border-none outline-none text-[15px] placeholder-gray-500 w-full font-medium" readonly="">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path></svg>
+                                        <div class="w-7 h-7 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 ml-1 border border-orange-200">
+                                            <span class="text-[12px]">👨</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="w-32 h-1.5 bg-gray-800 rounded-full mx-auto mt-5"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative rounded-[2rem] bg-[#F8F9FA] p-8 flex flex-col items-center justify-start shadow-sm overflow-hidden bento-card lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-1" style="min-height: 280px;">
+                        
+                        <div class="text-center z-10 mb-6 mt-2 relative">
+                            <h3 class="text-gray-900 text-[22px] font-bold mb-2 leading-tight">Manage everything from<br>our app</h3>
+                            <p class="text-gray-500 text-[14px] leading-[1.6]">A dashboard where you see your<br>stats and submit your claims</p>
+                        </div>
+
+                        <div class="relative w-full h-32 mt-auto perspective-[1200px] flex justify-center">
+                            
+                            <div class="absolute right-[5%] -bottom-4 w-[130px] bg-white rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.06)] border border-gray-100/50 p-3 transform rotate-[6deg] translate-z-[-20px] transition-all duration-500 hover:rotate-0 hover:translate-y-[-10px] hover:z-30 hover:shadow-lg">
+                                <div class="text-[9px] text-gray-500 font-medium mb-3">Select your bank</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="w-7 h-7 rounded-[6px] flex items-center justify-center bg-[#F3F4F6] text-[#0075EB]"><span class="font-bold text-[13px] italic">R</span></div>
+                                    <div class="w-7 h-7 rounded-[6px] flex items-center justify-center bg-[#F3F4F6] text-[#002663]"><span class="font-bold text-[13px]">B</span></div>
+                                    <div class="w-7 h-7 rounded-[6px] flex items-center justify-center bg-[#F3F4F6] text-black">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 12h3v8h14v-8h3L12 2z"></path></svg>
+                                    </div>
+                                    <div class="w-7 h-7 rounded-[6px] flex items-center justify-center bg-[#F3F4F6] text-[#003B70]"><span class="font-bold text-[10px] italic">citi</span></div>
+                                </div>
+                            </div>
+
+                            <div class="absolute left-[0%] top-0 w-[100px] h-[120px] bg-white rounded-2xl shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-gray-100/50 overflow-hidden transform -rotate-[5deg] translate-z-[10px] transition-all duration-500 hover:rotate-0 hover:translate-y-[-10px] hover:z-30 flex flex-col hover:shadow-xl">
+                                <div class="h-[75%] bg-gray-200 relative">
+                                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="User profile" class="w-full h-full object-cover">
+                                </div>
+                                <div class="h-[25%] bg-[#D5CFC9] px-3 flex flex-col justify-center">
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-[#FC6464]"></div>
+                                        <span class="text-[11px] font-bold text-gray-900 leading-none">Mike</span>
+                                    </div>
+                                    <span class="text-[8px] text-gray-600 ml-3">pro ninja</span>
+                                </div>
+                            </div>
+
+                            <div class="absolute left-1/2 -translate-x-1/2 -top-6 w-[150px] bg-white/80 backdrop-blur-xl rounded-[1.25rem] shadow-[0_20px_40px_rgba(0,0,0,0.1)] border border-white p-3 flex flex-col items-center transform -rotate-[1deg] z-20 transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl">
+                                <div class="w-full h-20 bg-gradient-to-br from-[#E8F3F1] to-[#D0E5DF] rounded-xl mb-3 flex items-center justify-center overflow-hidden relative">
+                                    <img src="https://images.unsplash.com/photo-1606144042835-2605f6e80b62?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="PS4 Controller" class="w-24 object-contain mix-blend-multiply opacity-80" style="filter: contrast(1.2);">
+                                </div>
+                                <div class="w-full text-left">
+                                    <div class="text-[10px] text-gray-500 font-medium mb-0.5">PS 4 Controller</div>
+                                    <div class="text-[18px] font-bold text-gray-900 mb-2">€ 75.00</div>
+                                    <button class="w-full py-2 bg-[#1C2433] hover:bg-black text-white text-[9px] font-bold rounded-lg transition-colors tracking-wider">PAY BY BANK</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="relative rounded-[2rem] bg-[#F8F9FA] p-8 flex flex-col justify-between shadow-sm bento-card lg:col-start-3 lg:col-span-1 lg:row-start-2 lg:row-span-2" style="min-height: 584px;">
+                        
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <div class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-50 flex flex-col items-center justify-center gap-2 aspect-square transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                                <svg class="w-8 h-8 text-[#00AEEF]" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"></path> 
+                                </svg>
+                                <span class="text-[9px] text-gray-400 font-semibold">Barclays Bank</span>
+                            </div>
+
+                            <div class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-50 flex flex-col items-center justify-center gap-2 aspect-square transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                                <svg class="w-8 h-8 text-[#002663]" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2L2 22h20L12 2zm0 6l3.5 10h-7L12 8z"></path> 
+                                </svg>
+                                <span class="text-[9px] text-gray-400 font-semibold text-center leading-tight">Bank of<br>Scotland</span>
+                            </div>
+
+                            <div class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-50 flex flex-col items-center justify-center gap-2 aspect-square transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md relative overflow-hidden">
+                                <svg class="w-8 h-8 text-[#DB0011]" viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon points="2,12 12,2 22,12 12,22"></polygon>
+                                    <polygon points="12,7 7,12 12,17 17,12" fill="white"></polygon>
+                                </svg>
+                                <span class="text-[9px] text-gray-400 font-semibold">HSBC</span>
+                            </div>
+
+                            <div class="bg-white rounded-2xl p-4 shadow-[0_4px_15px_rgba(0,0,0,0.05)] border border-gray-50 flex flex-col items-center justify-center gap-2 aspect-square transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md scale-[1.05] z-10"> 
+                                <div class="w-10 h-10 flex items-center justify-center">
+                                    <span class="text-3xl font-black text-[#0075EB] italic tracking-tighter">R</span>
+                                </div>
+                                <span class="text-[9px] text-gray-400 font-semibold">Revolut Bank</span>
+                            </div>
+
+                            <div class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-50 flex flex-col items-center justify-center gap-2 aspect-square transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md relative">
+                                <div class="flex items-end mt-2">
+                                    <span class="text-xl font-bold text-[#003B70]">citi</span>
+                                </div>
+                                <div class="absolute top-8 w-6 h-3 border-t-[2.5px] border-red-500 rounded-t-[50%]"></div>
+                                <span class="text-[9px] text-gray-400 font-semibold mt-auto">Citi Banks</span>
+                            </div>
+
+                             <div class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-50 flex flex-col items-center justify-center gap-2 aspect-square transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                                <svg class="w-8 h-8 text-black" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+                                    <circle cx="12" cy="12" r="3" fill="white"></circle> 
+                                </svg>
+                                <span class="text-[9px] text-gray-400 font-semibold">UBS</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h3 class="text-gray-900 text-[24px] font-bold mb-3 leading-tight tracking-tight">Get insured immediately</h3>
+                            <p class="text-gray-500 text-[14px] leading-[1.6]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                        </div>
+                    </div>
+
+                    <div class="relative rounded-[2rem] overflow-hidden group shadow-sm bento-card lg:col-start-1 lg:col-span-2 lg:row-start-3 lg:row-span-1" style="min-height: 280px;">
+                        <div class="absolute inset-0 bg-gray-900 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1614624532983-4ce03382d149?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Moody desk setup with ambient light" class="w-full h-[120%] object-cover object-center transform -translate-y-[10%] transition-transform duration-[2s] ease-out group-hover:scale-[1.03] opacity-85">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-tr from-[#2A0845]/70 via-[#6441A5]/20 to-transparent mix-blend-multiply"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+                        </div>
+
+                        <div class="relative z-10 w-full h-full p-8 flex items-end">
+                            <h3 class="text-white text-[28px] md:text-[32px] font-bold tracking-tight drop-shadow-md">Protect your devices and relax</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- END BENTO GRID -->
 
             <!-- USP GRID -->
             <section aria-label="Key features" class="usp-grid">
@@ -717,7 +1020,7 @@
                                         <div class="c3d-grad-bot"></div>
                                         <div class="c3d-ui">
                                             <div class="cui-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg><div class="cui-tabs"><span class="cui-tab-dim">Following</span><span class="cui-tab-active">For you</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;color:white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-                                            <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@cyber_walker</p><p class="cui-desc">Night walks in Tokyo. 🌃✨ <strong>#tokyo #neon #cyberpunk</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Midnight City - Cyber Walker</div></div></div></div><div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">720K</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">5,430</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">88K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy decoding="async"></div></div></div>
+                                            <div class="cui-bottom"><div class="cui-info"><p class="cui-username">@cyber_walker</p><p class="cui-desc">Night walks in Tokyo. 🌃✨ <strong>#tokyo #neon #cyberpunk</strong></p><div class="cui-music"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg><div class="cui-music-ticker"><div class="cui-music-text">Midnight City - Cyber Walker</div></div></div></div><div class="cui-actions"><div class="cui-avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="" loading="lazy" decoding="async"><div class="cui-avatar-plus">+</div></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg><span class="cui-action-text">720K</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span class="cui-action-text">5,430</span></div><div class="cui-action-btn"><svg class="cui-action-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg><span class="cui-action-text">88K</span></div><div class="cui-vinyl"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=100&auto=format&fit=crop" alt="" loading="lazy" decoding="async"></div></div></div>
                                         </div>
                                     </div>
                                     <!-- Slide 4 -->
@@ -867,6 +1170,44 @@
 
             const timerId = setInterval(tick, interval);
             return () => clearInterval(timerId);
+        }
+
+        // =========================================================
+        // BENTO GRID ANIMATIONS
+        // =========================================================
+        function initBentoGrid() {
+            const offsets = [
+                { x: -160, y:  30, rotate: -4 },  
+                { x: -120, y:  80, rotate:  3 },  
+                { x:  -20, y: 140, rotate: -2 },  
+                { x:  130, y: -20, rotate:  4 },  
+                { x:  150, y:  60, rotate: -3 },  
+                { x:   40, y: 160, rotate:  2 },  
+            ];
+
+            const cards = document.querySelectorAll('.bento-card');
+            if (!cards.length) return;
+
+            cards.forEach((el, i) => {
+                const o = offsets[i % offsets.length];
+                el.dataset.ox = o.x;
+                el.dataset.oy = o.y;
+                el.dataset.or = o.rotate;
+                el.style.transform = `translate(${o.x}px, ${o.y}px) rotate(${o.rotate}deg)`;
+                el.style.opacity = '0';
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const el = entry.target;
+                    if (entry.isIntersecting) {
+                        el.style.transform = 'translate(0, 0) rotate(0deg)';
+                        el.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(el => observer.observe(el));
         }
 
         // =========================================================
@@ -1082,6 +1423,7 @@
         function init() {
             initFooterYear();
             initButtons(); 
+            initBentoGrid(); // Initialize Bento Grid animations
 
             const cleanupSticker = initSticker();
             initFilmstrip();
