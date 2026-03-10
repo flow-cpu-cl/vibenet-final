@@ -39,6 +39,7 @@
         
         /* Updated Critical Button Styles */
         .btn-primary { background:#00DB82; color:#07005B; font-weight:700; font-size:1rem; padding:.875rem 2rem; border-radius:9999px; border:none; cursor:pointer; font-family:inherit; transition:all 0.3s; display:inline-flex; align-items:center; justify-content:center; min-width:160px; text-align:center; box-shadow:0 10px 20px rgba(0,219,130,0.25); }
+        .btn-secondary { background:transparent; color:#2853FF; font-weight:700; font-size:1rem; padding:calc(.875rem - 2px) calc(2rem - 2px); border-radius:9999px; border:2px solid #2853FF; cursor:pointer; font-family:inherit; transition:all 0.3s; display:inline-flex; align-items:center; justify-content:center; min-width:160px; text-align:center; text-decoration:none; }
         .btn-text { color:var(--apple-blue); font-size:1.0625rem; font-weight:500; display:flex; align-items:center; gap:.25rem; text-decoration:none; }
     </style>
 
@@ -119,7 +120,15 @@
         .btn-primary:active{background:var(--btn-primary-hover);transform:scale(0.98);box-shadow:0 5px 15px rgba(0,167,100,0.3)}
         .btn-primary.is-loading{background:var(--btn-primary-loading);color:white;pointer-events:none;transform:none;box-shadow:none;}
 
-        @media (min-width:48rem){.btn-primary{font-size:1.0625rem;padding:1rem 3rem}}
+        /* SECONDARY BUTTON STYLES */
+        .btn-secondary{background:transparent;color:var(--apple-blue);font-weight:700;font-size:1rem;padding:calc(0.875rem - 2px) calc(2.5rem - 2px);border-radius:9999px;border:2px solid var(--apple-blue);transition:all 0.3s;display:inline-flex;align-items:center;justify-content:center;}
+        .btn-secondary:hover{background:rgba(7,0,91,0.06);color:var(--apple-blue-hover);border-color:var(--apple-blue-hover);transform:translateY(-0.15rem);box-shadow:0 10px 20px rgba(7,0,91,0.08)}
+        .btn-secondary:active{transform:scale(0.98);box-shadow:0 5px 15px rgba(7,0,91,0.08)}
+
+        @media (min-width:48rem){
+            .btn-primary{font-size:1.0625rem;padding:1rem 3rem}
+            .btn-secondary{font-size:1.0625rem;padding:calc(1rem - 2px) calc(3rem - 2px)}
+        }
         .btn-text{color:var(--apple-blue);font-size:1.0625rem;font-weight:500;display:flex;align-items:center;gap:0.25rem}
         .btn-text span{transition:transform 0.2s}
         .btn-text:hover span{transform:translateX(0.25rem)}
@@ -132,7 +141,7 @@
         .filmstrip-card{cursor:pointer}
         .filmstrip-card:hover{transform:scale(1.02);box-shadow:0 30px 60px -12px rgba(0,0,0,0.1)}
         .filmstrip-card:focus-visible{outline:2px solid var(--apple-blue);outline-offset:4px}
-        .btn-nav:focus-visible,.btn-primary:focus-visible,.btn-pricing-new:focus-visible,.btn-ghost:focus-visible,.arrow-btn:focus-visible{outline:2px solid var(--apple-blue);outline-offset:4px;border-radius:9999px}
+        .btn-nav:focus-visible,.btn-secondary:focus-visible,.btn-primary:focus-visible,.btn-pricing-new:focus-visible,.btn-ghost:focus-visible,.arrow-btn:focus-visible{outline:2px solid var(--apple-blue);outline-offset:4px;border-radius:9999px}
         
         .usp-card{padding:2.5rem;display:flex;flex-direction:column;gap:1.25rem}
         .usp-icon{font-size:2.25rem;line-height:1;display:block}
@@ -358,7 +367,7 @@
             <a href="#coverage">Coverage</a>
             <a href="#manifesto">Manifesto</a>
         </div>
-        <button type="button" class="btn-nav">Join the Club</button>
+        <button type="button" class="btn-secondary" style="min-width: 0; padding: 0.5rem 1.5rem; font-size: 0.875rem;">Připojit se</button>
     </nav>
 
     <main>
@@ -379,7 +388,7 @@
                     </p>
                     <div class="hero-actions">
                         <button type="button" class="btn-primary">Objednat tarif</button>
-                        <a href="#coverage" class="btn-text">View Coverage <span aria-hidden="true">›</span></a>
+                        <a href="#coverage" class="btn-secondary">Zjistit pokrytí</a>
                     </div>
                 </div>
             </section>
