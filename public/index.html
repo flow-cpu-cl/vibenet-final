@@ -144,10 +144,73 @@
         .pricing-features { display: flex; flex-direction: column; gap: 1.5rem; }
         .pricing-features li { display: flex; align-items: center; gap: 1rem; font-size: 1.25rem; font-weight: 500; color: var(--apple-black); }
         .pricing-features svg { width: 1.5rem; height: 1.5rem; color: var(--apple-blue); flex-shrink: 0; }
+        
         .pricing-card-area { flex: 1; width: 100%; }
-        .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; overflow: hidden; width: 100%; max-width: 32rem; margin: 0 auto; text-align: left; }
-        .pricing-card-new::after { content: ''; position: absolute; top: 0; right: 0; width: 8rem; height: 8rem; background: #eff6ff; border-bottom-left-radius: 6rem; z-index: 0; pointer-events: none; }
+        
+        /* Úpravy pro tarifní kartu a přečnívající modem */
+        .pricing-card-new { background: white; border-radius: 2.5rem; padding: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); position: relative; width: 100%; max-width: 32rem; margin: 0 auto; text-align: left; }
+        /* Přidáno zakulacení i pro modrý pravý roh, jelikož jsme odstranili overflow: hidden */
+        .pricing-card-new::after { content: ''; position: absolute; top: 0; right: 0; width: 8rem; height: 8rem; background: #eff6ff; border-top-right-radius: 2.5rem; border-bottom-left-radius: 6rem; z-index: 0; pointer-events: none; }
         .pricing-card-new > * { position: relative; z-index: 10; }
+        
+        /* Nový blok pro vyčnívající modem */
+        .pricing-card-new > .pricing-modem-wrapper {
+            position: absolute;
+            top: -4rem;
+            right: -1rem;
+            width: 10.5rem;
+            z-index: 30; /* Nad vším v kartě */
+            pointer-events: none;
+        }
+        @media (min-width: 48rem) {
+            .pricing-card-new > .pricing-modem-wrapper {
+                top: -5rem;
+                right: -2.5rem;
+                width: 14rem;
+            }
+        }
+        .pricing-modem-img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+            transform: rotate(12deg);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+        .pricing-modem-tag {
+            position: absolute;
+            bottom: 1.5rem;
+            left: -2rem;
+            background: var(--apple-black);
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+            transform: rotate(-6deg);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+            white-space: nowrap;
+        }
+        @media (min-width: 48rem) {
+            .pricing-modem-tag {
+                bottom: 2rem;
+                left: -3rem;
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+        .pricing-card-new:hover .pricing-modem-img {
+            transform: rotate(8deg) translateY(-0.75rem) scale(1.05);
+        }
+        .pricing-card-new:hover .pricing-modem-tag {
+            transform: rotate(-2deg) translateY(-0.75rem);
+        }
+        /* Konec úprav modemu */
+
         .pricing-card-new h3 { font-size: 1.875rem; color: var(--apple-black); margin: 0 0 3rem 0; }
         .pricing-price-wrap { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 2rem; }
         .pricing-price-wrap .price { font-size: 6rem; line-height: 1; color: var(--apple-black); }
@@ -235,7 +298,6 @@
         .ds-3d-container-cell { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; min-height: 0; overflow: hidden; }
         .ds-3d-anchor { position: absolute; top: 50%; left: 50%; width: 0; height: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
         
-        /* FIX: Odstraněny tvrdé zarážky z CSS. Měřítko řídí plně JS na základě aktuálního dostupného místa! */
         .ds-3d-wrapper { position: relative; width: 340px; height: 680px; transform-origin: center center; will-change: transform; }
         
         .c-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
@@ -405,6 +467,14 @@
                     </div>
                     <div class="pricing-card-area">
                         <div class="pricing-card-new">
+                            
+                            <!-- ELEGANTNĚ VLOŽENÝ MODEM S ŠTÍTKEM -->
+                            <div class="pricing-modem-wrapper">
+                                <img src="modem-476.webp" alt="Nomad Puck Modem" class="pricing-modem-img" onerror="this.classList.add('img-error')">
+                                <div class="pricing-modem-tag">Hardware Included</div>
+                            </div>
+                            <!-- --------------------------------- -->
+
                             <h3 class="text-display">Nomad Pro</h3>
                             <div class="pricing-price-wrap">
                                 <span class="price text-display">88</span>
@@ -468,18 +538,12 @@
             <div class="filmstrip-container" id="filmstrip">
                 
                 <!-- NOVÁ KARTA S OBRÁZKEM V POZADÍ -->
-                <!-- TIP: Pokud použiješ světlý obrázek v pozadí, změň barvy textu na tyto hex kódy:
-                     fs-tag (Social Protocol): style="color: #0056b3;"
-                     fs-title (nadpis): style="color: #1d1d1f;"
-                     fs-desc (perex): style="color: #55555a;"
-                -->
                 <div class="filmstrip-card fs-bg-image" style="background-image: url('social-desktop.png');">
-                    <!-- Obsah karty (zarovnán nahoru díky justify-content: flex-start) -->
                     <div style="position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: flex-start; height: 100%;">
                         <div>
-                            <span class="fs-tag" style="color: #0056b3;">Social Protocol</span>
-                            <h3 class="text-display fs-title" style="color: #1d1d1f;">Share the Signal</h3>
-                            <p class="fs-desc" style="color: #55555a;">One Puck. Up to 10 friends. Your own personal local network, anywhere on Earth.</p>
+                            <span class="fs-tag" style="color: #93c5fd;">Social Protocol</span>
+                            <h3 class="text-display fs-title" style="color: white;">Share the Signal</h3>
+                            <p class="fs-desc" style="color: rgba(255,255,255,0.9);">One Puck. Up to 10 friends. Your own personal local network, anywhere on Earth.</p>
                         </div>
                     </div>
                 </div>
@@ -717,7 +781,6 @@
             function updateScrollAnimation() {
                 if (!phoneScrollWrapper || !phoneInnerCard) return;
 
-                // 1) ČÁST: Animace scrollu (opacita textů a zmenšování celé černé karty)
                 if (!prefersReducedMotion) {
                     const rect = phoneScrollWrapper.getBoundingClientRect();
                     const scrollDistance = phoneScrollWrapper.offsetHeight - window.innerHeight;
@@ -745,25 +808,19 @@
                     revealElements.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
                 }
 
-                // 2) ČÁST (FIX): Dynamické měřítko telefonu - garantuje, že nebude nikdy ořízlý!
-                // Spouští se vždy, i při zakázaných animacích (přepočítá se na velikost okna)
                 const containerCell = document.querySelector('.ds-3d-container-cell');
                 const phoneWrapper = document.querySelector('.ds-3d-wrapper');
                 
                 if (containerCell && phoneWrapper) {
-                    // Přečteme skutečně zbývající místo po vykreslení textu v nadpisu
                     const cellHeight = containerCell.clientHeight;
                     const cellWidth = containerCell.clientWidth;
                     
-                    // Bezpečnostní základní velikost s menším okrajem (padding), aby nebyl přilepený na okraje
                     const safeHeight = 680 + 40; 
                     const safeWidth = 340 + 40;
 
-                    // Jaká škála je potřeba, aby se vešel?
                     const scaleY = cellHeight / safeHeight;
                     const scaleX = cellWidth / safeWidth;
 
-                    // Telefon přizpůsobíme nejmenší hodnotě (nepřekročí kontejner), maximum je 0.9 aby nebyl "obří" na desktopu
                     const finalScale = Math.max(0.2, Math.min(scaleX, scaleY, 0.9));
                     
                     phoneWrapper.style.transform = `scale(${finalScale})`;
