@@ -136,10 +136,12 @@
         .usp-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:4rem}
         @media (min-width:40rem){.usp-grid{grid-template-columns:repeat(2,1fr)}}
         @media (min-width:64rem){.usp-grid{grid-template-columns:repeat(4,1fr)}}
-        .glass-panel{background:var(--apple-light-gray);transition:transform 0.3s cubic-bezier(0.25,1,0.5,1),box-shadow 0.3s ease;border-radius:2.25rem}
-        .glass-panel:hover{transform:scale(1.02);box-shadow:0 30px 60px -12px rgba(0,0,0,0.1)}
+        
+        /* UPDATED GLASS/CARD PANELS TO WHITE + SOFT SHADOW */
+        .glass-panel{background:#ffffff;border:1px solid rgba(0,0,0,0.04);box-shadow:0 10px 30px rgba(0,0,0,0.03);transition:transform 0.3s cubic-bezier(0.25,1,0.5,1),box-shadow 0.3s ease;border-radius:2.25rem}
+        .glass-panel:hover{transform:scale(1.02);box-shadow:0 20px 40px rgba(0,0,0,0.08)}
+        
         .filmstrip-card{cursor:pointer}
-        .filmstrip-card:hover{transform:scale(1.02);box-shadow:0 30px 60px -12px rgba(0,0,0,0.1)}
         .filmstrip-card:focus-visible{outline:2px solid var(--apple-blue);outline-offset:4px}
         .btn-nav:focus-visible,.btn-secondary:focus-visible,.btn-primary:focus-visible,.btn-pricing-new:focus-visible,.btn-ghost:focus-visible,.arrow-btn:focus-visible{outline:2px solid var(--apple-blue);outline-offset:4px;border-radius:9999px}
         
@@ -149,7 +151,8 @@
         .usp-card p{color:var(--apple-gray);font-size:0.9375rem;font-weight:500;margin:0;line-height:1.6}
         
         .pricing-new{margin-top:4rem}
-        .pricing-new-inner{background:var(--apple-light-gray);border-radius:3.125rem;padding:3rem 2rem;display:flex;flex-direction:column;gap:4rem;align-items:center}
+        /* UPDATED PRICING INNER PANEL TO WHITE + SOFT SHADOW */
+        .pricing-new-inner{background:#ffffff;border:1px solid rgba(0,0,0,0.04);box-shadow:0 10px 40px rgba(0,0,0,0.03);border-radius:3.125rem;padding:3rem 2rem;display:flex;flex-direction:column;gap:4rem;align-items:center}
         @media (min-width:64rem){.pricing-new-inner{flex-direction:row;padding:6rem;gap:4rem}}
         .pricing-text-area{flex:1;width:100%;text-align:left}
         .pricing-text-area h2{font-size:3rem;line-height:1;color:var(--apple-black);margin:0 0 2rem 0}
@@ -159,7 +162,8 @@
         .pricing-features svg{width:1.5rem;height:1.5rem;color:var(--apple-blue);flex-shrink:0}
         
         .pricing-card-area{flex:1;width:100%}
-        .pricing-card-new{background:white;border-radius:2.5rem;padding:3rem;box-shadow:0 25px 50px -12px rgba(0,0,0,0.15);position:relative;overflow:hidden;width:100%;max-width:32rem;margin:0 auto;text-align:left}
+        /* The card inside the pricing area */
+        .pricing-card-new{background:white;border-radius:2.5rem;padding:3rem;box-shadow:0 25px 50px -12px rgba(0,0,0,0.15);position:relative;overflow:hidden;width:100%;max-width:32rem;margin:0 auto;text-align:left; border: 1px solid rgba(0,0,0,0.05);}
         .pricing-card-new::after{content:'';position:absolute;top:0;right:0;width:8rem;height:8rem;background:#eff6ff;border-bottom-left-radius:6rem;z-index:0;pointer-events:none}
         .pricing-card-new>*{position:relative;z-index:10}
         .pricing-card-new h3{font-size:1.875rem;color:var(--apple-black);margin:0 0 3rem 0}
@@ -223,7 +227,7 @@
         .fs-c1-badge{background:rgba(255,255,255,0.8);padding:0.5rem 1rem;border-radius:9999px;font-size:0.625rem;font-weight:700;text-transform:uppercase;color:var(--apple-black)}
         .fs-c1-price{font-size:2.25rem;font-weight:700;letter-spacing:-0.02em;color:var(--apple-black);margin:0}
         
-        .fs-c2{background:white}
+        .fs-c2{background:#ffffff}
         .fs-icon-box{width:4rem;height:4rem;border-radius:1rem;background:#eff6ff;color:var(--apple-blue);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem}
         .fs-c2-bottom{margin-top:auto;padding-top:2.5rem;border-top:1px solid #f3f4f6}
         .fs-progress-wrap{display:flex;align-items:center;gap:1rem}
@@ -231,14 +235,15 @@
         .fs-progress-fill{height:100%;width:95%;background:var(--apple-blue)}
         .fs-progress-text{font-size:0.6875rem;font-weight:700;color:var(--apple-blue);letter-spacing:0.05em}
         
-        .fs-c3{background:var(--apple-black)}
+        /* Ghost mode card remains black for contrast */
+        .fs-c3{background:var(--apple-black); border:none;}
         .fs-c3 .fs-title{color:white}
         .fs-c3 .fs-desc{color:#d4d4d8}
         .fs-c3-icon-box{background:rgba(255,255,255,0.1);color:#ec4899}
         .btn-ghost{width:100%;padding:1rem;border-radius:1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:white;font-weight:700;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.1em;transition:background 0.2s}
         .btn-ghost:hover{background:rgba(255,255,255,0.1)}
         
-        .fs-c4{background:var(--apple-light-gray)}
+        .fs-c4{background:#ffffff}
         .fs-spec-list{display:flex;flex-direction:column;flex-grow:1;overflow-y:auto;margin-top:1rem}
         .fs-spec-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid rgba(0,0,0,0.06)}
         .fs-spec-row:last-child{border-bottom:none}
@@ -249,7 +254,7 @@
         .fs-c5-avatars{height:8rem;display:flex;align-items:center;justify-content:center;gap:0.5rem}
         .fs-avatar-static{width:3rem;height:3rem;border-radius:50%;background:white;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;font-size:1.25rem}
         .fs-avatar-more{background:#eff6ff;color:var(--apple-blue);font-weight:700;font-size:0.625rem}
-        .fs-bg-image{background-size:cover;background-position:center;background-repeat:no-repeat}
+        .fs-bg-image{background-size:cover;background-position:center;background-repeat:no-repeat;border:none;}
         
         .ds-scroll-wrapper{position:relative;height:250vh;z-index:20;width:100%}
         .ds-sticky-container{position:sticky;top:0;height:100vh;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent}
@@ -316,7 +321,8 @@
         .cui-nav-center-btn{width:2.875rem;height:1.875rem;border-radius:0.75rem;background:linear-gradient(to right,#22d3ee,white,#fb7185);padding:2px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center}
         .cui-nav-center-icon{width:1.1rem;height:1.1rem;fill:#000}
         
-        .specs-section{background:var(--apple-light-gray);border-radius:2.5rem;padding:2.5rem;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:4rem;position:relative}
+        /* UPDATED SPECS SECTION TO WHITE + SOFT SHADOW */
+        .specs-section{background:#ffffff;border:1px solid rgba(0,0,0,0.04);box-shadow:0 10px 40px rgba(0,0,0,0.03);border-radius:2.5rem;padding:2.5rem;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:4rem;position:relative}
         @media (min-width:48rem){.specs-section{padding:5rem}}
         @media (min-width:64rem){.specs-section{flex-direction:row;gap:6rem}}
         .specs-bg-glow{position:absolute;top:50%;left:25%;width:31.25rem;height:31.25rem;background:rgba(40,83,255,0.15);border-radius:50%;filter:blur(6.25rem);transform:translateY(-50%);pointer-events:none}
